@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 from scipy import signal
 
@@ -21,12 +22,41 @@ def gauss(M_x, M_y, std_x, std_y):
 
     return w_x * w_y
 
+sess = tf.Session()
 
-g = gauss(10,10,5,5)
+kernel = gauss(10,10,5,5)
+image = mpimg.imread('../../../data/sun.jpg')
+plt.figure()
+plt.imshow(kernel)
+plt.figure()
+plt.imshow(image)
 
-print(g)
+kernel = np.expand_dims(kernel,-1)
+kernel = np.expand_dims(kernel,-1)
+kernel = np.tile(kernel, [1,1,3,3])
 
-plt.imshow(g)
-plt.show(4)
+image = np.expand_dims(image,0)
+
+
+krn = tf.convert_to_tensor(kernel, dtype=np.float32)
+img = tf.convert_to_tensor(image, dtype=np.float32)
+
+strides = [1,1,1,1]
+
+new_img = tf.nn.conv2d(img, krn, strides, padding="SAME")
+
+with sess.as_default():
+    new_image = new_img.eval()
+
+print(new_image)
+
+new_image = np.squeeze(new_image)
+
+new_image = (new_image - np.min(new_image)) / (np.max(new_image) - np.min(new_image))
+
+plt.figure()
+plt.imshow(new_image)
+
+plt.show()
 
 
