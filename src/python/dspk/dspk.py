@@ -9,7 +9,7 @@ def dspk(data):
     sess = tf.Session()
 
     # contruct 3-D averaging kernel and form Tensor of shape (filter_depth, filter_height, filter_width, in_channel, out_channel)
-    mu_kernel = np.ones([3, 3, 3])
+    mu_kernel = np.ones([5, 5, 5])
     mu_kernel = np.expand_dims(mu_kernel, -1)
     mu_kernel = np.expand_dims(mu_kernel, -1)
 
@@ -20,6 +20,8 @@ def dspk(data):
     data = np.expand_dims(data, -1)
 
     dt = tf.convert_to_tensor(data, dtype=np.float32)
+    # #try using a placeholder node for large arrays
+    # dt = tf.placeholder(dtype=tf.float32)
 
     # form a map of good and bad pixels witht the same dimensions as data and form Tensor
     goodmap = data * 0 + 1
@@ -71,21 +73,46 @@ def dspk(data):
     def end_bad_pix_search(gm, mu_krn, dt, bad_num, percent_change,i):
         return tf.greater(percent_change, .01)
 
-
-
-    find_bad_pix = tf.while_loop(end_bad_pix_search, identify_bad_pix,
+    (gm, mu_krn, dt, bad_num, percent_change, i) = tf.while_loop(end_bad_pix_search, identify_bad_pix,
                                  loop_vars=(gm, mu_krn, dt, bad_num, percent_change,i))
 
-    (gm, mu_krn, dt, bad_num, percent_change,i) = sess.run(find_bad_pix)
 
 
-    print('Number of iterations',i)
+    # (gm, mu_krn, dt, bad_num, percent_change,i) = sess.run(find_bad_pix)
 
 
-    return (np.squeeze(dt),np.squeeze(gm),bad_num)
+
+
+
+
 
     # define a near-local smoothing kernel for replacing bad pixels
-    
+    skern_size = 5
+    smoothing_kernel = np.empty([skern_size,skern_size,skern_size])
+    for i in range(skern_size):
+        for j in range(skern_size):
+            for k in range (skern_size):
+                r = np.sqrt((i-2)**2+(j-2)**2+(k-2)**2)
+                smoothing_kernel[i,j,k] = np.exp((-r)/(1+r**3))
+
+    smoothing_kernel = np.expand_dims(smoothing_kernel,-1)
+    smoothing_kernel = np.expand_dims(smoothing_kernel,-1)
+    smoothing_krn = tf.convert_to_tensor(smoothing_kernel,dtype=np.float32)
+
+    #smooth data
+    g_data = tf.multiply(gm, dt)
+    norm = tf.nn.conv3d(gm, smoothing_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
+    dt = tf.nn.conv3d(g_data,smoothing_krn,strides=[1,1,1,1,1],padding='SAME')
+    dt = tf.divide(dt,norm)
+
+
+    #evaluate what we need
+    (dt,gm,bad_num) = sess.run([dt,gm,bad_num])
+
+    print('Number of iterations', i) #why is this always 4?
+    print('Bad Pix Found',bad_num)
+    return (np.squeeze(dt), np.squeeze(gm), bad_num)
+
 
 
 
