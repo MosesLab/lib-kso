@@ -48,8 +48,11 @@ def dspk(data):
         n_mean = tf.divide(n_mean, norm)
 
         # Deviation
+        # dev = tf.subtract(g_data, n_mean)
         dev = tf.subtract(dt, n_mean)
         n_std = tf.nn.conv3d(tf.multiply(tf.square(dev), gm), mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
+        # n_std = tf.nn.conv3d(tf.square(dev), mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
+
         n_std = tf.sqrt(tf.divide(n_std, norm))
 
         # Compare pixel deviation to local standard deviation
