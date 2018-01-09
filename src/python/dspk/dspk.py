@@ -1,6 +1,8 @@
 import numpy as np
 import tensorflow as tf
 
+from tensorflow.python import debug as tf_debug
+
 
 # The beginnings of a Tensor Flow based data despiking routine.  The goal is to despike an image cube efficiently using a
 # GPU
@@ -27,52 +29,51 @@ def dspk(data):
 
     # form a map of good and bad pixels witht the same dimensions as data and form Tensor
     goodmap = data * 0 + 1
-    gm = tf.convert_to_tensor(goodmap, dtype=np.float32)
+    gm = tf.convert_to_tensor(goodmap, dtype=np.float32, name='gm')
 
     # initilize bad pixel count to zero
-    bad_num = tf.constant(0, dtype=tf.float32)
+    bad_num = tf.constant(0, dtype=tf.float32, name='bad_num')
     # new_bad = tf.constant(0, dtype=tf.float32)
-    percent_change = tf.constant(1, dtype=tf.float32)
+    percent_change = tf.constant(1, dtype=tf.float32, name='percent_change')
 
     # count while loop iterations
-    index = tf.constant(0)
+    index = tf.constant(0, name='index')
 
     # Function to identify bad pixels
     def identify_bad_pix(gm, mu_krn, dt, bad_num, percent_change, index):
-        # Calculate running normilization
-        norm = tf.nn.conv3d(gm, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
+
+        # Calculate running normalization
+        norm = tf.nn.conv3d(gm, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name="norm")
 
         # Calculate a neighborhood mean
-        g_data = tf.multiply(gm, dt)
-        n_mean = tf.nn.conv3d(g_data, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
-        n_mean = tf.divide(n_mean, norm)
+        g_data = tf.multiply(gm, dt, name='g_data')
+        n_mean = tf.nn.conv3d(g_data, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='n_mean')
+        n_mean = tf.divide(n_mean, norm, name='n_mean_norm')
 
         # Deviation
-        # dev = tf.subtract(g_data, n_mean)
-        dev = tf.subtract(dt, n_mean)
-        n_std = tf.nn.conv3d(tf.multiply(tf.square(dev), gm), mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
-        # n_std = tf.nn.conv3d(tf.square(dev), mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
+        dev = tf.subtract(g_data, n_mean)
+        n_std = tf.nn.conv3d(tf.square(dev), mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
 
-        n_std = tf.sqrt(tf.divide(n_std, norm))
+        n_std = tf.sqrt(tf.divide(n_std, norm), name='n_std_norm')
 
         # Compare pixel deviation to local standard deviation
-        sigmas = tf.constant(4.5, dtype=tf.float32)
+        sigmas = tf.constant(4.5, dtype=tf.float32, name='sigmas')
 
-        test = tf.multiply(sigmas, n_std)
+        test = tf.multiply(sigmas, n_std, name='test')
 
-        bad = tf.where(tf.greater(dev, test), tf.ones_like(dt), tf.zeros_like(dt))
+        bad = tf.where(tf.greater(dev, test), tf.ones_like(dt), tf.zeros_like(dt), name='bad')
 
         # visualize bad pixels
         # bad_img = tf.summary.image('bad', tf.squeeze(bad, axis=0))
 
 
-        new_bad = tf.reduce_sum(bad)
-        percent_change = tf.divide(new_bad, bad_num)
+        new_bad = tf.reduce_sum(bad, name='new_bad')
+        percent_change = tf.divide(new_bad, bad_num, name='percent_change')
 
         # update good map and count bad pixels
-        gm = tf.subtract(gm, bad)
-        bad_num = tf.add(bad_num, new_bad)
-        index = tf.add(index, 1)
+        gm = tf.subtract(gm, bad, name='gm')
+        bad_num = tf.add(bad_num, new_bad, name='bad_num')
+        index = tf.add(index, 1, name='index')
 
         return (gm, mu_krn, dt, bad_num, percent_change, index)
 
@@ -99,13 +100,13 @@ def dspk(data):
 
     smoothing_kernel = np.expand_dims(smoothing_kernel, -1)
     smoothing_kernel = np.expand_dims(smoothing_kernel, -1)
-    smoothing_krn = tf.convert_to_tensor(smoothing_kernel, dtype=np.float32)
+    smoothing_krn = tf.convert_to_tensor(smoothing_kernel, dtype=np.float32, name='smoothing_krn')
 
     # smooth data
-    g_data = tf.multiply(gm, dt)
-    norm = tf.nn.conv3d(gm, smoothing_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
-    dt = tf.nn.conv3d(g_data, smoothing_krn, strides=[1, 1, 1, 1, 1], padding='SAME')
-    dt = tf.divide(dt, norm)
+    g_data = tf.multiply(gm, dt, name='g_data')
+    norm = tf.nn.conv3d(gm, smoothing_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='norm')
+    dt = tf.nn.conv3d(g_data, smoothing_krn, strides=[1, 1, 1, 1, 1], padding='SAME', name='dt')
+    dt = tf.divide(dt, norm, name='dt')
 
     tf.summary.image('smoothing kernel', tf.squeeze(smoothing_krn, axis=-1))
 
@@ -114,6 +115,9 @@ def dspk(data):
     # Start tensorflow session
     init = tf.global_variables_initializer()
     with tf.Session() as sess:
+
+        # initialize debugger
+        # sess = tf_debug.LocalCLIDebugWrapperSession(sess)
 
         # Open summary writer
         tb_writer = tf.summary.FileWriter('./data')
@@ -124,11 +128,13 @@ def dspk(data):
         # Evaluate graph
         sess.run(init)
         (test, dt, gm, bad_num,index) = sess.run([merged, dt, gm, bad_num, index])
-        # (dt, gm, bad_num) = sess.run([dt, gm, bad_num])
+        # (dt, gm, bad_num) = sess.run([dt, gm, bad_num])8
 
         # Add image summary
         tb_writer.add_summary(test)
         tb_writer.flush()
+
+
 
 
         print('Number of iterations', index)  # why is this always 4?
