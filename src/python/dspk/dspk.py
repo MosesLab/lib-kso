@@ -7,7 +7,7 @@ from tensorflow.python import debug as tf_debug
 # The beginnings of a Tensor Flow based data despiking routine.  The goal is to despike an image cube efficiently using a
 # GPU
 
-def dspk(data):
+def dspk(data, std_dev=4.5):
 
     # contruct 3-D averaging kernel and form Tensor of shape (filter_depth, filter_height, filter_width, in_channel, out_channel)
     mu_kernel = np.ones([5, 5, 5])
@@ -57,7 +57,7 @@ def dspk(data):
         n_std = tf.sqrt(tf.divide(n_std, norm), name='n_std_norm')
 
         # Compare pixel deviation to local standard deviation
-        sigmas = tf.constant(4.5, dtype=tf.float32, name='sigmas')
+        sigmas = tf.constant(std_dev, dtype=tf.float32, name='sigmas')
 
         test = tf.multiply(sigmas, n_std, name='test')
 
@@ -105,8 +105,14 @@ def dspk(data):
     # smooth data
     g_data = tf.multiply(gm, dt, name='g_data')
     norm = tf.nn.conv3d(gm, smoothing_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='norm')
-    dt = tf.nn.conv3d(g_data, smoothing_krn, strides=[1, 1, 1, 1, 1], padding='SAME', name='dt')
-    dt = tf.divide(dt, norm, name='dt')
+    sg_data = tf.nn.conv3d(g_data, smoothing_krn, strides=[1, 1, 1, 1, 1], padding='SAME', name='sg_data')
+    sg_data = tf.divide(sg_data, norm, name='sg_data')
+
+    # Replace bad pixels
+    all_bad = tf.subtract(1.0, gm, name='all_bad')
+    fixed_pix = tf.multiply(sg_data, all_bad, name='fixed_pix')
+    dt = tf.add(g_data, fixed_pix, name='dt')
+
 
     tf.summary.image('smoothing kernel', tf.squeeze(smoothing_krn, axis=-1))
 
