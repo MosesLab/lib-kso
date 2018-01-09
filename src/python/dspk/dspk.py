@@ -79,7 +79,7 @@ def dspk(data, std_dev=4.5):
 
     # setup while loop convergence condition
     def end_bad_pix_search(gm, mu_krn, dt, bad_num, percent_change, index):
-        return tf.greater(percent_change, .01)
+        return tf.greater(percent_change, 1e-4)
 
     (gm, mu_krn, dt, bad_num, percent_change, index) = tf.while_loop(end_bad_pix_search, identify_bad_pix,
                                                                  loop_vars=(gm, mu_krn, dt, bad_num, percent_change, index))

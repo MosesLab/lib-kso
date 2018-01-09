@@ -11,30 +11,36 @@ sz_x = 32
 sz_y = 32
 sz_z = 8
 
-slice_z = 1
+slice_z = 0
 
 n_spk = 512
 
 plt_min = 128
 plt_max = 512
 
+rand = np.random.RandomState(seed=1)
+
 #spiky data
 # data = np.ones([sz_x,sz_y,sz_z], dtype=np.float32)
-data = np.random.poisson(lam=256, size=[sz_x,sz_y,sz_z])
+data = rand.poisson(lam=256, size=[sz_x,sz_y,sz_z])
 
 for i in range(n_spk):
 
-    x = random.randrange(sz_x)
-    y = random.randrange(sz_y)
-    z = random.randrange(sz_z)
+    x = rand.randint(0,sz_x,1)
+    y = rand.randint(0, sz_y, 1)
+    z = rand.randint(0, sz_z, 1)
 
-    data[x,y,z] = np.random.poisson(lam=512, size=1)
+    # x = random.randrange(sz_x)
+    # y = random.randrange(sz_y)
+    # z = random.randrange(sz_z)
+
+    data[x,y,z] = rand.poisson(lam=512, size=1)
 
 
 f1 = plt.figure()
 plt.imshow(data[:,:,slice_z],vmin=plt_min, vmax=plt_max)
 
-(data,good_map,bad_pix_number) = dspk(data, std_dev=3.0)
+(data,good_map,bad_pix_number) = dspk(data, std_dev=2.0)
 
 f2 = plt.figure()
 plt.imshow(good_map[:,:,slice_z])
