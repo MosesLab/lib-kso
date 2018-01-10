@@ -22,6 +22,9 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.4-dev
 ```
+If you are using PyCharm, make sure to launch it from the command line. This will make sure the environment variables defined in `.bashrc` are inherited by PyCharm.
+
+
 ### Dependencies
 This program depends on tensorflow. Installation instructions using pip are from [here](https://www.tensorflow.org/install/install_linux#InstallingNativePip), and summarized below
 ```
