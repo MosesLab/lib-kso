@@ -29,5 +29,6 @@ If you are using PyCharm, make sure to launch it from the command line. This wil
 This program depends on tensorflow. Installation instructions using pip are from [here](https://www.tensorflow.org/install/install_linux#InstallingNativePip), and summarized below
 ```
 sudo apt-get install python3-pip
+python3.4 -m pip install setuptools
 python3.4 -m pip install tensorflow-gpu
 ```
