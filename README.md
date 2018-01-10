@@ -3,12 +3,7 @@
 Despiking code intended for use on IRIS spectra. Based on code developed by Charles Kankelborg and Jacob Parker
 
 ## Installation Instructions
-### Dependencies
-This program depends on tensorflow. Installation instructions using pip are from [here](https://www.tensorflow.org/install/install_linux#InstallingNativePip), and summarized below
-```
-sudo apt-get install python3-pip python3-dev
-pip3 install setuptools tensorflow-gpu
-```
+
 ### IDL-Python Bridge
 Open the `.bashrc` file 
 ```
@@ -27,4 +22,9 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.4-dev
 ```
-Not sure how to install the dependencies above for 3.4 yet
+### Dependencies
+This program depends on tensorflow. Installation instructions using pip are from [here](https://www.tensorflow.org/install/install_linux#InstallingNativePip), and summarized below
+```
+sudo apt-get install python3-pip
+python3.4 -m pip install tensorflow-gpu
+```
