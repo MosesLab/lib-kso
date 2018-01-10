@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import dspk_util
 
 from dspk import dspk
+from dspk_idl import dspk_idl
 
 sz_x = 32
 sz_y = 32
@@ -56,12 +57,17 @@ for i in range(n_spk):
 
 
 # Test despiking routine
-(dspk_data,good_map,bad_pix_number) = dspk(orig_data, std_dev=2.0)
+(dspk_data,good_map,bad_pix_number) = dspk(orig_data, std_dev=1.0)
+
+# Compare against IDL despiking routine
+idl_data = dspk_idl(orig_data, std_dev=2.0)
+print(idl_data.shape)
 
 # Flatten cube so we can view as image
 orig_data_flat = dspk_util.flatten_cube(orig_data, sz_x, sz_y, sz_z)
 good_map_flat = dspk_util.flatten_cube(good_map, sz_x, sz_y, sz_z)
 dspk_data_flat = dspk_util.flatten_cube(dspk_data, sz_x, sz_y, sz_z)
+idl_data_flat = dspk_util.flatten_cube(idl_data, sz_x, sz_y, sz_z)
 
 f1 = plt.figure()
 plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
@@ -71,6 +77,10 @@ plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 
 f3 = plt.figure()
 plt.imshow(dspk_data_flat, vmin=plt_min, vmax=plt_max)
+
+f4 = plt.figure()
+plt.imshow(idl_data_flat, vmin=plt_min, vmax=plt_max)
+
 
 # f3 = plt.figure()
 # plt.imshow(orig_data[:,:,slice_z], vmin=plt_min, vmax=plt_max)
