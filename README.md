@@ -20,7 +20,7 @@ IDL 8.5 does not support Python 3.5, we can circumvent this issue by installing 
 ```
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
-sudo apt install python3.4-dev
+sudo apt install python3.4-dev python3.4-tk
 ```
 If you are using PyCharm, make sure to launch it from the command line. This will make sure the environment variables defined in `.bashrc` are inherited by PyCharm.
 
@@ -30,5 +30,5 @@ This program depends on tensorflow. Installation instructions using pip are from
 ```
 sudo apt-get install python3-pip
 python3.4 -m pip install setuptools
-python3.4 -m pip install tensorflow-gpu
+python3.4 -m pip install tensorflow-gpu matplotlib
 ```
