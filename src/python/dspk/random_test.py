@@ -6,8 +6,8 @@ import dspk_util
 from dspk import dspk
 from dspk_idl import dspk_idl
 
-sz_x = 32
-sz_y = 32
+sz_x = 5
+sz_y = 5
 sz_z = np.square(3)  # must be a square!!
 
 sz = sz_x * sz_y * sz_z
@@ -18,6 +18,8 @@ slice_z = 0
 spk_frac = 0.05
 n_spk = int(spk_frac * sz)
 print(n_spk)
+
+Niter = 1
 
 noise_mean = 64
 spike_mean = 512
@@ -64,10 +66,10 @@ for i in range(n_spk):
 
 
 # Test despiking routine
-(dspk_data,good_map,bad_pix_number) = dspk(orig_data, std_dev=pix_dev)
+(dspk_data,good_map,bad_pix_number) = dspk(orig_data, std_dev=pix_dev, Niter=Niter)
 
 # Compare against IDL despiking routine
-idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=20)
+idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=Niter)
 print(idl_data.shape)
 
 # Flatten cube so we can view as image

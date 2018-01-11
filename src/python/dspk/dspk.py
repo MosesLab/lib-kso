@@ -40,7 +40,9 @@ def dspk(data, std_dev=4.5, Niter=10):
     index = tf.constant(0, name='index')
 
     # Function to identify bad pixels
-    def identify_bad_pix(gm, mu_krn, dt, bad_num, percent_change, index):
+    def identify_bad_pix(gm, mu_krn, dt, bad_num, percent_change, index, Niter):
+
+        # dt = tf.Print(dt,[dt], summarize=25)
 
         # Calculate running normalization
         norm = tf.nn.conv3d(gm, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name="norm")
@@ -48,7 +50,11 @@ def dspk(data, std_dev=4.5, Niter=10):
         # Calculate a neighborhood mean
         g_data = tf.multiply(gm, dt, name='g_data')
         n_mean = tf.nn.conv3d(g_data, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='n_mean')
+        n_mean = tf.Print(n_mean, [n_mean], summarize=225)
         n_mean = tf.divide(n_mean, norm, name='n_mean_norm')
+
+        # norm = tf.Print(norm, [norm], summarize=225)
+
 
         # Deviation
         dev = tf.subtract(dt, n_mean, name='dev')
@@ -77,17 +83,18 @@ def dspk(data, std_dev=4.5, Niter=10):
         bad_num = tf.add(bad_num, new_bad, name='bad_num')
         index = tf.add(index, 1, name='index')
 
-        return (gm, mu_krn, dt, bad_num, percent_change, index)
+        return (gm, mu_krn, dt, bad_num, percent_change, index, Niter)
 
     # setup while loop convergence condition
-    def end_bad_pix_search(gm, mu_krn, dt, bad_num, percent_change, index):
-        return tf.greater(percent_change, 1e-6)
+    def end_bad_pix_search(gm, mu_krn, dt, bad_num, percent_change, index, Niter):
+        perc = tf.greater(percent_change, 1e-6)
+        iter = tf.less(index, Niter)
+        return  tf.logical_and(perc, iter)
 
-    (gm, mu_krn, dt, bad_num, percent_change, index) = tf.while_loop(end_bad_pix_search, identify_bad_pix,
-                                                                 loop_vars=(gm, mu_krn, dt, bad_num, percent_change, index))
+    (gm, mu_krn, dt, bad_num, percent_change, index, Niter) = tf.while_loop(end_bad_pix_search, identify_bad_pix,
+                                                                 loop_vars=(gm, mu_krn, dt, bad_num, percent_change, index, Niter))
 
     tf.summary.image('original data', tf.squeeze(dt, axis=0))
-
 
 
 
@@ -125,7 +132,7 @@ def dspk(data, std_dev=4.5, Niter=10):
     with tf.Session() as sess:
 
         # initialize debugger
-        sess = tf_debug.LocalCLIDebugWrapperSession(sess)
+        # sess = tf_debug.LocalCLIDebugWrapperSession(sess)
 
         # Open summary writer
         tb_writer = tf.summary.FileWriter('./data')

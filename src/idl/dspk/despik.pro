@@ -83,8 +83,21 @@ if not keyword_set(restore) then begin
 ;Identify bad pixels
 goodmap = data*0.0 + 1.0 ;Map of good pixels. An array same size as data, initially all 1's
 for i=1, Niter do begin
-   neighborhood_mean = convol(goodmap*data, kernel, /edge_truncate) / $
-                       convol(goodmap,      kernel, /edge_truncate)
+  
+  n_norm = convol(goodmap,      kernel, /edge_truncate)
+  
+   neighborhood_mean = convol(goodmap*data, kernel, /edge_truncate)
+   
+       print, neighborhood_mean
+   
+   neighborhood_mean = neighborhood_mean / n_norm
+                       
+                       
+;    print, data
+;   print, TRANSPOSE(neighborhood_mean, [2,1,0])
+;    print, neighborhood_mean
+;  print, n_norm
+                       
    case mode of
       'bright': deviation = data - neighborhood_mean      ; find bright spikes only.
       'dark':   deviation = neighborhood_mean - data      ; find dark spikes only.
