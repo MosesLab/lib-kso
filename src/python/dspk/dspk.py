@@ -7,7 +7,7 @@ from tensorflow.python import debug as tf_debug
 # The beginnings of a Tensor Flow based data despiking routine.  The goal is to despike an image cube efficiently using a
 # GPU
 
-def dspk(data, std_dev=4.5):
+def dspk(data, std_dev=4.5, Niter=10):
 
     # contruct 3-D averaging kernel and form Tensor of shape (filter_depth, filter_height, filter_width, in_channel, out_channel)
     mu_kernel = np.ones([5, 5, 5])
@@ -51,8 +51,10 @@ def dspk(data, std_dev=4.5):
         n_mean = tf.divide(n_mean, norm, name='n_mean_norm')
 
         # Deviation
-        dev = tf.subtract(g_data, n_mean)
-        n_std = tf.nn.conv3d(tf.square(dev), mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
+        dev = tf.subtract(dt, n_mean, name='dev')
+        g_dev = tf.multiply(gm, dev, name='g_dev')
+        g_var = tf.square(g_dev, name='g_var')
+        n_std = tf.nn.conv3d(g_var, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME")
 
         n_std = tf.sqrt(tf.divide(n_std, norm), name='n_std_norm')
 
@@ -61,7 +63,7 @@ def dspk(data, std_dev=4.5):
 
         test = tf.multiply(sigmas, n_std, name='test')
 
-        bad = tf.where(tf.greater(dev, test), tf.ones_like(dt), tf.zeros_like(dt), name='bad')
+        bad = tf.where(tf.greater(g_dev, test), tf.ones_like(dt), tf.zeros_like(dt), name='bad')
 
         # visualize bad pixels
         # bad_img = tf.summary.image('bad', tf.squeeze(bad, axis=0))
@@ -123,7 +125,7 @@ def dspk(data, std_dev=4.5):
     with tf.Session() as sess:
 
         # initialize debugger
-        # sess = tf_debug.LocalCLIDebugWrapperSession(sess)
+        sess = tf_debug.LocalCLIDebugWrapperSession(sess)
 
         # Open summary writer
         tb_writer = tf.summary.FileWriter('./data')
