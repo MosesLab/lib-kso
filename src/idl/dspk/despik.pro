@@ -88,14 +88,14 @@ for i=1, Niter do begin
   
    neighborhood_mean = convol(goodmap*data, kernel, /edge_truncate)
    
-       print, neighborhood_mean
+;       print, neighborhood_mean
    
    neighborhood_mean = neighborhood_mean / n_norm
                        
                        
 ;    print, data
 ;   print, TRANSPOSE(neighborhood_mean, [2,1,0])
-;    print, neighborhood_mean
+    print, neighborhood_mean
 ;  print, n_norm
                        
    case mode of

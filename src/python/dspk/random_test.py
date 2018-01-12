@@ -35,8 +35,8 @@ plt_max = spike_mean + plt_dev * np.sqrt(spike_mean)
 rand = np.random.RandomState(seed=1)
 
 # Initialize background with noise
-# orig_data = rand.poisson(lam=64, size=[sz_x,sz_y,sz_z])
-orig_data = np.ones([sz_x,sz_y,sz_z], dtype=np.float32)
+orig_data = rand.poisson(lam=64, size=[sz_x,sz_y,sz_z])
+# orig_data = np.ones([sz_x,sz_y,sz_z], dtype=np.float32)
 
 # Put frames around data for easier viewing
 frame = 0
