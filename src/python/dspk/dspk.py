@@ -49,9 +49,12 @@ def dspk(data, std_dev=4.5, Niter=10):
 
         # Calculate a neighborhood mean
         g_data = tf.multiply(gm, dt, name='g_data')
+
         n_mean = tf.nn.conv3d(g_data, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='n_mean')
         n_mean = tf.Print(n_mean, [n_mean], summarize=225)
+
         n_mean = tf.divide(n_mean, norm, name='n_mean_norm')
+
 
         # norm = tf.Print(norm, [norm], summarize=225)
 
