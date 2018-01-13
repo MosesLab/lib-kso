@@ -6,8 +6,8 @@ import dspk_util
 from dspk import dspk
 from dspk_idl import dspk_idl
 
-sz_x = 5
-sz_y = 5
+sz_x = 32
+sz_y = 32
 sz_z = np.square(3)  # must be a square!!
 
 sz = sz_x * sz_y * sz_z
@@ -15,8 +15,8 @@ print(sz)
 
 slice_z = 0
 
-# spk_frac = 0.05
-spk_frac = 0.0
+spk_frac = 0.05
+# spk_frac = 0.0
 n_spk = int(spk_frac * sz)
 print(n_spk)
 
@@ -29,17 +29,19 @@ pix_dev = 4.0
 
 plt_dev = 2
 plt_min = 0
-# plt_min = noise_mean - plt_dev * np.sqrt(noise_mean)
+# plt_min = noise_mean - plt_dev * np.sqrt(noise_mean
 plt_max = spike_mean + plt_dev * np.sqrt(spike_mean)
 
-rand = np.random.RandomState(seed=1)
+# rand = np.random.RandomState(seed=1)
+rand = np.random.RandomState(seed=None)
+
 
 # Initialize background with noise
-# orig_data = rand.poisson(lam=64, size=[sz_x,sz_y,sz_z])
-orig_data = np.ones([sz_x,sz_y,sz_z], dtype=np.float32)
+orig_data = rand.poisson(lam=64, size=[sz_x,sz_y,sz_z])
+# orig_data = np.ones([sz_x,sz_y,sz_z], dtype=np.float32)
 
 # Put frames around data for easier viewing
-frame = 0
+frame = 1
 orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
 # Add random spikes

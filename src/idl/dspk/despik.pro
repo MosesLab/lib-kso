@@ -84,11 +84,13 @@ if not keyword_set(restore) then begin
 goodmap = data*0.0 + 1.0 ;Map of good pixels. An array same size as data, initially all 1's
 for i=1, Niter do begin
   
-  n_norm = convol(goodmap,      kernel, /edge_truncate)
+;  n_norm = convol(goodmap,      kernel, /edge_truncate)
+  n_norm = convol(goodmap,      kernel, /edge_zero)
   
-   neighborhood_mean = convol(goodmap*data, kernel, /edge_truncate)
+;   neighborhood_mean = convol(goodmap*data, kernel, /edge_truncate)
+   neighborhood_mean = convol(goodmap*data, kernel, /edge_zero)
    
-       print, neighborhood_mean
+;       print, neighborhood_mean
    
    neighborhood_mean = neighborhood_mean / n_norm
                        
@@ -104,8 +106,11 @@ for i=1, Niter do begin
       'both':   deviation = abs(data - neighborhood_mean) ; find both bright and dark spikes.
       else: message, 'Called with undefined mode: '+string(mode)
    endcase
-   neighborhood_std = sqrt( convol(goodmap*deviation^2, kernel, /edge_truncate) / $
-                            convol(goodmap,             kernel, /edge_truncate) ) > min_std
+;   neighborhood_std = sqrt( convol(goodmap*deviation^2, kernel, /edge_truncate) / n_norm ) > min_std
+   neighborhood_std = sqrt( convol(goodmap*deviation^2, kernel, /edge_zero) / n_norm ) > min_std
+
+                            
+                            
    bad = where( deviation gt (sigmas * neighborhood_std) )
    if bad[0] eq -1 then break
    newly_bad = where( goodmap[bad] )
@@ -181,9 +186,14 @@ case Ndim of
    else: message,'Data dimensionality is too great. Cannot construct k2.'
 endcase
 
+print, k2
+
 ;We now re-use the neighborhood_mean array to conserve memory!
-neighborhood_mean = convol(goodmap*data, k2, /edge_truncate) / $
-                    convol(goodmap,      k2, /edge_truncate)
+;n_norm = convol(goodmap,      k2, /edge_truncate)
+n_norm = convol(goodmap,      k2, /edge_zero)
+;neighborhood_mean = convol(goodmap*data, k2, /edge_truncate) / n_norm
+neighborhood_mean = convol(goodmap*data, k2, /edge_zero) / n_norm
+                   
 
 
 ;Replace bad pixels

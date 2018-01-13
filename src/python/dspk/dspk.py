@@ -108,7 +108,7 @@ def dspk(data, std_dev=4.5, Niter=10):
         for j in range(skern_size):
             for k in range(skern_size):
                 r = np.sqrt((i - 2) ** 2 + (j - 2) ** 2 + (k - 2) ** 2)
-                smoothing_kernel[i, j, k] = np.exp((-r) / (1 + r ** 3))
+                smoothing_kernel[i, j, k] = np.exp(-r) / (1 + r ** 3)
 
     smoothing_kernel = np.expand_dims(smoothing_kernel, -1)
     smoothing_kernel = np.expand_dims(smoothing_kernel, -1)
