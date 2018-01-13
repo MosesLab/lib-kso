@@ -97,7 +97,7 @@ for i=1, Niter do begin
                        
 ;    print, data
 ;   print, TRANSPOSE(neighborhood_mean, [2,1,0])
-;    print, neighborhood_mean
+    print, neighborhood_mean
 ;  print, n_norm
                        
    case mode of
