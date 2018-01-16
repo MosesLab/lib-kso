@@ -59,7 +59,6 @@ isize = size(data)
 Ndim = isize[0]
 t_begin = systime(/seconds)
 
-
 ;Keyword defaults.
 if not keyword_set(sigmas) then sigmas = 4.5
 if not keyword_set(Niter) then Niter = 10
@@ -79,26 +78,18 @@ endif
 ;If goodmap exists then skip identifying through restore keyword.
 if not keyword_set(restore) then begin
 
-
 ;Identify bad pixels
 goodmap = data*0.0 + 1.0 ;Map of good pixels. An array same size as data, initially all 1's
 for i=1, Niter do begin
   
 ;  n_norm = convol(goodmap,      kernel, /edge_truncate)
-  n_norm = convol(goodmap,      kernel, /edge_zero)
+   n_norm = convol(goodmap,      kernel, /edge_zero)
   
 ;   neighborhood_mean = convol(goodmap*data, kernel, /edge_truncate)
-   neighborhood_mean = convol(goodmap*data, kernel, /edge_zero)
-   
-;       print, neighborhood_mean
-   
+   neighborhood_mean = convol(goodmap*data, kernel, /edge_zero) 
    neighborhood_mean = neighborhood_mean / n_norm
                        
-                       
-;    print, data
-;   print, TRANSPOSE(neighborhood_mean, [2,1,0])
-    print, neighborhood_mean
-;  print, n_norm
+
                        
    case mode of
       'bright': deviation = data - neighborhood_mean      ; find bright spikes only.
@@ -118,8 +109,6 @@ for i=1, Niter do begin
    if not keyword_set(silent) then begin
       print, i, n_elements(bad), n_elements(newly_bad), $
          format='("Iteration ",i4," found ",i12," bad pixels, ",i12," of them new.")'
-      ;print,'Iteration ',i,' found ',n_elements(newly_bad),' newly bad pixels, ', $
-      ;   n_elements(bad),' total bad pixels.'
    endif
    goodmap[bad[newly_bad]] = 0.0
 endfor
@@ -161,7 +150,7 @@ case Ndim of
                      for k=0, Nk2-1 do begin
                         z = k - middle
                         r = sqrt(x^2 + y^2 + z^2)
-                        k2[i,j,k] = exp(-r)/(1+r^Ndim)
+                        k2[i,j,k] = exp(-r)/(1 +  r * r * r)
                      endfor
                endfor
          endfor 
@@ -186,15 +175,14 @@ case Ndim of
    else: message,'Data dimensionality is too great. Cannot construct k2.'
 endcase
 
-print, k2
-
+;print, k2
+;
 ;We now re-use the neighborhood_mean array to conserve memory!
 ;n_norm = convol(goodmap,      k2, /edge_truncate)
 n_norm = convol(goodmap,      k2, /edge_zero)
 ;neighborhood_mean = convol(goodmap*data, k2, /edge_truncate) / n_norm
 neighborhood_mean = convol(goodmap*data, k2, /edge_zero) / n_norm
-                   
-
+                 
 
 ;Replace bad pixels
 bad = where(~goodmap)
@@ -211,5 +199,6 @@ endif
 t_end = systime(/seconds)
 if not keyword_set(silent) then print,systime()+' DESPIK finished, ',t_end-t_begin,' sec elapsed.'
 return, result
+;return, neighborhood_mean
 
 end

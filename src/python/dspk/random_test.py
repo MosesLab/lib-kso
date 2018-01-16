@@ -11,14 +11,12 @@ sz_y = 32
 sz_z = np.square(3)  # must be a square!!
 
 sz = sz_x * sz_y * sz_z
-print(sz)
 
 slice_z = 0
 
 spk_frac = 0.05
 # spk_frac = 0.0
 n_spk = int(spk_frac * sz)
-print(n_spk)
 
 Niter = 1
 
@@ -32,16 +30,18 @@ plt_min = 0
 # plt_min = noise_mean - plt_dev * np.sqrt(noise_mean
 plt_max = spike_mean + plt_dev * np.sqrt(spike_mean)
 
-# rand = np.random.RandomState(seed=1)
-rand = np.random.RandomState(seed=None)
+rand = np.random.RandomState(seed=1)
+# rand = np.random.RandomState(seed=None)
 
 
 # Initialize background with noise
 orig_data = rand.poisson(lam=64, size=[sz_x,sz_y,sz_z])
 # orig_data = np.ones([sz_x,sz_y,sz_z], dtype=np.float32)
 
+
+
 # Put frames around data for easier viewing
-frame = 1
+frame = 0
 orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
 # Add random spikes
@@ -68,19 +68,20 @@ for i in range(n_spk):
 
 
 
-
 # Test despiking routine
 (dspk_data,good_map,bad_pix_number) = dspk(orig_data, std_dev=pix_dev, Niter=Niter)
 
 # Compare against IDL despiking routine
 idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=Niter)
-print(idl_data.shape)
+
 
 # Flatten cube so we can view as image
 orig_data_flat = dspk_util.flatten_cube(orig_data, sz_x, sz_y, sz_z)
 good_map_flat = dspk_util.flatten_cube(good_map, sz_x, sz_y, sz_z)
 dspk_data_flat = dspk_util.flatten_cube(dspk_data, sz_x, sz_y, sz_z)
 idl_data_flat = dspk_util.flatten_cube(idl_data, sz_x, sz_y, sz_z)
+# dspk_data_flat = dspk_util.flatten_cube(dspk_data, 9, 9, 9)
+# idl_data_flat = dspk_util.flatten_cube(idl_data, 9, 9, 9)
 
 f1 = plt.figure()
 plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
@@ -90,30 +91,17 @@ plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 
 f3 = plt.figure()
 plt.imshow(dspk_data_flat, vmin=plt_min, vmax=plt_max)
+# plt.imshow(dspk_data_flat)
 
 f4 = plt.figure()
 plt.imshow(idl_data_flat, vmin=plt_min, vmax=plt_max)
+# plt.imshow(idl_data_flat)
 
 diff = idl_data_flat - dspk_data_flat
-
 f5 = plt.figure()
 plt.imshow(diff)
 
 
-# f3 = plt.figure()
-# plt.imshow(orig_data[:,:,slice_z], vmin=plt_min, vmax=plt_max)
-
 
 
 plt.show()
-
-# try:
-#     plt.ion()
-#     plt.show()
-#     while True:
-#
-#         pass
-#
-# # plt.waitforbuttonpress()
-# except KeyboardInterrupt:
-#     plt.close()

@@ -23,10 +23,6 @@ def dspk(data, std_dev=4.5, Niter=10):
     dt = tf.convert_to_tensor(data, dtype=np.float32)
 
 
-
-    # #try using a placeholder node for large arrays
-    # dt = tf.placeholder(dtype=tf.float32)
-
     # form a map of good and bad pixels witht the same dimensions as data and form Tensor
     goodmap = data * 0 + 1
     gm = tf.convert_to_tensor(goodmap, dtype=np.float32, name='gm')
@@ -42,21 +38,14 @@ def dspk(data, std_dev=4.5, Niter=10):
     # Function to identify bad pixels
     def identify_bad_pix(gm, mu_krn, dt, bad_num, percent_change, index, Niter):
 
-        # dt = tf.Print(dt,[dt], summarize=25)
 
         # Calculate running normalization
         norm = tf.nn.conv3d(gm, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name="norm")
 
         # Calculate a neighborhood mean
         g_data = tf.multiply(gm, dt, name='g_data')
-
         n_mean = tf.nn.conv3d(g_data, mu_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='n_mean')
-
         n_mean = tf.divide(n_mean, norm, name='n_mean_norm')
-
-        n_mean = tf.Print(n_mean, [n_mean], summarize=225)
-
-        # norm = tf.Print(norm, [norm], summarize=225)
 
 
         # Deviation
@@ -73,9 +62,6 @@ def dspk(data, std_dev=4.5, Niter=10):
         test = tf.multiply(sigmas, n_std, name='test')
 
         bad = tf.where(tf.greater(g_dev, test), tf.ones_like(dt), tf.zeros_like(dt), name='bad')
-
-        # visualize bad pixels
-        # bad_img = tf.summary.image('bad', tf.squeeze(bad, axis=0))
 
 
         new_bad = tf.reduce_sum(bad, name='new_bad')
@@ -97,18 +83,21 @@ def dspk(data, std_dev=4.5, Niter=10):
     (gm, mu_krn, dt, bad_num, percent_change, index, Niter) = tf.while_loop(end_bad_pix_search, identify_bad_pix,
                                                                  loop_vars=(gm, mu_krn, dt, bad_num, percent_change, index, Niter))
 
-    tf.summary.image('original data', tf.squeeze(dt, axis=0))
 
 
 
     # define a near-local smoothing kernel for replacing bad pixels
-    skern_size = 5
-    smoothing_kernel = np.empty([skern_size, skern_size, skern_size])
-    for i in range(skern_size):
-        for j in range(skern_size):
-            for k in range(skern_size):
-                r = np.sqrt((i - 2) ** 2 + (j - 2) ** 2 + (k - 2) ** 2)
-                smoothing_kernel[i, j, k] = np.exp(-r) / (1 + r ** 3)
+    skern_size = np.array([5, 5, 5], dtype=np.int64)
+    sk2 = (skern_size - 1) / 2
+    print(sk2)
+    smoothing_kernel = np.empty(skern_size, dtype=np.float32)
+    for i in range(skern_size[0]):
+        for j in range(skern_size[1]):
+            for k in range(skern_size[2]):
+                r = np.sqrt((i - sk2[0]) ** 2 + (j - sk2[1]) ** 2 + (k - sk2[2]) ** 2, dtype=np.float32)
+                smoothing_kernel[i, j, k] = np.exp(-r) / (1 + r * r * r)
+
+    # print(smoothing_kernel)
 
     smoothing_kernel = np.expand_dims(smoothing_kernel, -1)
     smoothing_kernel = np.expand_dims(smoothing_kernel, -1)
@@ -116,19 +105,19 @@ def dspk(data, std_dev=4.5, Niter=10):
 
     # smooth data
     g_data = tf.multiply(gm, dt, name='g_data')
-    norm = tf.nn.conv3d(gm, smoothing_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='norm')
+    n_norm = tf.nn.conv3d(gm, smoothing_krn, strides=[1, 1, 1, 1, 1], padding="SAME", name='norm')
     sg_data = tf.nn.conv3d(g_data, smoothing_krn, strides=[1, 1, 1, 1, 1], padding='SAME', name='sg_data')
-    sg_data = tf.divide(sg_data, norm, name='sg_data')
+    sg_data = tf.divide(sg_data, n_norm, name='sg_data')
+
+
+    print(g_data.dtype)
 
     # Replace bad pixels
     all_bad = tf.subtract(1.0, gm, name='all_bad')
     fixed_pix = tf.multiply(sg_data, all_bad, name='fixed_pix')
     dt = tf.add(g_data, fixed_pix, name='dt')
 
-
-    tf.summary.image('smoothing kernel', tf.squeeze(smoothing_krn, axis=-1))
-
-    merged = tf.summary.merge_all()
+    dt= fixed_pix
 
     # Start tensorflow session
     init = tf.global_variables_initializer()
@@ -145,14 +134,8 @@ def dspk(data, std_dev=4.5, Niter=10):
 
         # Evaluate graph
         sess.run(init)
-        (test, dt, gm, bad_num,index) = sess.run([merged, dt, gm, bad_num, index])
-        # (dt, gm, bad_num) = sess.run([dt, gm, bad_num])8
-
-        # Add image summary
-        tb_writer.add_summary(test)
-        tb_writer.flush()
-
-
+        (dt, gm, bad_num,index) = sess.run([dt, gm, bad_num, index])
+        # (dt, gm, bad_num) = sess.run([dt, gm, bad_num])
 
 
         print('Number of iterations', index)  # why is this always 4?
