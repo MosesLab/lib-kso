@@ -117,7 +117,6 @@ def dspk(data, std_dev=4.5, Niter=10):
     fixed_pix = tf.multiply(sg_data, all_bad, name='fixed_pix')
     dt = tf.add(g_data, fixed_pix, name='dt')
 
-    dt= fixed_pix
 
     # Start tensorflow session
     init = tf.global_variables_initializer()

@@ -182,11 +182,12 @@ endcase
 n_norm = convol(goodmap,      k2, /edge_zero)
 ;neighborhood_mean = convol(goodmap*data, k2, /edge_truncate) / n_norm
 neighborhood_mean = convol(goodmap*data, k2, /edge_zero) / n_norm
-                 
+        
+print, typename(neighborhood_mean)         
 
 ;Replace bad pixels
 bad = where(~goodmap)
-result = data
+result = float(data)
 if bad[0] ne -1 then result[bad] = neighborhood_mean[bad]
 
 ;Restore the bad crap that was filtered out of the data when we started. Also put the
