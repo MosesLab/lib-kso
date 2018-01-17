@@ -8,9 +8,9 @@ from dspk_idl import dspk_idl
 
 import time
 
-sz_t = 1024
-sz_y = 256
-sz_l = 16
+sz_t = 64
+sz_y = 64
+sz_l = 64
 
 sz = sz_t * sz_y * sz_l
 
