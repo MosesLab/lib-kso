@@ -9,6 +9,8 @@ from tensorflow.python import debug as tf_debug
 
 def dspk(data, std_dev=4.5, Niter=10):
 
+
+
     # contruct 3-D averaging kernel and form Tensor of shape (filter_depth, filter_height, filter_width, in_channel, out_channel)
     mu_kernel = np.ones([5, 5, 5])
     mu_kernel = np.expand_dims(mu_kernel, -1)
@@ -17,10 +19,14 @@ def dspk(data, std_dev=4.5, Niter=10):
     mu_krn = tf.convert_to_tensor(mu_kernel, dtype=np.float32)
 
     # form data cube into tensor of shape (batch, depth, height, width, channels)
+    t_sz = 32
     data = np.expand_dims(data, 0)
     data = np.expand_dims(data, -1)
+    splits = np.arange(0, data.shape[1], )
+    split_data =
 
-    dt = tf.convert_to_tensor(data, dtype=np.float32)
+    # dt = tf.convert_to_tensor(data, dtype=np.float32)
+    dt = tf.placeholder(np.float32, [1, None, None, None, 1])
 
 
     # form a map of good and bad pixels witht the same dimensions as data and form Tensor

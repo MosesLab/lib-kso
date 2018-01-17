@@ -8,11 +8,11 @@ from dspk_idl import dspk_idl
 
 import time
 
-sz_x = 512
-sz_y = 512
-sz_z = 256
+sz_t = 1024
+sz_y = 256
+sz_l = 16
 
-sz = sz_x * sz_y * sz_z
+sz = sz_t * sz_y * sz_l
 
 slice_z = 0
 
@@ -37,7 +37,7 @@ rand = np.random.RandomState(seed=None)
 
 
 # Initialize background with noise
-orig_data = rand.poisson(lam=64, size=[sz_x,sz_y,sz_z])
+orig_data = rand.poisson(lam=64, size=[sz_t, sz_y, sz_l])
 # orig_data = np.ones([sz_x,sz_y,sz_z], dtype=np.float32)
 
 
@@ -53,7 +53,7 @@ coords = coords[:n_spk]
 
 orig_data = orig_data.flatten()
 orig_data[coords] = rand.poisson(lam=512, size=n_spk)
-orig_data = orig_data.reshape([sz_x, sz_y, sz_z])
+orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 
 
 
@@ -70,15 +70,16 @@ idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=Niter)
 idl_end = time.time()
 idl_elapsed = idl_end - idl_start
 
-print('tensorflow time = ', tf_elapsed)
-print('IDL time = ', idl_elapsed)
+print('tensorflow time =', tf_elapsed)
+print('IDL time =', idl_elapsed)
+print('ratio =', idl_elapsed / tf_elapsed)
 
 
 # Flatten cube so we can view as image
-orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_x, sz_y, 9)
-good_map_flat = dspk_util.flatten_cube(good_map[:,:,0:9], sz_x, sz_y, 9)
-dspk_data_flat = dspk_util.flatten_cube(dspk_data[:,:,0:9], sz_x, sz_y, 9)
-idl_data_flat = dspk_util.flatten_cube(idl_data[:,:,0:9], sz_x, sz_y, 9)
+orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_t, sz_y, 9)
+good_map_flat = dspk_util.flatten_cube(good_map[:,:,0:9], sz_t, sz_y, 9)
+dspk_data_flat = dspk_util.flatten_cube(dspk_data[:,:,0:9], sz_t, sz_y, 9)
+idl_data_flat = dspk_util.flatten_cube(idl_data[:,:,0:9], sz_t, sz_y, 9)
 # dspk_data_flat = dspk_util.flatten_cube(dspk_data, 9, 9, 9)
 # idl_data_flat = dspk_util.flatten_cube(idl_data, 9, 9, 9)
 
