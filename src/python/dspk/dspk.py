@@ -89,7 +89,6 @@ def dspk(data, std_dev=4.5, Niter=10):
     # define a near-local smoothing kernel for replacing bad pixels
     skern_size = np.array([5, 5, 5], dtype=np.int64)
     sk2 = (skern_size - 1) / 2
-    print(sk2)
     smoothing_kernel = np.empty(skern_size, dtype=np.float32)
     for i in range(skern_size[0]):
         for j in range(skern_size[1]):
@@ -109,8 +108,6 @@ def dspk(data, std_dev=4.5, Niter=10):
     sg_data = tf.nn.conv3d(g_data, smoothing_krn, strides=[1, 1, 1, 1, 1], padding='SAME', name='sg_data')
     sg_data = tf.divide(sg_data, n_norm, name='sg_data')
 
-
-    print(g_data.dtype)
 
     # Replace bad pixels
     all_bad = tf.subtract(1.0, gm, name='all_bad')

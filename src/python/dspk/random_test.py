@@ -6,9 +6,11 @@ import dspk_util
 from dspk import dspk
 from dspk_idl import dspk_idl
 
-sz_x = 32
-sz_y = 32
-sz_z = np.square(3)  # must be a square!!
+import time
+
+sz_x = 512
+sz_y = 512
+sz_z = 256
 
 sz = sz_x * sz_y * sz_z
 
@@ -18,20 +20,20 @@ spk_frac = 0.05
 # spk_frac = 0.0
 n_spk = int(spk_frac * sz)
 
-Niter = 1
+Niter = 20
 
 noise_mean = 64
 spike_mean = 512
 
-pix_dev = 4.0
+pix_dev = 3.0
 
 plt_dev = 2
 plt_min = 0
 # plt_min = noise_mean - plt_dev * np.sqrt(noise_mean
 plt_max = spike_mean + plt_dev * np.sqrt(spike_mean)
 
-rand = np.random.RandomState(seed=1)
-# rand = np.random.RandomState(seed=None)
+# rand = np.random.RandomState(seed=1)
+rand = np.random.RandomState(seed=None)
 
 
 # Initialize background with noise
@@ -45,41 +47,38 @@ frame = 0
 orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
 # Add random spikes
-spike_mask = np.zeros([sz_x,sz_y,sz_z], dtype=np.int32)
-for i in range(n_spk):
+coords = np.arange(sz)
+np.random.shuffle(coords)
+coords = coords[:n_spk]
 
-    # Loop to make sure we select a new coordinate
-    while True:
+orig_data = orig_data.flatten()
+orig_data[coords] = rand.poisson(lam=512, size=n_spk)
+orig_data = orig_data.reshape([sz_x, sz_y, sz_z])
 
-        # Select random coordinate
-        x = rand.randint(frame, sz_x-frame, 1)
-        y = rand.randint(frame, sz_y-frame, 1)
-        z = rand.randint(0, sz_z, 1)
-
-        # Check if coordinate has been selected before
-        if spike_mask[x,y,z] == 0:
-            break
-
-
-
-    # Apply spike
-    spike_mask[x,y,z] = 1
-    orig_data[x,y,z] = rand.poisson(lam=512, size=1)
 
 
 
 # Test despiking routine
+tf_start = time.time()
 (dspk_data,good_map,bad_pix_number) = dspk(orig_data, std_dev=pix_dev, Niter=Niter)
+tf_end = time.time()
+tf_elapsed = tf_end - tf_start
 
 # Compare against IDL despiking routine
+idl_start = time.time()
 idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=Niter)
+idl_end = time.time()
+idl_elapsed = idl_end - idl_start
+
+print('tensorflow time = ', tf_elapsed)
+print('IDL time = ', idl_elapsed)
 
 
 # Flatten cube so we can view as image
-orig_data_flat = dspk_util.flatten_cube(orig_data, sz_x, sz_y, sz_z)
-good_map_flat = dspk_util.flatten_cube(good_map, sz_x, sz_y, sz_z)
-dspk_data_flat = dspk_util.flatten_cube(dspk_data, sz_x, sz_y, sz_z)
-idl_data_flat = dspk_util.flatten_cube(idl_data, sz_x, sz_y, sz_z)
+orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_x, sz_y, 9)
+good_map_flat = dspk_util.flatten_cube(good_map[:,:,0:9], sz_x, sz_y, 9)
+dspk_data_flat = dspk_util.flatten_cube(dspk_data[:,:,0:9], sz_x, sz_y, 9)
+idl_data_flat = dspk_util.flatten_cube(idl_data[:,:,0:9], sz_x, sz_y, 9)
 # dspk_data_flat = dspk_util.flatten_cube(dspk_data, 9, 9, 9)
 # idl_data_flat = dspk_util.flatten_cube(idl_data, 9, 9, 9)
 

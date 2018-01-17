@@ -32,8 +32,6 @@ def add_frame(data_3D, axes, f_sz=1):
 
             data_3D = np.rollaxis(data, np.mod(-i,2))  # undo roll
 
-            print(data.shape)
-
         i = i + 1   # keep track of our own looping variable
 
 
