@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import dspk_util
 
 from dspk import dspk
-from dspk_idl import dspk_idl
+# from dspk_idl import dspk_idl
 
 import time
 
-sz_t = 64
+sz_t = 128
 sz_y = 64
 sz_l = 64
 
@@ -64,44 +64,44 @@ tf_start = time.time()
 tf_end = time.time()
 tf_elapsed = tf_end - tf_start
 
-# Compare against IDL despiking routine
-idl_start = time.time()
-idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=Niter)
-idl_end = time.time()
-idl_elapsed = idl_end - idl_start
-
-print('tensorflow time =', tf_elapsed)
-print('IDL time =', idl_elapsed)
-print('ratio =', idl_elapsed / tf_elapsed)
-
-
-# Flatten cube so we can view as image
-orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_t, sz_y, 9)
-good_map_flat = dspk_util.flatten_cube(good_map[:,:,0:9], sz_t, sz_y, 9)
-dspk_data_flat = dspk_util.flatten_cube(dspk_data[:,:,0:9], sz_t, sz_y, 9)
-idl_data_flat = dspk_util.flatten_cube(idl_data[:,:,0:9], sz_t, sz_y, 9)
-# dspk_data_flat = dspk_util.flatten_cube(dspk_data, 9, 9, 9)
-# idl_data_flat = dspk_util.flatten_cube(idl_data, 9, 9, 9)
-
-f1 = plt.figure()
-plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
-
-# f2 = plt.figure()
-# plt.imshow(good_map_flat)
-
-f3 = plt.figure()
-plt.imshow(dspk_data_flat, vmin=plt_min, vmax=plt_max)
-# plt.imshow(dspk_data_flat)
-
-f4 = plt.figure()
-plt.imshow(idl_data_flat, vmin=plt_min, vmax=plt_max)
-# plt.imshow(idl_data_flat)
-
-diff = idl_data_flat - dspk_data_flat
-f5 = plt.figure()
-plt.imshow(diff)
-
-
-
-
-plt.show()
+# # Compare against IDL despiking routine
+# idl_start = time.time()
+# idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=Niter)
+# idl_end = time.time()
+# idl_elapsed = idl_end - idl_start
+#
+# print('tensorflow time =', tf_elapsed)
+# print('IDL time =', idl_elapsed)
+# print('ratio =', idl_elapsed / tf_elapsed)
+#
+#
+# # Flatten cube so we can view as image
+# orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_t, sz_y, 9)
+# good_map_flat = dspk_util.flatten_cube(good_map[:,:,0:9], sz_t, sz_y, 9)
+# dspk_data_flat = dspk_util.flatten_cube(dspk_data[:,:,0:9], sz_t, sz_y, 9)
+# idl_data_flat = dspk_util.flatten_cube(idl_data[:,:,0:9], sz_t, sz_y, 9)
+# # dspk_data_flat = dspk_util.flatten_cube(dspk_data, 9, 9, 9)
+# # idl_data_flat = dspk_util.flatten_cube(idl_data, 9, 9, 9)
+#
+# f1 = plt.figure()
+# plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
+#
+# # f2 = plt.figure()
+# # plt.imshow(good_map_flat)
+#
+# f3 = plt.figure()
+# plt.imshow(dspk_data_flat, vmin=plt_min, vmax=plt_max)
+# # plt.imshow(dspk_data_flat)
+#
+# f4 = plt.figure()
+# plt.imshow(idl_data_flat, vmin=plt_min, vmax=plt_max)
+# # plt.imshow(idl_data_flat)
+#
+# diff = idl_data_flat - dspk_data_flat
+# f5 = plt.figure()
+# plt.imshow(diff)
+#
+#
+#
+#
+# plt.show()
