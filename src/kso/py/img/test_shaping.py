@@ -1,6 +1,6 @@
 import numpy as np
 
-import kso.tools.np.shaping as shp
+import kso.py.img.shaping as shp
 
 def test_time_stride_5D():
 
