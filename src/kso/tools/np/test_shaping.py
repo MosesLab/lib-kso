@@ -1,6 +1,6 @@
 import numpy as np
 
-import shaping
+import kso.tools.np.shaping as shp
 
 def test_time_stride_5D():
 
@@ -25,6 +25,7 @@ def test_time_stride_5D():
 
     # print(A)
 
-    B = time_stride_5D(A, ks_t, ss_t)
+    B = shp.time_stride_5D(A, ks_t, ss_t)
 
     print(B)
+
