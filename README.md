@@ -38,4 +38,8 @@ python3.4 -m pip install setuptools
 python3.4 -m pip install tensorflow-gpu matplotlib
 ```
 
+```
+sudo apt install python3-dev
+```
+
 
