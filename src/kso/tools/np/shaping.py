@@ -36,3 +36,42 @@ def add_frame(data_3D, axes, f_sz=1):
 
 
     return data_3D
+
+def time_stride_5D(A, krn_sz_t, stride_sz_t):
+
+    if len(A.shape) != 5: raise ValueError('Number of dimensions of input array must be 5.')
+    os_b = A.shape[0]
+    os_t = A.shape[1]
+    os_y = A.shape[2]
+    os_l = A.shape[3]
+    os_c = A.shape[4]
+
+    if os_b != 1: raise  ValueError('First dimension must be a singleton dimension')
+
+
+    ks_t = krn_sz_t
+
+
+    # new size of array after striding
+    ns_t = stride_sz_t
+    ns_y = os_y
+    ns_l = os_l
+    ns_c = os_c
+
+    ks_t_2 = np.int(np.floor(ks_t / 2))
+    es_b = ns_t - ks_t_2
+    ns_b = os_b * np.int(np.floor((os_t - ks_t_2) / es_b))
+    print(ns_b)
+
+    print(A.strides)
+
+    # size of strides
+    ms_t = A.strides[1]
+    ms_y = A.strides[2]
+    ms_l = A.strides[3]
+    ms_b = ms_t * es_b
+    ms_c = A.strides[4]
+
+    B = np.lib.stride_tricks.as_strided(A, shape=[ns_b, ns_t, ns_y, ns_l, ns_c], strides=[ms_b, ms_t, ms_y, ms_l, ms_c])
+
+    return B
