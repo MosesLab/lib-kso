@@ -18,9 +18,9 @@
 					<folderInfo id="0.1378040496." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.88625560" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform binaryParser="" id="org.eclipse.cdt.build.core.prefbase.toolchain.88625560.1960250872" name=""/>
-							<builder id="org.eclipse.cdt.build.core.settings.default.builder.1954860545" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<builder command="make" id="org.eclipse.cdt.build.core.settings.default.builder.1954860545" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.462261711" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs">
-								<option id="org.eclipse.cdt.build.core.settings.holder.libpaths.942108137" superClass="org.eclipse.cdt.build.core.settings.holder.libpaths" valueType="libPaths">
+								<option id="org.eclipse.cdt.build.core.settings.holder.libpaths.942108137" name="Library Paths" superClass="org.eclipse.cdt.build.core.settings.holder.libpaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="/usr/lib/x86_64-linux-gnu"/>
 								</option>
 							</tool>
