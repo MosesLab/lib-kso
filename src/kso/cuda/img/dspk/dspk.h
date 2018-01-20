@@ -18,12 +18,6 @@ namespace kso {
 
 			void remove_noise();
 
-			BOOST_PYTHON_MODULE(dspk){
-
-			    boost::python::def("remove_noise", remove_noise);
-
-			}
-
 		}
 
 	}

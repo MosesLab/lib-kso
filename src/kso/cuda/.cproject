@@ -49,7 +49,7 @@
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
-								<outputType id="nvcc.linker.output.so.1879664393" outputPrefix="lib" superClass="nvcc.linker.output.so"/>
+								<outputType id="nvcc.linker.output.so.1879664393" outputPrefix="" superClass="nvcc.linker.output.so"/>
 							</tool>
 							<tool id="nvcc.archiver.base.1243531691" name="NVCC Archiver" superClass="nvcc.archiver.base"/>
 							<tool id="com.nvidia.host.assembler.209766667" name="Host Assembler" superClass="com.nvidia.host.assembler">
@@ -64,6 +64,7 @@
 					<sass major="5" minor="2"/>
 					<ptx major="5" minor="2"/>
 				</executable>
+				<editor-arch major="5" minor="2"/>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
