@@ -41,5 +41,12 @@ python3.4 -m pip install tensorflow-gpu matplotlib
 ```
 sudo apt install python3-dev
 ```
+### Boost C++ Libraries
+The KSO library depends on a Boost Libraries >1.63 which is not yet available in the `apt` repositories. For now, [download](http://www.boost.org/users/history/version_1_66_0.html), extract and install.
+```
+cd boost_1_66_0/
+sudo ./bootstrap.sh --with-python-version=3.5 --libdir=/usr/lib/x86_64-linux-gnu/ --includedir=/usr/include
+sudo ./b2 install -j 8
+```
 
 
