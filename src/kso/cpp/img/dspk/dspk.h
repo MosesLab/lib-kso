@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <cstdlib>
 
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
@@ -25,7 +26,7 @@ namespace kso {
 
 		namespace dspk {
 
-			void remove_noise_3D();
+			void remove_noise_3D(const np::ndarray & cube);
 
 		}
 
