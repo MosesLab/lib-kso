@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
@@ -24,7 +25,7 @@ namespace kso {
 
 		namespace dspk {
 
-			void remove_noise();
+			void remove_noise_3D();
 
 		}
 
