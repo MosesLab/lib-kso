@@ -26,7 +26,7 @@ namespace kso {
 
 		namespace dspk {
 
-			void remove_noise_3D(const np::ndarray & cube);
+			void remove_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter);
 
 		}
 
