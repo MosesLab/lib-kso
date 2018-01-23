@@ -117,13 +117,6 @@ __global__ void kso::img::dspk::calc_dev(float * dt, float * gm, float * dev, di
 	uint n_y = n_l * sz_l;
 	uint n_t = n_y * sz_y;
 
-	// limits on main (outer) 3D loop. Need to account for kernel size
-	uint T0 = ks2;
-	uint T9 = sz_t - ks2;
-	uint Y0 = T0;
-	uint Y9 = T9;
-	uint L0 = T0;
-	uint L9 = T9;
 
 
 
@@ -139,7 +132,7 @@ __global__ void kso::img::dspk::calc_dev(float * dt, float * gm, float * dev, di
 		uint A = t - ks2 + a;
 
 		// truncate the kernel if we're over the edge
-		if(A < T0 or A > T9){
+		if(A >= (sz_t - 1)){
 			continue;
 		}
 
@@ -150,7 +143,7 @@ __global__ void kso::img::dspk::calc_dev(float * dt, float * gm, float * dev, di
 			uint B = y - ks2 + b;
 
 			// truncate kernel if we're over the edge
-			if(B < Y0 or B > Y9) {
+			if(B >= (sz_y - 1)) {
 				continue;
 			}
 
@@ -161,7 +154,7 @@ __global__ void kso::img::dspk::calc_dev(float * dt, float * gm, float * dev, di
 				uint C = l - ks2 + c;
 
 				// truncate kernel if we're over the edge
-				if(C < L0 or C > L9){
+				if(C >= (sz_l - 1)){
 					continue;
 				}
 
@@ -204,13 +197,6 @@ __global__ void kso::img::dspk::calc_goodmap(float std_dev, float * gm, float * 
 	uint n_y = n_l * sz_l;
 	uint n_t = n_y * sz_y;
 
-	// limits on main (outer) 3D loop. Need to account for kernel size
-	uint T0 = ks2;
-	uint T9 = sz_t - ks2;
-	uint Y0 = T0;
-	uint Y9 = T9;
-	uint L0 = T0;
-	uint L9 = T9;
 
 	// initialize neighborhood mean
 	float std = 0.0;
@@ -224,9 +210,11 @@ __global__ void kso::img::dspk::calc_goodmap(float std_dev, float * gm, float * 
 		uint A = t - ks2 + a;
 
 		// truncate the kernel if we're over the edge
-		if(A < T0 or A > T9){
+		if(A >= (sz_t - 1)){
 			continue;
 		}
+
+
 
 		// convolve over space
 		for(uint b = 0; b < k_sz; b++){
@@ -235,7 +223,7 @@ __global__ void kso::img::dspk::calc_goodmap(float std_dev, float * gm, float * 
 			uint B = y - ks2 + b;
 
 			// truncate kernel if we're over the edge
-			if(B < Y0 or B > Y9) {
+			if(B >= (sz_y - 1)) {
 				continue;
 			}
 
@@ -246,7 +234,7 @@ __global__ void kso::img::dspk::calc_goodmap(float std_dev, float * gm, float * 
 				uint C = l - ks2 + c;
 
 				// truncate kernel if we're over the edge
-				if(C < L0 or C > L9){
+				if(C >= (sz_l - 1)){
 					continue;
 				}
 

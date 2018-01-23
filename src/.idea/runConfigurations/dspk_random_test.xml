@@ -16,8 +16,6 @@
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />
-    <method>
-      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_make_kso_cpp" />
-    </method>
+    <method />
   </configuration>
 </component>

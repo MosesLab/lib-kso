@@ -90,7 +90,7 @@ np::ndarray kso::img::dspk::remove_noise_3D(const np::ndarray & cube, float std_
 								float nm = 0.0;
 								float nm_norm = 0.0;
 
-								// Neighborhood mean convolution
+								// Neighborhood mean convolution512
 								// convolve over time
 								for(uint i = 0; i < k_sz; i++){
 
