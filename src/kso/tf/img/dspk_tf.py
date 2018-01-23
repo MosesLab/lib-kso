@@ -3,43 +3,29 @@ import tensorflow as tf
 
 from tensorflow.python import debug as tf_debug
 
-from stride import time_stride_5D
-
 
 # The beginnings of a Tensor Flow based data despiking routine.  The goal is to despike an image cube efficiently using a
 # GPU
 
-def dspk(data, std_dev=4.5, k_sz = 5, Niter=10):
-
-    k_sz_2 = np.int(np.floor(k_sz / 2))
-
-    # form data cube into tensor of shape (batch, depth, height, width, channels)
-    stride_sz = 32
-    data = np.expand_dims(data, 0)
-    data = np.expand_dims(data, -1)
-    data = np.float32(data)
-    s_data = time_stride_5D(data, k_sz, stride_sz)
-    s_data_lst = np.split(s_data, s_data.shape[0], axis=0)
-
-    print(s_data.shape)
+def dspk(data, std_dev=4.5, Niter=10):
 
     # contruct 3-D averaging kernel and form Tensor of shape (filter_depth, filter_height, filter_width, in_channel, out_channel)
-    mu_kernel = np.ones([k_sz, k_sz, k_sz])
+    mu_kernel = np.ones([5, 5, 5])
     mu_kernel = np.expand_dims(mu_kernel, -1)
     mu_kernel = np.expand_dims(mu_kernel, -1)
 
     mu_krn = tf.convert_to_tensor(mu_kernel, dtype=np.float32)
 
+    # form data cube into tensor of shape (batch, depth, height, width, channels)
+    data = np.expand_dims(data, 0)
+    data = np.expand_dims(data, -1)
 
-
-
-    # dt = tf.convert_to_tensor(data, dtype=np.float32)
-    dt = tf.placeholder(np.float32, [None, stride_sz, None, None, 1], name='dt')
+    dt = tf.convert_to_tensor(data, dtype=np.float32)
 
 
     # form a map of good and bad pixels witht the same dimensions as data and form Tensor
-    gm = tf.add(tf.multiply(dt,0),1)
-    # gm = tf.convert_to_tensor(goodmap, dtype=np.float32, name='gm')
+    goodmap = data * 0 + 1
+    gm = tf.convert_to_tensor(goodmap, dtype=np.float32, name='gm')
 
     # initilize bad pixel count to zero
     bad_num = tf.constant(0, dtype=tf.float32, name='bad_num')
@@ -101,7 +87,7 @@ def dspk(data, std_dev=4.5, k_sz = 5, Niter=10):
 
 
     # define a near-local smoothing kernel for replacing bad pixels
-    skern_size = np.array([k_sz, k_sz, k_sz], dtype=np.int64)
+    skern_size = np.array([5, 5, 5], dtype=np.int64)
     sk2 = (skern_size - 1) / 2
     smoothing_kernel = np.empty(skern_size, dtype=np.float32)
     for i in range(skern_size[0]):
@@ -143,11 +129,10 @@ def dspk(data, std_dev=4.5, k_sz = 5, Niter=10):
         tb_writer.add_graph(sess.graph)
 
         # Evaluate graph
-        # sess.run(init)
-        (dt, gm, bad_num,index) = sess.run([gm, bad_num, index], feed_dict={dt: s_data_lst})
+        sess.run(init)
+        (dt, gm, bad_num,index) = sess.run([dt, gm, bad_num, index])
         # (dt, gm, bad_num) = sess.run([dt, gm, bad_num])
 
-        print(type(dt))
 
         print('Number of iterations', index)  # why is this always 4?
         print('Bad Pix Found', bad_num)

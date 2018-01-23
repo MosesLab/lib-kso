@@ -6,13 +6,16 @@ import matplotlib.pyplot as plt
 # from dspk import dspk
 # # from dspk_idl import dspk_idl
 
+import kso.tf.img.dspk_tf as dspk_tf
 import kso.cpp.img.dspk.dspk as dspk_cpp
+
+import kso.py.img.shaping.shaping as dspk_util
 
 import time
 
-sz_t = 64
-sz_y = 64
-sz_l = 64
+sz_t = 128
+sz_y = 128
+sz_l = 128
 
 sz = sz_t * sz_y * sz_l
 
@@ -21,7 +24,7 @@ spk_frac = 0.05
 # spk_frac = 0.0
 n_spk = int(spk_frac * sz)
 
-Niter = 20
+Niter = 5
 
 noise_mean = 64
 spike_mean = 512
@@ -57,53 +60,35 @@ orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 
 print(orig_data.strides)
 
-dspk_cpp.remove_noise_3D(orig_data, pix_dev, 5, Niter)
+cpp_start = time.time()
+gm_cpp = dspk_cpp.locate_noise_3D(orig_data, pix_dev, 5, Niter)
+cpp_end = time.time()
+cpp_elapsed = cpp_end - cpp_start
+print(cpp_elapsed)
+
+print(gm_cpp.shape)
 
 
-# # Test despiking routine
-# tf_start = time.time()
-# (dspk_data,good_map,bad_pix_number) = dspk(orig_data, std_dev=pix_dev, Niter=Niter)
-# tf_end = time.time()
-# tf_elapsed = tf_end - tf_start
+# Test despiking routine
+tf_start = time.time()
+(data_tf,gm_tf,bad_pix_number) = dspk_tf.dspk(orig_data, std_dev=pix_dev, Niter=Niter)
+tf_end = time.time()
+tf_elapsed = tf_end - tf_start
+print(tf_elapsed)
 
-# # Compare against IDL despiking routine
-# idl_start = time.time()
-# idl_data = dspk_idl(orig_data, std_dev=pix_dev, Niter=Niter)
-# idl_end = time.time()
-# idl_elapsed = idl_end - idl_start
-#
-# print('tensorflow time =', tf_elapsed)
-# print('IDL time =', idl_elapsed)
-# print('ratio =', idl_elapsed / tf_elapsed)
-#
-#
-# # Flatten cube so we can view as image
-# orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_t, sz_y, 9)
-# good_map_flat = dspk_util.flatten_cube(good_map[:,:,0:9], sz_t, sz_y, 9)
-# dspk_data_flat = dspk_util.flatten_cube(dspk_data[:,:,0:9], sz_t, sz_y, 9)
-# idl_data_flat = dspk_util.flatten_cube(idl_data[:,:,0:9], sz_t, sz_y, 9)
-# # dspk_data_flat = dspk_util.flatten_cube(dspk_data, 9, 9, 9)
-# # idl_data_flat = dspk_util.flatten_cube(idl_data, 9, 9, 9)
-#
-# f1 = plt.figure()
-# plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
-#
-# # f2 = plt.figure()
-# # plt.imshow(good_map_flat)
-#
-# f3 = plt.figure()
-# plt.imshow(dspk_data_flat, vmin=plt_min, vmax=plt_max)
-# # plt.imshow(dspk_data_flat)
-#
-# f4 = plt.figure()
-# plt.imshow(idl_data_flat, vmin=plt_min, vmax=plt_max)
-# # plt.imshow(idl_data_flat)
-#
-# diff = idl_data_flat - dspk_data_flat
-# f5 = plt.figure()
-# plt.imshow(diff)
-#
-#
-#
-#
-# plt.show()
+# Flatten cube so we can view as image
+orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_t, sz_y, 9)
+gm_cpp_flat = dspk_util.flatten_cube(gm_cpp[:,:,0:9], sz_t, sz_y, 9)
+gm_tf_flat = dspk_util.flatten_cube(gm_tf[:,:,0:9], sz_t, sz_y, 9)
+
+
+f1 = plt.figure()
+plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
+
+f2 = plt.figure()
+plt.imshow(gm_cpp_flat)
+
+f3 = plt.figure()
+plt.imshow(gm_tf_flat)
+
+plt.show()

@@ -1,7 +1,7 @@
 CXX=g++
 RM=rm -f
-CXXFLAGS=-g -I/usr/include/python3.5m/ -fPIC
-LDFLAGS=-g -shared
+CXXFLAGS=-O3 -I/usr/include/python3.5m/ -fPIC
+LDFLAGS=-O3 -shared
 LDLIBS=-lboost_python-py35 -lboost_numpy3
 
 SRCS=dspk.cpp
