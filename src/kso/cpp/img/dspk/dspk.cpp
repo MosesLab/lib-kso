@@ -218,7 +218,7 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 
 	// initialize goodmap
 	float * gm = new float[sz];
-	fill(gm, gm + n, 1.0);
+	fill(gm, gm + sz, 1.0);
 
 	// initialize neighborhood mean
 //	float * nm = new float[sz];
@@ -295,7 +295,7 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 								uint C = l - ks2 + c;
 
 								// truncate kernel if we're over the edge
-								if(C < Y0 or C > Y9){
+								if(C < L0 or C > L9){
 									continue;
 								}
 
