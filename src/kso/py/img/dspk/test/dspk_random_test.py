@@ -8,15 +8,15 @@ import matplotlib.pyplot as plt
 
 import kso.tf.img.dspk_tf as dspk_tf
 import kso.cpp.img.dspk.dspk as dspk_cpp
-# import kso.cuda.img.dspk.dspk_cuda as dspk_cuda
+import kso.cuda.img.dspk.dspk_cuda as dspk_cuda
 
 import kso.py.img.shaping.shaping as dspk_util
 
 import time
 
-sz_t = 16
-sz_y = 16
-sz_l = 16
+sz_t = 512
+sz_y = 512
+sz_l = 512
 
 sz = sz_t * sz_y * sz_l
 
@@ -25,7 +25,7 @@ spk_frac = 0.05
 # spk_frac = 0.0
 n_spk = int(spk_frac * sz)
 
-Niter = 1
+Niter = 5
 
 noise_mean = 64
 spike_mean = 512
@@ -60,18 +60,23 @@ orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 frame = 0
 orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
+print('C++ Test')
+
 cpp_start = time.time()
 gm_cpp = dspk_cpp.locate_noise_3D(orig_data, pix_dev, 5, Niter)
 cpp_end = time.time()
 cpp_elapsed = cpp_end - cpp_start
 print(cpp_elapsed)
 
-# cuda_start = time.time()
-# gm_cuda = dspk_cuda.locate_noise_3D(orig_data, pix_dev, 5, Niter)
-# cuda_end = time.time()
-# cuda_elapsed = cuda_end - cuda_start
-# print(cuda_elapsed)
+print('Cuda Test')
 
+cuda_start = time.time()
+gm_cuda = dspk_cuda.locate_noise_3D(orig_data, pix_dev, 5, Niter)
+cuda_end = time.time()
+cuda_elapsed = cuda_end - cuda_start
+print(cuda_elapsed)
+
+print('Tensorflow Test')
 
 # Test despiking routine
 tf_start = time.time()
@@ -81,11 +86,15 @@ tf_elapsed = tf_end - tf_start
 print(tf_elapsed)
 
 # Flatten cube so we can view as image
-orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_t, sz_y, 9)
-gm_cpp_flat = dspk_util.flatten_cube(gm_cpp[:,:,0:9], sz_t, sz_y, 9)
+# orig_data_flat = dspk_util.flatten_cube(orig_data[:,:,0:9], sz_t, sz_y, 9)
+# gm_cpp_flat = dspk_util.flatten_cube(gm_cpp[:,:,0:9], sz_t, sz_y, 9)
 # gm_cuda_flat = dspk_util.flatten_cube(gm_cuda[:,:,0:9], sz_t, sz_y, 9)
-gm_tf_flat = dspk_util.flatten_cube(gm_tf[:,:,0:9], sz_t, sz_y, 9)
-
+# gm_tf_flat = dspk_util.flatten_cube(gm_tf[:,:,0:9], sz_t, sz_y, 9)
+T = 9
+orig_data_flat = orig_data[T,:,:]
+gm_cpp_flat = gm_cpp[T,:,:]
+gm_cuda_flat = gm_cuda[T,:,:]
+gm_tf_flat = gm_tf[T,:,:]
 
 f1 = plt.figure()
 plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
@@ -93,8 +102,8 @@ plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 f2 = plt.figure()
 plt.imshow(gm_cpp_flat)
 #
-# f3 = plt.figure()
-# plt.imshow(gm_cuda_flat)
+f3 = plt.figure()
+plt.imshow(gm_cuda_flat)
 
 f4 = plt.figure()
 plt.imshow(gm_tf_flat)
