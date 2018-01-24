@@ -50,8 +50,8 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 		// -----------------------------------------------------------------------
 		// NEIGHBORHOOD MEAN CONVOLUTION
 		kso::img::dspk::calc_nm_x(dt, dev, gm, nrm, sz3, k_sz);
-		kso::img::dspk::calc_nm_y(dev, buf0, nrm, buf1, sz3, k_sz);
-		kso::img::dspk::calc_nm_z(buf0, dev, buf1, nrm, sz3, k_sz);
+//		kso::img::dspk::calc_nm_y(dev, buf0, nrm, buf1, sz3, k_sz);
+//		kso::img::dspk::calc_nm_z(buf0, dev, buf1, nrm, sz3, k_sz);
 
 		kso::img::dspk::calc_dev(dt, dev, dev, sz3);
 
@@ -59,8 +59,8 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 		// -----------------------------------------------------------------------
 		// NEIGHBORHOOD STANDARD DEVIATION CONVOLUTION
 		kso::img::dspk::calc_nsd_x(dev, nsd, gm, sz3, k_sz);
-		kso::img::dspk::calc_nsd_y(nsd, buf0, sz3, k_sz);
-		kso::img::dspk::calc_nsd_z(buf0, nsd, nrm, sz3, k_sz);
+//		kso::img::dspk::calc_nsd_y(nsd, buf0, sz3, k_sz);
+//		kso::img::dspk::calc_nsd_z(buf0, nsd, nrm, sz3, k_sz);
 
 		kso::img::dspk::update_gm(std_dev, gm, dev, nsd, sz3, &newBad);
 
@@ -79,7 +79,7 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 	p::tuple gm_stride = p::make_tuple(n_t * sizeof(float), n_y * sizeof(float), n_l * sizeof(float));
 	p::tuple gm_shape = p::make_tuple(sz_t, sz_y, sz_l);
 	np::dtype gm_type = np::dtype::get_builtin<float>();
-	np::ndarray gm_arr = np::from_data(gm, gm_type, gm_shape, gm_stride, gm_own);
+	np::ndarray gm_arr = np::from_data(dev, gm_type, gm_shape, gm_stride, gm_own);
 
 
 	return gm_arr;
