@@ -6,6 +6,8 @@ using namespace std;
 
 np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter){
 
+	kso::img::convol::hello();
+
 
 	// shape of input data
 	uint sz_t = cube.get_shape()[0];

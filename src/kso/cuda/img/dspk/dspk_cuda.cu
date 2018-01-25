@@ -14,10 +14,7 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 	uint sz = sz_t * sz_y * sz_l;
 	dim3 sz3(sz_l, sz_y, sz_t);
 
-	// stride of input data
-	uint n_t = cube.get_strides()[0] / sizeof(float);
-	uint n_y = cube.get_strides()[1] / sizeof(float);
-	uint n_l = cube.get_strides()[2] / sizeof(float);
+
 
 
 	// extract float data from numpy array
@@ -94,9 +91,14 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 
 	cout << "Total bad pixels: " << totBad << endl;
 
+	// stride of input data
+	uint n_t = cube.get_strides()[0];
+	uint n_y = cube.get_strides()[1];
+	uint n_l = cube.get_strides()[2];
+
 	// prepare to return Numpy array
 	p::object gm_own = p::object();
-	p::tuple gm_stride = p::make_tuple(n_t * sizeof(float), n_y * sizeof(float), n_l * sizeof(float));
+	p::tuple gm_stride = p::make_tuple(n_t, n_y, n_l);
 	p::tuple gm_shape = p::make_tuple(sz_t, sz_y, sz_l);
 	np::dtype gm_type = np::dtype::get_builtin<float>();
 	np::ndarray gm_arr = np::from_data(gm, gm_type, gm_shape, gm_stride, gm_own);

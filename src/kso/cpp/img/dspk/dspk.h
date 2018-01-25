@@ -16,6 +16,8 @@
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
 
+#include "img/convol/convol.h"
+
 class dim3{
 public:
 	uint x;

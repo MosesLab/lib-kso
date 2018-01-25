@@ -1,0 +1,20 @@
+CONVOL_C=img/convol/convol.cpp
+CONVOL_H=img/convol/convol.h
+CONVOL_O=img/convol/convol.o
+
+
+CONVOL_SRCS=$(CONVOL_C)
+CONVOL_HDRS=$(CONVOL_H)
+CONVOL_OBJS=$(CONVOL_O)
+CONVOL_SHRD=img/convol/convol.so
+
+IMG_ARTS+=$(CONVOL_SHRD)
+IMG_OBJS+=$(CONVOL_OBJS)
+
+
+
+$(CONVOL_SHRD): $(CONVOL_OBJS)
+	$(CXX) $(LDFLAGS) -o $(CONVOL_SHRD) $(CONVOL_OBJS) $(LDLIBS)
+
+$(CONVOL_O): $(CONVOL_C) $(CONVOL_H) 
+	$(CXX) $(CXXFLAGS) -c $(CONVOL_C) -o $(CONVOL_O) 

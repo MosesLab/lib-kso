@@ -14,9 +14,9 @@ import kso.py.img.shaping.shaping as dspk_util
 
 import time
 
-sz_t = 512
-sz_y = 512
-sz_l = 512
+sz_t = 16
+sz_y = 16
+sz_l = 16
 
 sz = sz_t * sz_y * sz_l
 
