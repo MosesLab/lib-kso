@@ -1,17 +1,26 @@
 DSPK_DIR=img/dspk/
+DSPK_ROOT=/../../
+
 DSPK_BASE=dspk
-
-DSPK_C=img/dspk/dspk.cpp
-DSPK_H=img/dspk/dspk.h
-DSPK_O=img/dspk/dspk.o
-
+DSPK=$(addprefix $(DSPK_DIR),$(DSPK_BASE))
+DSPK_C=$(addprefix $(DSPK),.cpp)
+DSPK_H=$(addprefix $(DSPK),.h)
+DSPK_O=$(addprefix $(DSPK),.o)
 
 DSPK_SRCS=$(DSPK_C)
 DSPK_HDRS=$(DSPK_H)
 DSPK_OBJS=$(DSPK_O)
+DSPK_SHRD=$(addsuffix .so,$(DSPK))
+
 DSPK_LIBS=$(CONVOL_SHRD)
-DSPK_LDLIBS=$(addprefix -l :,$(DSPK_LIBS)) -Wl,-rpath,'$$ORIGIN/../../'
-DSPK_SHRD=img/dspk/dspk.so
+DSPK_LDIRS=$(dir $(DSPK_LIBS))
+DSPK_LFILES=$(notdir $(DSPK_LIBS))
+DSPK_RP_ROOT=$(addprefix $(RP_ORIG), $(DSPK_ROOT))
+DSPK_RPATH=$(addprefix $(DSPK_RP_ROOT), $(DSPK_LDIRS))
+DSPK_Wl = $(addprefix -Wl$(COMMA)-rpath,,$(addprefix ',$(addsuffix ',$(DSPK_RPATH))))
+DSPK_LDLIBS=$(addprefix -L./,$(DSPK_LDIRS)) $(addprefix -l:,$(DSPK_LFILES)) $(DSPK_Wl) 
+
+
 
 IMG_ARTS+=$(DSPK_SHRD)
 IMG_OBJS+=$(DSPK_OBJS)
@@ -19,6 +28,9 @@ IMG_OBJS+=$(DSPK_OBJS)
 
 
 $(DSPK_SHRD): $(DSPK_OBJS) $(DSPK_LIBS)
+
+	@echo $(DSPK_RPATH) 
+
 	$(CXX) $(LDFLAGS) -o $(DSPK_SHRD) $(DSPK_OBJS)  $(LDLIBS) $(DSPK_LDLIBS)
 
 $(DSPK_O): $(DSPK_C) $(DSPK_H) 
