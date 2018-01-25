@@ -12,12 +12,12 @@ DSPK_HDRS=$(DSPK_H)
 DSPK_OBJS=$(DSPK_O)
 DSPK_SHRD=$(addsuffix .so,$(DSPK))
 
-DSPK_LIBS=$(CONVOL_SHRD)
+DSPK_LIBS=$(CONVOL_SHRD) $(UTIL_SHRD)
 DSPK_LDIRS=$(dir $(DSPK_LIBS))
 DSPK_LFILES=$(notdir $(DSPK_LIBS))
 DSPK_RP_ROOT=$(addprefix $(RP_ORIG), $(DSPK_ROOT))
 DSPK_RPATH=$(addprefix $(DSPK_RP_ROOT), $(DSPK_LDIRS))
-DSPK_Wl = $(addprefix -Wl$(COMMA)-rpath,,$(addprefix ',$(addsuffix ',$(DSPK_RPATH))))
+DSPK_Wl = $(addprefix -Wl$(COMMA)-rpath$(COMMA),$(addprefix ',$(addsuffix ',$(DSPK_RPATH))))
 DSPK_LDLIBS=$(addprefix -L./,$(DSPK_LDIRS)) $(addprefix -l:,$(DSPK_LFILES)) $(DSPK_Wl) 
 
 
@@ -27,10 +27,8 @@ IMG_OBJS+=$(DSPK_OBJS)
 
 
 
-$(DSPK_SHRD): $(DSPK_OBJS) $(DSPK_LIBS)
-
-	@echo $(DSPK_RPATH) 
-
+$(DSPK_SHRD): $(DSPK_OBJS) $(DSPK_LIBS) 
+	@echo $(UTIL_SHRD) 
 	$(CXX) $(LDFLAGS) -o $(DSPK_SHRD) $(DSPK_OBJS)  $(LDLIBS) $(DSPK_LDLIBS)
 
 $(DSPK_O): $(DSPK_C) $(DSPK_H) 

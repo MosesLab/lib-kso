@@ -2,6 +2,7 @@
 #include "dspk.h"
 
 using namespace std;
+using namespace kso::util;
 
 
 np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter){

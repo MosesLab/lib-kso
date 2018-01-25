@@ -8,9 +8,9 @@ import os
 # # from dspk_idl import dspk_idl
 
 
-# import kso.tf.img.dspk_tf as dspk_tf
+import kso.tf.img.dspk_tf as dspk_tf
 import kso.cpp.img.dspk.dspk as dspk_cpp
-# import kso.cuda.img.dspk.dspk_cuda as dspk_cuda
+import kso.cuda.img.dspk.dspk_cuda as dspk_cuda
 
 import kso.py.img.shaping.shaping as dspk_util
 
@@ -18,9 +18,9 @@ import time
 
 print(os.getcwd())
 
-sz_t = 16
-sz_y = 16
-sz_l = 16
+sz_t = 256
+sz_y = 256
+sz_l = 256
 
 sz = sz_t * sz_y * sz_l
 
