@@ -8,7 +8,7 @@
 #ifndef UTIL_MATH_H_
 #define UTIL_MATH_H_
 
-#include "util/dim3.h"
+#include "../util/dim3.h"
 
 namespace ku = kso::util;
 
