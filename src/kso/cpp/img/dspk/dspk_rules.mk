@@ -1,0 +1,5 @@
+$(DSPK_SHRD): $(DSPK_OBJS) $(DSPK_LIBS)
+	$(CXX) $(LDFLAGS) -o $(DSPK_SHRD) $(DSPK_OBJS)  $(LDLIBS) $(DSPK_LDLIBS)
+
+$(DSPK_O): $(DSPK_C) $(DSPK_H) 
+	$(CXX) $(CXXFLAGS) -c $(DSPK_C) -o $(DSPK_O) 

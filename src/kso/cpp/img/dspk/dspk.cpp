@@ -2,12 +2,17 @@
 #include "dspk.h"
 
 using namespace std;
-using namespace kso::util;
+using namespace ku;
 
 
-np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter){
+namespace kso {
 
-	kso::img::convol::hello();
+namespace img {
+
+namespace dspk {
+
+
+np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter){
 
 
 	// shape of input data
@@ -89,6 +94,30 @@ np::ndarray kso::img::dspk::locate_noise_3D(const np::ndarray & cube, float std_
 
 
 }
+
+void calc_norm(float * norm, float * gm, float * buf, float * krn, ku::dim3 sz, uint k_sz){
+
+	kso::img::convol::sconv_x(krn, gm, norm, sz, k_sz);
+	kso::img::convol::sconv_y(krn, norm, buf, sz, k_sz);
+	kso::img::convol::sconv_z(krn, buf, norm, sz, k_sz);
+
+}
+
+void calc_nm(float * mm, float * dt, float * gm, float * norm, float * buf, float * krn, ku::dim3 sz, uint k_sz) {
+
+	kso::img::convol::sconv_x(krn, gm, norm, sz, k_sz);
+	kso::img::convol::sconv_y(krn, norm, buf, sz, k_sz);
+	kso::img::convol::sconv_z(krn, buf, norm, sz, k_sz);
+
+}
+
+
+}
+
+}
+
+}
+
 
 void kso::img::dspk::calc_nm_x(float * dt, float * nm_out,  float * gm, float * nrm_out, dim3 sz, uint k_sz){
 

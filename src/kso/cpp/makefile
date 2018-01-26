@@ -8,9 +8,14 @@ LDLIBS=-lboost_python-py35 -lboost_numpy3 -L.
 
 RP_ORIG=$$ORIGIN
 
-KSO_MK_INC = img/img.mk
-KSO_MK_INC += util/util.mk
-include $(KSO_MK_INC)
+KSO_MK_VARS = img/img_vars.mk
+KSO_MK_VARS += util/util_vars.mk
+
+KSO_MK_RULES = img/img_rules.mk
+KSO_MK_RULES += util/util_rules.mk
+
+include $(KSO_MK_VARS)
+include $(KSO_MK_RULES) 
 
 
 

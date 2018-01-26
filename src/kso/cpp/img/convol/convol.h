@@ -12,6 +12,10 @@
 #include <stdlib.h>
 #include <iostream>
 
+#include "util/dim3.h"
+
+namespace ku = kso::util;
+
 namespace kso {
 
 namespace img {
@@ -19,8 +23,9 @@ namespace img {
 namespace convol {
 
 
-void hello();
-//void conv_x(float * krn, float * in, float * out, uint k_sz, dim)
+void sconv_x(float * krn, float * in, float * out, ku::dim3 sz, uint k_sz);
+void sconv_y(float * krn, float * in, float * out, ku::dim3 sz, uint k_sz);
+void sconv_z(float * krn, float * in, float * out, ku::dim3 sz, uint k_sz);
 
 }
 

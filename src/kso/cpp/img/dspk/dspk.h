@@ -19,7 +19,6 @@
 #include "img/convol/convol.h"
 #include "util/dim3.h"
 
-//test
 namespace p = boost::python;
 namespace np = boost::python::numpy;
 namespace ku = kso::util;
@@ -43,6 +42,13 @@ void calc_nsd_y(float * nsd_in, float * nsd_out, ku::dim3 sz, uint k_sz);
 void calc_nsd_z(float * nsd_in, float * nsd_out, float * nrm, ku::dim3 sz, uint k_sz);
 
 void update_gm(float std_dev, float * gm, float * dev, float * nsd, ku::dim3 sz, uint * new_bad);
+
+void calc_norm(float * norm, float * gm, float * buf, float * krn, ku::dim3 sz, uint k_sz);
+void calc_nm(float * mm, float * dt, float * gm, float * norm, float * buf, float * krn, ku::dim3 sz, uint k_sz);
+void calc_gdev(float * gdev, float * dt, float * nm, float* gm, ku::dim3 sz);
+void calc_gd2(float * gd2, float * dev, ku::dim3 sz);
+void calc_nsd(float * nsd, float * gd2, float * buf, float * krn, ku::dim3 sz, uint k_sz);
+void calc_gm(float * gm, float * dev, float * nsd, float std_dev, ku::dim3 sz);
 
 }
 

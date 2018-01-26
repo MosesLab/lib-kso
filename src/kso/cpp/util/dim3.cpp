@@ -8,7 +8,7 @@
 
 #include "dim3.h"
 
-kso::util::dim3(uint _x, uint _y, uint _z){
+kso::util::dim3::dim3(uint _x, uint _y, uint _z){
 	x = _x;
 	y = _y;
 	z = _z;

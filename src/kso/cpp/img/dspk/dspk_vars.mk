@@ -25,11 +25,3 @@ DSPK_LDLIBS=$(addprefix -L./,$(DSPK_LDIRS)) $(addprefix -l:,$(DSPK_LFILES)) $(DS
 IMG_ARTS+=$(DSPK_SHRD)
 IMG_OBJS+=$(DSPK_OBJS)
 
-
-
-$(DSPK_SHRD): $(DSPK_OBJS) $(DSPK_LIBS) 
-	@echo $(UTIL_SHRD) 
-	$(CXX) $(LDFLAGS) -o $(DSPK_SHRD) $(DSPK_OBJS)  $(LDLIBS) $(DSPK_LDLIBS)
-
-$(DSPK_O): $(DSPK_C) $(DSPK_H) 
-	$(CXX) $(CXXFLAGS) -c $(DSPK_C) -o $(DSPK_O) 
