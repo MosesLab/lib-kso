@@ -1,0 +1,610 @@
+
+#include "dspk.h"
+
+using namespace std;
+
+namespace kso {
+
+namespace img {
+
+namespace dspk {
+
+np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter){
+
+
+	// shape of input data
+	uint sz_t = cube.get_shape()[0];
+	uint sz_y = cube.get_shape()[1];
+	uint sz_l = cube.get_shape()[2];
+	uint sz = sz_t * sz_y * sz_l;
+	dim3 sz3(sz_l, sz_y, sz_t);
+
+
+
+
+	// extract float data from numpy array
+	float * dt = (float *) cube.get_data();
+
+	// initialize goodmap
+	float * gm = new float[sz];
+	fill(gm, gm + sz, 1.0);
+
+
+
+	// storage for the number of bad pixels found on each iteration
+	uint newBad = 0;
+	uint totBad = 0;
+
+	// allocate pointers for device data
+	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d, *buf1_d;
+	uint * newBad_d;
+
+	// allocate memory on device
+	CHECK(cudaMalloc((float **) &dt_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &gm_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &gdev_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &nsd_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &tmp_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &norm_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &buf1_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((uint **) &newBad_d, sizeof(uint)));
+
+	// copy memory to device
+	CHECK(cudaMemcpy(dt_d, dt, sz * sizeof(float), cudaMemcpyHostToDevice));
+	CHECK(cudaMemcpy(gm_d, gm, sz * sizeof(float), cudaMemcpyHostToDevice));;
+
+	// number of blocks and threads
+	dim3 threads(sz_l, 1, 1);
+	dim3 blocks(1, sz_y, sz_t);
+
+
+	// Number of identification iterations
+	for(uint iter = 0; iter < Niter; iter++){
+
+		newBad = 0;	// reset the number of bad pixels found for this iteration
+		CHECK(cudaMemcpy(newBad_d, &newBad, sizeof(uint), cudaMemcpyHostToDevice));
+
+		kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, sz3, k_sz);
+		kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz3, k_sz);
+		kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz3, k_sz);
+
+		kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz3, k_sz);
+		kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz3, k_sz);
+		kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz3, k_sz);
+
+		kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz3, k_sz);
+		kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz3, k_sz);
+		kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz3, k_sz);
+
+		kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, std_dev, newBad_d, sz3, k_sz);
+
+
+
+		CHECK(cudaDeviceSynchronize());
+
+
+		CHECK(cudaMemcpy(&newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
+		cout << "Iteration " << iter << ": found " << newBad << " bad pixels\n";
+		totBad = totBad + newBad;
+
+	}
+
+	// copy back from devicecudaMemcpyDeviceToHost
+	CHECK(cudaMemcpy(gm, gm_d, sz * sizeof(float), cudaMemcpyDeviceToHost));
+
+	cout << "Total bad pixels: " << totBad << endl;
+
+	// stride of input data
+	uint n_t = cube.get_strides()[0];
+	uint n_y = cube.get_strides()[1];
+	uint n_l = cube.get_strides()[2];
+
+	// prepare to return Numpy array
+	p::object gm_own = p::object();
+	p::tuple gm_stride = p::make_tuple(n_t, n_y, n_l);
+	p::tuple gm_shape = p::make_tuple(sz_t, sz_y, sz_l);
+	np::dtype gm_type = np::dtype::get_builtin<float>();
+	np::ndarray gm_arr = np::from_data(gm, gm_type, gm_shape, gm_stride, gm_own);
+
+
+	return gm_arr;
+
+
+}
+
+__global__ void calc_norm_0(float * norm_0, float * gm, dim3 sz, uint k_sz){
+
+	// calculate offset for kernel
+	uint ks2 = k_sz / 2;
+
+
+	// retrieve sizes
+	uint sz_l = sz.x;
+	uint sz_y = sz.y;
+
+	// compute stride sizes
+	uint n_l = 1;
+	uint n_y = n_l * sz_l;
+	uint n_t = n_y * sz_y;
+
+	// retrieve coordinates from thread and block id.
+	uint l = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+
+	// initialize neighborhood mean
+	float norm = 0.0;
+
+
+	// convolve over spectrum
+	for(uint c = 0; c < k_sz; c++){
+
+		// calculate offset
+		uint C = l - ks2 + c;
+
+		// truncate kernel if we're over the edge
+		if(C > (sz_l - 1)){
+			continue;
+		}
+
+		// load from memory
+		double gm_i = gm[n_t * t + n_y * y + n_l * C];
+
+		// update value of mean
+		norm = norm + gm_i;
+
+	}
+
+
+	norm_0[n_t * t + n_y * y + n_l * l] = norm;
+
+}
+__global__ void calc_norm_1(float * norm_1, float * norm_0, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+		uint ks2 = k_sz / 2;
+
+		// retrieve sizes
+		uint sz_l = sz.x;
+		uint sz_y = sz.y;
+
+		// compute stride sizes
+		uint n_l = 1;
+		uint n_y = n_l * sz_l;
+		uint n_t = n_y * sz_y;
+
+		// retrieve coordinates from thread and block id.
+		uint l = blockIdx.x * blockDim.x + threadIdx.x;
+		uint y = blockIdx.y * blockDim.y + threadIdx.y;
+		uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+
+		// initialize neighborhood mean
+		float norm = 0.0;
+
+		// convolve over space
+		for(uint b = 0; b < k_sz; b++){
+
+			// calculate offset
+			uint B = y - ks2 + b;
+
+			// truncate kernel if we're over the edge
+			if(B > (sz_y - 1)) {
+				continue;
+			}
+
+
+			// load from memory
+			double norm_i = norm_0[n_t * t + n_y * B + n_l * l];
+
+			// update value of mean
+			norm = norm + norm_i;
+
+		}
+
+
+		norm_1[n_t * t + n_y * y + n_l * l] =  norm;
+
+}
+__global__ void calc_norm_2(float * norm_2, float * norm_1, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+	uint ks2 = k_sz / 2;
+
+
+	// retrieve sizes
+	uint sz_l = sz.x;
+	uint sz_y = sz.y;
+	uint sz_t = sz.z;
+
+	// compute stride sizes
+	uint n_l = 1;
+	uint n_y = n_l * sz_l;
+	uint n_t = n_y * sz_y;
+
+	// retrieve coordinates from thread and block id.
+	uint l = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+
+	// initialize neighborhood mean
+	float norm = 0.0;
+
+	// convolve over time
+	for(uint a = 0; a < k_sz; a++){
+
+		// calculate offsets
+		uint A = t - ks2 + a;
+
+		// truncate the kernel if we're over the edge
+		if(A > (sz_t - 1)){
+			continue;
+		}
+
+
+		// load from memory
+		double norm_i = norm_1[n_t * A + n_y * y + n_l * l];
+
+		// update value of mean
+		norm = norm + norm_i;
+
+
+
+	}
+
+	norm_2[n_t * t + n_y * y + n_l * l] = norm;
+}
+
+__global__ void calc_gdev_0(float * gdev_0, float * dt, float * gm, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+	uint ks2 = k_sz / 2;
+
+
+	// retrieve sizes
+	uint sz_l = sz.x;
+	uint sz_y = sz.y;
+
+	// compute stride sizes
+	uint n_l = 1;
+	uint n_y = n_l * sz_l;
+	uint n_t = n_y * sz_y;
+
+	// retrieve coordinates from thread and block id.
+	uint l = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+
+	// initialize neighborhood mean
+	float mean = 0.0;
+
+
+	// convolve over spectrum
+	for(uint c = 0; c < k_sz; c++){
+
+		// calculate offset
+		uint C = l - ks2 + c;
+
+		// truncate kernel if we're over the edge
+		if(C > (sz_l - 1)){
+			continue;
+		}
+
+		// load from memory
+		double gm_i = gm[n_t * t + n_y * y + n_l * C];
+		double dt_i = dt[n_t * t + n_y * y + n_l * C];
+
+		// update value of mean
+		mean = mean + (gm_i * dt_i);
+
+	}
+
+
+	gdev_0[n_t * t + n_y * y + n_l * l] = mean;
+}
+__global__ void calc_gdev_1(float * gdev_1, float * gdev_0, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+		uint ks2 = k_sz / 2;
+
+		// retrieve sizes
+		uint sz_l = sz.x;
+		uint sz_y = sz.y;
+
+		// compute stride sizes
+		uint n_l = 1;
+		uint n_y = n_l * sz_l;
+		uint n_t = n_y * sz_y;
+
+		// retrieve coordinates from thread and block id.
+		uint l = blockIdx.x * blockDim.x + threadIdx.x;
+		uint y = blockIdx.y * blockDim.y + threadIdx.y;
+		uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+
+		// initialize neighborhood mean
+		float mean = 0.0;
+
+		// convolve over space
+		for(uint b = 0; b < k_sz; b++){
+
+			// calculate offset
+			uint B = y - ks2 + b;
+
+			// truncate kernel if we're over the edge
+			if(B > (sz_y - 1)) {
+				continue;
+			}
+
+
+			// load from memory
+			double gdev_i = gdev_0[n_t * t + n_y * B + n_l * l];
+
+			// update value of mean
+			mean = mean + gdev_i;
+
+		}
+
+
+		gdev_1[n_t * t + n_y * y + n_l * l] =  mean;
+
+}
+__global__ void calc_gdev_2(float * gdev_2, float * gdev_1, float * dt, float * gm, float * norm, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+	uint ks2 = k_sz / 2;
+
+
+	// retrieve sizes
+	uint sz_l = sz.x;
+	uint sz_y = sz.y;
+	uint sz_t = sz.z;
+
+	// compute stride sizes
+	uint n_l = 1;
+	uint n_y = n_l * sz_l;
+	uint n_t = n_y * sz_y;
+
+	// retrieve coordinates from thread and block id.
+	uint l = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+
+	// initialize neighborhood mean
+	float mean = 0.0;
+
+	// convolve over time
+	for(uint a = 0; a < k_sz; a++){
+
+		// calculate offsets
+		uint A = t - ks2 + a;
+
+		// truncate the kernel if we're over the edge
+		if(A > (sz_t - 1)){
+			continue;
+		}
+
+
+		// load from memory
+		double gdev_i = gdev_1[n_t * A + n_y * y + n_l * l];
+
+		// update value of mean
+		mean = mean + gdev_i;
+
+
+
+	}
+
+	float dt_i = dt[n_t * t + n_y * y + n_l * l];
+	float gm_i = gm[n_t * t + n_y * y + n_l * l];
+	float norm_i = norm[n_t * t + n_y * y + n_l * l];
+
+	gdev_2[n_t * t + n_y * y + n_l * l] = gm_i * ((mean / norm_i) - dt_i);
+}
+
+__global__ void calc_nsd_0(float * nsd_0, float * gdev, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+	uint ks2 = k_sz / 2;
+
+
+	// retrieve sizes
+	uint sz_l = sz.x;
+	uint sz_y = sz.y;
+
+	// compute stride sizes
+	uint n_l = 1;
+	uint n_y = n_l * sz_l;
+	uint n_t = n_y * sz_y;
+
+
+
+
+	// retrieve coordinates from thread and block id.
+	uint l = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+	// initialize neighborhood mean
+	float nsd = 0.0;
+
+	// convolve over spectrum
+	for(uint c = 0; c < k_sz; c++){
+
+		// calculate offset
+		uint C = l - ks2 + c;
+
+		// truncate kernel if we're over the edge
+		if(C > (sz_l - 1)){
+			continue;
+		}
+
+		// load from memory
+		double dev_i = gdev[n_t * t + n_y * y + n_l * C];
+
+		//								cout << dev_0 << endl;
+
+		// update value of mean
+		nsd = nsd + (dev_i * dev_i);
+
+	}
+
+
+	// finish calculating neighborhood standard deviation
+	nsd_0[n_t * t + n_y * y + n_l * l] = nsd;
+
+
+}
+__global__ void calc_nsd_1(float * nsd_1, float * nsd_0, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+		uint ks2 = k_sz / 2;
+
+
+		// retrieve sizes
+		uint sz_l = sz.x;
+		uint sz_y = sz.y;
+
+		// compute stride sizes
+		uint n_l = 1;
+		uint n_y = n_l * sz_l;
+		uint n_t = n_y * sz_y;
+
+
+
+
+		// retrieve coordinates from thread and block id.
+		uint l = blockIdx.x * blockDim.x + threadIdx.x;
+		uint y = blockIdx.y * blockDim.y + threadIdx.y;
+		uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+		// initialize neighborhood mean
+		float nsd = 0.0;
+
+		// convolve over space
+		for(uint b = 0; b < k_sz; b++){
+
+			// calculate offset
+			uint B = y - ks2 + b;
+
+			// truncate kernel if we're over the edge
+			if(B > (sz_y - 1)) {
+				continue;
+			}
+
+
+			// load from memory
+			double nsd_i = nsd_0[n_t * t + n_y * B + n_l * l];
+
+			//								cout << dev_0 << endl;
+
+			// update value of mean
+			nsd = nsd + nsd_i;
+
+		}
+
+
+		// finish calculating neighborhood standard deviation
+		nsd_1[n_t * t + n_y * y + n_l * l] = nsd;
+
+}
+__global__ void calc_nsd_2(float * nsd_2, float * nsd_1, float * norm, dim3 sz, uint k_sz){
+	// calculate offset for kernel
+		uint ks2 = k_sz / 2;
+
+
+		// retrieve sizes
+		uint sz_l = sz.x;
+		uint sz_y = sz.y;
+		uint sz_t = sz.z;
+
+		// compute stride sizes
+		uint n_l = 1;
+		uint n_y = n_l * sz_l;
+		uint n_t = n_y * sz_y;
+
+
+
+
+		// retrieve coordinates from thread and block id.
+		uint l = blockIdx.x * blockDim.x + threadIdx.x;
+		uint y = blockIdx.y * blockDim.y + threadIdx.y;
+		uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+		// initialize neighborhood mean
+		float nsd = 0.0;
+
+
+		// convolve over time
+		for(uint a = 0; a < k_sz; a++){
+
+			// calculate offsets
+			uint A = t - ks2 + a;
+
+			// truncate the kernel if we're over the edge
+			if(A > (sz_t - 1)){
+				continue;
+			}
+
+			// load from memory
+			double nsd_i = nsd_1[n_t * A + n_y * y + n_l * l];
+
+			//								cout << dev_0 << endl;
+
+			// update value of mean
+			nsd = nsd + nsd_i;
+
+
+
+		}
+
+		// finish calculating neighborhood standard deviation
+		float norm_i = norm[n_t * t + n_y * y + n_l * l];
+
+		nsd_2[n_t * t + n_y * y + n_l * l] = sqrt(nsd / norm_i);
+
+}
+
+__global__ void calc_gm(float * gm, float * gdev, float * nsd, float std_dev, uint * new_bad, dim3 sz, uint k_sz){
+	// retrieve sizes
+	uint sz_l = sz.x;
+	uint sz_y = sz.y;
+
+	// compute stride sizes
+	uint n_l = 1;
+	uint n_y = n_l * sz_l;
+	uint n_t = n_y * sz_y;
+
+	// retrieve coordinates from thread and block id.
+	uint l = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+	// load from memory
+	float gdev_i = gdev[n_t * t + n_y * y + n_l * l];
+	float nsd_i = nsd[n_t * t + n_y * y + n_l * l];
+
+	// check if bad pixel
+	if((gdev_i) > (std_dev * nsd_i)){
+		gm[n_t * t + n_y * y + n_l * l] = 0.0;	// update good pixel map
+		atomicAdd(new_bad, 1);
+	}
+}
+
+}
+
+}
+
+}
+
+
+
+
+
+BOOST_PYTHON_MODULE(libkso_cuda){
+
+	//	Py_Initialize();
+	np::initialize();   // only needed if you use numpy in the interface
+
+	boost::python::def("locate_noise_3D", kso::img::dspk::locate_noise_3D);
+
+}
+
+

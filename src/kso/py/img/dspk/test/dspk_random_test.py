@@ -9,8 +9,8 @@ import os
 
 
 import kso.tf.img.dspk_tf as dspk_tf
-import kso.cpp.img.dspk.dspk as dspk_cpp
-import kso.cuda.img.dspk.dspk_cuda as dspk_cuda
+# import kso.cpp.img.dspk.dspk as dspk_cpp
+import kso.cuda.img.dspk. as dspk_cuda
 
 import kso.py.img.shaping.shaping as dspk_util
 
