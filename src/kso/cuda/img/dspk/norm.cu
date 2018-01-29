@@ -8,7 +8,11 @@ namespace img {
 
 namespace dspk {
 
-__global__ void calc_norm_0(float * norm_0, float * gm, dim3 sz, uint k_sz){
+__global__ void calc_norm_0(float * norm_0, float * gm, uint * bad_pix, dim3 sz, uint k_sz){
+
+
+	// reset bad pixel counter
+	*bad_pix = 0;
 
 	// calculate offset for kernel
 	uint ks2 = k_sz / 2;

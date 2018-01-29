@@ -15,10 +15,28 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	kso::util::enum_device();
 
 	// shape of input data
-	uint sz_t = cube.get_shape()[0];
-	uint sz_y = cube.get_shape()[1];
-	uint sz_l = cube.get_shape()[2];
-	uint sz = sz_t * sz_y * sz_l;
+	uint dsz_t = cube.get_shape()[0];
+	uint dsz_y = cube.get_shape()[1];
+	uint dsz_l = cube.get_shape()[2];
+	uint dsz = dsz_t * dsz_y * dsz_l;
+
+	// stride of input data
+	uint n_t = cube.get_strides()[0];
+	uint n_y = cube.get_strides()[1];
+	uint n_l = cube.get_strides()[2];
+
+	// extract float data from numpy array
+	float * dt = (float *) cube.get_data();
+
+	// initialize host memory
+	float * gm = new float[dsz];
+	float * gdev = new float[dsz];
+	float * nsd = new float[dsz];
+	uint newBad = 0;			// Number of bad pixels found on each iteration
+	uint totBad = 0;
+
+	// calculate offset for kernel
+	uint ks2 = k_sz / 2;
 
 	// GPU information
 	uint device = 0;
@@ -33,95 +51,120 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	uint n_buf = 6;		// number of unique buffers. THIS NUMBER IS HARDCODED. MAKE SURE TO CHANGE IF NEEDED!
 	uint t_mem = mem / n_threads;	// Amount of memory per thead
 	uint c_mem = t_mem / n_buf;		// Amount of memory per chunk per thread
-	uint f_mem = sz_y * sz_l * sizeof(float); 	// Amount of memory occupied by a single frame (spectra / space)
+	uint f_mem = dsz_y * dsz_l * sizeof(float); 	// Amount of memory occupied by a single frame (spectra / space)
 	uint csz_t = c_mem / f_mem;		// Max number of frames per chunk
-	uint N_t = ceil((float) (sz_t) / (float) (csz_t));	// Number of chunks per observation
+	uint N_t = ceil((float) (dsz_t) / (float) (csz_t));	// Number of chunks per observation
+	uint csz = csz_t * dsz_y * dsz_l;
+
+	printf("Total memory allocated: %.0f MiB\n", mem / pow(2,20) );
+	printf("Memory per thread: %.0f MiB\n", t_mem / pow(2,20));
+	printf("Memory per chunk: %.0f MiB\n", c_mem / pow(2,20));
+	printf("Memory per frame: %.3f MiB\n", f_mem / pow(2,20));
+	printf("Number of frames per chunk: %d\n", csz_t);
+	printf("Number of chunks per observation: %d\n", N_t);
 
 
-	// extract float data from numpy array
-	float * dt = (float *) cube.get_data();
+	// number of blocks and threads
+	dim3 threads(dsz_l, 1, 1);
+	dim3 blocks(1, dsz_y, csz_t);
 
-	// initialize goodmap
-	float * gm = new float[sz];
-	float * gdev = new float[sz];
-	float * nsd = new float[sz];
-	fill(gm, gm + sz, 1.0);
-
-
-
-	// storage for the number of bad pixels found on each iteration
-	uint newBad = 0;
-	uint totBad = 0;
 
 	// allocate pointers for device data
 	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;
 	uint * newBad_d;
 
 	// allocate memory on device
-	CHECK(cudaMalloc((float **) &dt_d, sz * sizeof(float)));
-	CHECK(cudaMalloc((float **) &gm_d, sz * sizeof(float)));
-	CHECK(cudaMalloc((float **) &gdev_d, sz * sizeof(float)));
-	CHECK(cudaMalloc((float **) &nsd_d, sz * sizeof(float)));
-	CHECK(cudaMalloc((float **) &tmp_d, sz * sizeof(float)));
-	CHECK(cudaMalloc((float **) &norm_d, sz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &dt_d, csz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &gm_d, csz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &gdev_d, csz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &nsd_d, csz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &tmp_d, csz * sizeof(float)));
+	CHECK(cudaMalloc((float **) &norm_d, csz * sizeof(float)));
 	CHECK(cudaMalloc((uint **) &newBad_d, sizeof(uint)));
 
-	// copy memory to device
-	CHECK(cudaMemcpy(dt_d, dt, sz * sizeof(float), cudaMemcpyHostToDevice));
-	CHECK(cudaMemcpy(gm_d, gm, sz * sizeof(float), cudaMemcpyHostToDevice));;
-
-	// number of blocks and threads
-	dim3 threads(sz_l, 1, 1);
-	dim3 blocks(1, sz_y, sz_t);
-
-
-	// Number of identification iterations
-	for(uint iter = 0; iter < Niter; iter++){
-
-		newBad = 0;	// reset the number of bad pixels found for this iteration
-		CHECK(cudaMemcpy(newBad_d, &newBad, sizeof(uint), cudaMemcpyHostToDevice));
-
-		kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, sz3, k_sz);
-		kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz3, k_sz);
-		kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz3, k_sz);
-
-		kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz3, k_sz);
-		kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz3, k_sz);
-		kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz3, k_sz);
-
-		kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz3, k_sz);
-		kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz3, k_sz);
-		kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz3, k_sz);
-
-		kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, std_dev, newBad_d, sz3, k_sz);
 
 
 
-		CHECK(cudaDeviceSynchronize());
+	// loop over chunks
+	uint a_t;		// Start index of chunk
+	uint b_t;		// End index of chunk
+	for(uint C_t = 0; C_t < N_t; C_t++){
+
+		// final size of chunk as seen by kernel
+		uint sz_l = dsz_l;
+		uint sz_y = dsz_y;
+		uint sz_t = csz_t;
+
+		// calculate start and end indices of chunk
+		a_t = C_t * (csz_t - ks2);
+		b_t = a_t + csz_t;
+
+		// Check if current chunk will pass the end of input array
+		if(b_t > dsz_t){
+			sz_t = dsz_t - a_t;		// resize chunk to fit
+		}
+
+		// calculate final memory offset
+		uint a = a_t * n_t;
+
+		// copy sizes into dim3 object
+		dim3 sz3(sz_l, sz_y, sz_t);
+		uint sz = sz_l * sz_y * sz_t;
+
+		// copy memory to device
+		CHECK(cudaMemcpy(dt_d, dt + a, sz * sizeof(float), cudaMemcpyHostToDevice));
+		CHECK(cudaMemcpy(gm_d, gm + a, sz * sizeof(float), cudaMemcpyHostToDevice));
 
 
-		CHECK(cudaMemcpy(&newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
-		cout << "Iteration " << iter << ": found " << newBad << " bad pixels\n";
-		totBad = totBad + newBad;
+		// initialize good pixel map
+		kso::img::dspk::init_gm<<<blocks, threads>>>(gm_d, sz3);
+
+		// Number of identification iterations
+		for(uint iter = 0; iter < Niter; iter++){
+
+			newBad = 0;	// reset the number of bad pixels found for this iteration
+			CHECK(cudaMemcpy(newBad_d, &newBad, sizeof(uint), cudaMemcpyHostToDevice));
+
+			kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz3, k_sz);
+			kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz3, k_sz);
+			kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz3, k_sz);
+
+			kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz3, k_sz);
+			kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz3, k_sz);
+			kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz3, k_sz);
+
+			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz3, k_sz);
+			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz3, k_sz);
+			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz3, k_sz);
+
+			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, std_dev, newBad_d, sz3, k_sz);
+
+
+
+			CHECK(cudaDeviceSynchronize());
+
+
+			CHECK(cudaMemcpy(&newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
+			cout << "Iteration " << iter << ": found " << newBad << " bad pixels\n";
+			totBad = totBad + newBad;
+
+		}
+
+		// copy back from devicecudaMemcpyDeviceToHost
+		CHECK(cudaMemcpy(gm + a, gm_d, dsz * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(gdev + a, gdev_d, dsz * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(nsd + a, nsd_d, dsz * sizeof(float), cudaMemcpyDeviceToHost));
+
+		cout << "Total bad pixels: " << totBad << endl;
 
 	}
 
-	// copy back from devicecudaMemcpyDeviceToHost
-	CHECK(cudaMemcpy(gm, gm_d, sz * sizeof(float), cudaMemcpyDeviceToHost));
-	CHECK(cudaMemcpy(gdev, gdev_d, sz * sizeof(float), cudaMemcpyDeviceToHost));
-	CHECK(cudaMemcpy(nsd, nsd_d, sz * sizeof(float), cudaMemcpyDeviceToHost));
 
-	cout << "Total bad pixels: " << totBad << endl;
-
-	// stride of input data
-	uint n_t = cube.get_strides()[0];
-	uint n_y = cube.get_strides()[1];
-	uint n_l = cube.get_strides()[2];
 
 	// prepare to return Numpy array
 	p::object gm_own = p::object();
 	p::tuple gm_stride = p::make_tuple(n_t, n_y, n_l);
-	p::tuple gm_shape = p::make_tuple(sz_t, sz_y, sz_l);
+	p::tuple gm_shape = p::make_tuple(dsz_t, dsz_y, dsz_l);
 	np::dtype gm_type = np::dtype::get_builtin<float>();
 	np::ndarray gm_arr = np::from_data(gm, gm_type, gm_shape, gm_stride, gm_own);
 

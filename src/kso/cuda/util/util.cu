@@ -15,7 +15,7 @@ void enum_device(){
 	    cudaGetDeviceProperties(&deviceProp, device);
 	    printf("Device %d has compute capability %d.%d.\n",
 	           device, deviceProp.major, deviceProp.minor);
-	    printf("Device %d has %f MiB of memory\n", device, deviceProp.totalGlobalMem / pow(2,20));
+	    printf("Device %d has %.0f MiB of memory\n", device, deviceProp.totalGlobalMem / pow(2,20));
 	}
 
 }
