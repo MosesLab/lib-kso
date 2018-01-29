@@ -47,7 +47,7 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	size_t mem = tot_mem * mem_fill;
 
 	// calculate chunking of input data
-	uint n_threads = 1;		// Number of host threads
+	uint n_threads = 100;		// Number of host threads
 	uint n_buf = 6;		// number of unique buffers. THIS NUMBER IS HARDCODED. MAKE SURE TO CHANGE IF NEEDED!
 	uint t_mem = mem / n_threads;	// Amount of memory per thead
 	uint c_mem = t_mem / n_buf;		// Amount of memory per chunk per thread
@@ -88,7 +88,8 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	// loop over chunks
 	uint a_t;		// Start index of chunk
 	uint b_t;		// End index of chunk
-	for(uint C_t = 0; C_t < N_t; C_t++){
+
+	for(uint I_t = 0; I_t < N_t; I_t++){
 
 		// final size of chunk as seen by kernel
 		uint sz_l = dsz_l;
@@ -96,8 +97,9 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 		uint sz_t = csz_t;
 
 		// calculate start and end indices of chunk
-		a_t = C_t * (csz_t - ks2);
+		a_t = I_t * (csz_t - ks2);
 		b_t = a_t + csz_t;
+
 
 		// Check if current chunk will pass the end of input array
 		if(b_t > dsz_t){
@@ -110,6 +112,8 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 		// copy sizes into dim3 object
 		dim3 sz3(sz_l, sz_y, sz_t);
 		uint sz = sz_l * sz_y * sz_t;
+
+
 
 		// copy memory to device
 		CHECK(cudaMemcpy(dt_d, dt + a, sz * sizeof(float), cudaMemcpyHostToDevice));
@@ -150,10 +154,39 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 
 		}
 
+
+		// calculate size of halo
+		uint h_t = ks2;
+		uint hsz = sz_l * sz_y * ks2;
+
+		// only copy non-halo bytes unless we are at the start or end
+		uint g_t;		// start index without halo
+		uint g;			// start location without halo
+		uint gsz;		// number of elements not counting halo
+		if(I_t == 0){ 		// start
+
+			g_t = a_t;
+			g = g_t * n_t;
+			gsz = sz - hsz;
+
+		} else if (I_t == N_t - 1) {	// end
+
+			g_t = a_t + h_t;
+			g = g_t * n_t;
+			gsz = sz - hsz;
+
+		} else {		// otherwise ignore halo bytes
+
+			g_t = a_t + h_t;
+			g = g_t * n_t;
+			gsz = sz - 2 * hsz;
+
+		}
+
 		// copy back from devicecudaMemcpyDeviceToHost
-		CHECK(cudaMemcpy(gm + a, gm_d, dsz * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(gdev + a, gdev_d, dsz * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(nsd + a, nsd_d, dsz * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(gm + g, gm_d + hsz, gsz * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(gdev + g, gdev_d + hsz, gsz * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(nsd + g, nsd_d + hsz, gsz * sizeof(float), cudaMemcpyDeviceToHost));
 
 		cout << "Total bad pixels: " << totBad << endl;
 
