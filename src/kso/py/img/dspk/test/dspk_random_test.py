@@ -10,7 +10,7 @@ import os
 
 import kso.tf.img.dspk_tf as dspk_tf
 # import kso.cpp.img.dspk.dspk as dspk_cpp
-import kso.cuda.img.dspk. as dspk_cuda
+import kso.cuda.img.dspk as dspk_cuda
 
 import kso.py.img.shaping.shaping as dspk_util
 
@@ -64,13 +64,13 @@ orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 frame = 0
 orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
-print('C++ Test')
-
-cpp_start = time.time()
-gm_cpp = dspk_cpp.locate_noise_3D(orig_data, pix_dev, 5, Niter)
-cpp_end = time.time()
-cpp_elapsed = cpp_end - cpp_start
-print(cpp_elapsed)
+# print('C++ Test')
+#
+# cpp_start = time.time()
+# gm_cpp = dspk_cpp.locate_noise_3D(orig_data, pix_dev, 5, Niter)
+# cpp_end = time.time()
+# cpp_elapsed = cpp_end - cpp_start
+# print(cpp_elapsed)
 
 print('Cuda Test')
 
@@ -96,15 +96,15 @@ print(tf_elapsed)
 # gm_tf_flat = dspk_util.flatten_cube(gm_tf[:,:,0:9], sz_t, sz_y, 9)
 T = 9
 orig_data_flat = orig_data[T,:,:]
-gm_cpp_flat = gm_cpp[T,:,:]
+# gm_cpp_flat = gm_cpp[T,:,:]
 gm_cuda_flat = gm_cuda[T,:,:]
 gm_tf_flat = gm_tf[T,:,:]
 
 f1 = plt.figure()
 plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 
-f2 = plt.figure()
-plt.imshow(gm_cpp_flat)
+# f2 = plt.figure()
+# plt.imshow(gm_cpp_flat)
 #
 f3 = plt.figure()
 plt.imshow(gm_cuda_flat)

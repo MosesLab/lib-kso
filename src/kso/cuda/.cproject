@@ -98,7 +98,7 @@
 									<listOptionValue builtIn="false" value="boost_python-py35"/>
 									<listOptionValue builtIn="false" value="boost_numpy3"/>
 								</option>
-								<option defaultValue="true" id="nvcc.linker.option.shared.153901334" superClass="nvcc.linker.option.shared" valueType="boolean"/>
+								<option defaultValue="true" id="nvcc.linker.option.shared.153901334" name="Shared (-shared)" superClass="nvcc.linker.option.shared" valueType="boolean"/>
 								<inputType id="nvcc.linker.input.892151745" superClass="nvcc.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
