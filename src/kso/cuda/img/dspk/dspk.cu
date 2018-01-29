@@ -21,15 +21,21 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	uint sz = sz_t * sz_y * sz_l;
 
 	// GPU information
+	uint device = 0;
+	float mem_fill = 0.5;
 	cudaDeviceProp deviceProp;
 	cudaGetDeviceProperties(&deviceProp, device);
 	size_t tot_mem = deviceProp.totalGlobalMem;
-	size_t mem = tot_mem / 2;
+	size_t mem = tot_mem * mem_fill;
 
 	// calculate chunking of input data
-	uint C_t = floor((float) mem / (float)(sz_y * sz_l * sizeof(float)));		// number of frames per chunk
-	uint N_t = ceil((float) sz_t / (float) C_t);		// Number of chunks per input array
-	uint csz = C_t * sz_y * sz_l;		// Number of elements per chunk
+	uint n_threads = 1;		// Number of host threads
+	uint n_buf = 6;		// number of unique buffers. THIS NUMBER IS HARDCODED. MAKE SURE TO CHANGE IF NEEDED!
+	uint t_mem = mem / n_threads;	// Amount of memory per thead
+	uint c_mem = t_mem / n_buf;		// Amount of memory per chunk per thread
+	uint f_mem = sz_y * sz_l * sizeof(float); 	// Amount of memory occupied by a single frame (spectra / space)
+	uint csz_t = c_mem / f_mem;		// Max number of frames per chunk
+	uint N_t = ceil((float) (sz_t) / (float) (csz_t));	// Number of chunks per observation
 
 
 	// extract float data from numpy array
@@ -52,7 +58,6 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	uint * newBad_d;
 
 	// allocate memory on device
-	uint dt_d_sz = 2 * csz * sizeof(float);
 	CHECK(cudaMalloc((float **) &dt_d, sz * sizeof(float)));
 	CHECK(cudaMalloc((float **) &gm_d, sz * sizeof(float)));
 	CHECK(cudaMalloc((float **) &gdev_d, sz * sizeof(float)));
