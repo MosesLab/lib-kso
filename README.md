@@ -40,6 +40,7 @@ python3.4 -m pip install tensorflow-gpu matplotlib
 
 ```
 sudo apt install python3-dev
+sudo apt install libccfits-dev 
 ```
 ### Boost C++ Libraries
 The KSO library depends on a Boost Libraries >1.63 which is not yet available in the `apt` repositories. For now, [download](http://www.boost.org/users/history/version_1_66_0.html), extract and install.
