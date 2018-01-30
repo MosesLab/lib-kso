@@ -30,7 +30,7 @@ __global__ void calc_gm(float * gm, float * gdev, float * nsd, float std_dev, ui
 	// check if bad pixel
 	if((gdev_i) > (std_dev * nsd_i)){
 		gm[n_t * t + n_y * y + n_l * l] = 0.0;	// update good pixel map
-		atomicAdd(new_bad, 1);
+//		atomicAdd(new_bad, 1);
 	}
 }
 

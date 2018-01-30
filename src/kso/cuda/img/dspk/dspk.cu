@@ -9,7 +9,7 @@ namespace img {
 
 namespace dspk {
 
-np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter){
+np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, uint Niter, uint n_threads){
 
 
 	kso::util::enum_device();
@@ -47,7 +47,7 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	size_t mem = tot_mem * mem_fill;
 
 	// calculate chunking of input data
-	uint n_threads = 100;		// Number of host threads
+//	uint n_threads = 2;		// Number of host threads
 	uint n_buf = 6;		// number of unique buffers. THIS NUMBER IS HARDCODED. MAKE SURE TO CHANGE IF NEEDED!
 	uint t_mem = mem / n_threads;	// Amount of memory per thead
 	uint c_mem = t_mem / n_buf;		// Amount of memory per chunk per thread
@@ -91,6 +91,8 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	uint * a_d = new uint[num_strides];
 	kso::util::stride::get_strides(dsz_t, csz_t, 2 * ks2, A, a, L, l, a_d);
 
+	cout << "num_strides: " << num_strides << endl;
+
 
 
 	for(uint S = 0; S < num_strides; S++){
@@ -130,7 +132,7 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 		for(uint iter = 0; iter < Niter; iter++){
 
 			newBad = 0;	// reset the number of bad pixels found for this iteration
-			CHECK(cudaMemcpy(newBad_d, &newBad, sizeof(uint), cudaMemcpyHostToDevice));
+//			CHECK(cudaMemcpy(newBad_d, &newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
 			kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz3, k_sz);
 			kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz3, k_sz);
@@ -151,7 +153,7 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 			CHECK(cudaDeviceSynchronize());
 
 
-			CHECK(cudaMemcpy(&newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
+//			CHECK(cudaMemcpy(&newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
 			cout << "Iteration " << iter << ": found " << newBad << " bad pixels\n";
 			totBad = totBad + newBad;
 

@@ -34,15 +34,15 @@ Niter = 5
 noise_mean = 64
 spike_mean = 512
 
-pix_dev = 3.0
+pix_dev = 4.0
 
 plt_dev = 2
 plt_min = 0
 # plt_min = noise_mean - plt_dev * np.sqrt(noise_mean
 plt_max = spike_mean + plt_dev * np.sqrt(spike_mean)
 
-# rand = np.random.RandomState(seed=1)
-rand = np.random.RandomState(seed=None)
+rand = np.random.RandomState(seed=1)
+# rand = np.random.RandomState(seed=None)
 
 
 # Initialize background with noise
@@ -61,12 +61,14 @@ orig_data[coords] = rand.poisson(lam=512, size=n_spk)
 orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 
 # Put frames around data for easier viewing
-frame = 0
-orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
+# frame = 0
+# orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
 
-T = 255
-
+T = 71
+orig_data_flat = orig_data[T,:,:]
+f1 = plt.figure()
+plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 
 # print('C++ Test')
 #
@@ -79,10 +81,10 @@ T = 255
 # f2 = plt.figure()
 # plt.imshow(gm_cpp_flat)
 
-
+n_threads = 50
 print('Cuda Test')
 cuda_start = time.time()
-gm_cuda = dspk_cuda.locate_noise_3D(orig_data, pix_dev, 5, Niter)
+gm_cuda = dspk_cuda.locate_noise_3D(orig_data, pix_dev, 5, Niter,n_threads)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
@@ -101,10 +103,7 @@ gm_tf_flat = gm_tf[T,:,:]
 f4 = plt.figure()
 plt.imshow(gm_tf_flat)
 
-orig_data_flat = orig_data[T,:,:]
-f1 = plt.figure()
 
-plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 
 
 # Flatten cube so we can view as image
@@ -120,6 +119,8 @@ plt.figure()
 plt.plot(diff)
 #
 
+plt.figure()
+plt.imshow(np.sum(gm_cuda - gm_tf, axis=2))
 
 
 plt.show()
