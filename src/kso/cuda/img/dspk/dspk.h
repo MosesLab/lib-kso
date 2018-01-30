@@ -22,6 +22,7 @@
 #include "nsd.h"
 #include "gm.h"
 #include "util/util.h"
+#include "util/stride.h"
 
 //test
 namespace p = boost::python;

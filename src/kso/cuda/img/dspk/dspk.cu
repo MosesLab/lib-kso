@@ -21,9 +21,9 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	uint dsz = dsz_t * dsz_y * dsz_l;
 
 	// stride of input data
-	uint n_t = cube.get_strides()[0];
-	uint n_y = cube.get_strides()[1];
-	uint n_l = cube.get_strides()[2];
+	uint n_t = cube.get_strides()[0] / sizeof(float);
+	uint n_y = cube.get_strides()[1] / sizeof(float);
+	uint n_l = cube.get_strides()[2] / sizeof(float);
 
 	// extract float data from numpy array
 	float * dt = (float *) cube.get_data();
@@ -54,7 +54,7 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	uint f_mem = dsz_y * dsz_l * sizeof(float); 	// Amount of memory occupied by a single frame (spectra / space)
 	uint csz_t = c_mem / f_mem;		// Max number of frames per chunk
 	uint N_t = ceil((float) (dsz_t) / (float) (csz_t));	// Number of chunks per observation
-	uint csz = csz_t * dsz_y * dsz_l;
+	uint csz = csz_t * dsz_y * dsz_l;		// number of elements in chunk
 
 	printf("Total memory allocated: %.0f MiB\n", mem / pow(2,20) );
 	printf("Memory per thread: %.0f MiB\n", t_mem / pow(2,20));
@@ -82,32 +82,35 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 	CHECK(cudaMalloc((float **) &norm_d, csz * sizeof(float)));
 	CHECK(cudaMalloc((uint **) &newBad_d, sizeof(uint)));
 
+	// calculate chunking
+	uint num_strides = kso::util::stride::get_num_strides(dsz_t, csz_t, 2 * ks2);
+	uint * A = new uint[num_strides];
+	uint * a = new uint[num_strides];
+	uint * L = new uint[num_strides];
+	uint * l = new uint[num_strides];
+	uint * a_d = new uint[num_strides];
+	kso::util::stride::get_strides(dsz_t, csz_t, 2 * ks2, A, a, L, l, a_d);
 
 
 
-	// loop over chunks
-	uint a_t;		// Start index of chunk
-	uint b_t;		// End index of chunk
+	for(uint S = 0; S < num_strides; S++){
 
-	for(uint I_t = 0; I_t < N_t; I_t++){
+		cout << A[S] << endl;
+		cout << L[S] << endl;
+		cout << a[S] << endl;
+		cout << l[S] << endl;
+
+		cout << "-----------------" << endl;
+
 
 		// final size of chunk as seen by kernel
 		uint sz_l = dsz_l;
 		uint sz_y = dsz_y;
-		uint sz_t = csz_t;
+		uint sz_t = L[S];
 
-		// calculate start and end indices of chunk
-		a_t = I_t * (csz_t - ks2);
-		b_t = a_t + csz_t;
-
-
-		// Check if current chunk will pass the end of input array
-		if(b_t > dsz_t){
-			sz_t = dsz_t - a_t;		// resize chunk to fit
-		}
 
 		// calculate final memory offset
-		uint a = a_t * n_t;
+		uint B = A[S] * n_t;
 
 		// copy sizes into dim3 object
 		dim3 sz3(sz_l, sz_y, sz_t);
@@ -116,8 +119,8 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 
 
 		// copy memory to device
-		CHECK(cudaMemcpy(dt_d, dt + a, sz * sizeof(float), cudaMemcpyHostToDevice));
-		CHECK(cudaMemcpy(gm_d, gm + a, sz * sizeof(float), cudaMemcpyHostToDevice));
+		CHECK(cudaMemcpy(dt_d, dt + B, sz * sizeof(float), cudaMemcpyHostToDevice));
+		CHECK(cudaMemcpy(gm_d, gm + B, sz * sizeof(float), cudaMemcpyHostToDevice));
 
 
 		// initialize good pixel map
@@ -154,39 +157,14 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 
 		}
 
+		uint b = a[S] * n_t;
+		uint gsz = l[S] * n_t;
+		uint b_d = a_d[S] * n_t;
 
-		// calculate size of halo
-		uint h_t = ks2;
-		uint hsz = sz_l * sz_y * ks2;
-
-		// only copy non-halo bytes unless we are at the start or end
-		uint g_t;		// start index without halo
-		uint g;			// start location without halo
-		uint gsz;		// number of elements not counting halo
-		if(I_t == 0){ 		// start
-
-			g_t = a_t;
-			g = g_t * n_t;
-			gsz = sz - hsz;
-
-		} else if (I_t == N_t - 1) {	// end
-
-			g_t = a_t + h_t;
-			g = g_t * n_t;
-			gsz = sz - hsz;
-
-		} else {		// otherwise ignore halo bytes
-
-			g_t = a_t + h_t;
-			g = g_t * n_t;
-			gsz = sz - 2 * hsz;
-
-		}
-
-		// copy back from devicecudaMemcpyDeviceToHost
-		CHECK(cudaMemcpy(gm + g, gm_d + hsz, gsz * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(gdev + g, gdev_d + hsz, gsz * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(nsd + g, nsd_d + hsz, gsz * sizeof(float), cudaMemcpyDeviceToHost));
+		// copy back from devicecudaMemcpyDeviceToHost;
+		CHECK(cudaMemcpy(gm + b, gm_d + b_d, gsz * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(gdev + b, gdev_d + b_d, gsz * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(nsd + b, nsd_d + b_d, gsz * sizeof(float), cudaMemcpyDeviceToHost));
 
 		cout << "Total bad pixels: " << totBad << endl;
 
@@ -196,7 +174,7 @@ np::ndarray locate_noise_3D(const np::ndarray & cube, float std_dev, uint k_sz, 
 
 	// prepare to return Numpy array
 	p::object gm_own = p::object();
-	p::tuple gm_stride = p::make_tuple(n_t, n_y, n_l);
+	p::tuple gm_stride = p::make_tuple(n_t * sizeof(float), n_y * sizeof(float), n_l * sizeof(float));
 	p::tuple gm_shape = p::make_tuple(dsz_t, dsz_y, dsz_l);
 	np::dtype gm_type = np::dtype::get_builtin<float>();
 	np::ndarray gm_arr = np::from_data(gm, gm_type, gm_shape, gm_stride, gm_own);
