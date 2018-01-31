@@ -97,6 +97,7 @@
 							<tool id="nvcc.linker.base.1700730755" name="NVCC Linker" superClass="nvcc.linker.base">
 								<option id="nvcc.linker.option.libs.1507017045" name="Libraries (-l)" superClass="nvcc.linker.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="boost_python-py35"/>
+									<listOptionValue builtIn="false" value="CCfits"/>
 									<listOptionValue builtIn="false" value="boost_numpy3"/>
 								</option>
 								<option defaultValue="true" id="nvcc.linker.option.shared.153901334" name="Shared (-shared)" superClass="nvcc.linker.option.shared" valueType="boolean"/>
@@ -140,7 +141,14 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/kso_cuda"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/kso_cuda"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

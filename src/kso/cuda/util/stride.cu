@@ -1,36 +1,29 @@
 
 #include "stride.h"
 
+using namespace std;
+
 namespace kso {
 
 namespace util {
 
-namespace stride {
+stride::stride(uint _axis_sz, uint _buf_sz, uint _halo_sz){
 
-uint get_num_strides(uint axis_sz, uint buf_sz, uint halo_sz){
-
-	if (buf_sz > axis_sz) buf_sz = axis_sz;
-	uint eff_sz = (buf_sz - 2 * halo_sz);		// Throw exception if negative
-	return ceil((float)(axis_sz - buf_sz) / (float) eff_sz) + 1;
-
-}
-void get_strides(uint axis_sz, uint buf_sz, uint halo_sz, uint * in_ind, uint * out_ind, uint * in_len, uint * out_len, uint * dev_out_ind){
-
-	uint * A = in_ind;
-	uint * a = out_ind;
-	uint * L = in_len;
-	uint * l = out_len;
-	uint * a_d = dev_out_ind;
+	axis_sz = _axis_sz;
+	buf_sz = _buf_sz;
+	halo_sz = _halo_sz;
 
 	if (buf_sz > axis_sz) buf_sz = axis_sz;
 	uint eff_sz = (buf_sz - 2 * halo_sz);		// Throw exception if negative
-	uint s_sz = get_num_strides(axis_sz, buf_sz, halo_sz);
+	num_strides = ceil((float)(axis_sz - buf_sz) / (float) eff_sz) + 1;
 
-
+	A.resize(num_strides, 0);
+	a.resize(num_strides, 0);
+	L.resize(num_strides, 0);
+	l.resize(num_strides, 0);
 
 	uint i;
-	for(i = 0; i < s_sz; i++){
-
+	for(i = 0; i < num_strides; i++){
 
 
 		if(i == 0){
@@ -48,7 +41,7 @@ void get_strides(uint axis_sz, uint buf_sz, uint halo_sz, uint * in_ind, uint * 
 		}
 
 
-		if (i == (s_sz - 1)) {
+		if (i == (num_strides - 1)) {
 			L[i] = axis_sz - A[i];
 			l[i] = axis_sz - a[i];
 		}
@@ -56,12 +49,12 @@ void get_strides(uint axis_sz, uint buf_sz, uint halo_sz, uint * in_ind, uint * 
 
 	}
 
+}
+
+
+
+}
 
 }
 
 
-}
-
-}
-
-}

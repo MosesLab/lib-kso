@@ -20,6 +20,15 @@ void enum_device(){
 
 }
 
+size_t get_device_mem(uint device) {
+
+	cudaDeviceProp deviceProp;
+	cudaGetDeviceProperties(&deviceProp, device);
+	size_t tot_mem = deviceProp.totalGlobalMem;
+
+	return tot_mem;
+}
+
 }
 
 }

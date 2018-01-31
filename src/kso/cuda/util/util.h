@@ -20,6 +20,7 @@ namespace kso {
 namespace util {
 
 void enum_device();
+size_t get_device_mem(uint device);
 
 }
 
