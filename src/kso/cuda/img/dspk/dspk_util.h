@@ -15,6 +15,7 @@
 #include <string>
 #include <cuda.h>
 
+#include "util/util.h"
 #include "util/stride.h"
 
 
@@ -27,16 +28,21 @@ namespace dspk {
 
 class buf {
 public:
-	dim3 sz, csz;
+	dim3 sz, csz;	// shape of original data and chunked data
+	dim3 st, cst;	// array stride of original data and chunked data
 	uint sz3, csz3;
-	uint ksz;	// kernel size
+	uint ksz, ks2;	// kernel size, kernel half-size
 	float * dt, * gm;		// host memory
 	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
-	uint * newBad_d;				// more device memory
+	uint *newBad, *newBad_d;				// more device memory
 
-	kso::util::stride S;
 
-	buf(float * data, dim3 data_sz, uint kern_sz, uint n_threads);
+	dim3 threads;		// number of threads per block
+	dim3 blocks;	// number of blocks
+
+	kso::util::stride * S;
+
+	buf(float * in_data, float * out_data, dim3 data_sz, uint kern_sz, uint n_threads);
 
 
 };

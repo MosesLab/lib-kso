@@ -8,14 +8,19 @@ namespace img {
 namespace dspk {
 
 
-buf::buf(float * data, dim3 data_sz, uint kern_sz, uint n_threads){
+buf::buf(float * in_data, float * out_data, dim3 data_sz, uint kern_sz, uint n_threads){
 
 	float mem_fill = 0.5;
 
-	dt = data;
+	dt = in_data;
+	gm = out_data;
 
 	sz = data_sz;
 	sz3 = sz.x * sz.y * sz.z;
+
+	st.x = 1;
+	st.y = sz.x * st.x;
+	st.z = sz.y * st.y;
 
 	ksz = kern_sz;
 
@@ -29,18 +34,26 @@ buf::buf(float * data, dim3 data_sz, uint kern_sz, uint n_threads){
 	uint t_mem = mem / n_threads;	// Amount of memory per thead
 	uint c_mem = t_mem / n_buf;		// Amount of memory per chunk per thread
 	uint f_mem = sz.y * sz.x * sizeof(float); 	// Amount of memory occupied by a single frame (spectra / space)
+
+	// save chunk sizes
 	csz.x = sz.x;
 	csz.y = sz.y;
-	csz.t = c_mem / f_mem;		// Max number of frames per chunk
-	csz3 = csz.t * csz.x * csz.y;		// number of elements in chunk
+	csz.z = c_mem / f_mem;		// Max number of frames per chunk
+	csz3 = csz.z * csz.x * csz.y;		// number of elements in chunk
+	cst.x = 1;
+	cst.y = csz.x * cst.x;
+	cst.z = csz.y * cst.y;
 
 	printf("Total memory allocated: %.0f MiB\n", mem / pow(2,20) );
 	printf("Memory per thread: %.0f MiB\n", t_mem / pow(2,20));
 	printf("Memory per chunk: %.0f MiB\n", c_mem / pow(2,20));
 	printf("Memory per frame: %.3f MiB\n", f_mem / pow(2,20));
-	printf("Number of frames per chunk: %d\n", csz.t);
+	printf("Number of frames per chunk: %d\n", csz.z);
 
-	cudaHostRegister(dt, sz3, cudaHostRegisterDefault);
+	// allocate host page-locked memory
+	CHECK(cudaHostRegister(dt, sz3 * sizeof(float), cudaHostRegisterDefault));
+	CHECK(cudaHostRegister(gm, sz3 * sizeof(float), cudaHostRegisterDefault));
+	CHECK(cudaHostAlloc(&newBad, sizeof(uint), cudaHostRegisterDefault));
 
 	// allocate memory on device
 	CHECK(cudaMalloc((float **) &dt_d, csz3 * sizeof(float)));
@@ -52,10 +65,12 @@ buf::buf(float * data, dim3 data_sz, uint kern_sz, uint n_threads){
 	CHECK(cudaMalloc((uint **) &newBad_d, sizeof(uint)));
 
 	// calculate offset for kernel
-	uint ks2 = k_sz / 2;
+	uint ks2 = ksz / 2;
 
 	// calculate striding
-	S = new kso::util::stride(dsz_t, csz_t, 2 * ks2, A, a, L, l, a_d);
+	S = new kso::util::stride(sz.z, csz.z, 2 * ks2, cst.z);
+
+
 
 }
 

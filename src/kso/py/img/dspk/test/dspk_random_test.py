@@ -18,9 +18,9 @@ import time
 
 print(os.getcwd())
 
-sz_t = 256
-sz_y = 256
-sz_l = 256
+sz_t = 1024
+sz_y = 1024
+sz_l = 512
 
 sz = sz_t * sz_y * sz_l
 
@@ -46,29 +46,30 @@ rand = np.random.RandomState(seed=1)
 
 
 # Initialize background with noise
-orig_data = rand.poisson(lam=64, size=[sz_t, sz_y, sz_l])
-orig_data = orig_data.astype(np.float32)
-# orig_data = np.empty([sz_t, sz_y, sz_l], dtype=np.float32)
+# orig_data = rand.poisson(lam=64, size=[sz_t, sz_y, sz_l])
+# orig_data = orig_data.astype(np.float32)
+orig_data = np.empty([sz_t, sz_y, sz_l], dtype=np.float32)
 
 
 
 # Add random spikes
-coords = np.arange(sz)
-rand.shuffle(coords)
-coords = coords[:n_spk]
-orig_data = orig_data.flatten()
-orig_data[coords] = rand.poisson(lam=512, size=n_spk)
-orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
+# coords = np.arange(sz)
+# rand.shuffle(coords)
+# coords = coords[:n_spk]
+# orig_data = orig_data.flatten()
+# orig_data[coords] = rand.poisson(lam=512, size=n_spk)
+# orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 
 # Put frames around data for easier viewing
 # frame = 0
 # orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
 
-T = 71
+T = 23
 orig_data_flat = orig_data[T,:,:]
 f1 = plt.figure()
 plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
+
 
 # print('C++ Test')
 #
@@ -81,16 +82,19 @@ plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 # f2 = plt.figure()
 # plt.imshow(gm_cpp_flat)
 
-n_threads = 50
+
 print('Cuda Test')
+gm_cuda = np.empty([sz_t, sz_y, sz_l], dtype=np.float32)
 cuda_start = time.time()
-gm_cuda = dspk_cuda.locate_noise_3D(orig_data, pix_dev, 5, Niter,n_threads)
+dspk_cuda.denoise_ndarr(gm_cuda, orig_data, pix_dev, 5, Niter)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
 gm_cuda_flat = gm_cuda[T,:,:]
 f3 = plt.figure()
 plt.imshow(gm_cuda_flat)
+
+
 
 
 print('Tensorflow Test')
