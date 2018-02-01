@@ -40,7 +40,6 @@ python3.4 -m pip install tensorflow-gpu matplotlib
 
 ```
 sudo apt install python3-dev
-sudo apt install libccfits-dev 
 ```
 ### Boost C++ Libraries
 The KSO library depends on a Boost Libraries >1.63 which is not yet available in the `apt` repositories. For now, [download](http://www.boost.org/users/history/version_1_66_0.html), extract and install.
@@ -50,4 +49,18 @@ sudo ./bootstrap.sh --with-python-version=3.5 --libdir=/usr/lib/x86_64-linux-gnu
 sudo ./b2 install -j 8
 ```
 
+### libCCfits
+
+This library is used for reading FITS files. It should be able to be installed and working with the usual
+```
+sudo apt install libccfits-dev 
+```
+However, it appears that this method does not work in Linux Mint 18.0, (while it does in 18.1). 
+It can be installed from source by [downloading](https://heasarc.gsfc.nasa.gov/fitsio/CCfits/CCfits-2.5.tar.gz), extracting and then installed for Linux Mint and using the following commands
+```
+cd CCfits
+./configure --includedir=/usr/include --libdir=/usr/lib/x86_64-linux-gnu/
+make
+make install
+```
 
