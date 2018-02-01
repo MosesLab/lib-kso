@@ -18,9 +18,9 @@ import time
 
 print(os.getcwd())
 
-sz_t = 1024
-sz_y = 1024
-sz_l = 512
+sz_t = 256
+sz_y = 256
+sz_l = 256
 
 sz = sz_t * sz_y * sz_l
 
@@ -46,19 +46,19 @@ rand = np.random.RandomState(seed=1)
 
 
 # Initialize background with noise
-# orig_data = rand.poisson(lam=64, size=[sz_t, sz_y, sz_l])
-# orig_data = orig_data.astype(np.float32)
-orig_data = np.empty([sz_t, sz_y, sz_l], dtype=np.float32)
+orig_data = rand.poisson(lam=64, size=[sz_t, sz_y, sz_l])
+orig_data = orig_data.astype(np.float32)
+# orig_data = np.empty([sz_t, sz_y, sz_l], dtype=np.float32)
 
 
 
 # Add random spikes
-# coords = np.arange(sz)
-# rand.shuffle(coords)
-# coords = coords[:n_spk]
-# orig_data = orig_data.flatten()
-# orig_data[coords] = rand.poisson(lam=512, size=n_spk)
-# orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
+coords = np.arange(sz)
+rand.shuffle(coords)
+coords = coords[:n_spk]
+orig_data = orig_data.flatten()
+orig_data[coords] = rand.poisson(lam=512, size=n_spk)
+orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 
 # Put frames around data for easier viewing
 # frame = 0

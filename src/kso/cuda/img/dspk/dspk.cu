@@ -128,30 +128,30 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 }
 
-void denoise_ndarr(const np::ndarray & denoised_data, const np::ndarray & data, float std_dev, uint k_sz, uint Niter){
-
-	// shape of input data
-	dim3 sz;
-	sz.z = data.get_shape()[0];
-	sz.y = data.get_shape()[1];
-	sz.x = data.get_shape()[2];
-
-	dim3 st;
-	st.z = data.get_strides()[0] / sizeof(float);
-	st.y = data.get_strides()[1] / sizeof(float);
-	st.x = data.get_strides()[2] / sizeof(float);
-
-	// extract float data from numpy array
-	float * dt = (float *) data.get_data();
-	float * dn = (float *) denoised_data.get_data();
-
-	uint n_threads = 1;
-
-	buf * db = new buf(dt, dn, sz, k_sz, n_threads);
-
-	denoise(db, std_dev, Niter);
-
-}
+//void denoise_ndarr(const np::ndarray & denoised_data, const np::ndarray & data, float std_dev, uint k_sz, uint Niter){
+//
+//	// shape of input data
+//	dim3 sz;
+//	sz.z = data.get_shape()[0];
+//	sz.y = data.get_shape()[1];
+//	sz.x = data.get_shape()[2];
+//
+//	dim3 st;
+//	st.z = data.get_strides()[0] / sizeof(float);
+//	st.y = data.get_strides()[1] / sizeof(float);
+//	st.x = data.get_strides()[2] / sizeof(float);
+//
+//	// extract float data from numpy array
+//	float * dt = (float *) data.get_data();
+//	float * dn = (float *) denoised_data.get_data();
+//
+//	uint n_threads = 1;
+//
+//	buf * db = new buf(dt, dn, sz, k_sz, n_threads);
+//
+//	denoise(db, std_dev, Niter);
+//
+//}
 
 
 
