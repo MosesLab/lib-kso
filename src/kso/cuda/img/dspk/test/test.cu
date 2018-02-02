@@ -30,7 +30,7 @@ void test_unitialized(){
 	uint Niter = 5;
 	uint k_sz = 5;
 
-	uint n_threads = 1;
+	uint n_threads = 10;
 
 	buf * db = new buf(dt, dn, sz, k_sz, n_threads);
 

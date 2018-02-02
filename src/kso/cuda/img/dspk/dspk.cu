@@ -75,7 +75,7 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 		// copy memory to device
 		CHECK(cudaMemcpy(dt_d, dt + B[s], M[s] * sizeof(float), cudaMemcpyHostToDevice));
-		CHECK(cudaMemcpy(gm_d, gm + B[s], M[s] * sizeof(float), cudaMemcpyHostToDevice));
+//		CHECK(cudaMemcpy(gm_d, gm + B[s], M[s] * sizeof(float), cudaMemcpyHostToDevice));
 
 
 		// initialize good pixel map
