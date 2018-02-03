@@ -20,21 +20,26 @@ void read_fits_raster(std::string path, float * buf){
 
 	// read all user-specifed, coordinate, and checksum keys in the image
 	image.readAllKeys();
-//
+	//
 	image.read(contents);
 
 	// this doesn't print the data, just header info.
 	std::cout << image << std::endl;
 
 
-	ExtHDU& ext = pInfile->extension(3);
+	for(uint i = 1; i < 9; i++){
+
+		std::cout << i << std::endl;
+
+		ExtHDU& ext = pInfile->extension(i);
 
 
-	ext.readAllKeys();
+		ext.readAllKeys();
 
-	ext.read(contents);
+		//	ext.read(contents);
 
-	std::cout << ext << std::endl;
+		std::cout << ext << std::endl;
+	}
 
 
 }
