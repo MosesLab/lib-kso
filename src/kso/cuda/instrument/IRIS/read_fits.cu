@@ -83,9 +83,9 @@ dim3 read_fits_raster(string path, float * buf){
 
 void read_fits_raster_ndarr(np::ndarray & nd_buf, np::ndarray & nd_sz){
 
-//	string path = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
+	string path = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
 //	string path = "/kso/iris_l2_20140125_030458_3860259280_raster_t000_r00000.fits";
-	string path = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00002.fits";
+//	string path = "/kso/iris_l2_20140404_001944_3800259353_raster_t000_r00000.fits";
 
 	float * buf = (float *) nd_buf.get_data();
 
