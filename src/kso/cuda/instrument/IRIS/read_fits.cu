@@ -7,43 +7,95 @@ namespace instrument {
 
 namespace IRIS {
 
-using namespace CCfits;
 
-void read_fits_raster(std::string path, float * buf){
-
-	std::auto_ptr<FITS> pInfile(new FITS(path,Read,false));
-
-	PHDU& image = pInfile->pHDU();
+using namespace std;
+//using namespace CCfits;
 
 
-	std::valarray<unsigned long>  contents;
 
-	// read all user-specifed, coordinate, and checksum keys in the image
-	image.readAllKeys();
-	//
-	image.read(contents);
-
-	// this doesn't print the data, just header info.
-	std::cout << image << std::endl;
+dim3 read_fits_raster(string path, float * buf){
 
 
-	for(uint i = 1; i < 9; i++){
 
-		std::cout << i << std::endl;
+	fitsfile *fptr;
+	char card[FLEN_CARD];
+	int status = 0,  nkeys, ii;  /* MUST initialize status */
+	int num_hdus, i_h, type_h;
 
-		ExtHDU& ext = pInfile->extension(i);
+	fits_open_file(&fptr, path.c_str(), READONLY, &status);
+
+	fits_get_num_hdus(fptr, &num_hdus, & status);
+	cout << "Number of HDUs: " << num_hdus << endl;
+
+	uint i = 5;
+
+	cout << "_______________________" << endl;
+
+	fits_movabs_hdu(fptr, i, &type_h, &status);
+
+	fits_get_hdu_num(fptr, &i_h);
+	cout << "Current HDU index: " << i_h << endl;
+
+	//	fits_get_hdu_type(fptr, &type_h, &status);
+	cout << "Current HDU type: " << type_h << endl;
+
+	fits_get_hdrspace(fptr, &nkeys, NULL, &status);
+	cout << "Number of keys: " << nkeys << endl;
 
 
-		ext.readAllKeys();
+	int bitpix;
+	fits_get_img_type(fptr, &bitpix, &status);
+	cout << "Image type: " << bitpix << endl;
 
-		//	ext.read(contents);
-
-		std::cout << ext << std::endl;
+	for (ii = 1; ii <= nkeys; ii++)  {
+		fits_read_record(fptr, ii, card, &status); /* read keyword */
+		printf("%s\n", card);
 	}
+	printf("END\n\n");  /* terminate listing with END */
 
+	dim3 sz;
+	long axis_sz[3];
+	fits_get_img_size(fptr, 3, axis_sz, &status);
+	sz.x = axis_sz[0];
+	sz.y = axis_sz[1];
+	sz.z = axis_sz[2];
+	long sz3 = sz.x * sz.y * sz.z;
+
+
+
+	long fpixel[3];
+	fpixel[0] = 1;
+	fpixel[1] = 1;
+	fpixel[2] = 1;
+	fits_read_pix(fptr, TFLOAT, fpixel, sz3, NULL, buf, NULL, &status);
+
+
+
+	fits_close_file(fptr, &status);
+
+	if (status)          /* print any error messages */
+		fits_report_error(stderr, status);
+	//	return(status);
+
+	return sz;
 
 }
 
+void read_fits_raster_ndarr(np::ndarray & nd_buf, np::ndarray & nd_sz){
+
+//	string path = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
+//	string path = "/kso/iris_l2_20140125_030458_3860259280_raster_t000_r00000.fits";
+	string path = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00002.fits";
+
+	float * buf = (float *) nd_buf.get_data();
+
+	dim3 sz = read_fits_raster(path, buf);
+
+	nd_sz[0] = (uint) sz.z;
+	nd_sz[1] = (uint) sz.y;
+	nd_sz[2] = (uint) sz.x;
+
+}
 
 
 }

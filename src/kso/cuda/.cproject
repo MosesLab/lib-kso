@@ -97,7 +97,7 @@
 							<tool id="nvcc.linker.base.1700730755" name="NVCC Linker" superClass="nvcc.linker.base">
 								<option id="nvcc.linker.option.libs.1507017045" name="Libraries (-l)" superClass="nvcc.linker.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="boost_python-py35"/>
-									<listOptionValue builtIn="false" value="CCfits"/>
+									<listOptionValue builtIn="false" value="cfitsio"/>
 									<listOptionValue builtIn="false" value="boost_numpy3"/>
 								</option>
 								<option defaultValue="true" id="nvcc.linker.option.shared.153901334" name="Shared (-shared)" superClass="nvcc.linker.option.shared" valueType="boolean"/>
@@ -160,7 +160,7 @@
 									<listOptionValue builtIn="false" value="/usr/include/python3.5m"/>
 									<listOptionValue builtIn="false" value="../"/>
 								</option>
-								<option id="nvcc.compiler.option.gprof.2020317787" superClass="nvcc.compiler.option.gprof" value="true" valueType="boolean"/>
+								<option id="nvcc.compiler.option.gprof.2020317787" name="Generate gprof information (-pg)" superClass="nvcc.compiler.option.gprof" value="true" valueType="boolean"/>
 								<inputType id="nvcc.compiler.input.cu.374247603" superClass="nvcc.compiler.input.cu"/>
 								<inputType id="nvcc.compiler.input.cpp.1439543388" superClass="nvcc.compiler.input.cpp"/>
 								<inputType id="nvcc.compiler.input.c.578544853" superClass="nvcc.compiler.input.c"/>

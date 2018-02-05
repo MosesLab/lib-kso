@@ -1,1 +1,1 @@
-from kso.cuda.Release.libkso_cuda import read_fits_raster
+from kso.cuda.Release.libkso_cuda import read_fits_raster_ndarr

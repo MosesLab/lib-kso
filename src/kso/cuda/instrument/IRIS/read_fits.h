@@ -8,12 +8,14 @@
 #ifndef READ_FITS_H_
 #define READ_FITS_H_
 
+#include <iostream>
 #include <string>
 
-#include <CCfits/CCfits>
+//#include <CCfits/CCfits>
+#include "fitsio.h"
 
 
-
+#include "pyboost.h"
 
 namespace kso {
 
@@ -21,7 +23,8 @@ namespace instrument {
 
 namespace IRIS {
 
-void read_fits_raster(std::string path, float * buf);
+dim3 read_fits_raster(std::string path, float * buf);
+void read_fits_raster_ndarr(np::ndarray & nd_buf, np::ndarray & nd_sz);
 //void read_fits_raster(py::str, np::ndarray & buf);
 
 }
