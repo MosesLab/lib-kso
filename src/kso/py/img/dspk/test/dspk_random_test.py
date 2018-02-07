@@ -71,7 +71,7 @@ coords = np.arange(sz)
 rand.shuffle(coords)
 coords = coords[:n_spk]
 orig_data = orig_data.flatten()
-orig_data[coords] = rand.poisson(lam=512, size=n_spk)
+orig_data[coords] = orig_data[coords] + rand.poisson(lam=512, size=n_spk)
 orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 
 # Put frames around data for easier viewing

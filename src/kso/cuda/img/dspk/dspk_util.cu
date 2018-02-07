@@ -78,7 +78,7 @@ buf::buf(std::string path, uint max_sz, uint kern_sz, uint n_threads){
 
 	// allocate host page-locked memory
 	CHECK(cudaHostAlloc(&dt, max_sz * sizeof(float), cudaHostRegisterDefault));
-	CHECK(cudaHostAlloc(&gm, sz3 * sizeof(float), cudaHostRegisterDefault));
+//	CHECK(cudaHostAlloc(&gm, sz3 * sizeof(float), cudaHostRegisterDefault));
 	CHECK(cudaHostAlloc(&newBad, sizeof(uint), cudaHostRegisterDefault));
 
 	sz = instrument::IRIS::read_fits_raster(path, dt);

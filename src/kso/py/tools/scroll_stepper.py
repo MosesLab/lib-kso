@@ -26,6 +26,7 @@ class IndexTracker(object):
         else:
             self.ind = (self.ind - 1) % self.slices
         self.update()
+        print(self.ind)
 
     def update(self):
         self.ax.clear()

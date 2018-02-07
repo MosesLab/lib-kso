@@ -17,7 +17,7 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 	uint ksz = db->ksz;
 
 	float * dt = db->dt;
-	float * gm = db->gm;
+//	float * gm = db->gm;
 	uint * newBad = db->newBad;
 
 	float * dt_d = db->dt_d;
@@ -132,7 +132,7 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 		// copy back from devicecudaMemcpyDeviceToHost;
 		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(gm + b[s], gm_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+//		CHECK(cudaMemcpy(gm + b[s], gm_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 
 		cout << "Total bad pixels: " << totBad << endl;
 

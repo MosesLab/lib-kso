@@ -10,13 +10,18 @@ namespace dspk {
 
 __device__ float local_kern_1D(uint X, uint ksz){
 
+
+
 	// calculate offset for kernel
 	uint ks2 = ksz / 2;
+
+	float sig = ks2;
+	float var = sig * sig;
 
 	float x = (float) X - (float) ks2;
 	float x2 = x * x;
 
-	return exp(-x2) / (1.0 + x2);
+	return exp(-x2 / var) / (1.0 + x2);
 
 }
 
@@ -181,14 +186,13 @@ __global__ void calc_dt_2(float * dt_2, float * dt_1, float * gm, float * norm, 
 
 
 	dt_2[n_t * t + n_y * y + n_l * l] = (dt_i * gm_i) + (bm_i * lm_i);
+//	dt_2[n_t * t + n_y * y + n_l * l] = (dt_i * gm_i) ;
 
 }
 
 __global__ void calc_lmn_0(float * norm_0, float * gm, uint * bad_pix, dim3 sz, uint k_sz){
 
 
-	// reset bad pixel counter
-	*bad_pix = 0;
 
 	// calculate offset for kernel
 	uint ks2 = k_sz / 2;
