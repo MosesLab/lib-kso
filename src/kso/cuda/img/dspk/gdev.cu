@@ -44,8 +44,8 @@ __global__ void calc_gdev_0(float * gdev_0, float * dt, float * gm, dim3 sz, uin
 		}
 
 		// load from memory
-		double gm_i = gm[n_t * t + n_y * y + n_l * C];
-		double dt_i = dt[n_t * t + n_y * y + n_l * C];
+		float gm_i = gm[n_t * t + n_y * y + n_l * C];
+		float dt_i = dt[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
 		mean = mean + (gm_i * dt_i);
@@ -90,7 +90,7 @@ __global__ void calc_gdev_1(float * gdev_1, float * gdev_0, dim3 sz, uint k_sz){
 
 
 		// load from memory
-		double gdev_i = gdev_0[n_t * t + n_y * B + n_l * l];
+		float gdev_i = gdev_0[n_t * t + n_y * B + n_l * l];
 
 		// update value of mean
 		mean = mean + gdev_i;
@@ -138,7 +138,7 @@ __global__ void calc_gdev_2(float * gdev_2, float * gdev_1, float * dt, float * 
 
 
 		// load from memory
-		double gdev_i = gdev_1[n_t * A + n_y * y + n_l * l];
+		float gdev_i = gdev_1[n_t * A + n_y * y + n_l * l];
 
 		// update value of mean
 		mean = mean + gdev_i;

@@ -46,7 +46,7 @@ __global__ void calc_nsd_0(float * nsd_0, float * gdev, dim3 sz, uint k_sz){
 		}
 
 		// load from memory
-		double dev_i = gdev[n_t * t + n_y * y + n_l * C];
+		float dev_i = gdev[n_t * t + n_y * y + n_l * C];
 
 		//								cout << dev_0 << endl;
 
@@ -99,7 +99,7 @@ __global__ void calc_nsd_1(float * nsd_1, float * nsd_0, dim3 sz, uint k_sz){
 
 
 		// load from memory
-		double nsd_i = nsd_0[n_t * t + n_y * B + n_l * l];
+		float nsd_i = nsd_0[n_t * t + n_y * B + n_l * l];
 
 		//								cout << dev_0 << endl;
 
@@ -152,7 +152,7 @@ __global__ void calc_nsd_2(float * nsd_2, float * nsd_1, float * norm, dim3 sz, 
 		}
 
 		// load from memory
-		double nsd_i = nsd_1[n_t * A + n_y * y + n_l * l];
+		float nsd_i = nsd_1[n_t * A + n_y * y + n_l * l];
 
 		//								cout << dev_0 << endl;
 

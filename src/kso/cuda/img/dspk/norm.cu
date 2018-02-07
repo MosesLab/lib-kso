@@ -49,7 +49,7 @@ __global__ void calc_norm_0(float * norm_0, float * gm, uint * bad_pix, dim3 sz,
 		}
 
 		// load from memory
-		double gm_i = gm[n_t * t + n_y * y + n_l * C];
+		float gm_i = gm[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
 		norm = norm + gm_i;
@@ -95,7 +95,7 @@ __global__ void calc_norm_1(float * norm_1, float * norm_0, dim3 sz, uint k_sz){
 
 
 		// load from memory
-		double norm_i = norm_0[n_t * t + n_y * B + n_l * l];
+		float norm_i = norm_0[n_t * t + n_y * B + n_l * l];
 
 		// update value of mean
 		norm = norm + norm_i;
@@ -143,7 +143,7 @@ __global__ void calc_norm_2(float * norm_2, float * norm_1, dim3 sz, uint k_sz){
 
 
 		// load from memory
-		double norm_i = norm_1[n_t * A + n_y * y + n_l * l];
+		float norm_i = norm_1[n_t * A + n_y * y + n_l * l];
 
 		// update value of mean
 		norm = norm + norm_i;

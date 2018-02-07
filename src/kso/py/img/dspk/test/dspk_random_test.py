@@ -52,7 +52,19 @@ orig_data = rand.poisson(lam=64, size=[sz_t, sz_y, sz_l])
 orig_data = orig_data.astype(np.float32)
 # orig_data = np.empty([sz_t, sz_y, sz_l], dtype=np.float32)
 
-
+# Add signal
+x = np.arange(0, sz_l, 1, np.float32)
+y = np.arange(0, sz_y,1, np.float32)
+x = np.expand_dims(x, 0)
+x = np.expand_dims(x,0)
+y = np.expand_dims(y,0)
+y = np.expand_dims(y,-1)
+x0 = sz_l // 2
+y0 = sz_y // 2
+fwhm = sz_l / 5
+signal = 512 * np.exp(-((x - x0) ** 2 + (y - y0) ** 2) / fwhm ** 2)
+print(signal)
+orig_data = orig_data + signal
 
 # Add random spikes
 coords = np.arange(sz)
@@ -89,11 +101,11 @@ dspk_cuda.denoise_ndarr(orig_data, gm_cuda, pix_dev, 5, Niter)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
-
-T = 23
-orig_data_flat = orig_data[T,:,:]
-f1 = plt.figure()
-plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
+#
+# T = 23
+# orig_data_flat = orig_data[T,:,:]
+# f1 = plt.figure()
+# plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 
 fig, ax = plt.subplots(1, 1)
 tracker = IndexTracker(ax, orig_data, 0, v_min=plt_min, v_max=plt_max)

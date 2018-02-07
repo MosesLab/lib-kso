@@ -13,7 +13,7 @@ __device__ float local_kern_1D(uint X, uint ksz){
 	// calculate offset for kernel
 	uint ks2 = ksz / 2;
 
-	float x = (float) X -  (float) ks2;
+	float x = (float) X - (float) ks2;
 	float x2 = x * x;
 
 	return exp(-x2) / (1.0 + x2);
@@ -61,8 +61,8 @@ __global__ void calc_dt_0(float * dt_0, float * dt, float * gm, dim3 sz, uint k_
 		float k_i = local_kern_1D(c, k_sz);
 
 		// load from memory
-		double gm_i = gm[n_t * t + n_y * y + n_l * C];
-		double dt_i = dt[n_t * t + n_y * y + n_l * C];
+		float gm_i = gm[n_t * t + n_y * y + n_l * C];
+		float dt_i = dt[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
 		sum = sum + (gm_i * dt_i * k_i);
@@ -112,7 +112,7 @@ __global__ void calc_dt_1(float * dt_1, float * dt_0, dim3 sz, uint k_sz){
 		float k_i = local_kern_1D(b, k_sz);
 
 		// load from memory
-		double dt_i = dt_0[n_t * t + n_y * B + n_l * l];
+		float dt_i = dt_0[n_t * t + n_y * B + n_l * l];
 
 		// update value of mean
 		sum = sum + (dt_i * k_i);
@@ -163,7 +163,7 @@ __global__ void calc_dt_2(float * dt_2, float * dt_1, float * gm, float * norm, 
 		float k_i = local_kern_1D(a, k_sz);
 
 		// load from memory
-		double dt_i = dt_1[n_t * A + n_y * y + n_l * l];
+		float dt_i = dt_1[n_t * A + n_y * y + n_l * l];
 
 		// update value of mean
 		sum = sum + (dt_i * k_i);
@@ -228,7 +228,7 @@ __global__ void calc_lmn_0(float * norm_0, float * gm, uint * bad_pix, dim3 sz, 
 		float k_i = local_kern_1D(c, k_sz);
 
 		// load from memory
-		double gm_i = gm[n_t * t + n_y * y + n_l * C];
+		float gm_i = gm[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
 		norm = norm + (gm_i * k_i);
@@ -276,7 +276,7 @@ __global__ void calc_lmn_1(float * norm_1, float * norm_0, dim3 sz, uint k_sz){
 		float k_i = local_kern_1D(b, k_sz);
 
 		// load from memory
-		double norm_i = norm_0[n_t * t + n_y * B + n_l * l];
+		float norm_i = norm_0[n_t * t + n_y * B + n_l * l];
 
 		// update value of mean
 		norm = norm + (norm_i * k_i);
@@ -326,7 +326,7 @@ __global__ void calc_lmn_2(float * norm_2, float * norm_1, dim3 sz, uint k_sz){
 		float k_i = local_kern_1D(a, k_sz);
 
 		// load from memory
-		double norm_i = norm_1[n_t * A + n_y * y + n_l * l];
+		float norm_i = norm_1[n_t * A + n_y * y + n_l * l];
 
 		// update value of mean
 		norm = norm + (norm_i * k_i);
