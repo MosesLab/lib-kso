@@ -8,6 +8,19 @@ namespace img {
 
 namespace dspk {
 
+__device__ float local_kern_1D(uint X, uint ksz){
+
+	// calculate offset for kernel
+	uint ks2 = k_sz / 2;
+
+	float x = X - ks2;
+	float x2 = x * x;
+
+	return exp(-x2) / (1 + x2);
+
+}
+
+
 __global__ void calc_dt_0(float * dt_0, float * dt, float * gm, dim3 sz, uint k_sz){
 
 	// calculate offset for kernel
@@ -30,7 +43,7 @@ __global__ void calc_dt_0(float * dt_0, float * dt, float * gm, dim3 sz, uint k_
 
 
 	// initialize neighborhood mean
-	float mean = 0.0;
+	float sum = 0.0;
 
 
 	// convolve over spectrum
@@ -49,12 +62,12 @@ __global__ void calc_dt_0(float * dt_0, float * dt, float * gm, dim3 sz, uint k_
 		double dt_i = dt[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
-		mean = mean + (gm_i * dt_i);
+		sum = sum + (gm_i * dt_i);
 
 	}
 
 
-	gdev_0[n_t * t + n_y * y + n_l * l] = mean;
+	gdev_0[n_t * t + n_y * y + n_l * l] = sum;
 }
 
 }
