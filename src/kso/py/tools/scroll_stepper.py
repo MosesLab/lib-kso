@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 class IndexTracker(object):
-    def __init__(self, ax, X, ind):
+    def __init__(self, ax, X, ind, v_min=None, v_max=None):
         self.ax = ax
         ax.set_title('use scroll wheel to navigate images')
 
@@ -14,7 +14,10 @@ class IndexTracker(object):
         self.slices, self.rows, self.cols = X.shape
         self.ind = ind
 
-        self.im = ax.imshow(self.X[self.ind, :, :], cmap='gray', vmin=0.0, vmax = 1000.0)
+        self.vmin = v_min
+        self.vmax = v_max
+
+        self.im = ax.imshow(self.X[self.ind, :, :], vmin=self.vmin, vmax=self.vmax)
         self.update()
 
     def onscroll(self, event):
@@ -26,6 +29,6 @@ class IndexTracker(object):
 
     def update(self):
         self.ax.clear()
-        self.ax.imshow(self.X[self.ind, :, :], cmap='gray', vmin=0.0, vmax = 1000.0)
+        self.ax.imshow(self.X[self.ind, :, :], vmin=self.vmin, vmax=self.vmax)
         self.im.axes.figure.canvas.draw()
 

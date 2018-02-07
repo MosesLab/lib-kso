@@ -20,6 +20,7 @@
 #include "gdev.h"
 #include "nsd.h"
 #include "gm.h"
+#include "lm.h"
 #include "dspk_util.h"
 #include "util/util.h"
 #include "util/stride.h"
@@ -33,9 +34,9 @@ namespace img {
 namespace dspk {
 
 void denoise(buf * data_buf, float std_dev, uint Niter);
-void denoise_ndarr(const np::ndarray & denoised_data, const np::ndarray & data, float std_dev, uint k_sz, uint Niter);
+void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float std_dev, uint k_sz, uint Niter);
 
-void * denoise_fits_file(std::string out_path, std::string in_path, float std_dev, uint k_sz, uint Niter);
+np::ndarray denoise_fits_file(py::str path, float std_dev, uint k_sz, uint Niter);
 //void * denoise_fits_file(py::str out_path, py::str in_path, float std_dev, uint k_sz, uint Niter);
 
 //void denoise_fits(py::list out_paths, py::list in_paths, float std_dev, uint k_sz, uint Niter);

@@ -18,6 +18,7 @@
 #include "util/util.h"
 #include "util/stride.h"
 
+#include "instrument/IRIS/read_fits.h"
 
 
 namespace kso {
@@ -29,7 +30,8 @@ namespace dspk {
 class buf {
 public:
 	dim3 sz, csz;	// shape of original data and chunked data
-	dim3 st, cst;	// array stride of original data and chunked data
+	dim3 st, cst;	// array stride of original data and chunked data'
+	dim3 sb;		// array stride in bytes
 	uint sz3, csz3;
 	uint ksz, ks2;	// kernel size, kernel half-size
 	float * dt, * gm;		// host memory
@@ -42,7 +44,8 @@ public:
 
 	kso::util::stride * S;
 
-	buf(float * in_data, float * out_data, dim3 data_sz, uint kern_sz, uint n_threads);
+	buf(float * data, float * goodmap, dim3 data_sz, uint kern_sz, uint n_threads);
+	buf(std::string path, uint max_sz, uint kern_sz, uint n_threads);
 
 
 };

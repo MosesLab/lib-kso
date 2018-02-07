@@ -10,6 +10,7 @@ BOOST_PYTHON_MODULE(libkso_cuda){
 
 	py::def("denoise_ndarr", kso::img::dspk::denoise_ndarr);
 	py::def("read_fits_raster_ndarr", kso::instrument::IRIS::read_fits_raster_ndarr);
+	py::def("denoise_fits_file", kso::img::dspk::denoise_fits_file);
 
 
 }

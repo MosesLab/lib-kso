@@ -14,6 +14,8 @@ import kso.cuda.img.dspk as dspk_cuda
 
 import kso.py.img.shaping.shaping as dspk_util
 
+from kso.py.tools.scroll_stepper import IndexTracker
+
 import time
 
 print(os.getcwd())
@@ -34,7 +36,7 @@ Niter = 5
 noise_mean = 64
 spike_mean = 512
 
-pix_dev = 4.0
+pix_dev = 3.0
 
 plt_dev = 2
 plt_min = 0
@@ -65,10 +67,7 @@ orig_data = orig_data.reshape([sz_t, sz_y, sz_l])
 # orig_data = dspk_util.add_frame(orig_data, [0, 1], f_sz=frame)
 
 
-T = 23
-orig_data_flat = orig_data[T,:,:]
-f1 = plt.figure()
-plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
+
 
 
 # print('C++ Test')
@@ -86,26 +85,35 @@ plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
 print('Cuda Test')
 gm_cuda = np.empty([sz_t, sz_y, sz_l], dtype=np.float32)
 cuda_start = time.time()
-dspk_cuda.denoise_ndarr(gm_cuda, orig_data, pix_dev, 5, Niter)
+dspk_cuda.denoise_ndarr(orig_data, gm_cuda, pix_dev, 5, Niter)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
-gm_cuda_flat = gm_cuda[T,:,:]
-f3 = plt.figure()
-plt.imshow(gm_cuda_flat)
+
+T = 23
+orig_data_flat = orig_data[T,:,:]
+f1 = plt.figure()
+plt.imshow(orig_data_flat,vmin=plt_min, vmax=plt_max)
+
+fig, ax = plt.subplots(1, 1)
+tracker = IndexTracker(ax, orig_data, 0, v_min=plt_min, v_max=plt_max)
+fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
+
+# gm_cuda_flat = gm_cuda[T,:,:]
+# f3 = plt.figure()
+# plt.imshow(gm_cuda_flat)
 
 
-
-
-print('Tensorflow Test')
-tf_start = time.time()
-(data_tf,gm_tf,bad_pix_number) = dspk_tf.dspk(orig_data, std_dev=pix_dev, Niter=Niter)
-tf_end = time.time()
-tf_elapsed = tf_end - tf_start
-print(tf_elapsed)
-gm_tf_flat = gm_tf[T,:,:]
-f4 = plt.figure()
-plt.imshow(gm_tf_flat)
+#
+# print('Tensorflow Test')
+# tf_start = time.time()
+# (data_tf,gm_tf,bad_pix_number) = dspk_tf.dspk(orig_data, std_dev=pix_dev, Niter=Niter)
+# tf_end = time.time()
+# tf_elapsed = tf_end - tf_start
+# print(tf_elapsed)
+# gm_tf_flat = gm_tf[T,:,:]
+# f4 = plt.figure()
+# plt.imshow(gm_tf_flat)
 
 
 
@@ -116,15 +124,15 @@ plt.imshow(gm_tf_flat)
 # gm_cuda_flat = dspk_util.flatten_cube(gm_cuda[:,:,0:9], sz_t, sz_y, 9)
 # gm_tf_flat = dspk_util.flatten_cube(gm_tf[:,:,0:9], sz_t, sz_y, 9)
 
-
-diff = np.sum(gm_cuda - gm_tf, axis=(1,2))
-
-plt.figure()
-plt.plot(diff)
 #
-
-plt.figure()
-plt.imshow(np.sum(gm_cuda - gm_tf, axis=2))
+# diff = np.sum(gm_cuda - gm_tf, axis=(1,2))
+#
+# plt.figure()
+# plt.plot(diff)
+# #
+#
+# plt.figure()
+# plt.imshow(np.sum(gm_cuda - gm_tf, axis=2))
 
 
 plt.show()

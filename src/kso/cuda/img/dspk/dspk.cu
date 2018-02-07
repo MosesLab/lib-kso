@@ -104,17 +104,34 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 
 
-			CHECK(cudaDeviceSynchronize());
+
 
 
 			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
 			cout << "Iteration " << iter << ": found " << *newBad << " bad pixels\n";
 			totBad = totBad + *newBad;
 
+			if(newBad == 0){	// stop if we're not finding any pixels
+				break;
+			}
+
 		}
 
+		kso::img::dspk::calc_lmn_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz);
+		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz);
+		kso::img::dspk::calc_lmn_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz);
+
+
+		float * lm_d = gdev_d;	// reuse neighborhood mean memory
+		kso::img::dspk::calc_dt_0<<<blocks, threads>>>(lm_d, dt_d, gm_d, sz, ksz);
+		kso::img::dspk::calc_dt_1<<<blocks, threads>>>(tmp_d, lm_d, sz, ksz);
+		kso::img::dspk::calc_dt_2<<<blocks, threads>>>(dt_d, tmp_d, gm_d, norm_d, sz, ksz);
+
+
+		CHECK(cudaDeviceSynchronize());
 
 		// copy back from devicecudaMemcpyDeviceToHost;
+		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 		CHECK(cudaMemcpy(gm + b[s], gm_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 
 		cout << "Total bad pixels: " << totBad << endl;
@@ -128,7 +145,7 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 }
 
-void denoise_ndarr(const np::ndarray & denoised_data, const np::ndarray & data, float std_dev, uint k_sz, uint Niter){
+void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float std_dev, uint k_sz, uint Niter){
 
 	// shape of input data
 	dim3 sz;
@@ -143,17 +160,35 @@ void denoise_ndarr(const np::ndarray & denoised_data, const np::ndarray & data, 
 
 	// extract float data from numpy array
 	float * dt = (float *) data.get_data();
-	float * dn = (float *) denoised_data.get_data();
+	float * gm = (float *) goodmap.get_data();
 
 	uint n_threads = 1;
 
-	buf * db = new buf(dt, dn, sz, k_sz, n_threads);
+	buf * db = new buf(dt, gm, sz, k_sz, n_threads);
 
 	denoise(db, std_dev, Niter);
 
 }
 
+np::ndarray denoise_fits_file(py::str path, float std_dev, uint k_sz, uint Niter){
 
+
+	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
+
+	uint n_threads = 1;
+	uint max_sz = pow(2,30);	// 1 GB
+
+	buf * db = new buf(cpath, max_sz, k_sz, n_threads);
+
+	denoise(db, std_dev, Niter);
+
+	py::object own = py::object();
+	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);
+	py::tuple stride = py::make_tuple(db->sb.z, db->sb.y, db->sb.x);
+	np::dtype dtype = np::dtype::get_builtin<float>();
+
+	return np::from_data(db->dt, dtype, shape, stride, own);
+}
 
 
 }
