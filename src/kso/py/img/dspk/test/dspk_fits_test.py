@@ -22,7 +22,7 @@ print(os.getcwd())
 
 path = ""
 
-pix_dev = 2.0
+pix_dev = 3.0
 ksz = 5
 Niter = 20
 

@@ -151,7 +151,7 @@ __global__ void calc_gdev_2(float * gdev_2, float * gdev_1, float * dt, float * 
 	float gm_i = gm[n_t * t + n_y * y + n_l * l];
 	float norm_i = norm[n_t * t + n_y * y + n_l * l];
 
-	gdev_2[n_t * t + n_y * y + n_l * l] = gm_i * (dt_i - (mean / norm_i));
+	gdev_2[n_t * t + n_y * y + n_l * l] = gm_i * abs(dt_i - (mean / norm_i));
 }
 
 
