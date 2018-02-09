@@ -117,6 +117,8 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 		}
 
+		ksz = 3;
+
 		kso::img::dspk::calc_lmn_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz);
 		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz);
 		kso::img::dspk::calc_lmn_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz);
@@ -126,13 +128,13 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 		float * tp;	 // temporary pointer
 
-		Niter = 1;
+		Niter = 10;
 
-		ksz = 3;
+
 
 		for(uint iter = 0; iter < Niter; iter++){
 
-			// switch locations of temp and data buffer so this for looop works right
+			// switch locations of temp and data buffer so this for loop works right
 			tp = gdt_d;
 			gdt_d = tmp_d;
 			tmp_d = tp;
