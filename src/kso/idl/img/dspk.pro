@@ -37,7 +37,7 @@
 ;  2016-12-8 J. Parker  Added restore functionality if goodmap has
 ;  already been generated on a previous run
 
-function despik, data, sigmas=sigmas, Niter=Niter, kernel=kernel, min_std=min_std, $
+function dspk, data, sigmas=sigmas, Niter=Niter, kernel=kernel, min_std=min_std, $
    silent=silent, goodmap=goodmap, mode=mode, restore=restore
 
 if not keyword_set(silent) then begin 

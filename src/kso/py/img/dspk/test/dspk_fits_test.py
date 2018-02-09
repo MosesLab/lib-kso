@@ -24,7 +24,7 @@ path = ""
 
 pix_dev = 3.0
 ksz = 5
-Niter = 20
+Niter = 5
 
 print('Cuda Test')
 cuda_start = time.time()
@@ -35,7 +35,7 @@ print(cuda_elapsed)
 
 
 fig, ax = plt.subplots(1, 1)
-tracker = IndexTracker(ax, cuda_data, 0, v_min=0, v_max=1000)
+tracker = IndexTracker(ax, cuda_data, 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
 

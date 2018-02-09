@@ -121,17 +121,35 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz);
 		kso::img::dspk::calc_lmn_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz);
 
+		float * gdt_d = gdev_d;	// reuse neighborhood mean memory
+		kso::img::dspk::calc_gdt<<<blocks, threads>>>(gdt_d, dt_d, gm_d, sz);
 
-		float * lm_d = gdev_d;	// reuse neighborhood mean memory
-		kso::img::dspk::calc_dt_0<<<blocks, threads>>>(lm_d, dt_d, gm_d, sz, ksz);
-		kso::img::dspk::calc_dt_1<<<blocks, threads>>>(tmp_d, lm_d, sz, ksz);
-		kso::img::dspk::calc_dt_2<<<blocks, threads>>>(dt_d, tmp_d, gm_d, norm_d, sz, ksz);
+		float * tp;	 // temporary pointer
+
+		Niter = 1;
+
+		ksz = 3;
+
+		for(uint iter = 0; iter < Niter; iter++){
+
+			// switch locations of temp and data buffer so this for looop works right
+			tp = gdt_d;
+			gdt_d = tmp_d;
+			tmp_d = tp;
+
+			kso::img::dspk::calc_gdt_0<<<blocks, threads>>>(gdt_d, tmp_d, gm_d, sz, ksz);
+			kso::img::dspk::calc_gdt_1<<<blocks, threads>>>(tmp_d, gdt_d, sz, ksz);
+			kso::img::dspk::calc_gdt_2<<<blocks, threads>>>(gdt_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz);
+
+			cout << "Iteration " << iter << endl;
+
+		}
 
 
 		CHECK(cudaDeviceSynchronize());
 
 		// copy back from devicecudaMemcpyDeviceToHost;
-		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(dt + b[s], gdt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 //		CHECK(cudaMemcpy(gm + b[s], gm_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 
 		cout << "Total bad pixels: " << totBad << endl;

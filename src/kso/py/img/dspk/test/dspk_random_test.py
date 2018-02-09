@@ -20,9 +20,9 @@ import time
 
 print(os.getcwd())
 
-sz_t = 256
-sz_y = 256
-sz_l = 256
+sz_t = 16
+sz_y = 16
+sz_l = 16
 
 sz = sz_t * sz_y * sz_l
 

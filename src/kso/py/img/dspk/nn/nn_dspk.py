@@ -2,6 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+import time
+
 import kso.cuda.instrument.IRIS as iris
 
 from kso.py.tools.scroll_stepper import IndexTracker
@@ -19,6 +21,7 @@ from keras import regularizers
 from keras.initializers import RandomNormal
 from keras.callbacks import EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
+from keras.activations import selu
 
 bsz_x = 1024
 bsz_y = 1024
@@ -41,22 +44,24 @@ xx, yy, zz = np.meshgrid(x,y,z)
 
 print(xx.shape)
 
+tb_path = './logs/' + time.asctime(time.localtime())
+cb = TensorBoard(log_dir=tb_path, histogram_freq=0, write_graph=False, write_images=False)
 
 net = Sequential()
 
 init = RandomNormal(mean=0.0, stddev=2e-3, seed=None)
 
 
-l1_units = 1024
-net.add(Dense(l1_units, activation='tanh', input_shape=(3,)))
+l1_units = 256
+net.add(Dense(l1_units, activation=selu, input_shape=(3,)))
 
-l2_units = 1024
-net.add(Dense(l2_units, activation='tanh'))
+l2_units = 256
+net.add(Dense(l2_units, activation=selu))
 
 l3_units = 1
 net.add(Dense(l3_units, activation=None))
 
-sgd = SGD(lr=4e-4, decay=1e-4, momentum=0.9, nesterov=True)
+sgd = SGD(lr=1e-6, decay=1e-4, momentum=0.9, nesterov=True)
 
 # Compile parameters into the model
 net.compile(optimizer=sgd, loss='mse')
@@ -70,6 +75,6 @@ truth = np.expand_dims(dt_f,axis=-1)
 print(input.shape)
 print(truth.shape)
 
-net.fit(input, truth, batch_size=128*1024,verbose=1, shuffle='batch')
+net.fit(input, truth, batch_size=1024,verbose=1, callbacks=[cb], shuffle='batch')
 
 net.save('model.h5')
