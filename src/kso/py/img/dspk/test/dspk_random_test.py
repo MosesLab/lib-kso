@@ -20,9 +20,9 @@ import time
 
 print(os.getcwd())
 
-sz_t = 16
-sz_y = 16
-sz_l = 16
+sz_t = 7
+sz_y = 7
+sz_l = 7
 
 sz = sz_t * sz_y * sz_l
 
@@ -63,7 +63,6 @@ x0 = sz_l // 2
 y0 = sz_y // 2
 fwhm = sz_l / 5
 signal = 512 * np.exp(-((x - x0) ** 2 + (y - y0) ** 2) / fwhm ** 2)
-print(signal)
 orig_data = orig_data + signal
 
 # Add random spikes

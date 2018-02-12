@@ -22,9 +22,9 @@ print(os.getcwd())
 
 path = ""
 
-pix_dev = 2.5
-ksz = 3
-Niter = 20
+pix_dev = 3.0
+ksz = 7
+Niter = 30
 
 print('Cuda Test')
 cuda_start = time.time()

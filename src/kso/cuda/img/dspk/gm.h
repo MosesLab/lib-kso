@@ -21,7 +21,7 @@ namespace img {
 namespace dspk {
 
 __global__ void calc_gm(float * gm, float * gdev, float * nsd, float std_dev, uint * new_bad, dim3 sz, uint k_sz);
-__global__ void init_gm(float* gm, dim3 sz);
+__global__ void init_gm(float* gm, float * dt, dim3 sz);
 
 
 }

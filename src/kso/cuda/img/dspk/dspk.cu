@@ -79,7 +79,7 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 
 		// initialize good pixel map
-		kso::img::dspk::init_gm<<<blocks, threads>>>(gm_d, sz);
+		kso::img::dspk::init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
 
 		// Number of identification iterations
 		for(uint iter = 0; iter < Niter; iter++){

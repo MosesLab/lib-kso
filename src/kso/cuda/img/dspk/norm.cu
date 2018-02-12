@@ -8,6 +8,19 @@ namespace img {
 
 namespace dspk {
 
+__device__ float norm_kern_1D(float X, float ks2, float sig){
+
+		float x = X - ks2;
+
+		float var = sig * sig;
+
+		float x2 = x * x;
+
+		return exp(-x2 / var);
+
+}
+
+
 __global__ void calc_norm_0(float * norm_0, float * gm, uint * bad_pix, dim3 sz, uint k_sz){
 
 
@@ -48,11 +61,14 @@ __global__ void calc_norm_0(float * norm_0, float * gm, uint * bad_pix, dim3 sz,
 			continue;
 		}
 
+		// calculate kernel at this point
+		float k_i = kfac_l * norm_kern_1D(c, ks2, ksig_l);
+
 		// load from memory
 		float gm_i = gm[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
-		norm = norm + gm_i;
+		norm = norm + (k_i * gm_i);
 
 	}
 
@@ -93,12 +109,15 @@ __global__ void calc_norm_1(float * norm_1, float * norm_0, dim3 sz, uint k_sz){
 			continue;
 		}
 
+		// calculate kernel at this point
+		float k_i = kfac_y * norm_kern_1D(b, ks2, ksig_y);
+
 
 		// load from memory
 		float norm_i = norm_0[n_t * t + n_y * B + n_l * l];
 
 		// update value of mean
-		norm = norm + norm_i;
+		norm = norm + (k_i * norm_i);
 
 	}
 
@@ -141,12 +160,14 @@ __global__ void calc_norm_2(float * norm_2, float * norm_1, dim3 sz, uint k_sz){
 			continue;
 		}
 
+		// calculate kernel at this point
+		float k_i = kfac_t * norm_kern_1D(a, ks2, ksig_t);
 
 		// load from memory
 		float norm_i = norm_1[n_t * A + n_y * y + n_l * l];
 
 		// update value of mean
-		norm = norm + norm_i;
+		norm = norm + (k_i * norm_i);
 
 
 	}

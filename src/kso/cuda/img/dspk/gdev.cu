@@ -8,6 +8,18 @@ namespace img {
 
 namespace dspk {
 
+__device__ float gdev_kern_1D(float X, float ks2, float sig){
+
+		float x = X - ks2;
+
+		float var = sig * sig;
+
+		float x2 = x * x;
+
+		return exp(-x2 / var);
+
+}
+
 __global__ void calc_gdev_0(float * gdev_0, float * dt, float * gm, dim3 sz, uint k_sz){
 	// calculate offset for kernel
 	uint ks2 = k_sz / 2;
@@ -43,12 +55,16 @@ __global__ void calc_gdev_0(float * gdev_0, float * dt, float * gm, dim3 sz, uin
 			continue;
 		}
 
+		// calculate kernel at this point
+		float k_i = kfac_l * gdev_kern_1D(c, ks2, ksig_l);
+//				printf("%d %f\n", c, k_i);
+
 		// load from memory
 		float gm_i = gm[n_t * t + n_y * y + n_l * C];
 		float dt_i = dt[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
-		mean = mean + (gm_i * dt_i);
+		mean = mean + (k_i * gm_i * dt_i);
 
 	}
 
@@ -88,12 +104,16 @@ __global__ void calc_gdev_1(float * gdev_1, float * gdev_0, dim3 sz, uint k_sz){
 			continue;
 		}
 
+		// calculate kernel at this point
+		float k_i = kfac_y * gdev_kern_1D(b, ks2, ksig_y);
+//		printf("%d %f\n", b, k_i);
+
 
 		// load from memory
 		float gdev_i = gdev_0[n_t * t + n_y * B + n_l * l];
 
 		// update value of mean
-		mean = mean + gdev_i;
+		mean = mean + (k_i * gdev_i);
 
 	}
 
@@ -136,12 +156,16 @@ __global__ void calc_gdev_2(float * gdev_2, float * gdev_1, float * dt, float * 
 			continue;
 		}
 
+		// calculate kernel at this point
+		float k_i = kfac_t * gdev_kern_1D(a, ks2, ksig_t);
+//		printf("%f\n", k_i);
+
 
 		// load from memory
 		float gdev_i = gdev_1[n_t * A + n_y * y + n_l * l];
 
 		// update value of mean
-		mean = mean + gdev_i;
+		mean = mean + (k_i * gdev_i);
 
 
 

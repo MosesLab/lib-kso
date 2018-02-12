@@ -14,11 +14,15 @@
 #include <cstdlib>
 #include <cuda.h>
 
+#include "gdev.h"
+
 namespace kso {
 
 namespace img {
 
 namespace dspk {
+
+__device__ float norm_kern_1D(float X, float ks2, float sig);
 
 __global__ void calc_norm_0(float * norm_0, float * gm, uint * bad_pix, dim3 sz, uint k_sz);
 __global__ void calc_norm_1(float * norm_1, float * norm_0, dim3 sz, uint k_sz);
