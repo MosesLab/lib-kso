@@ -29,6 +29,16 @@ size_t get_device_mem(uint device) {
 	return tot_mem;
 }
 
+dim3 add_dim3(dim3 a, dim3 b){
+
+	a.x = a.x + b.x;
+	a.y = a.y + b.y;
+	a.z = a.z + b.z;
+
+	return a;
+
+}
+
 }
 
 }

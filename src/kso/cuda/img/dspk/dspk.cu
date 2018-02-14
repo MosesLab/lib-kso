@@ -14,7 +14,8 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 	buf * db = data_buf;
 
 
-	uint ksz = db->ksz;
+	uint ksz1 = db->ksz;
+	dim3 ksz(ksz1, ksz1, ksz1);
 
 	float * dt = db->dt;
 //	float * gm = db->gm;
@@ -45,6 +46,10 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 	uint totBad = 0;
 
 	cout << num_strides << endl;
+
+	float * q1_d = gdev_d;
+	float * q2_d = nsd_d;
+	float * q3_d = norm_d;
 
 
 	// loop over chunks
@@ -88,19 +93,27 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 			*newBad = 0;	// reset the number of bad pixels found for this iteration
 			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
-			kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz);
-			kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz);
-			kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz);
+			calc_quartiles(q1_d, q2_d, q3_d, dt_d, gm_d, tmp_d, sz, ksz);
+			calc_gm<<<blocks, threads>>>(q1_d, q2_d, q3_d, dt_d, gm_d, newBad_d, sz, ksz, std_dev);
 
-			kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz);
-			kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz);
-			kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz);
 
-			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz);
-			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz);
-			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz);
 
-			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, std_dev, newBad_d, sz, ksz);
+
+
+
+//			kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz);
+//			kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz);
+//			kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz);
+//
+//			kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz);
+//			kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz);
+//			kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz);
+//
+//			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz);
+//			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz);
+//			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz);
+
+//			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, std_dev, newBad_d, sz, ksz);
 
 
 
@@ -117,20 +130,20 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 		}
 
-		ksz = 3;
-
-		kso::img::dspk::calc_lmn_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz);
-		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz);
-		kso::img::dspk::calc_lmn_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz);
-
-		float * gdt_d = gdev_d;	// reuse neighborhood mean memory
-		kso::img::dspk::calc_gdt<<<blocks, threads>>>(gdt_d, dt_d, gm_d, sz);
-
-		float * tp;	 // temporary pointer
-
-		Niter = 10;
-
-
+//		ksz = 3;
+//
+//		kso::img::dspk::calc_lmn_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+//		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+//		kso::img::dspk::calc_lmn_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
+//
+//		float * gdt_d = gdev_d;	// reuse neighborhood mean memory
+//		kso::img::dspk::calc_gdt<<<blocks, threads>>>(gdt_d, dt_d, gm_d, sz);
+//
+//		float * tp;	 // temporary pointer
+//
+//		Niter = 10;
+//
+//
 //
 //		for(uint iter = 0; iter < Niter; iter++){
 //
@@ -139,9 +152,9 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 //			gdt_d = tmp_d;
 //			tmp_d = tp;
 //
-//			kso::img::dspk::calc_gdt_0<<<blocks, threads>>>(gdt_d, tmp_d, gm_d, sz, ksz);
-//			kso::img::dspk::calc_gdt_1<<<blocks, threads>>>(tmp_d, gdt_d, sz, ksz);
-//			kso::img::dspk::calc_gdt_2<<<blocks, threads>>>(gdt_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz);
+//			kso::img::dspk::calc_gdt_0<<<blocks, threads>>>(gdt_d, tmp_d, gm_d, sz, ksz1);
+//			kso::img::dspk::calc_gdt_1<<<blocks, threads>>>(tmp_d, gdt_d, sz, ksz1);
+//			kso::img::dspk::calc_gdt_2<<<blocks, threads>>>(gdt_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
 //
 //			cout << "Iteration " << iter << endl;
 //
@@ -151,7 +164,7 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 		CHECK(cudaDeviceSynchronize());
 
 		// copy back from devicecudaMemcpyDeviceToHost;
-		CHECK(cudaMemcpy(dt + b[s], gdt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 //		CHECK(cudaMemcpy(dt + b[s], nsd_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 
 

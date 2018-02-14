@@ -30,6 +30,7 @@ public:
 	uint * l;		// host read lengths
 	uint * a_d;	// device write indices
 
+	// linear indices as enumerated above
 	uint * B;
 	uint * b;
 	uint * M;

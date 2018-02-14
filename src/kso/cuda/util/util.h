@@ -15,13 +15,16 @@
 #include <cstdlib>
 #include <cuda.h>
 
+
+
 namespace kso {
 
 namespace util {
 
+
 void enum_device();
 size_t get_device_mem(uint device);
-
+dim3 add_dim3(dim3 a, dim3 b);
 
 
 }

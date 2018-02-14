@@ -15,7 +15,7 @@
 #include <string>
 #include <cuda.h>
 
-
+#include "med.h"
 #include "norm.h"
 #include "gdev.h"
 #include "nsd.h"

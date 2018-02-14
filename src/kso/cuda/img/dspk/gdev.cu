@@ -21,6 +21,7 @@ __device__ float gdev_kern_1D(float X, float ks2, float sig){
 }
 
 __global__ void calc_gdev_0(float * gdev_0, float * dt, float * gm, dim3 sz, uint k_sz){
+
 	// calculate offset for kernel
 	uint ks2 = k_sz / 2;
 
@@ -72,6 +73,7 @@ __global__ void calc_gdev_0(float * gdev_0, float * dt, float * gm, dim3 sz, uin
 	gdev_0[n_t * t + n_y * y + n_l * l] = mean;
 }
 __global__ void calc_gdev_1(float * gdev_1, float * gdev_0, dim3 sz, uint k_sz){
+
 	// calculate offset for kernel
 	uint ks2 = k_sz / 2;
 
@@ -122,6 +124,7 @@ __global__ void calc_gdev_1(float * gdev_1, float * gdev_0, dim3 sz, uint k_sz){
 
 }
 __global__ void calc_gdev_2(float * gdev_2, float * gdev_1, float * dt, float * gm, float * norm, dim3 sz, uint k_sz){
+
 	// calculate offset for kernel
 	uint ks2 = k_sz / 2;
 

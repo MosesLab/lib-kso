@@ -91,8 +91,8 @@ __global__ void calc_gdt_0(float * gdt_0, float * gdt_2, float * gm, dim3 sz, ui
 		float dt_i = gdt_2[n_t * t + n_y * y + n_l * C];
 
 		// update value of mean
-//		sum = sum + (gm_i * dt_i * k_i);
-		sum = sum + (dt_i * k_i);
+		sum = sum + (gm_i * dt_i * k_i);
+//		sum = sum + (dt_i * k_i);
 
 	}
 
