@@ -34,43 +34,47 @@ q3 = np.empty([1024, 1024, 1024], dtype=np.float32)
 
 print('Cuda Test')
 cuda_start = time.time()
-cuda_data = dspk_cuda.denoise_fits_file_quartiles(q1, q2, q3, ksz)
+dt = dspk_cuda.denoise_fits_file_quartiles(q1, q2, q3, ksz)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
 
-q1.resize(cuda_data.shape)
-q2.resize(cuda_data.shape)
-q3.resize(cuda_data.shape)
+q1.resize(dt.shape)
+q2.resize(dt.shape)
+q3.resize(dt.shape)
 
+dt_flat = dt.flatten()
 q1_flat = q1.flatten()
 q2_flat = q2.flatten()
 q3_flat = q3.flatten()
 
-q1_flat = q1_flat[q2_flat > 0]
-q3_flat = q3_flat[q2_flat > 0]
-q2_flat = q2_flat[q2_flat > 0]
+# q1_flat = q1_flat[q2_flat > 0]
+# q3_flat = q3_flat[q2_flat > 0]
+# q2_flat = q2_flat[q2_flat > 0]
 
 # Create linear regression object
-regr = linear_model.LinearRegression()
+# regr = linear_model.LinearRegression()
+# regr.fit(np.expand_dims(q2_flat, -1), np.expand_dims(q3_flat, -1))
+# print(regr.coef_)
+# print(regr.intercept_)
+# x = np.arange(0, 200,1,dtype=np.float32)
+# y = regr.predict(np.expand_dims(x, -1))
+# y = np.squeeze(y)
 
-regr.fit(np.expand_dims(q2_flat, -1), np.expand_dims(q3_flat, -1))
-
-x = np.arange(0, 200,1,dtype=np.float32)
-y = regr.predict(np.expand_dims(x, -1))
-y = np.squeeze(y)
+# plt.figure()
+# plt.hist2d(q2_flat, q3_flat - q2_flat, bins=100, norm=colors.SymLogNorm(linthresh=1))
+#
+#
+# plt.figure()
+# plt.hist2d(q2_flat, q1_flat - q2_flat, bins=100, norm=colors.SymLogNorm(linthresh=1))
 
 plt.figure()
-plt.hist2d(q2_flat, q3_flat, bins=100, norm=colors.SymLogNorm(linthresh=1))
-plt.plot(x,y)
-
-plt.figure()
-plt.hist2d(q2_flat, q1_flat, bins=100, norm=colors.SymLogNorm(linthresh=1))
+plt.hist2d(q2_flat, dt_flat, bins=100, norm=colors.SymLogNorm(linthresh=1), cmap='binary')
 
 
 
 fig, ax = plt.subplots(1, 1)
-tracker = IndexTracker(ax, q3, 0)
+tracker = IndexTracker(ax, dt, 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
 
