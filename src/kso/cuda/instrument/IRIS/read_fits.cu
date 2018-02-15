@@ -15,7 +15,7 @@ using namespace std;
 
 dim3 read_fits_raster(string path, float * buf){
 
-
+	int bitpix;
 
 	fitsfile *fptr;
 	char card[FLEN_CARD];
@@ -27,7 +27,32 @@ dim3 read_fits_raster(string path, float * buf){
 	fits_get_num_hdus(fptr, &num_hdus, & status);
 	cout << "Number of HDUs: " << num_hdus << endl;
 
-	uint i = 5;
+	// find number of windows
+	uint nwin;
+	fits_read_key(fptr, TUINT, "NWIN", &nwin, NULL, &status);
+	cout << "Number of windows " << nwin << endl;
+
+	const char * window = "'Si IV 1403'";
+	char keyval[256];
+	char key[256];
+
+	// loop through all windows
+	uint i;
+	for(i = 1; i <= nwin; i++){
+
+		sprintf(key, "TDESC%d", i);
+		fits_read_keyword(fptr, key, keyval, NULL, &status);
+
+		printf("%s\n", keyval);
+
+		if(strcmp(keyval, window) == 0){
+			i = i + 1;		// add one since the first HDU has no data
+			break;
+		}
+
+	}
+
+
 
 	cout << "_______________________" << endl;
 
@@ -43,7 +68,6 @@ dim3 read_fits_raster(string path, float * buf){
 	cout << "Number of keys: " << nkeys << endl;
 
 
-	int bitpix;
 	fits_get_img_type(fptr, &bitpix, &status);
 	cout << "Image type: " << bitpix << endl;
 
@@ -84,8 +108,8 @@ dim3 read_fits_raster(string path, float * buf){
 void read_fits_raster_ndarr(np::ndarray & nd_buf, np::ndarray & nd_sz){
 
 	string path = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
-//	string path = "/kso/iris_l2_20140125_030458_3860259280_raster_t000_r00000.fits";
-//	string path = "/kso/iris_l2_20140404_001944_3800259353_raster_t000_r00000.fits";
+	//	string path = "/kso/iris_l2_20140125_030458_3860259280_raster_t000_r00000.fits";
+	//	string path = "/kso/iris_l2_20140404_001944_3800259353_raster_t000_r00000.fits";
 
 	float * buf = (float *) nd_buf.get_data();
 

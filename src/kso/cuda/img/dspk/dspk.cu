@@ -9,7 +9,7 @@ namespace img {
 
 namespace dspk {
 
-void denoise(buf * data_buf, float std_dev, uint Niter){
+void denoise(buf * data_buf, float med_dev, float std_dev, uint Niter){
 
 	buf * db = data_buf;
 
@@ -86,6 +86,8 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 		// initialize good pixel map
 		kso::img::dspk::init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
 
+		cout << "Median Filter" << endl;
+
 		// Number of identification iterations
 		for(uint iter = 0; iter < Niter; iter++){
 
@@ -94,77 +96,88 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
 			calc_quartiles(q1_d, q2_d, q3_d, dt_d, gm_d, tmp_d, sz, ksz);
-			calc_gm<<<blocks, threads>>>(q1_d, q2_d, q3_d, dt_d, gm_d, newBad_d, sz, ksz, std_dev);
-
-
-
-
-
-
-//			kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz);
-//			kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz);
-//			kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz);
-//
-//			kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz);
-//			kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz);
-//			kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz);
-//
-//			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz);
-//			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz);
-//			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz);
-
-//			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, std_dev, newBad_d, sz, ksz);
-
-
-
-
+			calc_gm<<<blocks, threads>>>(q1_d, q2_d, q3_d, dt_d, gm_d, newBad_d, sz, ksz, med_dev);
 
 
 			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
 			cout << "Iteration " << iter << ": found " << *newBad << " bad pixels\n";
 			totBad = totBad + *newBad;
 
-			if(newBad == 0){	// stop if we're not finding any pixels
+			if(*newBad == 0){	// stop if we're not finding any pixels
 				break;
 			}
 
 		}
 
-//		ksz = 3;
-//
-//		kso::img::dspk::calc_lmn_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
-//		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
-//		kso::img::dspk::calc_lmn_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
-//
-//		float * gdt_d = gdev_d;	// reuse neighborhood mean memory
-//		kso::img::dspk::calc_gdt<<<blocks, threads>>>(gdt_d, dt_d, gm_d, sz);
-//
-//		float * tp;	 // temporary pointer
-//
-//		Niter = 10;
-//
-//
-//
-//		for(uint iter = 0; iter < Niter; iter++){
-//
-//			// switch locations of temp and data buffer so this for loop works right
-//			tp = gdt_d;
-//			gdt_d = tmp_d;
-//			tmp_d = tp;
-//
-//			kso::img::dspk::calc_gdt_0<<<blocks, threads>>>(gdt_d, tmp_d, gm_d, sz, ksz1);
-//			kso::img::dspk::calc_gdt_1<<<blocks, threads>>>(tmp_d, gdt_d, sz, ksz1);
-//			kso::img::dspk::calc_gdt_2<<<blocks, threads>>>(gdt_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
-//
-//			cout << "Iteration " << iter << endl;
-//
-//		}
+		cout << "Mean Filter" << endl;
+
+		// Number of identification iterations
+		for(uint iter = 0; iter < Niter; iter++){
+
+			*newBad = 0;	// reset the number of bad pixels found for this iteration
+			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
+
+			kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+			kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+			kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
+
+			kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
+			kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
+			kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
+
+			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz1);
+			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz1);
+			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz1);
+
+			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, dt_d, std_dev, newBad_d, sz, ksz1);
+
+			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
+			cout << "Iteration " << iter << ": found " << *newBad << " bad pixels\n";
+			totBad = totBad + *newBad;
+
+			if(*newBad == 0){	// stop if we're not finding any pixels
+				break;
+			}
+
+		}
+
+
+
+		ksz = 3;
+
+		kso::img::dspk::calc_lmn_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+		kso::img::dspk::calc_lmn_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
+
+		float * gdt_d = gdev_d;	// reuse neighborhood mean memory
+		kso::img::dspk::calc_gdt<<<blocks, threads>>>(gdt_d, dt_d, gm_d, sz);
+
+		float * tp;	 // temporary pointer
+
+		Niter = 10;
+
+
+
+		for(uint iter = 0; iter < Niter; iter++){
+
+			// switch locations of temp and data buffer so this for loop works right
+			tp = gdt_d;
+			gdt_d = tmp_d;
+			tmp_d = tp;
+
+			kso::img::dspk::calc_gdt_0<<<blocks, threads>>>(gdt_d, tmp_d, gm_d, sz, ksz1);
+			kso::img::dspk::calc_gdt_1<<<blocks, threads>>>(tmp_d, gdt_d, sz, ksz1);
+			kso::img::dspk::calc_gdt_2<<<blocks, threads>>>(gdt_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
+
+			cout << "Iteration " << iter << endl;
+
+		}
 
 
 		CHECK(cudaDeviceSynchronize());
 
 		// copy back from devicecudaMemcpyDeviceToHost;
-		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(dt + b[s], gdt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 //		CHECK(cudaMemcpy(dt + b[s], nsd_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 
 
@@ -179,7 +192,7 @@ void denoise(buf * data_buf, float std_dev, uint Niter){
 
 }
 
-void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float std_dev, uint k_sz, uint Niter){
+void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float med_dev, float std_dev, uint k_sz, uint Niter){
 
 	// shape of input data
 	dim3 sz;
@@ -200,21 +213,22 @@ void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float 
 
 	buf * db = new buf(dt, gm, sz, k_sz, n_threads);
 
-	denoise(db, std_dev, Niter);
+	denoise(db, med_dev, std_dev, Niter);
 
 }
 
-np::ndarray denoise_fits_file(py::str path, float std_dev, uint k_sz, uint Niter){
+np::ndarray denoise_fits_file(py::str path, float med_dev, float std_dev, uint k_sz, uint Niter){
 
 
 	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
+//	string cpath = "/kso/iris_l2_20141129_000738_3860009154_raster_t000_r00000.fits";
 
 	uint n_threads = 1;
 	uint max_sz = pow(2,30);	// 1 GB
 
 	buf * db = new buf(cpath, max_sz, k_sz, n_threads);
 
-	denoise(db, std_dev, Niter);
+	denoise(db, med_dev, std_dev, Niter);
 
 	py::object own = py::object();
 	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);

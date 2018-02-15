@@ -56,28 +56,32 @@ __global__ void calc_gm(float * q1, float * q2, float * q3,
 
 }
 
-__global__ void calc_gm(float * gm, float * gdev, float * nsd, float std_dev, uint * new_bad, dim3 sz, uint k_sz){
-	// retrieve sizes
-	uint sz_l = sz.x;
-	uint sz_y = sz.y;
+__global__ void calc_gm(float * gm, float * gdev, float * nsd, float * dt, float std_dev, uint * new_bad, dim3 sz, uint k_sz){
+
 
 	// compute stride sizes
-	uint n_l = 1;
-	uint n_y = n_l * sz_l;
-	uint n_t = n_y * sz_y;
+	dim3 n;
+	n.x = 1;
+	n.y = n.x * sz.x;
+	n.z = n.y * sz.y;
+
 
 	// retrieve coordinates from thread and block id.
-	uint l = blockIdx.x * blockDim.x + threadIdx.x;
+	uint x = blockIdx.x * blockDim.x + threadIdx.x;
 	uint y = blockIdx.y * blockDim.y + threadIdx.y;
-	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+	uint z = blockIdx.z * blockDim.z + threadIdx.z;
+
+	// overall index
+	uint L = n.z * z + n.y * y + n.x * x;
 
 	// load from memory
-	float gdev_i = gdev[n_t * t + n_y * y + n_l * l];
-	float nsd_i = nsd[n_t * t + n_y * y + n_l * l];
+	float gdev_i = gdev[L];
+	float nsd_i = nsd[L];
 
 	// check if bad pixel
 	if((gdev_i) > (std_dev * nsd_i)){
-		gm[n_t * t + n_y * y + n_l * l] = 0.0;	// update good pixel map
+		gm[L] = 0.0f;	// update good pixel map
+		dt[L] = 0.0f;
 		atomicAdd(new_bad, 1);
 	}
 }
@@ -97,6 +101,8 @@ __global__ void init_gm(float * gm, float * dt, dim3 sz){
 	uint l = blockIdx.x * blockDim.x + threadIdx.x;
 	uint y = blockIdx.y * blockDim.y + threadIdx.y;
 	uint t = blockIdx.z * blockDim.z + threadIdx.z;
+
+
 
 	gm[n_t * t + n_y * y + n_l * l] = 1.0f;	// update good pixel map
 

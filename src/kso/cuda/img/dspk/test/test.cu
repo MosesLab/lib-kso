@@ -27,6 +27,7 @@ void test_unitialized(){
 	float * dn = new float[sz3];
 
 	float std_dev = 3.0;
+	float med_dev = 10.0;
 	uint Niter = 5;
 	uint k_sz = 5;
 
@@ -34,7 +35,7 @@ void test_unitialized(){
 
 	buf * db = new buf(dt, dn, sz, k_sz, n_threads);
 
-	denoise(db, std_dev, Niter);
+	denoise(db, med_dev, std_dev, Niter);
 
 }
 

@@ -22,13 +22,14 @@ print(os.getcwd())
 
 path = ""
 
-pix_dev = 4.0
+med_dev = 25.0
+std_dev = 3.5
 ksz = 9
 Niter = 10
 
 print('Cuda Test')
 cuda_start = time.time()
-cuda_data = dspk_cuda.denoise_fits_file(path, pix_dev, ksz, Niter)
+cuda_data = dspk_cuda.denoise_fits_file(path, med_dev, std_dev, ksz, Niter)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
