@@ -35,6 +35,7 @@ public:
 	uint sz3, csz3;
 	uint ksz, ks2;	// kernel size, kernel half-size
 	float * dt, * gm;		// host memory
+	float * q1, * q2, * q3;
 	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
 	uint *newBad, *newBad_d;				// more device memory
 

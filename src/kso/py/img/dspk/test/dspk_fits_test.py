@@ -20,12 +20,15 @@ import time
 
 print(os.getcwd())
 
-path = ""
+path = "sfdsf"
+
 
 med_dev = 25.0
 std_dev = 3.5
 ksz = 9
 Niter = 10
+
+
 
 print('Cuda Test')
 cuda_start = time.time()

@@ -37,9 +37,8 @@ void denoise(buf * data_buf, float med_dev, float std_dev, uint Niter);
 void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float med_dev, float std_dev, uint k_sz, uint Niter);
 
 np::ndarray denoise_fits_file(py::str path, float med_dev, float std_dev, uint k_sz, uint Niter);
-//void * denoise_fits_file(py::str out_path, py::str in_path, float std_dev, uint k_sz, uint Niter);
+np::ndarray denoise_fits_file_quartiles(const np::ndarray & q1, const np::ndarray & q2, const np::ndarray & q3, uint k_sz);
 
-//void denoise_fits(py::list out_paths, py::list in_paths, float std_dev, uint k_sz, uint Niter);
 
 
 
