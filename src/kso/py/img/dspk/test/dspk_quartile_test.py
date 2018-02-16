@@ -69,7 +69,7 @@ q3_flat = q3.flatten()
 # plt.hist2d(q2_flat, q1_flat - q2_flat, bins=100, norm=colors.SymLogNorm(linthresh=1))
 
 plt.figure()
-plt.hist2d(q2_flat, dt_flat, bins=100, norm=colors.SymLogNorm(linthresh=1), cmap='binary')
+plt.hist2d(q2_flat, dt_flat, bins=[400,2000], norm=colors.SymLogNorm(linthresh=1))
 
 
 
