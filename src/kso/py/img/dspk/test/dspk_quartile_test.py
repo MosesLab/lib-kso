@@ -28,13 +28,16 @@ print(os.getcwd())
 ksz = 9
 
 
-q1 = np.empty([1024, 1024, 1024], dtype=np.float32)
 q2 = np.empty([1024, 1024, 1024], dtype=np.float32)
-q3 = np.empty([1024, 1024, 1024], dtype=np.float32)
+
+hsx = 1024
+hsy = 1024
+hist = np.empty([hsx, hsy], dtype=np.uint)
+
 
 print('Cuda Test')
 cuda_start = time.time()
-dt = dspk_cuda.denoise_fits_file_quartiles(q1, q2, q3, ksz)
+dt = dspk_cuda.denoise_fits_file_quartiles(q2,  ksz)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)

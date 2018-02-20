@@ -9,6 +9,58 @@ namespace dspk {
 
 using namespace std;
 
+__global__ void calc_hist(uint * hist, float * dt, float * q2, dim3 sz, dim3 hsz){
+
+	// retrieve coordinates from thread and block id.
+	uint x = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint z = blockIdx.z * blockDim.z + threadIdx.z;
+
+	// compute stride sizes
+	dim3 n;
+	n.x = 1;
+	n.y = n.x * sz.x;
+	n.z = n.y * sz.y;
+
+	// compute histogram strides
+	dim3 m;
+	m.x = 1;
+	m.y = m.x * sz.x;
+	m.z = 0;
+
+	// overall index
+	uint L = n.z * z + n.y * y + n.x * x;
+
+	// load median and intensity at this point
+	float dt_0 = dt[L];
+	float q2_0 = q2[L];
+
+	// store domain of histogram
+	int dt_max = 16384;
+	int dt_min = -200;
+	int q2_max = 300;
+	int q2_min = -200;
+	int Dt = dt_max - dt_min;
+	int Dq = q2_max - q2_min;
+	if(Dq < hsz.x){			// make sure the median doesn't have too many bins
+		hsz.x = Dq;
+	}
+
+	// calculate width of histogram bins
+	dim3 bw;
+	bw.x = Dq / (hsz.x - 1);
+	bw.y = Dt / (hsz.y - 1);
+
+	// calculate histogram indices
+	uint X = (q2_0 - q2_min) / bw.x;
+	uint Y = (dt_0 - dt_min) / bw.y;
+	uint M = m.x * X + m.y * Y;
+
+	// update histogram
+	atomicAdd(hist + M, 1);
+
+}
+
 void calc_quartiles(float * q1, float * q2, float * q3, float * dt, float * gm, float * tmp, dim3 sz, dim3 ksz){
 
 	vector<float * > q;

@@ -9,7 +9,7 @@ namespace img {
 
 namespace dspk {
 
-void denoise(buf * data_buf, float med_dev, float std_dev, uint Niter){
+void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
 
 	buf * db = data_buf;
 
@@ -98,7 +98,7 @@ void denoise(buf * data_buf, float med_dev, float std_dev, uint Niter){
 			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
 			calc_quartiles(q1_d, q2_d, q3_d, dt_d, gm_d, tmp_d, sz, ksz);
-			calc_gm<<<blocks, threads>>>(q1_d, q2_d, q3_d, dt_d, gm_d, newBad_d, sz, ksz, med_dev);
+//			calc_gm<<<blocks, threads>>>(q1_d, q2_d, q3_d, dt_d, gm_d, newBad_d, sz, ksz, med_dev);
 
 
 			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
@@ -196,7 +196,7 @@ void denoise(buf * data_buf, float med_dev, float std_dev, uint Niter){
 
 }
 
-void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float med_dev, float std_dev, uint k_sz, uint Niter){
+void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, const np::ndarray & hist, float tmin, float tmax, uint hsx, uint hsy, uint k_sz, uint Niter){
 
 	// shape of input data
 	dim3 sz;
@@ -208,6 +208,7 @@ void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float 
 	st.z = data.get_strides()[0] / sizeof(float);
 	st.y = data.get_strides()[1] / sizeof(float);
 	st.x = data.get_strides()[2] / sizeof(float);
+	dim3 hsz(hsx, hsy, 0);
 
 	// extract float data from numpy array
 	float * dt = (float *) data.get_data();
@@ -215,54 +216,55 @@ void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float 
 
 	uint n_threads = 1;
 
-	buf * db = new buf(dt, gm, sz, k_sz, n_threads);
+	buf * db = new buf(dt, gm, sz, k_sz, hsz, n_threads);
 
-	denoise(db, med_dev, std_dev, Niter);
-
-}
-
-np::ndarray denoise_fits_file(py::str path, float med_dev, float std_dev, uint k_sz, uint Niter){
-
-
-	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
-//	string cpath = "/kso/iris_l2_20141129_000738_3860009154_raster_t000_r00000.fits";
-
-	uint n_threads = 1;
-	uint max_sz = pow(2,30);	// 1 GB
-
-	buf * db = new buf(cpath, max_sz, k_sz, n_threads);
-
-	denoise(db, med_dev, std_dev, Niter);
-
-	py::object own = py::object();
-	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);
-	py::tuple stride = py::make_tuple(db->sb.z, db->sb.y, db->sb.x);
-	np::dtype dtype = np::dtype::get_builtin<float>();
-
-	return np::from_data(db->dt, dtype, shape, stride, own);
+	denoise(db, tmin, tmax, Niter);
 
 }
 
-np::ndarray denoise_fits_file_quartiles(const np::ndarray & q1, const np::ndarray & q2, const np::ndarray & q3, uint k_sz){
+//np::ndarray denoise_fits_file(py::str path, float med_dev, float std_dev, uint k_sz, uint Niter){
+//
+//
+//	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
+////	string cpath = "/kso/iris_l2_20141129_000738_3860009154_raster_t000_r00000.fits";
+//
+//	uint n_threads = 1;
+//	uint max_sz = pow(2,30);	// 1 GB
+//
+//	buf * db = new buf(cpath, max_sz, k_sz, n_threads);
+//
+//	denoise(db, med_dev, std_dev, Niter);
+//
+//	py::object own = py::object();
+//	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);
+//	py::tuple stride = py::make_tuple(db->sb.z, db->sb.y, db->sb.x);
+//	np::dtype dtype = np::dtype::get_builtin<float>();
+//
+//	return np::from_data(db->dt, dtype, shape, stride, own);
+//
+//}
+
+np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2, const np::ndarray & hist, uint hsx, uint hsy, uint k_sz){
 
 	uint Niter = 1;
 
 	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
 //	string cpath = "/kso/iris_l2_20141129_000738_3860009154_raster_t000_r00000.fits";
 
+	dim3 hsz(hsx, hsy, 0);
+
 	uint n_threads = 1;
 	uint max_sz = pow(2,30);	// 1 GB
 
-	buf * db = new buf(cpath, max_sz, k_sz, n_threads);
-	db->q1 = (float *)q1.get_data();
+	buf * db = new buf(cpath, max_sz, k_sz, hsz, n_threads);
 	db->q2 = (float *)q2.get_data();
-	db->q3 = (float *)q3.get_data();
+	db->ht = (float *)hist.get_data();
 
-	float med_dev = 1000.0f;
-	float std_dev = 1000.0f;
+	float tmax = 99.9;
+	float tmin = 0.01;
 
 
-	denoise(db, med_dev, std_dev, Niter);
+	denoise(db, tmin, tmax, Niter);
 
 	py::object own = py::object();
 	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);

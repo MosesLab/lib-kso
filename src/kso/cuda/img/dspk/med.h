@@ -22,7 +22,7 @@ void calc_quartiles(float * q1, float * q2, float * q3, float * dt, float * gm, 
 
 __global__ void calc_sep_quartile(float * q_out, float * q_in, float * gm, dim3 sz, dim3 ksz, dim3 axis, uint quartile);
 
-__global__ void calc_median_hist(float * hist, float * q2, float * dt, float * gm, dim3 sz, dim3 ksz, )
+//__global__ void calc_median_hist(float * hist, float * q2, float * dt, float * gm, dim3 sz, dim3 ksz, )
 
 }
 

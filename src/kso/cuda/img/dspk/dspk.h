@@ -33,11 +33,11 @@ namespace img {
 
 namespace dspk {
 
-void denoise(buf * data_buf, float med_dev, float std_dev, uint Niter);
+void denoise(buf * data_buf,  float tmax, float tmin, uint Niter);
 void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, float med_dev, float std_dev, uint k_sz, uint Niter);
 
 np::ndarray denoise_fits_file(py::str path, float med_dev, float std_dev, uint k_sz, uint Niter);
-np::ndarray denoise_fits_file_quartiles(const np::ndarray & q1, const np::ndarray & q2, const np::ndarray & q3, uint k_sz);
+np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2, const np::ndarray & hist, uint hsx, uint hsy, uint k_sz);
 
 
 
