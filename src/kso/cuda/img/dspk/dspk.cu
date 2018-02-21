@@ -15,7 +15,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 
 	uint ksz1 = db->ksz;
-	dim3 ksz(ksz1, ksz1, ksz1);
+	dim3 ksz(3, 5, 25);
 
 	float * dt = db->dt;
 //	float * q1 = db->q1;
@@ -111,7 +111,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			calc_quartile(q2_d, dt_d, gm_d, tmp_d, sz, ksz, 2);
 			calc_hist<<<blocks, threads>>>(ht_d, dt_d, q2_d, sz, hsz);
 			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
-			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, cs_d, hsz, tmin, tmax);
+			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
 			calc_gm<<<blocks,threads>>>(gm_d, dt_d, q2_d, t0_d, t1_d, sz, hsz);
 
 
@@ -287,8 +287,8 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	db->t0 = (float *)t0.get_data();
 	db->t1 = (float *)t1.get_data();
 
-	float tmax = 0.9999;
-	float tmin = 0.0001;
+	float tmax = 0.99;
+	float tmin = 0.01;
 
 
 	denoise(db, tmin, tmax, Niter);

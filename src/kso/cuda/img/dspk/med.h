@@ -25,7 +25,7 @@ const int Dt = dt_max - dt_min;
 
 __global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz);
 
-__global__ void calc_thresh(float * t0, float * t1, float * cs, dim3 hsz, float T0, float T1);
+__global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, dim3 hsz, float T0, float T1);
 
 __global__ void calc_cumsum(float * cs, float * hist, dim3 hsz);
 
@@ -36,6 +36,7 @@ void calc_quartile(float * q, float * dt, float * gm, float * tmp, dim3 sz, dim3
 void calc_quartiles(float * q1, float * q2, float * q3, float * dt, float * gm, float * tmp, dim3 sz, dim3 ksz);
 
 __global__ void calc_sep_quartile(float * q_out, float * q_in, float * gm, dim3 sz, dim3 ksz, dim3 axis, uint quartile);
+__global__ void calc_tot_quartile(float * q, float * dt, float * gm, dim3 sz, dim3 ksz, uint quartile);
 
 __global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz);
 

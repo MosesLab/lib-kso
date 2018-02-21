@@ -47,8 +47,7 @@ print(cuda_elapsed)
 
 # q1.resize(dt.shape)
 q2.resize(dt.shape)
-# q3.resize(dt.shape)
-
+# q3.resize(dt.shape)t
 dt_flat = dt.flatten()
 # q1_flat = q1.flatten()
 q2_flat = q2.flatten()
@@ -75,15 +74,18 @@ q2_flat = q2.flatten()
 # plt.hist2d(q2_flat, q1_flat - q2_flat, bins=100, norm=colors.SymLogNorm(linthresh=1))
 
 plt.figure()
-plt.hist2d(q2_flat, dt_flat, bins=[400,2000], norm=colors.SymLogNorm(linthresh=1))
+plt.hist2d(q2_flat, dt_flat, bins=[500,4096], norm=colors.SymLogNorm(linthresh=1))
+plt.colorbar()
 
 plt.figure()
-plt.imshow(hist, norm=colors.SymLogNorm(linthresh=1))
+plt.imshow(hist, norm=colors.SymLogNorm(linthresh=1), origin='lower')
 plt.plot(t0)
 plt.plot(t1)
+plt.colorbar()
 
 plt.figure()
 plt.imshow(cumsum, norm=colors.SymLogNorm(linthresh=1))
+plt.colorbar()
 
 
 fig, ax = plt.subplots(1, 1)
