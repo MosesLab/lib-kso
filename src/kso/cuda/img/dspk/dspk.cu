@@ -9,7 +9,7 @@ namespace img {
 
 namespace dspk {
 
-void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
+void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 	buf * db = data_buf;
 
@@ -18,9 +18,13 @@ void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
 	dim3 ksz(ksz1, ksz1, ksz1);
 
 	float * dt = db->dt;
-	float * q1 = db->q1;
+//	float * q1 = db->q1;
 	float * q2 = db->q2;
-	float * q3 = db->q3;
+//	float * q3 = db->q3;
+	float * ht = db->ht;
+	float * cs = db->cs;
+	float * t0 = db->t0;
+	float * t1 = db->t1;
 	uint * newBad = db->newBad;
 
 	float * dt_d = db->dt_d;
@@ -29,7 +33,13 @@ void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
 	float * nsd_d = db->nsd_d;
 	float * tmp_d = db->tmp_d;
 	float * norm_d = db->norm_d;
+	float * ht_d = db->ht_d;
+	float * cs_d = db->cs_d;
+	float * t0_d = db->t0_d;
+	float * t1_d = db->t1_d;
 	uint * newBad_d = db->newBad_d;
+
+	dim3 hsz = db->hsz;
 
 	uint num_strides = db->S->num_strides;
 	uint * A = db->S->A;
@@ -49,9 +59,9 @@ void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
 
 	cout << num_strides << endl;
 
-	float * q1_d = gdev_d;
+//	float * q1_d = gdev_d;
 	float * q2_d = nsd_d;
-	float * q3_d = norm_d;
+//	float * q3_d = norm_d;
 
 
 	// loop over chunks
@@ -87,6 +97,7 @@ void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
 
 		// initialize good pixel map
 		kso::img::dspk::init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
+		kso::img::dspk::init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz);
 
 		cout << "Median Filter" << endl;
 
@@ -97,7 +108,14 @@ void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
 			*newBad = 0;	// reset the number of bad pixels found for this iteration
 			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
-			calc_quartiles(q1_d, q2_d, q3_d, dt_d, gm_d, tmp_d, sz, ksz);
+			calc_quartile(q2_d, dt_d, gm_d, tmp_d, sz, ksz, 2);
+			calc_hist<<<blocks, threads>>>(ht_d, dt_d, q2_d, sz, hsz);
+			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
+			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, cs_d, hsz, tmin, tmax);
+			calc_gm<<<blocks,threads>>>(gm_d, dt_d, q2_d, t0_d, t1_d, sz, hsz);
+
+
+//			calc_quartiles(q1_d, q2_d, q3_d, dt_d, gm_d, tmp_d, sz, ksz);
 //			calc_gm<<<blocks, threads>>>(q1_d, q2_d, q3_d, dt_d, gm_d, newBad_d, sz, ksz, med_dev);
 
 
@@ -179,10 +197,14 @@ void denoise(buf * data_buf, float tmax, float tmin, uint Niter){
 		CHECK(cudaDeviceSynchronize());
 
 		// copy back from devicecudaMemcpyDeviceToHost;
-//		CHECK(cudaMemcpy(dt + b[s], gdt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(q1 + b[s], q1_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+//		CHECK(cudaMemcpy(q1 + b[s], q1_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 		CHECK(cudaMemcpy(q2 + b[s], q2_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(q3 + b[s], q3_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+//		CHECK(cudaMemcpy(q3 + b[s], q3_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(ht, ht_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(cs, cs_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(t0, t0_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+		CHECK(cudaMemcpy(t1, t1_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
 
 
 		cout << "Total bad pixels: " << totBad << endl;
@@ -244,7 +266,9 @@ void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, const 
 //
 //}
 
-np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2, const np::ndarray & hist, uint hsx, uint hsy, uint k_sz){
+np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
+		const np::ndarray & hist, const np::ndarray & cumsum, const np::ndarray & t0, const np::ndarray & t1,
+		uint hsx, uint hsy, uint k_sz){
 
 	uint Niter = 1;
 
@@ -259,9 +283,12 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2, const np::ndarra
 	buf * db = new buf(cpath, max_sz, k_sz, hsz, n_threads);
 	db->q2 = (float *)q2.get_data();
 	db->ht = (float *)hist.get_data();
+	db->cs = (float *)cumsum.get_data();
+	db->t0 = (float *)t0.get_data();
+	db->t1 = (float *)t1.get_data();
 
-	float tmax = 99.9;
-	float tmin = 0.01;
+	float tmax = 0.9999;
+	float tmin = 0.0001;
 
 
 	denoise(db, tmin, tmax, Niter);

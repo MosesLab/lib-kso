@@ -14,7 +14,7 @@
 
 #include <cuda.h>
 
-#include "img/dspk/test/test.h"
+//#include "img/dspk/test/test.h"
 #include "instrument/IRIS/test/test.h"
 
 int main(int argc, char **argv);

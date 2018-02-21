@@ -94,7 +94,10 @@ void buf::prep(uint kern_sz, dim3 hist_sz, uint n_threads){
 	CHECK(cudaMalloc((float **) &norm_d, csz3 * sizeof(float)));
 	CHECK(cudaMalloc((float **) &norm_d, csz3 * sizeof(float)));
 	CHECK(cudaMalloc((uint **) &newBad_d, sizeof(uint)));
-	CHECK(cudaMalloc((uint **) &ht_d, hsz3 * sizeof(uint)));
+	CHECK(cudaMalloc((float **) &ht_d, hsz3 * sizeof(float)));
+	CHECK(cudaMalloc((float **) &cs_d, hsz3 * sizeof(float)));
+	CHECK(cudaMalloc((float **) &t0_d, hsz.x * sizeof(float)));
+	CHECK(cudaMalloc((float **) &t1_d, hsz.x * sizeof(float)));
 
 	// calculate offset for kernel
 	ks2 = ksz / 2;

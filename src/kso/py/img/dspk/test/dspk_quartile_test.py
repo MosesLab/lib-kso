@@ -25,31 +25,34 @@ import time
 print(os.getcwd())
 
 
-ksz = 9
+ksz = 5
 
 
 q2 = np.empty([1024, 1024, 1024], dtype=np.float32)
 
 hsx = 1024
-hsy = 1024
-hist = np.empty([hsx, hsy], dtype=np.uint)
+hsy = 4096
+hist = np.empty([hsy, hsx], dtype=np.float32)
+cumsum = np.empty([hsy, hsx], dtype=np.float32)
+t0 = np.empty([hsx], dtype=np.float32)
+t1 = np.empty([hsx], dtype=np.float32)
 
 
 print('Cuda Test')
 cuda_start = time.time()
-dt = dspk_cuda.denoise_fits_file_quartiles(q2,  ksz)
+dt = dspk_cuda.denoise_fits_file_quartiles(q2,  hist, cumsum, t0, t1, hsx, hsy, ksz)
 cuda_end = time.time()
 cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
 
-q1.resize(dt.shape)
+# q1.resize(dt.shape)
 q2.resize(dt.shape)
-q3.resize(dt.shape)
+# q3.resize(dt.shape)
 
 dt_flat = dt.flatten()
-q1_flat = q1.flatten()
+# q1_flat = q1.flatten()
 q2_flat = q2.flatten()
-q3_flat = q3.flatten()
+# q3_flat = q3.flatten()
 
 # q1_flat = q1_flat[q2_flat > 0]
 # q3_flat = q3_flat[q2_flat > 0]
@@ -74,6 +77,13 @@ q3_flat = q3.flatten()
 plt.figure()
 plt.hist2d(q2_flat, dt_flat, bins=[400,2000], norm=colors.SymLogNorm(linthresh=1))
 
+plt.figure()
+plt.imshow(hist, norm=colors.SymLogNorm(linthresh=1))
+plt.plot(t0)
+plt.plot(t1)
+
+plt.figure()
+plt.imshow(cumsum, norm=colors.SymLogNorm(linthresh=1))
 
 
 fig, ax = plt.subplots(1, 1)

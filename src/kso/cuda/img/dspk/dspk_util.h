@@ -36,10 +36,13 @@ public:
 	dim3 sb;		// array stride in bytes
 	uint sz3, csz3, hsz3;
 	uint ksz, ks2;	// kernel size, kernel half-size
-	float * dt, * gm, * ht;		// host memory
+	float * dt, * gm;		// host memory
 	float * q1, * q2, * q3;
-	float * dt_d, * gm_d, * ht_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
+	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
 	uint *newBad, *newBad_d;				// more device memory
+	float * ht, * ht_d;		// histogram memory
+	float * cs, * cs_d;		// cumsum memory
+	float * t0, * t1, * t0_d, * t1_d;		// arrays of thresholds for each median
 
 
 	dim3 threads;		// number of threads per block
