@@ -9,7 +9,7 @@ namespace dspk {
 
 using namespace std;
 
-__global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz){
+__global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz, uint ndim){
 
 	// retrieve coordinates from thread and block id.
 	uint x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -22,6 +22,8 @@ __global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * 
 	n.y = n.x * sz.x;
 	n.z = n.y * sz.y;
 
+	uint sz3 = sz.x * sz.y * sz.z;
+
 	// compute histogram strides
 	dim3 m;
 	m.x = 1;
@@ -31,27 +33,46 @@ __global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * 
 	// overall index
 	uint L = n.z * z + n.y * y + n.x * x;
 
-	// load median and intensity at this point
-	float dt_0 = dt[L];
-	float q2_0 = q2[L];
-
-
 	// calculate width of histogram bins
 	dim3 bw;
 	bw.x = 1;
 	bw.y = Dt / (hsz.y - 1);
 	bw.z = 0;
 
-	// calculate histogram indices
-	uint X = (((int) q2_0) / bw.x) %  hsz.x;;
-	uint Y = (dt_0 - dt_min) / bw.y;
+	uint votes = 0;
 
-	if((((uint) t0[X]) >= Y) or (((uint) t1[X]) <= Y)){
+	for(uint ax = 0; ax < ndim; ax++){
+
+		uint Lx = L + ax * sz3;
+
+		// load median and intensity at this point
+		float dt_0 = dt[Lx];
+		float q2_0 = q2[Lx];
+
+
+
+
+		// calculate histogram indices
+		uint X = ((((int) q2_0) / bw.x) %  hsz.x) + (ax * hsz.x);
+		uint Y = (dt_0 - dt_min) / bw.y;
+
+		if((((uint) t0[X]) >= Y) or (((uint) t1[X]) <= Y)){
+
+			votes++;
+
+		}
+
+	}
+
+	if(votes >= ndim){
 
 		gm[L] = 0.0f;
 		dt[L] = 0.0f;
 
+
 	}
+
+
 
 
 }

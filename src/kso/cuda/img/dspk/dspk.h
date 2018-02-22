@@ -33,6 +33,11 @@ namespace img {
 
 namespace dspk {
 
+const dim3 xhat(1,0,0);
+const dim3 yhat(0,1,0);
+const dim3 zhat(0,0,1);
+const dim3 uv[3] = {xhat, yhat, zhat};
+
 void denoise(buf * data_buf,  float tmax, float tmin, uint Niter);
 void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, const np::ndarray & hist, float tmin, float tmax, uint hsx, uint hsy, uint k_sz, uint Niter);
 

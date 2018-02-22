@@ -29,6 +29,7 @@ namespace dspk {
 
 class buf {
 public:
+	uint ndim;
 	float mem_fill;
 	dim3 sz, csz;	// shape of original data and chunked data
 	dim3 st, cst;	// array stride of original data and chunked data'
@@ -37,8 +38,10 @@ public:
 	uint sz3, csz3, hsz3;
 	uint ksz, ks2;	// kernel size, kernel half-size
 	float * dt, * gm;		// host memory
-	float * q1, * q2, * q3;
-	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
+	float * q2;
+	float * dt_d, * gm_d;
+	float * q2_d;
+//	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
 	uint *newBad, *newBad_d;				// more device memory
 	float * ht, * ht_d;		// histogram memory
 	float * cs, * cs_d;		// cumsum memory

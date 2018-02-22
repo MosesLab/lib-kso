@@ -37,6 +37,8 @@ buf::buf(std::string path, uint max_sz, uint kern_sz, dim3 hist_sz, uint n_threa
 
 void buf::prep(uint kern_sz, dim3 hist_sz, uint n_threads){
 
+	ndim = 3;
+
 	mem_fill = 0.5;
 
 	sz3 = sz.x * sz.y * sz.z;
@@ -88,16 +90,17 @@ void buf::prep(uint kern_sz, dim3 hist_sz, uint n_threads){
 	// allocate memory on device
 	CHECK(cudaMalloc((float **) &dt_d, csz3 * sizeof(float)));
 	CHECK(cudaMalloc((float **) &gm_d, csz3 * sizeof(float)));
-	CHECK(cudaMalloc((float **) &gdev_d, csz3 * sizeof(float)));
-	CHECK(cudaMalloc((float **) &nsd_d, csz3 * sizeof(float)));
-	CHECK(cudaMalloc((float **) &tmp_d, csz3 * sizeof(float)));
-	CHECK(cudaMalloc((float **) &norm_d, csz3 * sizeof(float)));
-	CHECK(cudaMalloc((float **) &norm_d, csz3 * sizeof(float)));
+	CHECK(cudaMalloc((float **) &q2_d, ndim * csz3 * sizeof(float)));
+//	CHECK(cudaMalloc((float **) &gdev_d, csz3 * sizeof(float)));
+//	CHECK(cudaMalloc((float **) &nsd_d, csz3 * sizeof(float)));
+//	CHECK(cudaMalloc((float **) &tmp_d, csz3 * sizeof(float)));
+//	CHECK(cudaMalloc((float **) &norm_d, csz3 * sizeof(float)));
+//	CHECK(cudaMalloc((float **) &norm_d, csz3 * sizeof(float)));
 	CHECK(cudaMalloc((uint **) &newBad_d, sizeof(uint)));
-	CHECK(cudaMalloc((float **) &ht_d, hsz3 * sizeof(float)));
-	CHECK(cudaMalloc((float **) &cs_d, hsz3 * sizeof(float)));
-	CHECK(cudaMalloc((float **) &t0_d, hsz.x * sizeof(float)));
-	CHECK(cudaMalloc((float **) &t1_d, hsz.x * sizeof(float)));
+	CHECK(cudaMalloc((float **) &ht_d, ndim * hsz3 * sizeof(float)));
+	CHECK(cudaMalloc((float **) &cs_d, ndim * hsz3 * sizeof(float)));
+	CHECK(cudaMalloc((float **) &t0_d, ndim * hsz.x * sizeof(float)));
+	CHECK(cudaMalloc((float **) &t1_d, ndim * hsz.x * sizeof(float)));
 
 	// calculate offset for kernel
 	ks2 = ksz / 2;

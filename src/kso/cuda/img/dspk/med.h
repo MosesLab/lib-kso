@@ -23,7 +23,7 @@ const int dt_max = 16384;
 const int dt_min = -200;
 const int Dt = dt_max - dt_min;
 
-__global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz);
+__global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz, uint ndim);
 
 __global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, dim3 hsz, float T0, float T1);
 

@@ -13,8 +13,9 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 	buf * db = data_buf;
 
+	uint ndim = db->ndim;
 
-	uint ksz1 = db->ksz;
+//	uint ksz1 = db->ksz;
 	dim3 ksz(3, 5, 25);
 
 	float * dt = db->dt;
@@ -29,10 +30,11 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 	float * dt_d = db->dt_d;
 	float * gm_d = db->gm_d;
-	float * gdev_d = db->gdev_d;
-	float * nsd_d = db->nsd_d;
-	float * tmp_d = db->tmp_d;
-	float * norm_d = db->norm_d;
+	float * q2_d = db->q2_d;
+//	float * gdev_d = db->gdev_d;
+//	float * nsd_d = db->nsd_d;
+//	float * tmp_d = db->tmp_d;
+//	float * norm_d = db->norm_d;
 	float * ht_d = db->ht_d;
 	float * cs_d = db->cs_d;
 	float * t0_d = db->t0_d;
@@ -40,6 +42,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	uint * newBad_d = db->newBad_d;
 
 	dim3 hsz = db->hsz;
+	uint hsz3 = db->hsz3;
 
 	uint num_strides = db->S->num_strides;
 	uint * A = db->S->A;
@@ -52,6 +55,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	uint * m = db->S->m;
 	uint * b_d = db->S->b_d;
 
+	uint sz3;
 	dim3 sz;
 	dim3 threads, blocks;
 
@@ -59,9 +63,6 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 	cout << num_strides << endl;
 
-//	float * q1_d = gdev_d;
-	float * q2_d = nsd_d;
-//	float * q3_d = norm_d;
 
 
 	// loop over chunks
@@ -108,11 +109,30 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			*newBad = 0;	// reset the number of bad pixels found for this iteration
 			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
-			calc_quartile(q2_d, dt_d, gm_d, tmp_d, sz, ksz, 2);
-			calc_hist<<<blocks, threads>>>(ht_d, dt_d, q2_d, sz, hsz);
-			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
-			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
-			calc_gm<<<blocks,threads>>>(gm_d, dt_d, q2_d, t0_d, t1_d, sz, hsz);
+			for(uint ax = 0; ax < ndim; ax++){
+
+				// move pointer to correct place in memory
+				float * q2x_d = q2_d + ax * sz3;
+				float * htx_d = ht_d + ax * hsz3;
+				float * csx_d = cs_d + ax * hsz3;
+				float * t0x_d = t0_d + ax * hsz.x;
+				float * t1x_d = t1_d + ax * hsz.x;
+
+
+				calc_sep_quartile<<<blocks, threads>>>(q2x_d, dt_d, gm_d, sz, ksz, uv[ax], 2);
+				calc_hist<<<blocks, threads>>>(htx_d, dt_d, q2x_d, sz, hsz);
+				calc_cumsum<<<1,hsz.x>>>(csx_d, htx_d, hsz);
+				calc_thresh<<<1,hsz.x>>>(t0x_d, t1x_d, htx_d, csx_d, hsz, tmin, tmax);
+
+			}
+
+			calc_gm<<<blocks,threads>>>(gm_d, dt_d, q2_d, t0_d, t1_d, sz, hsz, ndim);
+
+//			calc_quartile(q2_d, dt_d, gm_d, tmp_d, sz, ksz, 2);
+//			calc_hist<<<blocks, threads>>>(ht_d, dt_d, q2_d, sz, hsz);
+//			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
+//			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
+//			calc_gm<<<blocks,threads>>>(gm_d, dt_d, q2_d, t0_d, t1_d, sz, hsz);
 
 
 //			calc_quartiles(q1_d, q2_d, q3_d, dt_d, gm_d, tmp_d, sz, ksz);
