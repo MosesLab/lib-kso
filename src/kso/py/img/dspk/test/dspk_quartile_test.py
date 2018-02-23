@@ -25,7 +25,7 @@ import time
 print(os.getcwd())
 
 
-ksz = 5
+ksz = 25
 
 
 q2_3 = np.empty([1024, 1024, 1024], dtype=np.float32)
@@ -71,6 +71,9 @@ for ax in range(0,ndim):
     plt.imshow(hist, norm=colors.SymLogNorm(linthresh=1), origin='lower')
     plt.plot(t0)
     plt.plot(t1)
+
+    plt.figure()
+    plt.imshow(q2_3[ax, 53,])
     # plt.colorbar()
 
     # plt.figure()
@@ -80,6 +83,7 @@ for ax in range(0,ndim):
 
 fig, ax = plt.subplots(1, 1)
 tracker = IndexTracker(ax, dt, 0)
+# tracker = IndexTracker(ax, q2_3[0,], 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
 

@@ -33,6 +33,8 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 	// overall index
 	uint L = n.z * z + n.y * y + n.x * x;
 
+	if (gm[L] == 0.0) return;
+
 	// calculate width of histogram bins
 	dim3 bw;
 	bw.x = 1;
@@ -41,12 +43,13 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 
 	uint votes = 0;
 
+	float dt_0 = dt[L];
+
 	for(uint ax = 0; ax < ndim; ax++){
 
 		uint Lx = L + ax * sz3;
 
 		// load median and intensity at this point
-		float dt_0 = dt[Lx];
 		float q2_0 = q2[Lx];
 
 
@@ -64,7 +67,7 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 
 	}
 
-	if(votes >= (ndim - 1)){
+	if(votes >= (ndim)){
 
 		gm[L] = 0.0f;
 		dt[L] = 0.0f;
@@ -224,7 +227,7 @@ __global__ void calc_hist(float * hist, float * dt, float * q2, dim3 sz, dim3 hs
 	uint Y = (dt_0 - dt_min) / bw.y;
 	uint M = m.x * X + m.y * Y;
 
-	uint Y_0 = (0 - dt_min) / bw.y;
+//	uint Y_0 = (0 - dt_min) / bw.y;
 
 	// update histogram
 	atomicAdd(hist + M, 1);

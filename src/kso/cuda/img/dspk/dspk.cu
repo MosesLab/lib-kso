@@ -16,8 +16,8 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	uint ndim = db->ndim;
 
 	uint ksz1 = db->ksz;
-//	dim3 ksz(3, 5, 25);
-	dim3 ksz(ksz1,ksz1,ksz1);
+	dim3 ksz(25, 5, 5);
+//	dim3 ksz(ksz1,ksz1,ksz1);
 
 	float * dt = db->dt;
 //	float * q1 = db->q1;
@@ -83,6 +83,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 		sz.x = db->csz.x;
 		sz.y = db->csz.y;
 		sz.z = db->S->L[s];
+		sz3 = sz.x * sz.y * sz.z;
 
 		// calculate number of threads in each dimension
 		threads.x = sz.x;
@@ -239,6 +240,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 
 		cout << "Total bad pixels: " << totBad << endl;
+		cout << "Percentage bad pixels: " << ((float) totBad) / ((float) sz3) << endl;
 
 	}
 
@@ -301,7 +303,7 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 		const np::ndarray & hist, const np::ndarray & cumsum, const np::ndarray & t0, const np::ndarray & t1,
 		uint hsx, uint hsy, uint k_sz){
 
-	uint Niter = 1;
+	uint Niter = 10;
 
 	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
 //	string cpath = "/kso/iris_l2_20141129_000738_3860009154_raster_t000_r00000.fits";
