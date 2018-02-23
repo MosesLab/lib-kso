@@ -47,12 +47,13 @@ cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
 
 dt_flat = dt.flatten()
-q2_3.resize((3,) + dt.shape)
+q2_3.resize((ndim,) + dt.shape)
+print(q2_3.shape)
 
 for ax in range(0,ndim):
 
 
-    q2 = q2_3[ax,:,:]
+    q2 = q2_3[ax,:, :, :]
     hist = hist_3[ax, :, :]
     cumsum = cumsum_3[ax, :, :]
     t0 = t0_3[ax, :]
@@ -70,11 +71,11 @@ for ax in range(0,ndim):
     plt.imshow(hist, norm=colors.SymLogNorm(linthresh=1), origin='lower')
     plt.plot(t0)
     plt.plot(t1)
-    plt.colorbar()
+    # plt.colorbar()
 
-    plt.figure()
-    plt.imshow(cumsum, norm=colors.SymLogNorm(linthresh=1))
-    plt.colorbar()
+    # plt.figure()
+    # plt.imshow(cumsum, norm=colors.SymLogNorm(linthresh=1))
+    # plt.colorbar()
 
 
 fig, ax = plt.subplots(1, 1)

@@ -9,7 +9,7 @@ namespace dspk {
 
 using namespace std;
 
-__global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz, uint ndim){
+__global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz, uint ndim){
 
 	// retrieve coordinates from thread and block id.
 	uint x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -64,11 +64,11 @@ __global__ void calc_gm(float * gm, float * dt, float * q2, float * t0, float * 
 
 	}
 
-	if(votes >= ndim){
+	if(votes >= (ndim - 1)){
 
 		gm[L] = 0.0f;
 		dt[L] = 0.0f;
-
+		atomicAdd(new_bad, 1);
 
 	}
 
@@ -492,7 +492,7 @@ __global__ void calc_tot_quartile(float * q, float * dt, float * gm, dim3 sz, di
 
 }
 
-__global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz){
+__global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz, uint ndim){
 
 	uint i = threadIdx.x;
 	uint j = blockIdx.x;
@@ -502,14 +502,22 @@ __global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz){
 	m.y = m.x * hsz.x;
 	m.z = 0;
 
+	uint hsz3 = hsz.x * hsz.y;
+
 	uint L = i * m.x + j * m.y;
 
-	if(j == 0){
-		t0[i] = 0.0f;
-		t1[i] = 0.0f;
+	for(uint ax = 0; ax < ndim; ax++){
+
+		if(j == 0){
+			t0[i + ax * hsz.x] = 0.0f;
+			t1[i + ax * hsz.x] = 0.0f;
+		}
+
+		hist[L + ax * hsz3] = 0;
+
 	}
 
-	hist[L] = 0;
+
 
 }
 

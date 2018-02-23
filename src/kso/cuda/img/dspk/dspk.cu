@@ -15,8 +15,9 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 	uint ndim = db->ndim;
 
-//	uint ksz1 = db->ksz;
-	dim3 ksz(3, 5, 25);
+	uint ksz1 = db->ksz;
+//	dim3 ksz(3, 5, 25);
+	dim3 ksz(ksz1,ksz1,ksz1);
 
 	float * dt = db->dt;
 //	float * q1 = db->q1;
@@ -54,6 +55,9 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	uint * M = db->S->M;
 	uint * m = db->S->m;
 	uint * b_d = db->S->b_d;
+
+	dim3 dsz = db->sz;
+	uint dsz3 = db->sz3;
 
 	uint sz3;
 	dim3 sz;
@@ -98,7 +102,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 		// initialize good pixel map
 		kso::img::dspk::init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
-		kso::img::dspk::init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz);
+		kso::img::dspk::init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz, ndim);
 
 		cout << "Median Filter" << endl;
 
@@ -112,11 +116,17 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			for(uint ax = 0; ax < ndim; ax++){
 
 				// move pointer to correct place in memory
-				float * q2x_d = q2_d + ax * sz3;
+				float * q2x_d = q2_d + ax * dsz3;
 				float * htx_d = ht_d + ax * hsz3;
 				float * csx_d = cs_d + ax * hsz3;
 				float * t0x_d = t0_d + ax * hsz.x;
 				float * t1x_d = t1_d + ax * hsz.x;
+
+				float * q2x = q2 + ax * dsz3;
+				float * htx = ht + ax * hsz3;
+				float * csx = cs + ax * hsz3;
+				float * t0x = t0 + ax * hsz.x;
+				float * t1x = t1 + ax * hsz.x;
 
 
 				calc_sep_quartile<<<blocks, threads>>>(q2x_d, dt_d, gm_d, sz, ksz, uv[ax], 2);
@@ -124,9 +134,15 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 				calc_cumsum<<<1,hsz.x>>>(csx_d, htx_d, hsz);
 				calc_thresh<<<1,hsz.x>>>(t0x_d, t1x_d, htx_d, csx_d, hsz, tmin, tmax);
 
+				CHECK(cudaMemcpy(q2x + b[s], q2x_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+				CHECK(cudaMemcpy(htx, htx_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+				CHECK(cudaMemcpy(csx, csx_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+				CHECK(cudaMemcpy(t0x, t0x_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+				CHECK(cudaMemcpy(t1x, t1x_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+
 			}
 
-			calc_gm<<<blocks,threads>>>(gm_d, dt_d, q2_d, t0_d, t1_d, sz, hsz, ndim);
+			calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, q2_d, t0_d, t1_d, sz, hsz, ndim);
 
 //			calc_quartile(q2_d, dt_d, gm_d, tmp_d, sz, ksz, 2);
 //			calc_hist<<<blocks, threads>>>(ht_d, dt_d, q2_d, sz, hsz);
@@ -218,13 +234,8 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 		// copy back from devicecudaMemcpyDeviceToHost;
 		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-//		CHECK(cudaMemcpy(q1 + b[s], q1_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(q2 + b[s], q2_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-//		CHECK(cudaMemcpy(q3 + b[s], q3_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(ht, ht_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(cs, cs_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(t0, t0_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
-		CHECK(cudaMemcpy(t1, t1_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+
+
 
 
 		cout << "Total bad pixels: " << totBad << endl;
