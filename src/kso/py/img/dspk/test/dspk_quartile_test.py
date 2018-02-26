@@ -63,17 +63,17 @@ for ax in range(0,ndim):
 
 
 
-    plt.figure()
-    plt.hist2d(q2_flat, dt_flat, bins=[500,4096], norm=colors.SymLogNorm(linthresh=1))
-    plt.colorbar()
+    # plt.figure()
+    # plt.hist2d(q2_flat, dt_flat, bins=[500,4096], norm=colors.SymLogNorm(linthresh=1))
+    # plt.colorbar()
 
     plt.figure()
     plt.imshow(hist, norm=colors.SymLogNorm(linthresh=1), origin='lower')
     plt.plot(t0)
     plt.plot(t1)
-
-    plt.figure()
-    plt.imshow(q2_3[ax, 53,])
+    #
+    # plt.figure()
+    # plt.imshow(q2_3[ax, 53,])
     # plt.colorbar()
 
     # plt.figure()

@@ -177,7 +177,7 @@ __global__ void calc_cumsum(float * cs, float * hist, dim3 hsz){
 		uint M = m.x * i + m.y * j;
 
 		cs[M] = cs[M] / sum;
-		hist[M] = hist[M] / sum;
+//		hist[M] = hist[M] / sum;
 
 	}
 

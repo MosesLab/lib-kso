@@ -16,7 +16,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	uint ndim = db->ndim;
 
 	uint ksz1 = db->ksz;
-	dim3 ksz(25, 5, 5);
+	dim3 ksz(25, 25, 25);
 //	dim3 ksz(ksz1,ksz1,ksz1);
 
 	float * dt = db->dt;
@@ -114,6 +114,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			*newBad = 0;	// reset the number of bad pixels found for this iteration
 			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
+			// loop over each axis
 			for(uint ax = 0; ax < ndim; ax++){
 
 				// move pointer to correct place in memory
@@ -303,7 +304,7 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 		const np::ndarray & hist, const np::ndarray & cumsum, const np::ndarray & t0, const np::ndarray & t1,
 		uint hsx, uint hsy, uint k_sz){
 
-	uint Niter = 10;
+	uint Niter = 1;
 
 	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
 //	string cpath = "/kso/iris_l2_20141129_000738_3860009154_raster_t000_r00000.fits";
