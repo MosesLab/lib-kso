@@ -31,7 +31,7 @@ ksz = 25
 q2_3 = np.empty([1024, 1024, 1024], dtype=np.float32)
 
 hsx = 1024
-hsy = 4096
+hsy = 2048
 ndim = 3
 hist_3 = np.empty([ndim, hsy, hsx], dtype=np.float32)
 cumsum_3 = np.empty([ndim, hsy, hsx], dtype=np.float32)

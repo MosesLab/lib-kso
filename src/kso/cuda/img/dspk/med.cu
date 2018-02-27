@@ -37,9 +37,11 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 
 	// calculate width of histogram bins
 	dim3 bw;
-	bw.x = 1;
+	bw.x = Dt / (hsz.x - 1);
 	bw.y = Dt / (hsz.y - 1);
 	bw.z = 0;
+
+
 
 	uint votes = 0;
 
@@ -56,7 +58,7 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 
 
 		// calculate histogram indices
-		uint X = ((((int) q2_0) / bw.x) %  hsz.x) + (ax * hsz.x);
+		uint X = (q2_0 - dt_min) / bw.x;
 		uint Y = (dt_0 - dt_min) / bw.y;
 
 		if((((uint) t0[X]) >= Y) or (((uint) t1[X]) <= Y)){
@@ -218,12 +220,12 @@ __global__ void calc_hist(float * hist, float * dt, float * q2, dim3 sz, dim3 hs
 
 	// calculate width of histogram bins
 	dim3 bw;
-	bw.x = 1;
+	bw.x = Dt / (hsz.x - 1);
 	bw.y = Dt / (hsz.y - 1);
 	bw.z = 0;
 
 	// calculate histogram indices
-	uint X = (((int) q2_0) / bw.x) %  hsz.x;
+	uint X = (q2_0 - dt_min) / bw.x;
 	uint Y = (dt_0 - dt_min) / bw.y;
 	uint M = m.x * X + m.y * Y;
 
