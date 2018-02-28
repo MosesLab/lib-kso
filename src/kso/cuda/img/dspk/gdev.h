@@ -21,9 +21,9 @@ namespace img {
 
 namespace dspk {
 
-const float ksig_l = 4.0;
-const float ksig_y = 0.25;
-const float ksig_t = 0.25;
+const float ksig_l = 8.0;
+const float ksig_y = 1.0;
+const float ksig_t = 1.0;
 
 const float kfac_l = 1.0;
 const float kfac_y = 1.0;

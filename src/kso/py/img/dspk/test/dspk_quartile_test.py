@@ -25,7 +25,7 @@ import time
 print(os.getcwd())
 
 
-ksz = 15
+ksz = 25
 
 
 q2_3 = np.empty([1024, 1024, 1024], dtype=np.float32)

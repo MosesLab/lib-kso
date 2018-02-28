@@ -178,7 +178,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
 			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
 
-			tmax = 0.985;
+			tmax = 0.99;
 			tmin = 0.01;
 
 			// initialize good pixel map
@@ -336,7 +336,7 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	db->t0 = (float *)t0.get_data();
 	db->t1 = (float *)t1.get_data();
 
-	float tmax = 0.95;
+	float tmax = 0.97;
 	float tmin = 0.01;
 
 

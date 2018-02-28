@@ -152,7 +152,8 @@ __global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, di
 
 	// march along y and find value of threshold
 	bool f1 = false;
-	for(int j = 0; j < hsz.y; j++){
+	int j;
+	for(j = 0; j < hsz.y; j++){
 
 		// linear index in histogram
 		uint M = m.x * i + m.y * j;
@@ -169,13 +170,15 @@ __global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, di
 			if(cs[M] >= T1){
 
 				t1[i] = j + 1;
-				break;
+				return;
 
 			}
 
 		}
 
+
 	}
+	t1[i] = j;
 
 	//	for(uint j = 0; j < hsz.y; j++){
 	//
