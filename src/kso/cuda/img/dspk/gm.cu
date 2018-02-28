@@ -104,13 +104,13 @@ __global__ void init_gm(float * gm, float * dt, dim3 sz){
 
 
 
-	gm[n_t * t + n_y * y + n_l * l] = 1.0f;	// update good pixel map
+//	gm[n_t * t + n_y * y + n_l * l] = 1.0f;	// update good pixel map
 
-//	if(dt[n_t * t + n_y * y + n_l * l] < 0.0){
-//		gm[n_t * t + n_y * y + n_l * l] = 0.0;	// update good pixel map
-//	} else {
-//		gm[n_t * t + n_y * y + n_l * l] = 1.0;	// update good pixel map
-//	}
+	if(dt[n_t * t + n_y * y + n_l * l] == -200.0f){
+		gm[n_t * t + n_y * y + n_l * l] = 0.0f;	// update good pixel map
+	} else {
+		gm[n_t * t + n_y * y + n_l * l] = 1.0f;	// update good pixel map
+	}
 
 
 

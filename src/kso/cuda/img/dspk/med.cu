@@ -9,7 +9,62 @@ namespace dspk {
 
 using namespace std;
 
-__global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz, uint ndim){
+__global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz){
+
+	// retrieve coordinates from thread and block id.
+	uint x = blockIdx.x * blockDim.x + threadIdx.x;
+	uint y = blockIdx.y * blockDim.y + threadIdx.y;
+	uint z = blockIdx.z * blockDim.z + threadIdx.z;
+
+	// compute stride sizes
+	dim3 n;
+	n.x = 1;
+	n.y = n.x * sz.x;
+	n.z = n.y * sz.y;
+
+
+	// compute histogram strides
+	dim3 m;
+	m.x = 1;
+	m.y = m.x * hsz.x;
+	m.z = 0;
+
+	// overall index
+	uint L = n.z * z + n.y * y + n.x * x;
+
+	if (gm[L] == 0.0) return;
+
+	// calculate width of histogram bins
+	dim3 bw;
+	bw.x = Dt / (hsz.x - 1);
+	bw.y = Dt / (hsz.y - 1);
+	bw.z = 0;
+
+
+	float dt_0 = dt[L];
+
+	// load median and intensity at this point
+	float q2_0 = q2[L];
+
+
+	// calculate histogram indices
+	uint X = (q2_0 - dt_min) / bw.x;
+	uint Y = (dt_0 - dt_min) / bw.y;
+
+	if((((uint) t0[X]) >= Y) or (((uint) t1[X]) <= Y)){
+
+		gm[L] = 0.0f;
+		dt[L] = 0.0f;
+		atomicAdd(new_bad, 1);
+
+	}
+
+}
+
+
+
+
+__global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, float * t0, float * t1, dim3 sz, dim3 hsz, uint nmet){
 
 	// retrieve coordinates from thread and block id.
 	uint x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -41,13 +96,14 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 	bw.y = Dt / (hsz.y - 1);
 	bw.z = 0;
 
-
+	uint wgt[4] = {1, 1, 1, 1};
+	uint tot_wgt = 0;
 
 	uint votes = 0;
 
 	float dt_0 = dt[L];
 
-	for(uint ax = 0; ax < ndim; ax++){
+	for(uint ax = 0; ax < nmet; ax++){
 
 		uint Lx = L + ax * sz3;
 
@@ -63,16 +119,17 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 
 		if((((uint) t0[X]) >= Y) or (((uint) t1[X]) <= Y)){
 
-			votes++;
+			votes += wgt[ax];
 
 		}
+		tot_wgt += wgt[ax];
 
 	}
 
-	if(votes >= (ndim)){
+	if(votes >= (tot_wgt)){
 
 		gm[L] = 0.0f;
-		dt[L] = 0.0f;
+//		dt[L] = 0.0f;
 		atomicAdd(new_bad, 1);
 
 	}
@@ -95,7 +152,7 @@ __global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, di
 
 	// march along y and find value of threshold
 	bool f1 = false;
-	for(uint j = 0; j < hsz.y; j++){
+	for(int j = 0; j < hsz.y; j++){
 
 		// linear index in histogram
 		uint M = m.x * i + m.y * j;
@@ -104,14 +161,14 @@ __global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, di
 			if(cs[M] >= T0){
 
 				f1 = true;
-				t0[i] = j;
+				t0[i] = max(j - 1,0);
 
 			}
 		} else {
 
 			if(cs[M] >= T1){
 
-				t1[i] = j;
+				t1[i] = j + 1;
 				break;
 
 			}
@@ -120,28 +177,28 @@ __global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, di
 
 	}
 
-//	for(uint j = 0; j < hsz.y; j++){
-//
-//		// linear index in histogram
-//		uint M = m.x * i + m.y * j;
-//
-//		if(hist[M] >= 5){
-//			t0[i] = j;
-//			break;
-//		}
-//
-//	}
-//	for(int j = (hsz.y - 1); j >= 0; j = j - 1){
-//
-//		// linear index in histogram
-//		uint M = m.x * i + m.y * j;
-//
-//		if(hist[M] >= 5){
-//			t1[i] = j;
-//			break;
-//		}
-//
-//	}
+	//	for(uint j = 0; j < hsz.y; j++){
+	//
+	//		// linear index in histogram
+	//		uint M = m.x * i + m.y * j;
+	//
+	//		if(hist[M] >= 5){
+	//			t0[i] = j;
+	//			break;
+	//		}
+	//
+	//	}
+	//	for(int j = (hsz.y - 1); j >= 0; j = j - 1){
+	//
+	//		// linear index in histogram
+	//		uint M = m.x * i + m.y * j;
+	//
+	//		if(hist[M] >= 5){
+	//			t1[i] = j;
+	//			break;
+	//		}
+	//
+	//	}
 
 
 }
@@ -179,7 +236,7 @@ __global__ void calc_cumsum(float * cs, float * hist, dim3 hsz){
 		uint M = m.x * i + m.y * j;
 
 		cs[M] = cs[M] / sum;
-//		hist[M] = hist[M] / sum;
+		//		hist[M] = hist[M] / sum;
 
 	}
 
@@ -187,7 +244,7 @@ __global__ void calc_cumsum(float * cs, float * hist, dim3 hsz){
 
 }
 
-__global__ void calc_hist(float * hist, float * dt, float * q2, dim3 sz, dim3 hsz){
+__global__ void calc_hist(float * hist, float * dt, float * q2, float * gm, dim3 sz, dim3 hsz){
 
 	// retrieve coordinates from thread and block id.
 	uint x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -209,6 +266,8 @@ __global__ void calc_hist(float * hist, float * dt, float * q2, dim3 sz, dim3 hs
 	// overall index
 	uint L = n.z * z + n.y * y + n.x * x;
 
+	if (gm[L] == 0.0) return;	// don't do anything if the goodmap marks this pixel as bad
+
 	// load median and intensity at this point
 	float dt_0 = dt[L];
 	float q2_0 = q2[L];
@@ -229,7 +288,9 @@ __global__ void calc_hist(float * hist, float * dt, float * q2, dim3 sz, dim3 hs
 	uint Y = (dt_0 - dt_min) / bw.y;
 	uint M = m.x * X + m.y * Y;
 
-//	uint Y_0 = (0 - dt_min) / bw.y;
+
+
+	//	uint Y_0 = (0 - dt_min) / bw.y;
 
 	// update histogram
 	atomicAdd(hist + M, 1);
@@ -249,7 +310,7 @@ void calc_quartile(float * q, float * dt, float * gm, float * tmp, dim3 sz, dim3
 	calc_sep_quartile<<<blocks, threads>>>(q, dt, gm, sz, ksz, xhat, quartile);
 	calc_sep_quartile<<<blocks, threads>>>(tmp, q, gm, sz, ksz, yhat, quartile);
 	calc_sep_quartile<<<blocks, threads>>>(q, tmp, gm, sz, ksz, zhat, quartile);
-//	calc_tot_quartile<<<blocks, threads>>>(q, dt, gm, sz, ksz, quartile);
+	//	calc_tot_quartile<<<blocks, threads>>>(q, dt, gm, sz, ksz, quartile);
 
 
 }
@@ -382,11 +443,12 @@ __global__ void calc_sep_quartile(float * q_out, float * q_in, float * gm, dim3 
 		if((sm - 1) < P){
 			if((sm + eq - 1) >= P){
 				q_out[L] = u;
-				break;
+				return;
 			}
 		}
 
 	}
+	q_out[L] = 0.0f;
 
 }
 
@@ -497,7 +559,7 @@ __global__ void calc_tot_quartile(float * q, float * dt, float * gm, dim3 sz, di
 
 }
 
-__global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz, uint ndim){
+__global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz, uint nmet){
 
 	uint i = threadIdx.x;
 	uint j = blockIdx.x;
@@ -511,7 +573,7 @@ __global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz, uint n
 
 	uint L = i * m.x + j * m.y;
 
-	for(uint ax = 0; ax < ndim; ax++){
+	for(uint ax = 0; ax < nmet; ax++){
 
 		if(j == 0){
 			t0[i + ax * hsz.x] = 0.0f;

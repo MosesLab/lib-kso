@@ -20,7 +20,6 @@
 
 #include "instrument/IRIS/read_fits.h"
 
-
 namespace kso {
 
 namespace img {
@@ -29,7 +28,7 @@ namespace dspk {
 
 class buf {
 public:
-	uint ndim;
+	uint ndim, nmet;
 	float mem_fill;
 	dim3 sz, csz;	// shape of original data and chunked data
 	dim3 st, cst;	// array stride of original data and chunked data'
@@ -39,9 +38,10 @@ public:
 	uint ksz, ks2;	// kernel size, kernel half-size
 	float * dt, * gm;		// host memory
 	float * q2;
+	float * buf_d;
 	float * dt_d, * gm_d;
 	float * q2_d;
-//	float * dt_d, * gm_d, * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
+	float * gdev_d, *nsd_d, *tmp_d, *norm_d;	// device memory
 	uint *newBad, *newBad_d;				// more device memory
 	float * ht, * ht_d;		// histogram memory
 	float * cs, * cs_d;		// cumsum memory

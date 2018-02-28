@@ -25,18 +25,19 @@ import time
 print(os.getcwd())
 
 
-ksz = 25
+ksz = 15
 
 
 q2_3 = np.empty([1024, 1024, 1024], dtype=np.float32)
 
 hsx = 1024
-hsy = 2048
+hsy = 1024
 ndim = 3
-hist_3 = np.empty([ndim, hsy, hsx], dtype=np.float32)
-cumsum_3 = np.empty([ndim, hsy, hsx], dtype=np.float32)
-t0_3 = np.empty([ndim, hsx], dtype=np.float32)
-t1_3 = np.empty([ndim, hsx], dtype=np.float32)
+nmet = ndim + 1
+hist_3 = np.empty([nmet, hsy, hsx], dtype=np.float32)
+cumsum_3 = np.empty([nmet, hsy, hsx], dtype=np.float32)
+t0_3 = np.empty([nmet, hsx], dtype=np.float32)
+t1_3 = np.empty([nmet, hsx], dtype=np.float32)
 
 
 print('Cuda Test')
@@ -47,10 +48,10 @@ cuda_elapsed = cuda_end - cuda_start
 print(cuda_elapsed)
 
 dt_flat = dt.flatten()
-q2_3.resize((ndim,) + dt.shape)
+q2_3.resize((nmet,) + dt.shape)
 print(q2_3.shape)
 
-for ax in range(0,ndim):
+for ax in range(0,nmet):
 
 
     q2 = q2_3[ax,:, :, :]
@@ -83,7 +84,7 @@ for ax in range(0,ndim):
 
 fig, ax = plt.subplots(1, 1)
 tracker = IndexTracker(ax, dt, 0)
-# tracker = IndexTracker(ax, q2_3[0,], 0)
+# tracker = IndexTracker(ax, q2_3[3,], 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
 

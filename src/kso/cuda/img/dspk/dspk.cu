@@ -14,15 +14,16 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	buf * db = data_buf;
 
 	uint ndim = db->ndim;
+	uint nmet = db->nmet;
 
 	uint ksz1 = db->ksz;
-	dim3 ksz(25, 25, 25);
-//	dim3 ksz(ksz1,ksz1,ksz1);
+//	dim3 ksz(25, 25, 25);
+		dim3 ksz(ksz1,ksz1,ksz1);
 
 	float * dt = db->dt;
-//	float * q1 = db->q1;
+	//	float * q1 = db->q1;
 	float * q2 = db->q2;
-//	float * q3 = db->q3;
+	//	float * q3 = db->q3;
 	float * ht = db->ht;
 	float * cs = db->cs;
 	float * t0 = db->t0;
@@ -32,10 +33,10 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	float * dt_d = db->dt_d;
 	float * gm_d = db->gm_d;
 	float * q2_d = db->q2_d;
-//	float * gdev_d = db->gdev_d;
-//	float * nsd_d = db->nsd_d;
-//	float * tmp_d = db->tmp_d;
-//	float * norm_d = db->norm_d;
+	float * gdev_d = db->gdev_d;
+	float * nsd_d = db->nsd_d;
+	float * tmp_d = db->tmp_d;
+	float * norm_d = db->norm_d;
 	float * ht_d = db->ht_d;
 	float * cs_d = db->cs_d;
 	float * t0_d = db->t0_d;
@@ -76,6 +77,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 		cout << L[s] << endl;
 		cout << a[s] << endl;
 		cout << l[s] << endl;
+		cout << b_d[s] << endl;
 
 		cout << "-----------------" << endl;
 
@@ -98,64 +100,109 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 		// copy memory to device
 		CHECK(cudaMemcpy(dt_d, dt + B[s], M[s] * sizeof(float), cudaMemcpyHostToDevice));
-//		CHECK(cudaMemcpy(gm_d, gm + B[s], M[s] * sizeof(float), cudaMemcpyHostToDevice));
+		//		CHECK(cudaMemcpy(gm_d, gm + B[s], M[s] * sizeof(float), cudaMemcpyHostToDevice));
 
 
 		// initialize good pixel map
-		kso::img::dspk::init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
-		kso::img::dspk::init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz, ndim);
+		init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
+		init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz, nmet);
 
 		cout << "Median Filter" << endl;
+
+
+		*newBad = 0;	// reset the number of bad pixels found for this iteration
+		CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
+
+		// loop over each axis
+		for(uint ax = 0; ax < nmet; ax++){
+
+			// move pointer to correct place in memory
+			float * q2x_d = q2_d + ax * sz3;
+			float * htx_d = ht_d + ax * hsz3;
+			float * csx_d = cs_d + ax * hsz3;
+			float * t0x_d = t0_d + ax * hsz.x;
+			float * t1x_d = t1_d + ax * hsz.x;
+
+			float * q2x = q2 + ax * dsz3;
+			float * htx = ht + ax * hsz3;
+			float * csx = cs + ax * hsz3;
+			float * t0x = t0 + ax * hsz.x;
+			float * t1x = t1 + ax * hsz.x;
+
+			if(ax < ndim){	// independent median for each axis
+				calc_sep_quartile<<<blocks, threads>>>(q2x_d, dt_d, gm_d, sz, ksz, uv[ax], 2);
+			} else {	// separable median
+				calc_quartile(q2x_d, dt_d, gm_d, tmp_d, sz, ksz, 2);
+
+				//				calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+				//				calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+				//				calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
+				//
+				//				calc_gdev_0<<<blocks, threads>>>(q2x_d, dt_d, gm_d, sz, ksz1);
+				//				calc_gdev_1<<<blocks, threads>>>(tmp_d, q2x_d, sz, ksz1);
+				//				calc_gdev_2<<<blocks, threads>>>(q2x_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
+			}
+
+			calc_hist<<<blocks, threads>>>(htx_d, dt_d, q2x_d, gm_d, sz, hsz);
+			calc_cumsum<<<1,hsz.x>>>(csx_d, htx_d, hsz);
+			calc_thresh<<<1,hsz.x>>>(t0x_d, t1x_d, htx_d, csx_d, hsz, tmin, tmax);
+
+			cout << ax << endl;
+
+			CHECK(cudaMemcpy(q2x + b[s], q2x_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(htx, htx_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(csx, csx_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(t0x, t0x_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(t1x, t1x_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+
+		}
+
+		calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, q2_d, t0_d, t1_d, sz, hsz, nmet);
+
+
+
+//		/////////////////////////////////////////////////////////////////////
+		cout << "Mean Filter" << endl;
 
 		// Number of identification iterations
 		for(uint iter = 0; iter < Niter; iter++){
 
-
 			*newBad = 0;	// reset the number of bad pixels found for this iteration
 			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
 
-			// loop over each axis
-			for(uint ax = 0; ax < ndim; ax++){
+			calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+			calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+			calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
 
-				// move pointer to correct place in memory
-				float * q2x_d = q2_d + ax * dsz3;
-				float * htx_d = ht_d + ax * hsz3;
-				float * csx_d = cs_d + ax * hsz3;
-				float * t0x_d = t0_d + ax * hsz.x;
-				float * t1x_d = t1_d + ax * hsz.x;
+			calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
+			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
+			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
 
-				float * q2x = q2 + ax * dsz3;
-				float * htx = ht + ax * hsz3;
-				float * csx = cs + ax * hsz3;
-				float * t0x = t0 + ax * hsz.x;
-				float * t1x = t1 + ax * hsz.x;
+			tmax = 0.985;
+			tmin = 0.01;
 
-
-				calc_sep_quartile<<<blocks, threads>>>(q2x_d, dt_d, gm_d, sz, ksz, uv[ax], 2);
-				calc_hist<<<blocks, threads>>>(htx_d, dt_d, q2x_d, sz, hsz);
-				calc_cumsum<<<1,hsz.x>>>(csx_d, htx_d, hsz);
-				calc_thresh<<<1,hsz.x>>>(t0x_d, t1x_d, htx_d, csx_d, hsz, tmin, tmax);
-
-				CHECK(cudaMemcpy(q2x + b[s], q2x_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-				CHECK(cudaMemcpy(htx, htx_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
-				CHECK(cudaMemcpy(csx, csx_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
-				CHECK(cudaMemcpy(t0x, t0x_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
-				CHECK(cudaMemcpy(t1x, t1x_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
-
-			}
-
-			calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, q2_d, t0_d, t1_d, sz, hsz, ndim);
-
-//			calc_quartile(q2_d, dt_d, gm_d, tmp_d, sz, ksz, 2);
-//			calc_hist<<<blocks, threads>>>(ht_d, dt_d, q2_d, sz, hsz);
-//			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
-//			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
-//			calc_gm<<<blocks,threads>>>(gm_d, dt_d, q2_d, t0_d, t1_d, sz, hsz);
+			// initialize good pixel map
+			cout << "here" << endl;
+			init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
+			init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz, nmet);
 
 
-//			calc_quartiles(q1_d, q2_d, q3_d, dt_d, gm_d, tmp_d, sz, ksz);
-//			calc_gm<<<blocks, threads>>>(q1_d, q2_d, q3_d, dt_d, gm_d, newBad_d, sz, ksz, med_dev);
+			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
+			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
+			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
+			calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, gdev_d, t0_d, t1_d, sz, hsz);
 
+			//			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz1);
+			//			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz1);
+			//			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz1);
+			//
+			//			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, dt_d, std_dev, newBad_d, sz, ksz1);
+
+			CHECK(cudaMemcpy(q2 + b[s], gdev_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(ht, ht_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(cs, cs_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(t0, t0_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+			CHECK(cudaMemcpy(t1, t1_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
 
 			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
 			cout << "Iteration " << iter << ": found " << *newBad << " bad pixels\n";
@@ -167,41 +214,9 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 		}
 
-//		cout << "Mean Filter" << endl;
-//
-//		// Number of identification iterations
-//		for(uint iter = 0; iter < Niter; iter++){
-//
-//			*newBad = 0;	// reset the number of bad pixels found for this iteration
-//			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
-//
-//			kso::img::dspk::calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
-//			kso::img::dspk::calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
-//			kso::img::dspk::calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
-//
-//			kso::img::dspk::calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
-//			kso::img::dspk::calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
-//			kso::img::dspk::calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
-//
-//			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz1);
-//			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz1);
-//			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz1);
-//
-//			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, dt_d, std_dev, newBad_d, sz, ksz1);
-//
-//			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
-//			cout << "Iteration " << iter << ": found " << *newBad << " bad pixels\n";
-//			totBad = totBad + *newBad;
-//
-//			if(*newBad == 0){	// stop if we're not finding any pixels
-//				break;
-//			}
-//
-//		}
 
 
-//
-//		ksz = 3;
+//		ksz = 9;
 //
 //		kso::img::dspk::calc_lmn_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
 //		kso::img::dspk::calc_lmn_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
@@ -274,7 +289,7 @@ void denoise_ndarr(const np::ndarray & data, const np::ndarray & goodmap, const 
 
 	buf * db = new buf(dt, gm, sz, k_sz, hsz, n_threads);
 
-	denoise(db, tmin, tmax, Niter);
+//	denoise(db, tmin, tmax, Niter);
 
 }
 
@@ -307,7 +322,7 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	uint Niter = 1;
 
 	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
-//	string cpath = "/kso/iris_l2_20141129_000738_3860009154_raster_t000_r00000.fits";
+//		string cpath = "/kso/iris_l2_20140917_015809_3862257453_raster_t000_r00000.fits";
 
 	dim3 hsz(hsx, hsy, 0);
 
@@ -321,7 +336,7 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	db->t0 = (float *)t0.get_data();
 	db->t1 = (float *)t1.get_data();
 
-	float tmax = 0.99;
+	float tmax = 0.95;
 	float tmin = 0.01;
 
 
