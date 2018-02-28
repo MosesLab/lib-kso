@@ -4,7 +4,7 @@ print(os.getcwd())
 
 import gzip
 from shutil import copyfileobj
-from kso.py.tools.find_files import find_files
+from find_files import find_files
 # from ....tools.find_files import find_files
 
 db_path = '/exports/fi1/IRIS/archive/level2/2013'
