@@ -181,15 +181,23 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			tmax = 0.99;
 			tmin = 0.01;
 
-			// initialize good pixel map
-			cout << "here" << endl;
-			init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
+
 			init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz, nmet);
-
-
 			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
 			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
 			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
+
+			init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
+
+			// calculate mean on unmasked data
+			calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+			calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+			calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
+
+			calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
+			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
+			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
+
 			calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, gdev_d, t0_d, t1_d, sz, hsz);
 
 			//			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz1);
