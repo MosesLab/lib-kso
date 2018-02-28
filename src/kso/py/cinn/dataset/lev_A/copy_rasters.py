@@ -19,6 +19,7 @@ save_path = '/mnt/roy/IRIS_level2'
 
 
 [roots, names] = find_files(db_path, pattern)
+print(names)
 
 for root, name in zip(roots, names):
 
