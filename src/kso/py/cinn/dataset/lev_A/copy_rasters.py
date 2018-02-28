@@ -1,4 +1,7 @@
 import os
+
+print(os.getcwd())
+
 import gzip
 from shutil import copyfileobj
 from kso.py.tools.find_files import find_files
