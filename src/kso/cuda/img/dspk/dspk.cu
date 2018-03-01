@@ -41,6 +41,8 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 	float * cs_d = db->cs_d;
 	float * t0_d = db->t0_d;
 	float * t1_d = db->t1_d;
+	float * T0_d = db->T0_d;
+	float * T1_d = db->T1_d;
 	uint * newBad_d = db->newBad_d;
 
 	dim3 hsz = db->hsz;
@@ -105,7 +107,8 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 		// initialize good pixel map
 		init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
-		init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz, nmet);
+		init_hist<<<hsz.y, hsz.x>>>(ht_d, hsz, nmet);
+		init_thresh<<<1, hsz.x>>>(t0_d, t1_d, hsz, nmet);
 
 		cout << "Median Filter" << endl;
 
@@ -122,6 +125,8 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			float * csx_d = cs_d + ax * hsz3;
 			float * t0x_d = t0_d + ax * hsz.x;
 			float * t1x_d = t1_d + ax * hsz.x;
+			float * T0x_d = T0_d + ax * hsz.x;
+			float * T1x_d = T1_d + ax * hsz.x;
 
 			float * q2x = q2 + ax * dsz3;
 			float * htx = ht + ax * hsz3;
@@ -146,6 +151,8 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			calc_hist<<<blocks, threads>>>(htx_d, dt_d, q2x_d, gm_d, sz, hsz);
 			calc_cumsum<<<1,hsz.x>>>(csx_d, htx_d, hsz);
 			calc_thresh<<<1,hsz.x>>>(t0x_d, t1x_d, htx_d, csx_d, hsz, tmin, tmax);
+//			smooth_thresh<<<1,hsz.x>>>(t0x_d, T0x_d, hsz, 3);
+//			smooth_thresh<<<1,hsz.x>>>(t1x_d, T1x_d, hsz, 3);
 
 			cout << ax << endl;
 
@@ -182,10 +189,13 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			tmin = 0.01;
 
 
-			init_hist<<<hsz.y, hsz.x>>>(ht_d, t0_d, t1_d, hsz, nmet);
+			init_hist<<<hsz.y, hsz.x>>>(ht_d, hsz, nmet);
+			init_thresh<<<1, hsz.x>>>(t0_d, t1_d, hsz, nmet);
 			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
 			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
 			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
+//			smooth_thresh<<<1,hsz.x>>>(t0_d, T0_d, hsz, 3);
+//			smooth_thresh<<<1,hsz.x>>>(t1_d, T1_d, hsz, 3);
 
 			init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
 
@@ -197,6 +207,9 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 			calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
 			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
 			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
+
+			init_hist<<<hsz.y, hsz.x>>>(ht_d, hsz, nmet);
+			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
 
 			calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, gdev_d, t0_d, t1_d, sz, hsz);
 
@@ -344,8 +357,8 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	db->t0 = (float *)t0.get_data();
 	db->t1 = (float *)t1.get_data();
 
-	float tmax = 0.97;
-	float tmin = 0.01;
+	float tmax = 0.51;
+	float tmin = 0.49;
 
 
 	denoise(db, tmin, tmax, Niter);

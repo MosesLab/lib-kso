@@ -45,7 +45,8 @@ public:
 	uint *newBad, *newBad_d;				// more device memory
 	float * ht, * ht_d;		// histogram memory
 	float * cs, * cs_d;		// cumsum memory
-	float * t0, * t1, * t0_d, * t1_d;		// arrays of thresholds for each median
+	float * t0, * t1, * t0_d, * t1_d;		// smoothed arrays of thresholds for each median
+	float * T0_d, * T1_d;	// unsmoothed thresholds
 
 
 	dim3 threads;		// number of threads per block

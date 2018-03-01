@@ -129,8 +129,8 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 	if(votes >= (tot_wgt)){
 
 		gm[L] = 0.0f;
-//		dt[L] = 0.0f;
-		atomicAdd(new_bad, 1);
+		//		dt[L] = 0.0f;
+		//		atomicAdd(new_bad, 1);
 
 	}
 
@@ -178,31 +178,44 @@ __global__ void calc_thresh(float * t0, float * t1, float * hist, float * cs, di
 
 
 	}
-	t1[i] = j;
+	uint slope = hsz.y / hsz.x;
+	t0[i] = slope * i;
+	t1[i] = slope * i;
 
-	//	for(uint j = 0; j < hsz.y; j++){
-	//
-	//		// linear index in histogram
-	//		uint M = m.x * i + m.y * j;
-	//
-	//		if(hist[M] >= 5){
-	//			t0[i] = j;
-	//			break;
-	//		}
-	//
-	//	}
-	//	for(int j = (hsz.y - 1); j >= 0; j = j - 1){
-	//
-	//		// linear index in histogram
-	//		uint M = m.x * i + m.y * j;
-	//
-	//		if(hist[M] >= 5){
-	//			t1[i] = j;
-	//			break;
-	//		}
-	//
-	//	}
 
+}
+
+__global__ void smooth_thresh(float * out, float * in, dim3 hsz, uint kern_sz){
+
+	uint i = threadIdx.x;
+
+
+	// initialize mean
+	float mean = 0.0;
+	float norm = 0.0;
+
+	uint ks2 = kern_sz / 2;
+
+	// convolve
+	for(uint x = 0; x < kern_sz; x++){
+
+		// calculate offset
+		uint X = i - ks2 + x;
+
+		// truncate kernel if we're over the edge
+		if(X > (hsz.x - 1)){
+			continue;
+		}
+
+
+		mean = mean + in[X];
+		norm = norm + 1.0f;
+
+	}
+
+	mean = mean / norm;
+
+	out[i] = mean;
 
 }
 
@@ -562,7 +575,7 @@ __global__ void calc_tot_quartile(float * q, float * dt, float * gm, dim3 sz, di
 
 }
 
-__global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz, uint nmet){
+__global__ void init_hist(float * hist, dim3 hsz, uint nmet){
 
 	uint i = threadIdx.x;
 	uint j = blockIdx.x;
@@ -578,12 +591,28 @@ __global__ void init_hist(float * hist, float * t0, float * t1, dim3 hsz, uint n
 
 	for(uint ax = 0; ax < nmet; ax++){
 
-		if(j == 0){
-			t0[i + ax * hsz.x] = 0.0f;
-			t1[i + ax * hsz.x] = 0.0f;
-		}
-
 		hist[L + ax * hsz3] = 0;
+
+	}
+
+
+
+}
+
+__global__ void init_thresh(float * t0, float * t1, dim3 hsz, uint nmet){
+
+	uint i = threadIdx.x;
+
+	dim3 m;
+	m.x = 1;
+	m.y = m.x * hsz.x;
+	m.z = 0;
+
+
+	for(uint ax = 0; ax < nmet; ax++){
+
+		t0[i + ax * hsz.x] = 0.0f;
+		t1[i + ax * hsz.x] = 0.0f;
 
 	}
 

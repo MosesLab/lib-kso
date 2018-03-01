@@ -84,7 +84,7 @@ for ax in range(0,nmet):
 
 fig, ax = plt.subplots(1, 1)
 tracker = IndexTracker(ax, dt, 0)
-# tracker = IndexTracker(ax, q2_3[3,], 0)
+# tracker = IndexTracker(ax, q2_3[0,], 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
 
