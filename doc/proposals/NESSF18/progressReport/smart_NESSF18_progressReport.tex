@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage[nolist,nohyperlinks]{acronym}
+\usepackage{float}
+\usepackage{subcaption}
 
 \newacro{TR}{Transition Region}
 \newacro{EE}{Explosive Event}
@@ -32,7 +34,7 @@
 		
 		These spectrographs are unique in that they have the capability to spectrally-resolve a few \ac{EUV} emission lines over a large 2D \ac{FOV}.
 		However, this capability depends on the development of robust inversion algorithms that can interpret the data correctly.
-		Therfore, the integral part of our proposal was the development of a \ac{CNN} inversion algorithm that used the IRIS Si\,\textsc{iv} 1403 \AA\ spectral observations as a model for the \ac{EUV} emission lines observed by MOSES and ESIS.
+		Therfore, the integral part of our proposal was the development of a \ac{CNN}-based inversion algorithm that used the IRIS Si\,\textsc{iv} 1403 \AA\ spectral observations as a model for the \ac{EUV} emission lines observed by MOSES and ESIS.
 		
 		During the course of our investigation, we found that achieving a full spectrum inversion superior to those demonstrated in the proposal would require a more sophisticated network than previously anticipated.
 		This modification will be discussed in Section \ref{sec_gan}, but we were able to build a useful network using our proposed architecture, a central tendency neural network.
@@ -47,11 +49,12 @@
 		This effort has provided much needed experience using the instruments in this study, which will allow us to be more effective in the development of our inversion routines.
 		
 		Parallel to the advancement of MOSES and ESIS, I was also involved in the design phase of the FURST mission, which was just accepted in this latest LCAS proposal round.
-		The design process of FURST gave me useful experience using optical modeling software, which will allow for the implementation of more sophisticated instrument models in my inversion routine.
+		The design process of FURST gave me useful experience using optical modeling software, which will allow for the implementation of more sophisticated instrument models in our inversion routine.
 	
 		\subsection{CTIS Inversion Neural Networks}
 		
-			The basic component of our data processing pipeline is the convolutional neural network, a (relatively) small neural network that is convolved with the input
+			As discussed in our proposal, we started by attempting to analyze data from the MOSES I mission in 2006.
+			Our goal was to reconstruct the spectrum of the He \textsc{ii} 304 \AA line in the MOSES passband 
 			
 			
 			\subsubsection{Spectrum Inversion Network}
@@ -60,6 +63,48 @@
 			
 			\subsubsection{Central-tendency Inversion Network}
 			
+				\begin{figure*}[t!]
+					\centering
+					\begin{subfigure}[t]{0.5\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/smart_hist}
+						\caption{Lorem ipsum}
+					\end{subfigure}%
+					~ 
+					\begin{subfigure}[t]{0.5\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/minnd_hist}
+						\caption{Lorem ipsum, lorem ipsum,Lorem ipsum, lorem ipsum,Lorem ipsum}
+					\end{subfigure}
+					\caption{Caption place holder}
+				\end{figure*}
+				
+				\begin{figure*}[t!]
+					\centering
+					\begin{subfigure}[t]{0.49\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/doppler_1182}
+					\end{subfigure}
+					~ 
+					\begin{subfigure}[t]{0.49\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/doppler_1225}
+					\end{subfigure}
+					~ 
+					\begin{subfigure}[t]{0.49\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/doppler_1263}
+					\end{subfigure}
+					~ 
+					\begin{subfigure}[t]{0.49\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/doppler_1343}
+					\end{subfigure}
+					\caption{Caption place holder}
+				\end{figure*}
+				
+				
+				
 			\subsubsection{Despiking Training Data}	\label{sec_dspk}
 		
 		\subsection{MOSES/ESIS Preparation}

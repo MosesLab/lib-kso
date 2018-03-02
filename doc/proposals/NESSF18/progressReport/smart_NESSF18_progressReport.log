@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.8)  27 FEB 2018 00:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.8)  1 MAR 2018 23:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -284,23 +284,55 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 )
 \AC@clearlist=\toks23
 )
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count115
+\float@exts=\toks24
+\float@box=\box28
+\@float@everytoks=\toks25
+\@floatcapt=\box29
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen126
+\captionmargin@=\dimen127
+\captionwidth=\dimen128
+\caption@tempdima=\dimen129
+\caption@indent=\dimen130
+\caption@parindent=\dimen131
+\caption@hangindent=\dimen132
+)
+\c@ContinuedFloat=\count116
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+)
+\c@subfigure=\count117
+\c@subtable=\count118
+)
 (./smart_NESSF18_progressReport.aux)
 \openout1 = `smart_NESSF18_progressReport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -338,17 +370,17 @@ LaTeX Font Info:    ... okay on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
-\scratchdimen=\dimen126
-\scratchbox=\box28
-\nofMPsegments=\count116
-\nofMParguments=\count117
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count118
-\MPscratchDim=\dimen127
-\MPnumerator=\count119
-\makeMPintoPDFobject=\count120
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count119
+\scratchdimen=\dimen133
+\scratchbox=\box30
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen134
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks27
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -364,8 +396,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 24.
+\AtBeginShipoutBox=\box31
+Package hyperref Info: Link coloring OFF on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -373,74 +405,137 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count121
+\c@section@level=\count125
 )
-LaTeX Info: Redefining \ref on input line 24.
-LaTeX Info: Redefining \pageref on input line 24.
-LaTeX Info: Redefining \nameref on input line 24.
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+LaTeX Info: Redefining \nameref on input line 26.
 
 (./smart_NESSF18_progressReport.out) (./smart_NESSF18_progressReport.out)
 \@outlinefile=\write4
 \openout4 = `smart_NESSF18_progressReport.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 27.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 29.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 27.
+LaTeX Font Info:    Try loading font information for U+msb on input line 29.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Package acronym Info: Label `acro:EE' newly defined as it shall be overridden
-although it is yet undefined on input line 30.
+although it is yet undefined on input line 32.
 Package acronym Info: Label `acro:TR' newly defined as it shall be overridden
-although it is yet undefined on input line 30.
+although it is yet undefined on input line 32.
 Package acronym Info: Label `acro:MOSES' newly defined as it shall be overridde
 n
-although it is yet undefined on input line 31.
+although it is yet undefined on input line 33.
 Package acronym Info: Label `acro:ESIS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 31.
+although it is yet undefined on input line 33.
 Package acronym Info: Label `acro:EUV' newly defined as it shall be overridden
-although it is yet undefined on input line 33.
-Package acronym Info: Label `acro:FOV' newly defined as it shall be overridden
-although it is yet undefined on input line 33.
-Package acronym Info: Label `acro:CNN' newly defined as it shall be overridden
 although it is yet undefined on input line 35.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 84.
+Package acronym Info: Label `acro:FOV' newly defined as it shall be overridden
+although it is yet undefined on input line 35.
+Package acronym Info: Label `acro:CNN' newly defined as it shall be overridden
+although it is yet undefined on input line 37.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 84.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Package epstopdf Info: Source file: <fig/smart_hist.eps>
+(epstopdf)                    date: 2018-03-01 23:36:13
+(epstopdf)                    size: 662951 bytes
+(epstopdf)             Output file: <fig/smart_hist-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-03-01 23:44:14
+(epstopdf)                    size: 128439 bytes
+(epstopdf)             Command: <repstopdf --outfile=fig/smart_hist-eps-convert
+ed-to.pdf fig/smart_hist.eps>
+(epstopdf)             \includegraphics on input line 70.
+Package epstopdf Info: Output file is already uptodate.
+
+<fig/smart_hist-eps-converted-to.pdf, id=86, 699.61375pt x 591.20876pt>
+File: fig/smart_hist-eps-converted-to.pdf Graphic file (type pdf)
+
+<use fig/smart_hist-eps-converted-to.pdf>
+Package pdftex.def Info: fig/smart_hist-eps-converted-to.pdf used on input line
+ 70.
+(pdftex.def)             Requested size: 234.8775pt x 198.4824pt.
+
+<fig/minnd_hist.pdf, id=87, 405.89903pt x 315.53458pt>
+File: fig/minnd_hist.pdf Graphic file (type pdf)
+
+<use fig/minnd_hist.pdf>
+Package pdftex.def Info: fig/minnd_hist.pdf used on input line 76.
+(pdftex.def)             Requested size: 234.8775pt x 182.58649pt.
+
+Overfull \hbox (4.44441pt too wide) in paragraph at lines 68--79
+ [][]  [] 
+ []
+
+<fig/doppler_1182.png, id=88, 363.5181pt x 83.8332pt>
+File: fig/doppler_1182.png Graphic file (type png)
+
+<use fig/doppler_1182.png>
+Package pdftex.def Info: fig/doppler_1182.png used on input line 86.
+(pdftex.def)             Requested size: 230.18253pt x 53.0838pt.
+
+<fig/doppler_1225.png, id=90, 363.5181pt x 83.8332pt>
+File: fig/doppler_1225.png Graphic file (type png)
+
+<use fig/doppler_1225.png>
+Package pdftex.def Info: fig/doppler_1225.png used on input line 91.
+(pdftex.def)             Requested size: 230.18253pt x 53.0838pt.
+
+<fig/doppler_1263.png, id=91, 363.5181pt x 83.8332pt>
+File: fig/doppler_1263.png Graphic file (type png)
+
+<use fig/doppler_1263.png>
+Package pdftex.def Info: fig/doppler_1263.png used on input line 96.
+(pdftex.def)             Requested size: 230.18253pt x 53.0838pt.
+
+<fig/doppler_1343.png, id=92, 363.5181pt x 83.8332pt>
+File: fig/doppler_1343.png Graphic file (type png)
+
+<use fig/doppler_1343.png>
+Package pdftex.def Info: fig/doppler_1343.png used on input line 101.
+(pdftex.def)             Requested size: 230.18253pt x 53.0838pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
+ [2 <./fig/smart_hist-eps-converted-to.pdf> <./fig/minnd_hist.pdf> <./fig/doppl
+er_1182.png> <./fig/doppler_1225.png> <./fig/doppler_1263.png> <./fig/doppler_1
+343.png>] [3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
  (./smart_NESSF18_progressReport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 84.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 84.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 134.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 134.
 Package rerunfilecheck Info: File `smart_NESSF18_progressReport.out' has not ch
 anged.
 (rerunfilecheck)             Checksum: 4EB7877347656B8BF0F2C91A65E4FA7D;1201.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 84.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 134.
  ) 
 Here is how much of TeX's memory you used:
- 6923 strings out of 493029
- 99608 string characters out of 6136234
- 199056 words of memory out of 5000000
- 10359 multiletter control sequences out of 15000+600000
- 10921 words of font info for 41 fonts, out of 8000000 for 9000
+ 8104 strings out of 493029
+ 120783 string characters out of 6136234
+ 218932 words of memory out of 5000000
+ 11503 multiletter control sequences out of 15000+600000
+ 11220 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,7n,32p,328b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,7n,40p,328b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on smart_NESSF18_progressReport.pdf (2 pages, 102943 bytes).
+t/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmtt12.pfb>
+Output written on smart_NESSF18_progressReport.pdf (3 pages, 293672 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 183 PDF objects out of 1000 (max. 8388607)
+ 128 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
+ 167 words of extra memory for PDF output out of 10000 (max. 10000000)
 
