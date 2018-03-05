@@ -169,71 +169,71 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 
 //		/////////////////////////////////////////////////////////////////////
-		cout << "Mean Filter" << endl;
-
-		// Number of identification iterations
-		for(uint iter = 0; iter < Niter; iter++){
-
-			*newBad = 0;	// reset the number of bad pixels found for this iteration
-			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
-
-			calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
-			calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
-			calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
-
-			calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
-			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
-			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
-
-			tmax = 0.99;
-			tmin = 0.01;
-
-
-			init_hist<<<hsz.y, hsz.x>>>(ht_d, hsz, nmet);
-			init_thresh<<<1, hsz.x>>>(t0_d, t1_d, hsz, nmet);
-			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
-			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
-			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
-//			smooth_thresh<<<1,hsz.x>>>(t0_d, T0_d, hsz, 3);
-//			smooth_thresh<<<1,hsz.x>>>(t1_d, T1_d, hsz, 3);
-
-			init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
-
-			// calculate mean on unmasked data
-			calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
-			calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
-			calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
-
-			calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
-			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
-			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
-
-			init_hist<<<hsz.y, hsz.x>>>(ht_d, hsz, nmet);
-			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
-
-			calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, gdev_d, t0_d, t1_d, sz, hsz);
-
-			//			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz1);
-			//			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz1);
-			//			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz1);
-			//
-			//			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, dt_d, std_dev, newBad_d, sz, ksz1);
-
-			CHECK(cudaMemcpy(q2 + b[s], gdev_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
-			CHECK(cudaMemcpy(ht, ht_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
-			CHECK(cudaMemcpy(cs, cs_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
-			CHECK(cudaMemcpy(t0, t0_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
-			CHECK(cudaMemcpy(t1, t1_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
-
-			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
-			cout << "Iteration " << iter << ": found " << *newBad << " bad pixels\n";
-			totBad = totBad + *newBad;
-
-			if(*newBad == 0){	// stop if we're not finding any pixels
-				break;
-			}
-
-		}
+//		cout << "Mean Filter" << endl;
+//
+//		// Number of identification iterations
+//		for(uint iter = 0; iter < Niter; iter++){
+//
+//			*newBad = 0;	// reset the number of bad pixels found for this iteration
+//			CHECK(cudaMemcpy(newBad_d, newBad, sizeof(uint), cudaMemcpyHostToDevice));
+//
+//			calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+//			calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+//			calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
+//
+//			calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
+//			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
+//			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
+//
+//			tmax = 0.99;
+//			tmin = 0.01;
+//
+//
+//			init_hist<<<hsz.y, hsz.x>>>(ht_d, hsz, nmet);
+//			init_thresh<<<1, hsz.x>>>(t0_d, t1_d, hsz, nmet);
+//			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
+//			calc_cumsum<<<1,hsz.x>>>(cs_d, ht_d, hsz);
+//			calc_thresh<<<1,hsz.x>>>(t0_d, t1_d, ht_d, cs_d, hsz, tmin, tmax);
+////			smooth_thresh<<<1,hsz.x>>>(t0_d, T0_d, hsz, 3);
+////			smooth_thresh<<<1,hsz.x>>>(t1_d, T1_d, hsz, 3);
+//
+//			init_gm<<<blocks, threads>>>(gm_d, dt_d, sz);
+//
+//			// calculate mean on unmasked data
+//			calc_norm_0<<<blocks, threads>>>(norm_d, gm_d, newBad_d, sz, ksz1);
+//			calc_norm_1<<<blocks, threads>>>(tmp_d, norm_d, sz, ksz1);
+//			calc_norm_2<<<blocks, threads>>>(norm_d, tmp_d, sz, ksz1);
+//
+//			calc_gdev_0<<<blocks, threads>>>(gdev_d, dt_d, gm_d, sz, ksz1);
+//			calc_gdev_1<<<blocks, threads>>>(tmp_d, gdev_d, sz, ksz1);
+//			calc_gdev_2<<<blocks, threads>>>(gdev_d, tmp_d, dt_d, gm_d, norm_d, sz, ksz1);
+//
+//			init_hist<<<hsz.y, hsz.x>>>(ht_d, hsz, nmet);
+//			calc_hist<<<blocks, threads>>>(ht_d, dt_d, gdev_d, gm_d, sz, hsz);
+//
+//			calc_gm<<<blocks,threads>>>(gm_d, newBad_d, dt_d, gdev_d, t0_d, t1_d, sz, hsz);
+//
+//			//			kso::img::dspk::calc_nsd_0<<<blocks, threads>>>(nsd_d, gdev_d, sz, ksz1);
+//			//			kso::img::dspk::calc_nsd_1<<<blocks, threads>>>(tmp_d, nsd_d, sz, ksz1);
+//			//			kso::img::dspk::calc_nsd_2<<<blocks, threads>>>(nsd_d, tmp_d, norm_d, sz, ksz1);
+//			//
+//			//			kso::img::dspk::calc_gm<<<blocks, threads>>>(gm_d, gdev_d, nsd_d, dt_d, std_dev, newBad_d, sz, ksz1);
+//
+//			CHECK(cudaMemcpy(q2 + b[s], gdev_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
+//			CHECK(cudaMemcpy(ht, ht_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+//			CHECK(cudaMemcpy(cs, cs_d, db->hsz3 * sizeof(float), cudaMemcpyDeviceToHost));
+//			CHECK(cudaMemcpy(t0, t0_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+//			CHECK(cudaMemcpy(t1, t1_d, hsz.x * sizeof(float), cudaMemcpyDeviceToHost));
+//
+//			CHECK(cudaMemcpy(newBad, newBad_d, sizeof(uint), cudaMemcpyDeviceToHost));
+//			cout << "Iteration " << iter << ": found " << *newBad << " bad pixels\n";
+//			totBad = totBad + *newBad;
+//
+//			if(*newBad == 0){	// stop if we're not finding any pixels
+//				break;
+//			}
+//
+//		}
 
 
 
@@ -357,8 +357,8 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	db->t0 = (float *)t0.get_data();
 	db->t1 = (float *)t1.get_data();
 
-	float tmax = 0.51;
-	float tmin = 0.49;
+	float tmax = 0.98;
+	float tmin = 0.01;
 
 
 	denoise(db, tmin, tmax, Niter);

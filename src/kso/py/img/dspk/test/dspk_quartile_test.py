@@ -87,7 +87,9 @@ tracker = IndexTracker(ax, dt, 0)
 # tracker = IndexTracker(ax, q2_3[0,], 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
-
+plt.figure(figsize=(16.0,9.0))
+plt.imshow(np.rot90(dt[47,:,300:400]), vmin=0, vmax=256)
+plt.savefig('dspk.pdf', bbox_inches='tight', pad_inches=0, dpi=300)
 
 
 plt.show()

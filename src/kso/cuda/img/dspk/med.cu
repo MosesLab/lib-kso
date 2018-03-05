@@ -129,8 +129,8 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 	if(votes >= (tot_wgt)){
 
 		gm[L] = 0.0f;
-		//		dt[L] = 0.0f;
-		//		atomicAdd(new_bad, 1);
+				dt[L] = 0.0f;
+				atomicAdd(new_bad, 1);
 
 	}
 
