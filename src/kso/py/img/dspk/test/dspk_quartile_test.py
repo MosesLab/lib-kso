@@ -68,10 +68,13 @@ for ax in range(0,nmet):
     # plt.hist2d(q2_flat, dt_flat, bins=[500,4096], norm=colors.SymLogNorm(linthresh=1))
     # plt.colorbar()
 
-    plt.figure()
-    plt.imshow(hist, norm=colors.SymLogNorm(linthresh=1), origin='lower')
-    plt.plot(t0)
-    plt.plot(t1)
+    plt.figure(figsize=(4.0, 4.0))
+    plt.imshow(10000 * hist, norm=colors.SymLogNorm(linthresh=1), origin='lower')
+    plt.plot(t0, 'w')
+    plt.plot(t1, 'w')
+    plt.xlim(0,60)
+    plt.ylim(0,60)
+    plt.savefig('hist_' + str(ax) + '.pdf', bbox_inches='tight', pad_inches=0, dpi=300)
     #
     # plt.figure()
     # plt.imshow(q2_3[ax, 53,])
@@ -83,12 +86,12 @@ for ax in range(0,nmet):
 
 
 fig, ax = plt.subplots(1, 1)
-tracker = IndexTracker(ax, dt, 0)
+tracker = IndexTracker(ax, dt, 0, v_min=-5, v_max=256, cmap='gist_heat_r')
 # tracker = IndexTracker(ax, q2_3[0,], 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
 plt.figure(figsize=(16.0,9.0))
-plt.imshow(np.rot90(dt[47,:,300:400]), vmin=0, vmax=256)
+plt.imshow(np.rot90(dt[54,:,300:400]), vmin=-5, vmax=256, cmap='gist_heat_r')
 plt.savefig('dspk.pdf', bbox_inches='tight', pad_inches=0, dpi=300)
 
 

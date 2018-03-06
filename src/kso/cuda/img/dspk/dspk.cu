@@ -70,6 +70,11 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 	cout << num_strides << endl;
 
+	float time;
+	cudaEvent_t start, stop;
+	CHECK( cudaEventCreate(&start) );
+	CHECK( cudaEventCreate(&stop) );
+	CHECK( cudaEventRecord(start, 0) );
 
 
 	// loop over chunks
@@ -273,7 +278,10 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 		// copy back from devicecudaMemcpyDeviceToHost;
 		CHECK(cudaMemcpy(dt + b[s], dt_d + b_d[s], m[s] * sizeof(float), cudaMemcpyDeviceToHost));
 
-
+		CHECK( cudaEventRecord(stop, 0) );
+		CHECK( cudaEventSynchronize(stop) );
+		CHECK( cudaEventElapsedTime(&time, start, stop) );
+		printf("CUDA-measured time:  %3.1f ms \n", time);
 
 
 		cout << "Total bad pixels: " << totBad << endl;
@@ -361,7 +369,7 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	float tmin = 0.01;
 
 
-	denoise(db, tmin, tmax, Niter);
+//	denoise(db, tmin, tmax, Niter);
 
 	py::object own = py::object();
 	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);

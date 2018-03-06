@@ -231,7 +231,7 @@ __global__ void calc_cumsum(float * cs, float * hist, dim3 hsz){
 	m.z = 0;
 
 	// march along y to build cumulative distribution
-	float sum = 0;
+	float sum = 0.0f;
 	for(uint j = 0; j < hsz.y; j++){
 
 		// linear index in histogram
@@ -252,7 +252,12 @@ __global__ void calc_cumsum(float * cs, float * hist, dim3 hsz){
 		uint M = m.x * i + m.y * j;
 
 		cs[M] = cs[M] / sum;
-		//		hist[M] = hist[M] / sum;
+
+		if(sum != 0.0f){
+			hist[M] = hist[M] / sum;
+		} else {
+			hist[M] = 0.0f;
+		}
 
 	}
 

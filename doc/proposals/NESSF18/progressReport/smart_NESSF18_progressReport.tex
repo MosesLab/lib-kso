@@ -10,35 +10,36 @@
 \usepackage{float}
 \usepackage{subcaption}
 
-\newcommand{\SiIV}{Si\,\textsc{iv} 1403 \AA\ }
-\newcommand{\HeII}{He \textsc{ii} 304 \AA\ }
+\newcommand{\SiIV}{Si\,\textsc{iv} 1403 \AA}
+\newcommand{\HeII}{He \textsc{ii} 304 \AA}
 
 \newacro{TR}{transition region}
-\newcommand{\TR}{\ac{TR} }
+\newcommand{\TR}{\ac{TR}}
 \newacro{EE}{explosive event}
-\newcommand{\EE}{\ac{EE} }
+\newcommand{\EE}{\ac{EE}}
+\newcommand{\EEs}{\acp{EE}}
 \newacro{CT}{computed tomography}
-\newcommand{\CT}{\ac{CT} }
+\newcommand{\CT}{\ac{CT}}
 \newacro{CTIS}{computed tomography imaging spectroscopy}
-\newcommand{\CTIS}{\ac{CTIS} }
+\newcommand{\CTIS}{\ac{CTIS}}
 \newacro{MOSES}{\textit{Multi-order Solar EUV Spectrograph}}
-\newcommand{\MOSES}{\ac{MOSES} }
+\newcommand{\MOSES}{\ac{MOSES}}
 \newacro{ESIS}{\textit{EUV Snapshot Imaging Spectrograph}}
-\newcommand{\ESIS}{\ac{ESIS} }
+\newcommand{\ESIS}{\ac{ESIS}}
 \newacro{EUV}{extreme ultraviolet}
-\newcommand{\EUV}{\ac{EUV} }
+\newcommand{\EUV}{\ac{EUV}}
 \newacro{FOV}{field-of-view}
 \newcommand{\FOV}{\ac{FOV}}
 \newacro{CNN}{convolutional neural network}
-\newcommand{\CNN}{\ac{CNN} }
-\newacro{SMART}{smooth multiplicative algebraic reconstruction}
-\newcommand{\SMART}{\ac{SMART} }
+\newcommand{\CNN}{\ac{CNN}}
+\newacro{SMART}{smooth multiplicative algebraic reconstruction technique}
+\newcommand{\SMART}{\ac{SMART}}
 \newacro{SAA}{South-Atlantic Anamoly}
-\newcommand{\SAA}{\ac{SAA} }
+\newcommand{\SAA}{\ac{SAA}}
 \newacro{CINN}{CTIS inversion neural network}
-\newcommand{\CINN}{\ac{CINN} }
+\newcommand{\CINN}{\ac{CINN}}
 \newacro{DIN}{Doppler inversion network}
-\newcommand{\DIN}{\ac{DIN} }
+\newcommand{\DIN}{\ac{DIN}}
 
 \title{\textsc{Progress Report: \\ Neural Networks for Computed Tomography Imaging Spectroscopy of the Solar Atmosphere}}
 \author{Roy Smart \\ \url{roy.smart@montana.edu} \\ Montana State University, Department of Physics \\ Bozeman, MT 59717, USA}
@@ -73,24 +74,47 @@
 	
 		\subsection{CTIS Inversion Neural Networks}
 		
-			Since the ultimate goal of solar spectroscopy is the determination of plasma parameters such as bulk velocity, temperature, density, etc., we don't necessarily need to recover the spectrum from \MOSES observations, just the derived physical quantities that we're interested in. 
+			Since the ultimate goal of solar spectroscopy is the determination of plasma parameters such as bulk velocity, temperature, density, etc., we don't necessarily need to recover the spectrum from \MOSES\ observations, just the derived physical quantities that we're interested in. 
 			Finding a few physical quantities is easier than reconstructing the entire spectrum since they contain less information, easing the ill-posedness of the inversion problem.
-			Contrary to the plan outlined in the NESSF17 proposal, we decided to first construct a neural network that would derive the bulk velocity of \TR plasma by finding the central-tendency (doppler shift) of an input spectrum from a MOSES observation.
+			Contrary to the plan outlined in the NESSF17 proposal, we decided to first construct a neural network that would derive the bulk velocity of \TR\ plasma by finding the central-tendency (doppler shift) of an input spectrum from a MOSES observation.
 
 			This branch from the proposal was temporarily taken since we wanted to be sure that we could solve this simple problem before putting too much effort into a full spectrum inversion.
 			From the development of our \DIN, we were able to see the necessity of a high-performance despiking algorithm for the input dataset.
-			We have completed a pixel-identification module of our despiking alogrithm, and are planning a simple implementation of a pixel replacement module.
+			We have nearly completed a pixel-identification module of our despiking alogrithm, and are planning a simple implementation of a pixel replacement module.
 				
 			\subsubsection{Doppler Inversion Network}
 				
-				Our \DIN is a sophisticated 21x21 kernel that is convolved with MOSES observations to yield the Doppler shift at each pixel.
+				Our \DIN\ is a sophisticated 21x21 kernel that is convolved with MOSES observations to yield the Doppler shift at each pixel.
 				The convolutional kernel is learned through training on MOSES observations where the Doppler shift at each pixel is known a priori.
-				This a priori dataset is formed by using the IRIS \SiIV spectral line as model for the \HeII line observed by \MOSES.
-				The Doppler shift is taken to be the mean along the spectral dimension of the IRIS observations in a -150 to 150 km/s window centered around the \SiIV spectral line.
+				This a priori dataset is formed by using the IRIS \SiIV\ spectral line as model for the \HeII\ line observed by \MOSES.
+				The Doppler shift is taken to be the mean along the spectral dimension of the IRIS observations in a -150 to 150 km/s window centered around the \SiIV\ spectral line.
 				
-				In Figure \ref{dopp_ex} we can see a few examples of our \DIN applied to some spectra with \EE characteristics.
+				During the development of our \DIN, we tested two neural networks to understand how increasing the complexity of the network affects the quality of the results.
+				The first network was dubbed the ``test'' network, and contained relatively few free parameters, while the ``Final'' network had many more free parameters, to increase the predictive power of the network.
+				In Table \ref{nn_table}, we have provided both parameters and results of both networks.
+				Here, we can see that both networks were able to achieve an RMS velocity error better than the theoretical resolution of MOSES (29 km/s).
+				
+				\begin{table}[h!]
+					
+					\centering
+					\begin{tabular}{| l | c c |}
+						\hline
+						& Test & Final \\ \hline
+						Free Parameters & 1.2k & 836k \\
+						Training Images & 4.5k & 4.5k \\				
+						Training time (min) & 3 & 15 \\ 
+						RMS error (km/s) & 12.7 & 10.3 \\
+						Pearson's $r$ & 0.500 & 0.701 \\ \hline				
+					\end{tabular}					
+					\caption{Description of the characteristics and results of two neural networks tested for this progress report. More comprehensive results from the ``Final'' network are presented in later figures.}
+					\label{nn_table}
+					
+				\end{table}
+				
+				In Figure \ref{dopp_ex} we have provided a few validation examples of our method, where we have plotted the reconstructed Doppler velocity along with the ``true'' velocity for comparison. 
+				We chose to show these validation examples since they demonstrated reasonably-high Doppler velocities, characteristic of some types of \acp{EE}
 				We can see that in areas of high signal the network does reasonably well at reproducing the true Doppler shift, while in areas of low signal the Doppler shift is underestimated.
-				
+				We anticipate that the despiking procedure outlined in Section \ref{sec_dspk} will improve results in these low-signal areas, since spikes are more effective at changing the estimated Doppler shift in these areas.
 			
 				\begin{figure*}[h!]
 					\centering
@@ -113,10 +137,25 @@
 						\centering
 						\includegraphics[width=\textwidth]{fig/doppler_1343}
 					\end{subfigure}
-					\caption{Examples of central-tendency inversions. Each image is an IRIS \SiIV spectra scaled into \MOSES resolution. The vertical axis is in km/s and the horizontal axis is in arcsec. The true line center is plotted in orange, and the reconstructed line center is plotted in blue.}
+					\caption{Examples of Doppler inversions. Each image is an IRIS \SiIV\ spectra rebinned into \MOSES\ resolution. The vertical axis is in km/s and the horizontal axis is in arcsec. The true line center is plotted in orange, and the reconstructed line center is plotted in blue.}
 					\label{dopp_ex}
 				\end{figure*}
 
+				In Figure \ref{din_hist} we constructed a histogram of the true velocity vs. the reconstructed velocity for every pixel in our validation dataset to demonstrate the statistical effectiveness of our method.
+				If the DIN reconstruction were perfect, the result of this plot would be a straight line with slope unity (plotted in blue).
+				Immediately, we can see that the reconstruction is not flawless. 
+				There is an obvious spread about the line of perfect reconstruction, biased towards slower speeds.
+				
+				For comparison with Figure \ref{din_hist} we have provided an analogous image (Figure \ref{smart_hist}) prepared using the \SMART, the de-facto standard algorithm for inverting MOSES observations.
+				This image is a scatterplot constructed from a single SUMER O\,\textsc{iii} 703.87 \AA\ raster.
+				Since Figure \ref{smart_hist} is only constructed from a single raster, it contains much less samples than Figure \ref{din_hist}, and therefore the two should not be compared directly.
+				However, SMART's underestimation of velocity is a well-studied phenomenon, so we know that Figure \ref{smart_hist} reasonably demonstrates SMART's capabilities.
+				
+				With the above considerations we can see that according to Figure \ref{dopp_hist} the \DIN\ is much less likely to underestimate the velocity than this implementation of SMART.
+				However these results are still preliminary and obviously need to be verified by applying SMART to the same IRIS dataset used to validate the DIN.
+				
+				A quantitative test that we preformed on Figure \ref{din_hist} was the calculation of Pearson's $r$, a test of linearity.
+				The result, enumerated in Table \ref{nn_table} as $r = 0.701$, we interpret as modest performance, likely polluted by spikes in the input dataset.
 			
 				\begin{figure*}[h!]
 					\centering
@@ -124,33 +163,66 @@
 						\centering
 						\includegraphics[width=\textwidth]{fig/smart_hist}
 						\caption{SMART}
+						\label{smart_hist}
 					\end{subfigure}%
 					~ 
 					\begin{subfigure}[t]{0.5\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/linearity}
-						\caption{CINN}
+						\caption{DIN}
+						\label{din_hist}
 					\end{subfigure}
-					\caption{Doppler velocity reconstruction using both the standard SMART algorithm (applied to SUMER O\,\textsc{iii} 703.87 \AA\ raster), and the CINN algorithm (applied to IRIS Si\,\textsc{iv} 1403 \AA.)}
+					\caption{Reconstructed vs. true Doppler velocity using both the standard \SMART\ algorithm (applied to SUMER O\,\textsc{iii} 703.87 \AA\ raster; courtesy of Charles Kankelborg), and the CINN algorithm (applied to IRIS Si\,\textsc{iv} 1403 \AA.)}
 					\label{dopp_hist}
 				\end{figure*}
 				
-
+				
 							
 			\subsubsection{Despiking Training Data}	\label{sec_dspk}
 			
+				Spikes in IRIS observations are a stochastic process, primarily due to ionospheric particles impacting the CCD detectors.
+				Removal of spikes in our training dataset is important since the network will become distracted trying to reconstruct the spikes, a futile undertaking.
+				This was not considered to be a serious problem during the proposal phase, as there have been several despiking routines written for IRIS.
+				However we failed to appreciate how difficult it would be to apply these routines in an automated fashion to a large section of the IRIS \SiIV\ dataset.
+				
+				There are a multitude of despiking routines available on the IDL SolarSoft libraries, such as \texttt{nospike.pro}, \texttt{array\_despike.pro}, \texttt{despike.pro}.
+				Unfortunately they all identify spikes using the same method: convolution of some kernel with an image to estimate a local mean and standard deviation, and a hard threshold to exclude pixels some number of standard deviations above the mean.
+				This method is often too aggressive in areas of high signal intensity and not aggressive enough in areas of low signal intensity.
+				To use these procedures, we found that we would have to manually tune them for each observation, which would become prohibitive for a large training dataset.
+				
+				 
+			
 				\begin{figure*}[h!]
 					\centering
-					\begin{subfigure}[t]{\textwidth}
+					\begin{subfigure}[t]{0.8\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/orig}
 					\end{subfigure}
 					~ 
-					\begin{subfigure}[t]{\textwidth}
+					\begin{subfigure}[t]{0.8\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/dspk}
 					\end{subfigure}
-					\caption{An example of our despiking algorithm applied to an IRIS \SiIV spectra, the 47th frame of the observation gathered at 07:24:26 on 06-16-2015. The top image is the original data, and the bottom image is the original data with the identified spikes set to zero.}
+					\caption{An example of our despiking algorithm applied to an IRIS \SiIV\ spectra, the 47th frame of the observation gathered at 07:24:26 on 06-16-2015. The top image is the original data, and the bottom image is the original data with the identified spikes set to zero. This frame }
+				\end{figure*}
+				
+				\begin{figure*}[h!]
+					\centering
+					\begin{subfigure}[t]{0.32\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/hist_0}
+					\end{subfigure}
+					~ 
+					\begin{subfigure}[t]{0.32\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/hist_1}
+					\end{subfigure}
+					~ 
+					\begin{subfigure}[t]{0.32\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/hist_2}
+					\end{subfigure}
+					\caption{}
 				\end{figure*}
 		
 		\subsection{MOSES/ESIS Preparation}
