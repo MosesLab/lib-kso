@@ -289,7 +289,7 @@ void denoise(buf * data_buf, float tmin, float tmax, uint Niter){
 
 	}
 
-
+	cudaFree(db->buf_d);
 
 	return;
 
@@ -369,17 +369,43 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 	float tmin = 0.01;
 
 
-//	denoise(db, tmin, tmax, Niter);
+	denoise(db, tmin, tmax, Niter);
 
 	py::object own = py::object();
 	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);
 	py::tuple stride = py::make_tuple(db->sb.z, db->sb.y, db->sb.x);
 	np::dtype dtype = np::dtype::get_builtin<float>();
 
+
 	return np::from_data(db->dt, dtype, shape, stride, own);
 
 }
 
+np::ndarray read_fits_file(){
+
+	uint Niter = 1;
+
+	string cpath = "/kso/iris_l2_20150615_072426_3610091469_raster_t000_r00000.fits";
+//		string cpath = "/kso/iris_l2_20140917_015809_3862257453_raster_t000_r00000.fits";
+
+
+	uint n_threads = 1;
+	uint max_sz = pow(2,30);	// 1 GB
+
+	buf * db = new buf(cpath, max_sz, 1, 1, n_threads);
+
+
+
+	py::object own = py::object();
+	py::tuple shape = py::make_tuple(db->sz.z, db->sz.y, db->sz.x);
+	py::tuple stride = py::make_tuple(db->sb.z, db->sb.y, db->sb.x);
+	np::dtype dtype = np::dtype::get_builtin<float>();
+
+
+
+	return np::from_data(db->dt, dtype, shape, stride, own);
+
+}
 
 }
 

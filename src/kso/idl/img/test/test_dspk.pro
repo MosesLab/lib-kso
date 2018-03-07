@@ -9,12 +9,15 @@ print, SIZE(data)
 
 
 
-;data = dspk(data, sigmas=2.5, Niter=5, mode='both')
-data = nospike(data[*,*,47])
+data = dspk(data, sigmas=3, Niter=5, mode='both')
+openw, 1, 'obs.dat'
+writeu, 1, data
 
-;atv, data[*,*,47]
-atv, data
+print, TYPENAME(data)
 
-;xstepper, data, xsize=1920 * 0.6, ysize = 1080 * 0.6
+atv, data[*,*,54]
+
+
+xstepper, data, xsize=1920 * 0.6, ysize = 1080 * 0.6
 
 end

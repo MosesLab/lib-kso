@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.8)  6 MAR 2018 01:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.8)  7 MAR 2018 03:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -316,23 +316,81 @@ Package caption Info: hyperref package is loaded.
 \c@subfigure=\count117
 \c@subtable=\count118
 )
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2015/09/18 v0.5d Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count119
+\calc@Bcount=\count120
+\calc@Adimen=\dimen133
+\calc@Bdimen=\dimen134
+\calc@Askip=\skip47
+\calc@Bskip=\skip48
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count121
+\calc@Cskip=\skip49
+)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+))
+\AM@pagewidth=\dimen135
+\AM@pageheight=\dimen136
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2015/09/18 v0.5d Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box30
+\AM@toc@title=\toks26
+\c@AM@survey=\count122
+\AM@templatesizebox=\box31
+)
 (./smart_NESSF18_progressReport.aux)
 \openout1 = `smart_NESSF18_progressReport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -370,17 +428,17 @@ LaTeX Font Info:    ... okay on input line 47.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count119
-\scratchdimen=\dimen133
-\scratchbox=\box30
-\nofMPsegments=\count120
-\nofMParguments=\count121
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count122
-\MPscratchDim=\dimen134
-\MPnumerator=\count123
-\makeMPintoPDFobject=\count124
-\everyMPtoPDFconversion=\toks27
+\scratchcounter=\count123
+\scratchdimen=\dimen137
+\scratchbox=\box32
+\nofMPsegments=\count124
+\nofMParguments=\count125
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count126
+\MPscratchDim=\dimen138
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
+\everyMPtoPDFconversion=\toks28
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -396,8 +454,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box31
-Package hyperref Info: Link coloring OFF on input line 47.
+\AtBeginShipoutBox=\box33
+Package hyperref Info: Link coloring OFF on input line 49.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -405,11 +463,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count125
+\c@section@level=\count129
 )
-LaTeX Info: Redefining \ref on input line 47.
-LaTeX Info: Redefining \pageref on input line 47.
-LaTeX Info: Redefining \nameref on input line 47.
+LaTeX Info: Redefining \ref on input line 49.
+LaTeX Info: Redefining \pageref on input line 49.
+LaTeX Info: Redefining \nameref on input line 49.
 
 (./smart_NESSF18_progressReport.out) (./smart_NESSF18_progressReport.out)
 \@outlinefile=\write4
@@ -417,64 +475,64 @@ LaTeX Info: Redefining \nameref on input line 47.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 50.
+LaTeX Font Info:    Try loading font information for U+msa on input line 52.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 50.
+LaTeX Font Info:    Try loading font information for U+msb on input line 52.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Package acronym Info: Label `acro:EE' newly defined as it shall be overridden
-although it is yet undefined on input line 53.
+although it is yet undefined on input line 55.
 Package acronym Info: Label `acro:TR' newly defined as it shall be overridden
-although it is yet undefined on input line 53.
+although it is yet undefined on input line 55.
 Package acronym Info: Label `acro:MOSES' newly defined as it shall be overridde
 n
-although it is yet undefined on input line 54.
+although it is yet undefined on input line 56.
 Package acronym Info: Label `acro:ESIS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 54.
+although it is yet undefined on input line 56.
 Package acronym Info: Label `acro:EUV' newly defined as it shall be overridden
-although it is yet undefined on input line 56.
-Package acronym Info: Label `acro:FOV' newly defined as it shall be overridden
-although it is yet undefined on input line 56.
-Package acronym Info: Label `acro:CNN' newly defined as it shall be overridden
 although it is yet undefined on input line 58.
+Package acronym Info: Label `acro:FOV' newly defined as it shall be overridden
+although it is yet undefined on input line 58.
+Package acronym Info: Label `acro:CNN' newly defined as it shall be overridden
+although it is yet undefined on input line 60.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 Package acronym Info: Label `acro:DIN' newly defined as it shall be overridden
-although it is yet undefined on input line 82.
+although it is yet undefined on input line 84.
 
-<fig/doppler_1182.png, id=85, 398.9304pt x 91.0602pt>
+<fig/doppler_1182.png, id=81, 398.9304pt x 91.0602pt>
 File: fig/doppler_1182.png Graphic file (type png)
 
 <use fig/doppler_1182.png>
-Package pdftex.def Info: fig/doppler_1182.png used on input line 123.
+Package pdftex.def Info: fig/doppler_1182.png used on input line 125.
 (pdftex.def)             Requested size: 230.18253pt x 52.5426pt.
 
-<fig/doppler_1225.png, id=87, 398.9304pt x 91.0602pt>
+<fig/doppler_1225.png, id=83, 398.9304pt x 91.0602pt>
 File: fig/doppler_1225.png Graphic file (type png)
 
 <use fig/doppler_1225.png>
-Package pdftex.def Info: fig/doppler_1225.png used on input line 128.
+Package pdftex.def Info: fig/doppler_1225.png used on input line 130.
 (pdftex.def)             Requested size: 230.18253pt x 52.5426pt.
 
-<fig/doppler_1263.png, id=88, 398.9304pt x 91.0602pt>
+<fig/doppler_1263.png, id=84, 398.9304pt x 91.0602pt>
 File: fig/doppler_1263.png Graphic file (type png)
 
 <use fig/doppler_1263.png>
-Package pdftex.def Info: fig/doppler_1263.png used on input line 133.
+Package pdftex.def Info: fig/doppler_1263.png used on input line 135.
 (pdftex.def)             Requested size: 230.18253pt x 52.5426pt.
 
-<fig/doppler_1343.png, id=89, 398.9304pt x 91.0602pt>
+<fig/doppler_1343.png, id=85, 398.9304pt x 91.0602pt>
 File: fig/doppler_1343.png Graphic file (type png)
 
 <use fig/doppler_1343.png>
-Package pdftex.def Info: fig/doppler_1343.png used on input line 138.
+Package pdftex.def Info: fig/doppler_1343.png used on input line 140.
 (pdftex.def)             Requested size: 230.18253pt x 52.5426pt.
 
 
@@ -482,7 +540,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package acronym Info: Label `acro:SMART' newly defined as it shall be overridde
 n
-although it is yet undefined on input line 149.
+although it is yet undefined on input line 151.
 [2]
 Package epstopdf Info: Source file: <fig/smart_hist.eps>
 (epstopdf)                    date: 2018-03-01 23:36:13
@@ -492,63 +550,108 @@ Package epstopdf Info: Source file: <fig/smart_hist.eps>
 (epstopdf)                    size: 128439 bytes
 (epstopdf)             Command: <repstopdf --outfile=fig/smart_hist-eps-convert
 ed-to.pdf fig/smart_hist.eps>
-(epstopdf)             \includegraphics on input line 164.
+(epstopdf)             \includegraphics on input line 166.
 Package epstopdf Info: Output file is already uptodate.
- <fig/smart_hist-eps-converted-to.pdf, id=108, 699.61375pt x 591.20876pt>
+ <fig/smart_hist-eps-converted-to.pdf, id=104, 699.61375pt x 591.20876pt>
 File: fig/smart_hist-eps-converted-to.pdf Graphic file (type pdf)
 
 <use fig/smart_hist-eps-converted-to.pdf>
 Package pdftex.def Info: fig/smart_hist-eps-converted-to.pdf used on input line
- 164.
+ 166.
 (pdftex.def)             Requested size: 234.8775pt x 198.4824pt.
 
-<fig/linearity.pdf, id=109, 402.71527pt x 315.83257pt>
+<fig/linearity.pdf, id=105, 408.73776pt x 315.83257pt>
 File: fig/linearity.pdf Graphic file (type pdf)
  <use fig/linearity.pdf>
-Package pdftex.def Info: fig/linearity.pdf used on input line 171.
-(pdftex.def)             Requested size: 234.8775pt x 184.2095pt.
+Package pdftex.def Info: fig/linearity.pdf used on input line 173.
+(pdftex.def)             Requested size: 234.8775pt x 181.48665pt.
 
-Overfull \hbox (4.44441pt too wide) in paragraph at lines 162--175
+Overfull \hbox (4.44441pt too wide) in paragraph at lines 164--177
  [][]  [] 
  []
 
 [3 <./fig/doppler_1182.png> <./fig/doppler_1225.png> <./fig/doppler_1263.png> <
 ./fig/doppler_1343.png> <./fig/smart_hist-eps-converted-to.pdf> <./fig/linearit
-y.pdf>] <fig/orig.pdf, id=155, 919.45381pt x 251.81032pt>
-File: fig/orig.pdf Graphic file (type pdf)
- <use fig/orig.pdf>
-Package pdftex.def Info: fig/orig.pdf used on input line 199.
-(pdftex.def)             Requested size: 375.80544pt x 102.92014pt.
+y.pdf>] <fig/orig_1.pdf, id=151, 229.61784pt x 229.61784pt>
+File: fig/orig_1.pdf Graphic file (type pdf)
 
-<fig/dspk.pdf, id=156, 919.45381pt x 251.81032pt>
-File: fig/dspk.pdf Graphic file (type pdf)
- <use fig/dspk.pdf>
-Package pdftex.def Info: fig/dspk.pdf used on input line 204.
-(pdftex.def)             Requested size: 375.80544pt x 102.92014pt.
+<use fig/orig_1.pdf>
+Package pdftex.def Info: fig/orig_1.pdf used on input line 203.
+(pdftex.def)             Requested size: 126.47249pt x 126.47238pt.
+ <fig/despike_1.pdf, id=152, 229.61784pt x 229.61784pt>
+File: fig/despike_1.pdf Graphic file (type pdf)
 
-<fig/hist_0.pdf, id=157, 248.76752pt x 243.1371pt>
+<use fig/despike_1.pdf>
+Package pdftex.def Info: fig/despike_1.pdf used on input line 203.
+(pdftex.def)             Requested size: 126.47249pt x 126.47238pt.
+ <fig/dspk_1.pdf, id=153, 229.61784pt x 229.61784pt>
+File: fig/dspk_1.pdf Graphic file (type pdf)
+
+<use fig/dspk_1.pdf>
+Package pdftex.def Info: fig/dspk_1.pdf used on input line 203.
+(pdftex.def)             Requested size: 126.47249pt x 126.47238pt.
+ <fig/orig_2.pdf, id=154, 229.61784pt x 229.61784pt>
+File: fig/orig_2.pdf Graphic file (type pdf)
+
+<use fig/orig_2.pdf>
+Package pdftex.def Info: fig/orig_2.pdf used on input line 204.
+(pdftex.def)             Requested size: 126.47249pt x 126.47238pt.
+ <fig/despike_2.pdf, id=155, 229.61784pt x 229.61784pt>
+File: fig/despike_2.pdf Graphic file (type pdf)
+
+<use fig/despike_2.pdf>
+Package pdftex.def Info: fig/despike_2.pdf used on input line 204.
+(pdftex.def)             Requested size: 126.47249pt x 126.47238pt.
+ <fig/dspk_2.pdf, id=156, 229.61784pt x 229.61784pt>
+File: fig/dspk_2.pdf Graphic file (type pdf)
+
+<use fig/dspk_2.pdf>
+Package pdftex.def Info: fig/dspk_2.pdf used on input line 204.
+(pdftex.def)             Requested size: 126.47249pt x 126.47238pt.
+ <fig/hist_0.pdf, id=157, 238.6748pt x 242.83911pt>
 File: fig/hist_0.pdf Graphic file (type pdf)
- <use fig/hist_0.pdf>
+
+<use fig/hist_0.pdf>
 Package pdftex.def Info: fig/hist_0.pdf used on input line 213.
-(pdftex.def)             Requested size: 150.32504pt x 146.92216pt.
-
-<fig/hist_1.pdf, id=158, 248.76752pt x 243.1371pt>
+(pdftex.def)             Requested size: 135.2868pt x 137.6453pt.
+ <fig/hist_1.pdf, id=158, 238.6748pt x 242.83911pt>
 File: fig/hist_1.pdf Graphic file (type pdf)
- <use fig/hist_1.pdf>
+
+<use fig/hist_1.pdf>
 Package pdftex.def Info: fig/hist_1.pdf used on input line 218.
-(pdftex.def)             Requested size: 150.32504pt x 146.92216pt.
-
-<fig/hist_2.pdf, id=159, 248.76752pt x 243.1371pt>
+(pdftex.def)             Requested size: 135.2868pt x 137.6453pt.
+ <fig/hist_2.pdf, id=159, 238.6748pt x 242.83911pt>
 File: fig/hist_2.pdf Graphic file (type pdf)
- <use fig/hist_2.pdf>
+
+<use fig/hist_2.pdf>
 Package pdftex.def Info: fig/hist_2.pdf used on input line 223.
-(pdftex.def)             Requested size: 150.32504pt x 146.92216pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 252.
+(pdftex.def)             Requested size: 135.2868pt x 137.6453pt.
+ <fig/cbar.pdf, id=160, 47.36696pt x 182.73865pt>
+File: fig/cbar.pdf Graphic file (type pdf)
 
-[4 <./fig/orig.pdf> <./fig/dspk.pdf
+<use fig/cbar.pdf>
+Package pdftex.def Info: fig/cbar.pdf used on input line 228.
+(pdftex.def)             Requested size: 37.10817pt x 143.17131pt.
+ [4 <./fig/orig_1.pdf> <./fig/despike_1.pdf
 
-pdfTeX warning: /usr/bin/pdflatex (file ./fig/dspk.pdf): PDF inclusion: multipl
-e pdfs with page group included in a single page
+pdfTeX warning: /usr/bin/pdflatex (file ./fig/despike_1.pdf): PDF inclusion: mu
+ltiple pdfs with page group included in a single page
+> <./fig/dspk_1.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./fig/dspk_1.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+> <./fig/orig_2.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./fig/orig_2.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+> <./fig/despike_2.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./fig/despike_2.pdf): PDF inclusion: mu
+ltiple pdfs with page group included in a single page
+> <./fig/dspk_2.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./fig/dspk_2.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
 > <./fig/hist_0.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ./fig/hist_0.pdf): PDF inclusion: multi
@@ -561,24 +664,75 @@ ple pdfs with page group included in a single page
 
 pdfTeX warning: /usr/bin/pdflatex (file ./fig/hist_2.pdf): PDF inclusion: multi
 ple pdfs with page group included in a single page
->] [5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 252.
+> <./fig/cbar.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./fig/cbar.pdf): PDF inclusion: multipl
+e pdfs with page group included in a single page
+>] [5] <../schedule/NESSF18_schedule.pdf, id=250, 794.97pt x 614.295pt>
+File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
+
+<use ../schedule/NESSF18_schedule.pdf>
+Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf used on input line 25
+6.
+(pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
+File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
+ <use ../schedule/NESSF18_schedule.pdf>
+Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf used on input line 25
+6.
+(pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
+
+<../schedule/NESSF18_schedule.pdf, id=253, page=1, 794.97pt x 614.295pt>
+File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
+
+<use ../schedule/NESSF18_schedule.pdf, page 1>
+Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf, page1 used on input 
+line 256.
+(pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
+File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
+
+<use ../schedule/NESSF18_schedule.pdf, page 1>
+Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf, page1 used on input 
+line 256.
+(pdftex.def)             Requested size: 795.3441pt x 614.58406pt.
+File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
+
+<use ../schedule/NESSF18_schedule.pdf, page 1>
+Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf, page1 used on input 
+line 256.
+(pdftex.def)             Requested size: 795.3441pt x 614.58406pt.
+File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
+
+<use ../schedule/NESSF18_schedule.pdf, page 1>
+Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf, page1 used on input 
+line 256.
+(pdftex.def)             Requested size: 795.3441pt x 614.58406pt.
+File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
+
+<use ../schedule/NESSF18_schedule.pdf, page 1>
+Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf, page1 used on input 
+line 256.
+(pdftex.def)             Requested size: 795.3441pt x 614.58406pt.
+ [6
+
+ <../schedule/NESSF18_schedule.pdf, page is rotated 90 degrees>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 260.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 260.
  (./smart_NESSF18_progressReport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 252.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 252.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 260.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 260.
 Package rerunfilecheck Info: File `smart_NESSF18_progressReport.out' has not ch
 anged.
-(rerunfilecheck)             Checksum: AA335C9242F16CF3D2E9F6EB4D7BA2DF;1106.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 252.
+(rerunfilecheck)             Checksum: 253E0D2CECA75F743F4D9505B46D5358;1044.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 260.
  ) 
 Here is how much of TeX's memory you used:
- 8189 strings out of 493029
- 121695 string characters out of 6136234
- 223257 words of memory out of 5000000
- 11576 multiletter control sequences out of 15000+600000
+ 9376 strings out of 493029
+ 138789 string characters out of 6136234
+ 248415 words of memory out of 5000000
+ 12725 multiletter control sequences out of 15000+600000
  13087 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,8n,40p,482b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,18n,43p,481b,528s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
@@ -589,10 +743,10 @@ s/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb>
-Output written on smart_NESSF18_progressReport.pdf (5 pages, 594597 bytes).
+Output written on smart_NESSF18_progressReport.pdf (6 pages, 616571 bytes).
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 183 compressed objects within 2 object streams
+ 358 PDF objects out of 1000 (max. 8388607)
+ 197 compressed objects within 2 object streams
  27 named destinations out of 1000 (max. 500000)
- 184 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 

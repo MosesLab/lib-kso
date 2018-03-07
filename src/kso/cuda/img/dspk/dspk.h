@@ -46,7 +46,7 @@ np::ndarray denoise_fits_file_quartiles(const np::ndarray & q2,
 		const np::ndarray & hist, const np::ndarray & cumsum, const np::ndarray & t0, const np::ndarray & t1,
 		uint hsx, uint hsy, uint k_sz);
 
-
+np::ndarray read_fits_file();
 
 
 

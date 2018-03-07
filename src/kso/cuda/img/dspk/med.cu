@@ -54,7 +54,7 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 	if((((uint) t0[X]) >= Y) or (((uint) t1[X]) <= Y)){
 
 		gm[L] = 0.0f;
-		dt[L] = 0.0f;
+		dt[L] = CUDART_NAN_F;
 		atomicAdd(new_bad, 1);
 
 	}
@@ -129,7 +129,7 @@ __global__ void calc_gm(float * gm, uint * new_bad, float * dt, float * q2, floa
 	if(votes >= (tot_wgt)){
 
 		gm[L] = 0.0f;
-				dt[L] = 0.0f;
+				dt[L] = CUDART_NAN_F;
 				atomicAdd(new_bad, 1);
 
 	}

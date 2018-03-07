@@ -9,7 +9,7 @@
 #define MED_H_
 
 #include <vector>
-
+#include <math_constants.h>
 #include "util/util.h"
 
 namespace kso {

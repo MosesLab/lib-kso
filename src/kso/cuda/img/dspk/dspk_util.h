@@ -15,6 +15,7 @@
 #include <string>
 #include <cuda.h>
 
+
 #include "util/util.h"
 #include "util/stride.h"
 

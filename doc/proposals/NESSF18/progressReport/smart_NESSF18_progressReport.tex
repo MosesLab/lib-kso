@@ -9,6 +9,8 @@
 \usepackage[nolist,nohyperlinks]{acronym}
 \usepackage{float}
 \usepackage{subcaption}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
 
 \newcommand{\SiIV}{Si\,\textsc{iv} 1403 \AA}
 \newcommand{\HeII}{He \textsc{ii} 304 \AA}
@@ -188,39 +190,42 @@
 				There are a multitude of despiking routines available on the IDL SolarSoft libraries, such as \texttt{nospike.pro}, \texttt{array\_despike.pro}, \texttt{despike.pro}.
 				Unfortunately they all identify spikes using the same method: convolution of some kernel with an image to estimate a local mean and standard deviation, and a hard threshold to exclude pixels some number of standard deviations above the mean.
 				This method is often too aggressive in areas of high signal intensity and not aggressive enough in areas of low signal intensity.
+				For example, setting the 
 				To use these procedures, we found that we would have to manually tune them for each observation, which would become prohibitive for a large training dataset.
 				
-				 
+				
 			
-				\begin{figure*}[h!]
+				\begin{figure}
+					
 					\centering
-					\begin{subfigure}[t]{0.8\textwidth}
-						\centering
-						\includegraphics[width=\textwidth]{fig/orig}
-					\end{subfigure}
-					~ 
-					\begin{subfigure}[t]{0.8\textwidth}
-						\centering
-						\includegraphics[width=\textwidth]{fig/dspk}
-					\end{subfigure}
-					\caption{An example of our despiking algorithm applied to an IRIS \SiIV\ spectra, the 47th frame of the observation gathered at 07:24:26 on 06-16-2015. The top image is the original data, and the bottom image is the original data with the identified spikes set to zero. This frame }
-				\end{figure*}
+					\begin{tabular}{c c c c}
+						& Original & Despike & Ours \\
+						Region 1 & \includegraphics[width=1.75in]{fig/orig_1} & \includegraphics[width=1.75in]{fig/despike_1} & \includegraphics[width=1.75in]{fig/dspk_1} \\
+						Region 2 & \includegraphics[width=1.75in]{fig/orig_2} & \includegraphics[width=1.75in]{fig/despike_2} & \includegraphics[width=1.75in]{fig/dspk_2} \\
+					\end{tabular}
+					
+				\end{figure}
 				
 				\begin{figure*}[h!]
 					\centering
-					\begin{subfigure}[t]{0.32\textwidth}
+					\begin{subfigure}[t]{0.288\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/hist_0}
 					\end{subfigure}
 					~ 
-					\begin{subfigure}[t]{0.32\textwidth}
+					\begin{subfigure}[t]{0.288\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/hist_1}
 					\end{subfigure}
 					~ 
-					\begin{subfigure}[t]{0.32\textwidth}
+					\begin{subfigure}[t]{0.288\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/hist_2}
+					\end{subfigure}
+					~ 
+					\begin{subfigure}[t]{0.079\textwidth}
+						\centering
+						\includegraphics[width=\textwidth]{fig/cbar}
 					\end{subfigure}
 					\caption{}
 				\end{figure*}
@@ -244,9 +249,12 @@
 			
 		
 		\subsection{MOSES/ESIS Launch}
-		
-		\subsection{Publications}
+
 	
 	\section{Conclusion}
+	\begin{landscape}
+		\includepdf[pages=-,landscape=true]{../schedule/NESSF18_schedule}
+%\includegraphics[width=\textwidth]{../schedule/NESSF18_schedule}
+	\end{landscape}
 	
 \end{document}

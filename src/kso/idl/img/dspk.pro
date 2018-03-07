@@ -188,7 +188,8 @@ print, typename(neighborhood_mean)
 ;Replace bad pixels
 bad = where(~goodmap)
 result = float(data)
-if bad[0] ne -1 then result[bad] = neighborhood_mean[bad]
+;if bad[0] ne -1 then result[bad] = neighborhood_mean[bad]
+result[bad] = !VALUES.F_NAN
 
 ;Restore the bad crap that was filtered out of the data when we started. Also put the
 ;bad crap into the result.
