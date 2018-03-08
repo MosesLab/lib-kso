@@ -9,7 +9,7 @@ print, SIZE(data)
 
 
 
-data = dspk(data, sigmas=3, Niter=5, mode='both')
+data = dspk(data, sigmas=3.5, Niter=5, mode='both')
 openw, 1, 'obs.dat'
 writeu, 1, data
 

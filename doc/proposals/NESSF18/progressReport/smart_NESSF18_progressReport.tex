@@ -11,6 +11,8 @@
 \usepackage{subcaption}
 \usepackage{pdflscape}
 \usepackage{pdfpages}
+\usepackage{array}
+\usepackage{booktabs}
 
 \newcommand{\SiIV}{Si\,\textsc{iv} 1403 \AA}
 \newcommand{\HeII}{He \textsc{ii} 304 \AA}
@@ -187,22 +189,38 @@
 				This was not considered to be a serious problem during the proposal phase, as there have been several despiking routines written for IRIS.
 				However we failed to appreciate how difficult it would be to apply these routines in an automated fashion to a large section of the IRIS \SiIV\ dataset.
 				
-				There are a multitude of despiking routines available on the IDL SolarSoft libraries, such as \texttt{nospike.pro}, \texttt{array\_despike.pro}, \texttt{despike.pro}.
+				There are a multitude of despiking routines available on the IDL SolarSoft libraries, such as \texttt{nospike.pro}, \texttt{array\_despike.pro}, \texttt{iris\_prep\_despike.pro}.
 				Unfortunately they all identify spikes using the same method: convolution of some kernel with an image to estimate a local mean and standard deviation, and a hard threshold to exclude pixels some number of standard deviations above the mean.
 				This method is often too aggressive in areas of high signal intensity and not aggressive enough in areas of low signal intensity.
-				For example, setting the 
-				To use these procedures, we found that we would have to manually tune them for each observation, which would become prohibitive for a large training dataset.
+				In Figure \ref{dspk_ex}, we can see an example of this behavior: the explosive event in the bottom row has become eroded from \texttt{iris\_prep\_despike.pro}, while many of the spikes in the top row are only partially identified.
+				Considering this behavior, to use these procedures we found that we would have to manually tune them for each observation, which would become prohibitive for a training dataset composed of many IRIS observations.
 				
+				Instead of estimating the mean and standard deviation, our method uses a median-percentile based approach, where pixels are marked as spikes if their value is larger than 99\% (for example) of all other pixels with the same median. 
+				This is accomplished by calculating a local median for every pixel in the observation, and then constructing a histogram of median vs. pixel value for each observation.
+				From this histogram, we can then determine the bad pixel threshold as a function of the local median.
+				Finally, this procedure was performed independently along each axis (wavelength, space, time) and we required that a pixel must be above the threshold for all three axes to be marked as a spike.
+				A visualization of this procedure is presented in Figure \ref{dspk_hist}, where we can see the threshold used to perform the despiking seen in Figure \ref{dspk_ex}.		
+				We have developed a GPU implementation of this despiking procedure, resulting in code that is at least 10x faster than current methods while being much more discriminatory.
 				
 			
-				\begin{figure}
+				\begin{figure}[h!]
 					
 					\centering
-					\begin{tabular}{c c c c}
-						& Original & Despike & Ours \\
-						Region 1 & \includegraphics[width=1.75in]{fig/orig_1} & \includegraphics[width=1.75in]{fig/despike_1} & \includegraphics[width=1.75in]{fig/dspk_1} \\
-						Region 2 & \includegraphics[width=1.75in]{fig/orig_2} & \includegraphics[width=1.75in]{fig/despike_2} & \includegraphics[width=1.75in]{fig/dspk_2} \\
+					\renewcommand{\arraystretch}{0}
+					\setlength{\tabcolsep}{0pt}
+					\begin{tabular}{m{0.1\textwidth} m{0.3\textwidth} m{0.3\textwidth} m{0.3\textwidth} @{}m{0pt}@{}}
+						& \centering Original & \centering \texttt{iris\_prep\_despike.pro} & \centering Our Method & \\[5mm]
+						Region 1 & \includegraphics[width=0.3\textwidth]{fig/orig_1} & \includegraphics[width=0.3\textwidth]{fig/despike_1} & \includegraphics[width=0.3\textwidth]{fig/dspk_1} & \\
+						Region 2 & \includegraphics[width=0.3\textwidth]{fig/orig_2} & \includegraphics[width=0.3\textwidth]{fig/despike_2} & \includegraphics[width=0.3\textwidth]{fig/dspk_2} & \\
 					\end{tabular}
+					
+					\caption{An example of both the standard despiking algorithm and our spike identification algorithm applied to an IRIS \SiIV\ observation gathered at 07:24:26 on 06-16-2015.
+						Pixels containing spikes are marked red by each algorithm.
+						We present cutouts from frames 24 and 50 to demonstrate how susceptible each algorithm is to false spike identifications. 
+						The frame on the top row was taken inside the \SAA, and provides examples of many types of spikes intended to show the false negatives identified by each algorithm.
+						The frame on the bottom row is an example of an \EE, and serves as an example of the false positives identified by each algorithm.}
+					
+					\label{dspk_ex}
 					
 				\end{figure}
 				
@@ -211,44 +229,44 @@
 					\begin{subfigure}[t]{0.288\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/hist_0}
+						\caption{Wavelength}
 					\end{subfigure}
 					~ 
 					\begin{subfigure}[t]{0.288\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/hist_1}
+						\caption{Space}
 					\end{subfigure}
 					~ 
 					\begin{subfigure}[t]{0.288\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/hist_2}
+						\caption{Time}
 					\end{subfigure}
 					~ 
 					\begin{subfigure}[t]{0.079\textwidth}
 						\centering
 						\includegraphics[width=\textwidth]{fig/cbar}
 					\end{subfigure}
-					\caption{}
+					
+					\caption{Column-normalized histogram along each axis for the observation in Figure \ref{dspk_ex}.
+						Each column has been divided by its total to understand the distribution of values about a particular median.
+						The 1\% and 99\% thresholds have been plotted in white.
+						Horizontal and vertical axes are in DN.}
+					
+					\label{dspk_hist}
+					
 				\end{figure*}
-		
-		\subsection{MOSES/ESIS Preparation}
 		
 		\subsection{FURST Design}
 	
 	\section{Proposal for Renewal}
 	
-		\subsection{Further CINN Development}
+		\subsection{MOSES Inversion GAN} \label{sec_gan}
 		
-			\subsubsection{Training Data Pipeline}
-		
-			\subsubsection{Quantile Inversion Network}
-			
-			\subsection{Generative-Adversarial Networks}	\label{sec_gan}
 		
 		\subsection{Explosive Event Classification}
 		
-			
-		
-		\subsection{MOSES/ESIS Launch}
 
 	
 	\section{Conclusion}
