@@ -14,8 +14,8 @@
 \usepackage{array}
 \usepackage{booktabs}
 
-\newcommand{\SiIV}{Si\,\textsc{iv} 1403 \AA}
-\newcommand{\HeII}{He \textsc{ii} 304 \AA}
+\newcommand{\SiIV}{Si\,\textsc{iv}~1403\,\AA}
+\newcommand{\HeII}{He \textsc{ii}~304\,\AA}
 
 \newacro{TR}{transition region}
 \newcommand{\TR}{\ac{TR}}
@@ -58,51 +58,21 @@
 	\section{Introduction}
 	
 		The goal outlined in my NESSF17 proposal was to classify \EEs\ in the solar \TR\ according to their 2D spatial structure.
-		We proposed to accomplish this goal using two instruments optimized towards observing explosive events, the \MOSES, and the \ESIS.
-		These instruments are members of a class of spectrographs known as snapshot imaging spectrographs, which can spectrally-resolve a 2D \FOV\ in a single snapshot, as opposed to imaging spectrographs, such as IRIS, which can only spectrally-resolve a 2D \FOV\ through rastering.
+		I proposed to accomplish this goal using two instruments optimized towards observing explosive events, the \MOSES, and the \ESIS.
+		These instruments are members of a class of spectrographs known as snapshot imaging spectrographs, which can spectrally-resolve a 2D \FOV\ in a single snapshot, as opposed to imaging spectrographs, such as \IRIS, which can only spectrally-resolve a 2D \FOV\ through rastering.
 		Snapshot imaging spectrographs are needed to adequately characterize the spatial structure of \EEs, since the \EEs\ evolve faster than the rastering timescale of \IRIS.
 		
-		\MOSES\ and \ESIS\ are a type of snapshot imaging spectograph known as a \CTIS.
-		A \CTIS\ observes a 2D \FOV\ by simply removing the slit used by imaging spectrographs.
+		\MOSES\ and \ESIS\ are a type of snapshot imaging spectograph known as a \CTIS, which takes a snapshot of a 2D \FOV\ by simply removing the slit used by imaging spectrographs.
 		Without the slit, space and spectrum become confused, and so images are taken at several diffraction orders/angles to provide more information about the scene.
 		These images can be combined to form a spectrally-resolved 2D scene using \CT inversion algorithms, hence the name \CTIS.
-		Spectrally-resolving \MOSES\ and \ESIS\ data is an ill-posed inversion problem because they only image in a limited number of diffraction orders/angles.
+		Spectrally-resolving \MOSES\ and \ESIS\ data is an ill-posed inversion problem because they only image in a limited number (3-6) of diffraction orders/angles.
 		
-		To address the ill-posedness of the inversion problem, we imagined constructing a dictionary, where 
-		
-		To alleviate the ill-posedness of the \MOSES/\ESIS inversion problem, we proposed an algorithm that used an empirical model of the sun to predict the expected (average) spectrally-resolved scene for a given set of input images.
-		
-		An important aspect of our proposal intended to alleviate the ill-posedness of the \MOSES inversion problem was 
-		
-		Our goal in this investigation is to classify \EEs\ in the solar \TR\ according to their 2D spatial structure.
-		
-		The 
-		We proposed to develop a \CNN-based \CT\ algorithm to analyze data from the \MOSES and \ESIS experiments
-		
-		
-		accomplish this goal using observations from two sounding rocket-borne instruments the \ac{MOSES}, and the \ac{ESIS}, of which \ac{MOSES}.
-		
-		
-		
-		 has successfully flown in 2006 and 2015, and \ac{ESIS} is scheduled to launch alongside \ac{MOSES} in 2019.
-		These spectrographs are unique in that they lack the slit used by traditional spectrographs, instead allowing space and spectrum to become overlapped onto a detector.
-		By using narrow bandpass filters and imaging in several diffraction orders, these instruments have the capability to spectrally-resolve a few \ac{EUV} emission lines over a large 2D \ac{FOV}.
-		This class of spectrograph is known as a \CTIS, since interpreting their observations can be reduced to a problem in \CT\.
-		However since MOSES and ESIS image only a few diffraction orders 
-		
-		An important part of our NESSF17 proposal was the development of an improved \CT\ algorithm f
-
-		
-		We proposed to accomplish this goal using observations from two snapshot imaging spectrographs, the \ac{MOSES}, and the \ac{ESIS}, of which \ac{MOSES} has successfully flown in 2006 and 2015, and \ac{ESIS} is scheduled to launch alongside \ac{MOSES} in 2019.
-		
-		These spectrographs are unique in that they have the capability to spectrally-resolve a few \ac{EUV} emission lines over a large 2D \ac{FOV}.
-		However, this capability depends on the development of robust inversion algorithms that can interpret the data correctly.
-		Therfore, the integral part of our proposal was the development of a \ac{CNN}-based inversion algorithm that used the IRIS Si\,\textsc{iv} 1403 \AA\ spectral observations as a model for the \ac{EUV} emission lines observed by MOSES and ESIS.
-		
-		During the course of our investigation, we found that achieving a full spectrum inversion superior to those demonstrated in the proposal would require a more sophisticated network than previously anticipated.
-		This modification will be discussed in Section \ref{sec_gan}, but we were able to build a useful network using our proposed architecture, a central-tendency neural network.
-		Instead of reconstructing the full spectrum, this network simply reconstructs the central-tendency (bulk doppler shift), which is a much easier problem to solve.
-		Unfortunately, out central-tendency network is easily confounded by spikes in the training set, which necessitated the development of a high-performance image despking routine, discussed in Section \ref{sec_dspk}.
+		A brute-force approach to addressing this ill-posed inversion problem would be to use a forward model of a \MOSES/\ESIS and an a priori model of solar \TR spectra to create a dictionary of spectral structures and their corresponding signature on the \CTIS detectors.
+		This would allow observations to be matched to entries in this dictionary to recover a spectrally-resolved scene.
+		I am developing a \CNN-based procedure, that uses \IRIS \SiIV observations as a model of the solar \TR, as an approximation to the above brute-force approach, which will spectrally-resolve the observations gathered by \MOSES and \ESIS.
+			
+		I have completed a simple realization of a \CINN for the \MOSES instrument, the \DIN, which reconstructs the Doppler-shift of the spectral line profile.
+		We found that our implementation of a \DIN was more accurate at large Doppler velocities than existing \CT algorithms 
 		
 	
 	\section{Progress Report}
