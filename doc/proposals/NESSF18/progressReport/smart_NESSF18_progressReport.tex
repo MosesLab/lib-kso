@@ -36,6 +36,7 @@
 \newcommand{\FOV}{\ac{FOV}}
 \newacro{CNN}{convolutional neural network}
 \newcommand{\CNN}{\ac{CNN}}
+\newcommand{\CNNs}{\acp{CNN}}
 \newacro{SMART}{smooth multiplicative algebraic reconstruction technique}
 \newcommand{\SMART}{\ac{SMART}}
 \newacro{SAA}{South-Atlantic Anamoly}
@@ -44,6 +45,8 @@
 \newcommand{\CINN}{\ac{CINN}}
 \newacro{DIN}{Doppler inversion network}
 \newcommand{\DIN}{\ac{DIN}}
+\newacro{IRIS}{\textit{Interface Region Imaging Spectrograph}}
+\newcommand{\IRIS}{\ac{IRIS}}
 
 \title{\textsc{Progress Report: \\ Neural Networks for Computed Tomography Imaging Spectroscopy of the Solar Atmosphere}}
 \author{Roy Smart \\ \url{roy.smart@montana.edu} \\ Montana State University, Department of Physics \\ Bozeman, MT 59717, USA}
@@ -54,7 +57,42 @@
 	
 	\section{Introduction}
 	
-		The goal of this investigation is to classify \acp{EE} in the solar \ac{TR} using snapshot imaging spectroscopy. 
+		The goal outlined in my NESSF17 proposal was to classify \EEs\ in the solar \TR\ according to their 2D spatial structure.
+		We proposed to accomplish this goal using two instruments optimized towards observing explosive events, the \MOSES, and the \ESIS.
+		These instruments are members of a class of spectrographs known as snapshot imaging spectrographs, which can spectrally-resolve a 2D \FOV\ in a single snapshot, as opposed to imaging spectrographs, such as IRIS, which can only spectrally-resolve a 2D \FOV\ through rastering.
+		Snapshot imaging spectrographs are needed to adequately characterize the spatial structure of \EEs, since the \EEs\ evolve faster than the rastering timescale of \IRIS.
+		
+		\MOSES\ and \ESIS\ are a type of snapshot imaging spectograph known as a \CTIS.
+		A \CTIS\ observes a 2D \FOV\ by simply removing the slit used by imaging spectrographs.
+		Without the slit, space and spectrum become confused, and so images are taken at several diffraction orders/angles to provide more information about the scene.
+		These images can be combined to form a spectrally-resolved 2D scene using \CT inversion algorithms, hence the name \CTIS.
+		Spectrally-resolving \MOSES\ and \ESIS\ data is an ill-posed inversion problem because they only image in a limited number of diffraction orders/angles.
+		
+		To address the ill-posedness of the inversion problem, we imagined constructing a dictionary, where 
+		
+		To alleviate the ill-posedness of the \MOSES/\ESIS inversion problem, we proposed an algorithm that used an empirical model of the sun to predict the expected (average) spectrally-resolved scene for a given set of input images.
+		
+		An important aspect of our proposal intended to alleviate the ill-posedness of the \MOSES inversion problem was 
+		
+		Our goal in this investigation is to classify \EEs\ in the solar \TR\ according to their 2D spatial structure.
+		
+		The 
+		We proposed to develop a \CNN-based \CT\ algorithm to analyze data from the \MOSES and \ESIS experiments
+		
+		
+		accomplish this goal using observations from two sounding rocket-borne instruments the \ac{MOSES}, and the \ac{ESIS}, of which \ac{MOSES}.
+		
+		
+		
+		 has successfully flown in 2006 and 2015, and \ac{ESIS} is scheduled to launch alongside \ac{MOSES} in 2019.
+		These spectrographs are unique in that they lack the slit used by traditional spectrographs, instead allowing space and spectrum to become overlapped onto a detector.
+		By using narrow bandpass filters and imaging in several diffraction orders, these instruments have the capability to spectrally-resolve a few \ac{EUV} emission lines over a large 2D \ac{FOV}.
+		This class of spectrograph is known as a \CTIS, since interpreting their observations can be reduced to a problem in \CT\.
+		However since MOSES and ESIS image only a few diffraction orders 
+		
+		An important part of our NESSF17 proposal was the development of an improved \CT\ algorithm f
+
+		
 		We proposed to accomplish this goal using observations from two snapshot imaging spectrographs, the \ac{MOSES}, and the \ac{ESIS}, of which \ac{MOSES} has successfully flown in 2006 and 2015, and \ac{ESIS} is scheduled to launch alongside \ac{MOSES} in 2019.
 		
 		These spectrographs are unique in that they have the capability to spectrally-resolve a few \ac{EUV} emission lines over a large 2D \ac{FOV}.
