@@ -14,6 +14,9 @@
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage[round]{natbib}
+\usepackage{setspace}
+
+
 \bibliographystyle{plainnat}
 
 
@@ -23,60 +26,45 @@
 
 \newcommand{\tilewidth}{0.25\textwidth}
 
-
-\newacro{TR}{transition region}
 \newcommand{\TR}{\ac{TR}}
-\newacro{EE}{explosive event}
 \newcommand{\EE}{\ac{EE}}
 \newcommand{\EEs}{\acp{EE}}
-\newacro{CT}{computed tomography}
 \newcommand{\CT}{\ac{CT}}
-\newacro{CTIS}{computed tomography imaging spectrograph}
 \newcommand{\CTIS}{\ac{CTIS}}
-\newacro{MOSES}{\textit{Multi-order Solar EUV Spectrograph}}
 \newcommand{\MOSES}{\ac{MOSES}}
-\newacro{ESIS}{\textit{EUV Snapshot Imaging Spectrograph}}
 \newcommand{\ESIS}{\ac{ESIS}}
-\newacro{EUV}{extreme ultraviolet}
 \newcommand{\EUV}{\ac{EUV}}
-\newacro{FOV}{field-of-view}
 \newcommand{\FOV}{\ac{FOV}}
-\newacro{NN}{neural network}
 \newcommand{\NN}{\ac{NN}}
 \newcommand{\NNs}{\acp{NN}}
-\newacro{CNN}{convolutional neural network}
 \newcommand{\CNN}{\ac{CNN}}
 \newcommand{\CNNs}{\acp{CNN}}
-\newacro{SMART}{smooth multiplicative algebraic reconstruction technique}
 \newcommand{\SMART}{\ac{SMART}}
-\newacro{SAA}{South-Atlantic Anamoly}
 \newcommand{\SAA}{\ac{SAA}}
-\newacro{CINN}{CTIS inversion neural network}
 \newcommand{\CINN}{\ac{CINN}}
 \newcommand{\CINNs}{\acp{CINN}}
-\newacro{DIN}{Doppler inversion network}
 \newcommand{\DIN}{\ac{DIN}}
-\newacro{SPIN}{spectral profile inversion network}
 \newcommand{\SPIN}{\ac{SPIN}}
-\newacro{IRIS}{\textit{Interface Region Imaging Spectrograph}}
 \newcommand{\IRIS}{\ac{IRIS}}
-\newacro{CRS}{cosmic ray spikes}
 \newcommand{\CRS}{\ac{CRS}}
 \newcommand{\CRSs}{\acp{CRS}}
-\newacro{GPU}{graphics processing unit}
 \newcommand{\GPU}{\ac{GPU}}
-\newacro{GAN}{generative adversarial network}
 \newcommand{\GAN}{\ac{GAN}}
-\newacro{SNR}{signal-to-noise ratio}
 \newcommand{\SNR}{\ac{SNR}}
+\newcommand{\PSF}{\ac{PSF}}
+
 
 \title{\textsc{Progress Report: \\ Neural Networks for Computed Tomography Imaging Spectroscopy of the Solar Atmosphere}}
 \author{Roy Smart \\ \url{roy.smart@montana.edu} \\ Montana State University, Department of Physics \\ Bozeman, MT 59717, USA}
 
 
 \begin{document}
+
+
 	
 	\maketitle
+	
+%	\doublespacing
 	
 	\section{Introduction}
 	
@@ -160,22 +148,22 @@
 		
 			\begin{figure*}[t!]
 				\centering
-				\begin{subfigure}[t]{0.49\textwidth}
+				\begin{subfigure}[t]{0.45\textwidth}
 					\centering
 					\includegraphics[width=\textwidth]{fig/doppler_1182}
 				\end{subfigure}
 				~ 
-				\begin{subfigure}[t]{0.49\textwidth}
+				\begin{subfigure}[t]{0.45\textwidth}
 					\centering
 					\includegraphics[width=\textwidth]{fig/doppler_1225}
 				\end{subfigure}
 				~ 
-				\begin{subfigure}[t]{0.49\textwidth}
+				\begin{subfigure}[t]{0.45\textwidth}
 					\centering
 					\includegraphics[width=\textwidth]{fig/doppler_1263}
 				\end{subfigure}
 				~ 
-				\begin{subfigure}[t]{0.49\textwidth}
+				\begin{subfigure}[t]{0.45\textwidth}
 					\centering
 					\includegraphics[width=\textwidth]{fig/doppler_1343}
 				\end{subfigure}
@@ -190,14 +178,14 @@
 			
 			\begin{figure*}[t!]
 				\centering
-				\begin{subfigure}[t]{0.5\textwidth}
+				\begin{subfigure}[t]{0.45\textwidth}
 					\centering
 					\includegraphics[width=\textwidth]{fig/smart_hist}
 					\caption{SMART}
 					\label{smart_hist}
 				\end{subfigure}%
 				~ 
-				\begin{subfigure}[t]{0.5\textwidth}
+				\begin{subfigure}[t]{0.45\textwidth}
 					\centering	
 					\includegraphics[width=\textwidth]{fig/linearity}
 					\caption{DIN}
@@ -212,7 +200,7 @@
 			This test can be represented as a scatterplot since it consisted of applying \SMART\ to a single SUMER raster.
 			
 			In Figure \ref{din_hist} we present an analogue of Figure \ref{smart_hist} for the \DIN\ calculated using our validation dataset.
-			Since the validation dataset is so large, it would be poorly represented as a scatterplot, so we present it as a column-normalized 2D histogram.
+			Since the validation dataset is so large, it would be poorly represented as a scatterplot, so we present it as a column-normalized 2D histogram, where each bin of the histogram has been divided by the sum of its column.
 			This presentation demonstrates the probability of accurately reconstructing the Doppler velocity as a function of the true Doppler velocity.
 			We have also plotted the line of perfect reconstruction, if the algorithm were perfect, all the probability would be in pixels under this line.
 			We calculated Pearson's $r$ of this histogram for both our Test and Final networks, and were able to verify that the addition of more free parameters corresponded to significant improvement in the performance of the network under this metric.
@@ -224,7 +212,7 @@
 						
 		\subsection{Despiking Training Data}	\label{sec_dspk}	
 			
-			\begin{figure}[h!]
+			\begin{figure}[b!]
 	
 				\renewcommand{\arraystretch}{0}
 				\setlength{\tabcolsep}{0pt}
@@ -244,7 +232,7 @@
 				
 			\end{figure}
 			
-			\begin{figure}[h!]
+			\begin{figure}[t!]
 				\centering
 				\begin{subfigure}[t]{0.288\textwidth}
 					\centering
@@ -287,7 +275,7 @@
 			All these procedures identify spikes using the same method: convolution of some kernel with an image to estimate a local mean and standard deviation, and a hard threshold to exclude pixels some number of standard deviations above the mean.
 			This method is often too aggressive in areas of high signal intensity and not aggressive enough in areas of low signal intensity.
 			In Figure \ref{dspk_ex}, we can see an example of this behavior: the explosive event in the bottom row has become eroded from \texttt{iris\_prep\_despike.pro}, while many of the spikes in the top row are only partially identified.
-			Considering this behavior, to use these procedures we found that we would have to manually tune them for each observation, which would become prohibitive for a training dataset composed of many IRIS observations.
+			Considering this behavior, to use these procedures we found that we would have to manually tune them for each observation, which would become prohibitive for a training dataset composed of thousands of IRIS observations.
 			
 			Instead of estimating the mean and standard deviation, our method uses a median-percentile based approach, where pixels are marked as spikes if their value is larger than 99\% (for example) of all other pixels with the same median. 
 			This is accomplished by calculating a local median for every pixel in the observation, and then constructing a histogram of median vs. pixel value for each observation.
@@ -302,31 +290,82 @@
 		With the exception of exchanging the \SPIN\ development for the \DIN\ development, we are consistent with the schedule given in my NESSF17 proposal, on track for a publication to be submitted before the end date of the proposal period.
 		This publication will cover the motivation, implementation, and validation of our \DIN, with applications to the \MOSES-06 dataset.
 		We will compare the inversions recovered using the \DIN\ to those calculated using other methods to determine if the \DIN\ is a worthwhile improvement.
-		Finally, we will make our inversions of the \MOSES-06 dataset available to the public, to support further investigations into this dataset.
+		Our inversions of the \MOSES-06 dataset will be available to the public, to support further investigations into this dataset.
+		Also, we will release our despiking routine to the public to promote easier analysis of \IRIS\ data and allow other researchers to adapt the code for their needs.
 		
 		Before the results of our method can be published, we need to make a few improvements to the training data pipeline such as: the despiking procedure discussed in Section \ref{sec_dspk}, a model of the \MOSES-06 passband \citep{Fox2011}, a solar continuum model around \HeII \citep{Fox2011}, and an accurate noise model for the \MOSES-06 detectors \cite{Rust2017}.
-		We also need to implement some critical preprocessing steps to the \MOSES-06 dataset such as: PSF deconvolution \citep{Rust2017}, and spectral contamination removal \citep{Parker2016}.
-		Additionally, we need to improve our validation 
+		We also need to implement some critical preprocessing steps to the \MOSES-06 dataset such as: \PSF\ deconvolution \citep{Rust2017}, and spectral contamination removal \citep{Parker2016}.
+		Additionally, we need to improve our network architecture to include the width of the spectral line profile.
+		Finally, our validation tests need to be improved, with \SMART\ applied to the same validation set as the \DIN, and several simple validation tests such as those in \cite{Rust2017}.
 	
 	\section{NESSF18 Proposal}
 	
 		We are proposing to continue this research under the NESSF18 solicitation.
-		The results we have obtained so far show that our method is superior to current techniques in terms of both reconstruction 
+		The results we have obtained so far show that our method is superior to current techniques in terms of reconstruction accuracy of Doppler shift.
+		We think this merits additional investigation into using \CNN\ techniques to interpret data from \CTIS\ instruments such as \MOSES\ and \ESIS.
+		Furthermore, we have made progress in terms of our \CTIS\ analysis tools, but we haven't yet developed any software to address our ultimate goal of classifying \EEs.
+		We plan to implement a more sophisticated \SPIN\ during the first half of the NESSF18 proposal period, and to begin work on an \EE\ classifier during the second half of the proposal period.
 	
 		\subsection{MOSES Inversion GAN} \label{sec_gan}
 		
+			An exciting advancement in using \CNNs\ for image reconstruction has been the development of \textit{adversial loss} as opposed to the Euclidean loss used by our current networks. 
+			This concept is expressed in a new type of \NN\ called a \GAN, developed by \cite{Goodfellow2014}. 
+			In this type of network, our current \DIN\ is known as the \textit{generator} network, and its output is an input to the \textit{adversary} network. 
+			The adversary network's task is to compare the output image of the generator network to the true image and determine which one was created by the generator network.
+			The loss is minimized when the adversary network can't distinguish between the generated image and the true image \cite{Isola2016}.
+			This method was recently used for \PSF\ deconvolution of astrophysical images by \cite{Schawinski2017}, the results indicate that this is a powerful technique that is well-suited to our inversion problem.
+			
+			Our plan is to pursue development of a \GAN\ for a \MOSES\ \SPIN\ after the submitting our publication describing the \DIN.
+			We expect the development time should be relatively short considering that we can use the training dataset from the \DIN.
+			If this \MOSES\ inversion \GAN\ is shows improvement over our current method, we will publish a short article describing the implementation and results of our approach.
+			
 		
 		\subsection{Explosive Event Classification}
 		
-
+			The literature has conducted extensive analyses of \EEs\ using rastering imaging spectrographs, such as \IRIS.
+			They identify \EEs\ as an enhancement of the red and/or blue wings of emission lines forming between 20,000K and 250,000K \citep{Moses1994}.
+			These events are often spectrally classified into two groups: those with enhancements in both wings and those with enhancement in only one wing \citep{Dere1989}.
+			The wings are sometimes displaced from one another by a few thousand kilometers \citep{Dere1994}, indicating a dynamic spatial structure.
+			Recently, \cite{Innes2015} interpreted \EEs\ as evidence of  MHD reconnection through the plasmoid instability, however there have been many other explanations for \EEs\ such as: flows along loops \citep{Teriaca2004}, flows along spicules \citep{Wilhelm2000} and plasma ejection and retraction \citep{Huang2014}.
+			Therefore it is unclear if \EEs\ can be explained by one physical mechanism, or if multiple mechanisms are required to explain their characteristics.
+			
+			In our NESSF17 proposal we asked: \textbf{If these events do arise from multiple mechanisms, can we distinguish different types of explosive events by considering their spatial structure?}
+			To answer this question, the spectrally-resolved images of the solar \TR\ taken using \MOSES\ and later \ESIS\ will be used to isolate \EEs\ and construct a database of events.
+			We will then apply simple \textit{clustering} algorithms, such as $k$-means \citep{Macqueen1967}, to test if \EEs\ can naturally be classified into different groups.
+			This is an important first step to see if any obvious classes of \EEs\ can be identified.
+			We intend to present preliminary results of our investigation into this method in our NESSF19 progress report.
+			
 	
-	\section{Conclusion}
-	
-	\bibliography{bib/sources}
 	
 	\begin{landscape}
 		\includepdf[pages=-,landscape=true]{../schedule/NESSF18_schedule}
-%\includegraphics[width=\textwidth]{../schedule/NESSF18_schedule}
 	\end{landscape}
+	
+	\bibliography{bib/sources}
+	
+	\section{List of Acronyms}
+	\begin{acronym}
+		\acro{TR}{transition region}
+		\acro{EE}{explosive event}
+		\acro{CT}{computed tomography}
+		\acro{CTIS}{computed tomography imaging spectrograph}
+		\acro{MOSES}{\textit{Multi-order Solar EUV Spectrograph}}
+		\acro{ESIS}{\textit{EUV Snapshot Imaging Spectrograph}}
+		\acro{EUV}{extreme ultraviolet}
+		\acro{FOV}{field-of-view}
+		\acro{NN}{neural network}
+		\acro{CNN}{convolutional neural network}
+		\acro{SMART}{smooth multiplicative algebraic reconstruction technique}
+		\acro{SAA}{South-Atlantic Anamoly}
+		\acro{CINN}{CTIS inversion neural network}
+		\acro{DIN}{Doppler inversion network}
+		\acro{SPIN}{spectral profile inversion network}
+		\acro{IRIS}{\textit{Interface Region Imaging Spectrograph}}
+		\acro{CRS}{cosmic ray spikes}
+		\acro{GPU}{graphics processing unit}
+		\acro{GAN}{generative adversarial network}
+		\acro{SNR}{signal-to-noise ratio}
+		\acro{PSF}{point-spread function}
+	\end{acronym}
 	
 \end{document}

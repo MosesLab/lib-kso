@@ -4,45 +4,46 @@ The top-level auxiliary file: smart_NESSF18_progressReport.aux
 The style file: plainnat.bst
 Database file #1: bib/sources.bib
 Warning--empty publisher in Fox2011
-You've used 14 entries,
+Warning--empty journal in Goodfellow2014
+You've used 23 entries,
             2773 wiz_defined-function locations,
-            706 strings with 9129 characters,
-and the built_in function-call counts, 10723 in all, are:
-= -- 851
-> -- 1098
-< -- 12
-+ -- 368
-- -- 354
-* -- 1045
-:= -- 1761
-add.period$ -- 58
-call.type$ -- 14
-change.case$ -- 160
-chr.to.int$ -- 14
-cite$ -- 29
-duplicate$ -- 305
-empty$ -- 528
-format.name$ -- 378
-if$ -- 2135
+            770 strings with 11298 characters,
+and the built_in function-call counts, 16045 in all, are:
+= -- 1300
+> -- 1526
+< -- 15
++ -- 512
+- -- 489
+* -- 1543
+:= -- 2611
+add.period$ -- 92
+call.type$ -- 23
+change.case$ -- 232
+chr.to.int$ -- 23
+cite$ -- 48
+duplicate$ -- 502
+empty$ -- 876
+format.name$ -- 522
+if$ -- 3223
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 14
-newline$ -- 94
-num.names$ -- 56
-pop$ -- 304
+missing$ -- 23
+newline$ -- 145
+num.names$ -- 92
+pop$ -- 436
 preamble$ -- 1
-purify$ -- 146
+purify$ -- 209
 quote$ -- 0
-skip$ -- 315
+skip$ -- 473
 stack$ -- 0
-substring$ -- 209
-swap$ -- 50
-text.length$ -- 4
+substring$ -- 367
+swap$ -- 73
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 144
-warning$ -- 1
-while$ -- 53
+type$ -- 243
+warning$ -- 2
+while$ -- 89
 width$ -- 0
-write$ -- 220
-(There was 1 warning)
+write$ -- 348
+(There were 2 warnings)

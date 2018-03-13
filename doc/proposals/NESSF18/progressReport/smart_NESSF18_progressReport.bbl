@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -77,11 +77,41 @@ James~Lewis Fox.
   the multi-order solar EUV spectrograph (MOSES) sounding rocket mission}.
 \newblock 2011.
 
+\bibitem[Goodfellow et~al.(2014)Goodfellow, Pouget-Abadie, Mirza, Xu,
+  Warde-Farley, Ozair, Courville, and Bengio]{Goodfellow2014}
+Ian~J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David
+  Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio.
+\newblock Generative adversarial networks.
+\newblock June 2014.
+
 \bibitem[Haugan et~al.(2013)Haugan, Serafin, and Shinen]{itn15}
 Stein V.~H. Haugan, John Serafin, and Richard Shinen.
 \newblock Iris technical note 15 pipeline despiking procedure.
 \newblock Technical report, Lockheed Martin, Solar Astrophysics Laboratory,
   June 2013.
+
+\bibitem[Huang et~al.(2014)Huang, Madjarska, Xia, Doyle, Galsgaard, and
+  Fu]{Huang2014}
+Zhenghua Huang, Maria~S. Madjarska, Lidong Xia, J.~G. Doyle, Klaus Galsgaard,
+  and Hui Fu.
+\newblock Explosive events on a subarcsecond scale in iris observations: A case
+  study.
+\newblock \emph{The Astrophysical Journal}, 797\penalty0 (2):\penalty0 88,
+  2014.
+\newblock URL \url{http://stacks.iop.org/0004-637X/797/i=2/a=88}.
+
+\bibitem[Innes et~al.(2015)Innes, Guo, Huang, and Bhattacharjee]{Innes2015}
+D.~E. Innes, L.-J. Guo, Y.-M. Huang, and A.~Bhattacharjee.
+\newblock Iris si iv line profiles: An indication for the plasmoid instability
+  during small-scale magnetic reconnection on the sun.
+\newblock \emph{The Astrophysical Journal}, 813\penalty0 (2):\penalty0 86,
+  2015.
+\newblock URL \url{http://stacks.iop.org/0004-637X/813/i=2/a=86}.
+
+\bibitem[{Isola} et~al.(2016){Isola}, {Zhu}, {Zhou}, and {Efros}]{Isola2016}
+P.~{Isola}, J.-Y. {Zhu}, T.~{Zhou}, and A.~A. {Efros}.
+\newblock {Image-to-Image Translation with Conditional Adversarial Networks}.
+\newblock \emph{ArXiv e-prints}, November 2016.
 
 \bibitem[Kankelborg and Thomas(2001)]{kankel1}
 Charles~C. Kankelborg and Roger~J. Thomas.
@@ -90,6 +120,25 @@ Charles~C. Kankelborg and Roger~J. Thomas.
 \newblock \emph{Proc. SPIE}, 4498:\penalty0 16--26, 2001.
 \newblock \doi{10.1117/12.450074}.
 \newblock URL \url{http://dx.doi.org/10.1117/12.450074}.
+
+\bibitem[MacQueen(1967)]{Macqueen1967}
+J.~MacQueen.
+\newblock Some methods for classification and analysis of multivariate
+  observations.
+\newblock In \emph{Proceedings of the Fifth Berkeley Symposium on Mathematical
+  Statistics and Probability, Volume 1: Statistics}, pages 281--297, Berkeley,
+  Calif., 1967. University of California Press.
+\newblock URL \url{https://projecteuclid.org/euclid.bsmsp/1200512992}.
+
+\bibitem[{Moses} et~al.(1994){Moses}, {Cook}, {Bartoe}, {Brueckner}, {Dere},
+  {Webb}, {Davis}, {Harvey}, {Recely}, {Martin}, and {Zirin}]{Moses1994}
+D.~{Moses}, J.~W. {Cook}, J.-D.~F. {Bartoe}, G.~E. {Brueckner}, K.~P. {Dere},
+  D.~F. {Webb}, J.~M. {Davis}, J.~W. {Harvey}, F.~{Recely}, S.~F. {Martin}, and
+  H.~{Zirin}.
+\newblock {Solar fine scale structures in the corona, transition region, and
+  lower atmosphere}.
+\newblock \emph{ApJ}, 430:\penalty0 913--924, August 1994.
+\newblock \doi{10.1086/174461}.
 
 \bibitem[Okamoto and Yamaguchi(1991)]{Okamoto:91}
 Takayuki Okamoto and Ichirou Yamaguchi.
@@ -122,11 +171,34 @@ Thomas Rust.
   spectroscopy instrumentation and observations, January 2017.
 \newblock URL \url{http://search.proquest.com/docview/1952045621/}.
 
+\bibitem[{Schawinski} et~al.(2017){Schawinski}, {Zhang}, {Zhang}, {Fowler}, and
+  {Santhanam}]{Schawinski2017}
+K.~{Schawinski}, C.~{Zhang}, H.~{Zhang}, L.~{Fowler}, and G.~K. {Santhanam}.
+\newblock {Generative adversarial networks recover features in astrophysical
+  images of galaxies beyond the deconvolution limit}.
+\newblock \emph{Monthly Notices of the Royal Astronomical SocietyS},
+  467:\penalty0 L110--L114, May 2017.
+\newblock \doi{10.1093/mnrasl/slx008}.
+
 \bibitem[{Smart} et~al.(2016){Smart}, {Courrier}, and {Kankelborg}]{smart1}
 R.~{Smart}, H.~{Courrier}, and C.~{Kankelborg}.
 \newblock {Preliminary Results of the MOSES II 2015 Flight}.
 \newblock In \emph{AAS/Solar Physics Division Meeting}, volume~47 of
   \emph{AAS/Solar Physics Division Meeting}, page 309.01, May 2016.
 \newblock URL \url{http://adsabs.harvard.edu/abs/2016SPD....4730901S}.
+
+\bibitem[{Teriaca} et~al.(2004){Teriaca}, {Banerjee}, {Falchi}, {Doyle}, and
+  {Madjarska}]{Teriaca2004}
+L.~{Teriaca}, D.~{Banerjee}, A.~{Falchi}, J.~G. {Doyle}, and M.~S. {Madjarska}.
+\newblock {Transition region small-scale dynamics as seen by SUMER on SOHO}.
+\newblock \emph{Astronomy \& Astrophysics}, 427:\penalty0 1065--1074, December
+  2004.
+\newblock \doi{10.1051/0004-6361:20040503}.
+
+\bibitem[{Wilhelm}(2000)]{Wilhelm2000}
+K.~{Wilhelm}.
+\newblock {Solar spicules and macrospicules observed by SUMER}.
+\newblock \emph{Astronomy \& Astrophysics}, 360:\penalty0 351--362, August
+  2000.
 
 \end{thebibliography}
