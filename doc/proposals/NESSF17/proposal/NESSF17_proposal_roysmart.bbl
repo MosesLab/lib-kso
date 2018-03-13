@@ -1,0 +1,1848 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{Boublil2015}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Boublil}{B.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Elad}{E.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Shtok}{S.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zibulevsky}{Z.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{computerised tomography;feedforward neural nets;image
+  reconstruction;iterative methods;learning (artificial intelligence);medical
+  image processing;computed tomography;feed-forward neural network;image
+  recovery methods;iterative reconstruction methods;local nonlinear
+  fusion;numerical experiments;signal recovery methods;spatially-adaptive
+  reconstruction;supervised machine learning approach;Artificial neural
+  networks;Computed tomography;Image
+  reconstruction;Noise;Photonics;Reconstruction algorithms;Training;Computed
+  Tomography;filtered-back-projection (FBP);low-dose reconstruction;neural
+  networks;supervised learning}
+  \strng{namehash}{BD+1}
+  \strng{fullhash}{BDEMSJZM1}
+  \field{labelyear}{2015}
+  \field{sortinit}{B}
+  \verb{doi}
+  \verb 10.1109/TMI.2015.2401131
+  \endverb
+  \field{issn}{0278-0062}
+  \field{number}{7}
+  \field{pages}{1474\bibrangedash 1485}
+  \field{title}{Spatially-Adaptive Reconstruction in Computed Tomography Using
+  Neural Networks}
+  \field{volume}{34}
+  \field{journaltitle}{IEEE Transactions on Medical Imaging}
+  \field{year}{2015}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Brueckner1983}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {{Brueckner}}{B.}%
+     {G.~E.}{G.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Bartoe}}{B.}%
+     {J.-D.~F.}{J.-D.~F.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Coronal Loops, Plasma Acceleration, Plasma Heating, Solar Wind
+  Velocity, Magnetic Flux, Magnetohydrodynamic Turbulence, Plasma Clouds, Shock
+  Heating, Solar Magnetic Field, Solar Spectra, Turbulent Jets, Ultraviolet
+  Spectra}
+  \strng{namehash}{BGEBJDF1}
+  \strng{fullhash}{BGEBJDF1}
+  \field{labelyear}{1983}
+  \field{sortinit}{B}
+  \verb{doi}
+  \verb 10.1086/161297
+  \endverb
+  \field{pages}{329\bibrangedash 348}
+  \field{title}{{Observations of high-energy jets in the corona above the quiet
+  sun, the heating of the corona, and the acceleration of the solar wind}}
+  \field{volume}{272}
+  \field{journaltitle}{The Astrophysical Journal}
+  \field{month}{09}
+  \field{year}{1983}
+\endentry
+
+\entry{Bulygin:05}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Bulygin}{B.}%
+     {F.~V.}{F.~V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Levin}{L.}%
+     {G.~G.}{G.~G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BFVLGG1}
+  \strng{fullhash}{BFVLGG1}
+  \field{labelyear}{2005}
+  \field{sortinit}{B}
+  \verb{doi}
+  \verb 10.1007/s11018-006-0029-4
+  \endverb
+  \field{issn}{1573-8906}
+  \field{number}{11}
+  \field{pages}{1109\bibrangedash 1114}
+  \field{title}{Spectrotomography, a New Method for Studying the Internal
+  Structure of Polychromatic objects}
+  \verb{url}
+  \verb http://dx.doi.org/10.1007/s11018-006-0029-4
+  \endverb
+  \field{volume}{48}
+  \field{journaltitle}{Measurement Techniques}
+  \field{year}{2005}
+\endentry
+
+\entry{bulygin:92}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Bulygin}{B.}%
+     {Theodor~V.}{T.~V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vishnyakov}{V.}%
+     {Gennady~N.}{G.~N.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BTVVGN1}
+  \strng{fullhash}{BTVVGN1}
+  \field{labelyear}{1992}
+  \field{sortinit}{B}
+  \verb{doi}
+  \verb 10.1117/12.131904
+  \endverb
+  \field{pages}{315\bibrangedash 322}
+  \field{title}{Spectrotomography: a new method of obtaining spectrograms of
+  two-dimensional objects}
+  \verb{url}
+  \verb http://dx.doi.org/10.1117/12.131904
+  \endverb
+  \field{volume}{1843}
+  \field{journaltitle}{Proc. SPIE}
+  \field{year}{1992}
+\endentry
+
+\entry{DePontieu2011}{article}{}
+  \name{author}{9}{}{%
+    {{}%
+     {De~Pontieu}{D.~P.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {McIntosh}{M.}%
+     {S.~W.}{S.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carlsson}{C.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hansteen}{H.}%
+     {V.~H.}{V.~H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tarbell}{T.}%
+     {T.~D.}{T.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Boerner}{B.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Martinez-Sykora}{M.-S.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schrijver}{S.}%
+     {C.~J.}{C.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Title}{T.}%
+     {A.~M.}{A.~M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Association for the Advancement of Science}%
+  }
+  \strng{namehash}{DPB+1}
+  \strng{fullhash}{DPBMSWCMHVHTTDBPMSJSCJTAM1}
+  \field{labelyear}{2011}
+  \field{sortinit}{D}
+  \field{abstract}{%
+  The Sun{\textquoteright}s outer atmosphere, or corona, is heated to millions
+  of degrees, considerably hotter than its surface or photosphere. Explanations
+  for this enigma typically invoke the deposition in the corona of nonthermal
+  energy generated by magnetoconvection. However, the coronal heating mechanism
+  remains unknown. We used observations from the Solar Dynamics Observatory and
+  the Hinode solar physics mission to reveal a ubiquitous coronal mass supply
+  in which chromospheric plasma in fountainlike jets or spicules is accelerated
+  upward into the corona, with much of the plasma heated to temperatures
+  between ~0.02 and 0.1 million kelvin (MK) and a small but sufficient fraction
+  to temperatures above 1 MK. These observations provide constraints on the
+  coronal heating mechanism(s) and highlight the importance of the interface
+  region between photosphere and corona.%
+  }
+  \verb{doi}
+  \verb 10.1126/science.1197738
+  \endverb
+  \verb{eprint}
+  \verb http://science.sciencemag.org/content/331/6013/55.full.pdf
+  \endverb
+  \field{issn}{0036-8075}
+  \field{number}{6013}
+  \field{pages}{55\bibrangedash 58}
+  \field{title}{The Origins of Hot Plasma in the Solar Corona}
+  \verb{url}
+  \verb http://science.sciencemag.org/content/331/6013/55
+  \endverb
+  \field{volume}{331}
+  \field{journaltitle}{Science}
+  \field{year}{2011}
+\endentry
+
+\entry{dere1989}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {{Dere}}{D.}%
+     {K.~P.}{K.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Bartoe}}{B.}%
+     {J.-D.~F.}{J.-D.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Brueckner}}{B.}%
+     {G.~E.}{G.~E.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{DKPBJDFBGE1}
+  \strng{fullhash}{DKPBJDFBGE1}
+  \field{labelyear}{1989}
+  \field{sortinit}{D}
+  \verb{doi}
+  \verb 10.1007/BF00150011
+  \endverb
+  \field{pages}{41\bibrangedash 68}
+  \field{title}{{Explosive events in the solar transition zone}}
+  \verb{url}
+  \verb http://adsabs.harvard.edu/abs/1989SoPh..123...41D
+  \endverb
+  \field{volume}{123}
+  \field{journaltitle}{Solar Physics}
+  \field{month}{03}
+  \field{year}{1989}
+\endentry
+
+\entry{Dere1991}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Dere}{D.}%
+     {K.~P.}{K.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bartoe}{B.}%
+     {J.-D.~F.}{J.-D.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brueckner}{B.}%
+     {G.~E.}{G.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ewing}{E.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lund}{L.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Solar Physics, Astrophysics, and Astronomy: Corona and transition
+  region, Magnetic fields, Magnetic reconnection}
+  \strng{namehash}{DKP+1}
+  \strng{fullhash}{DKPBJDFBGEEJLP1}
+  \field{labelyear}{1991}
+  \field{sortinit}{D}
+  \verb{doi}
+  \verb 10.1029/90JA02572
+  \endverb
+  \field{issn}{2156-2202}
+  \field{number}{A6}
+  \field{pages}{9399\bibrangedash 9407}
+  \field{title}{Explosive events and magnetic reconnection in the solar
+  atmosphere}
+  \verb{url}
+  \verb http://dx.doi.org/10.1029/90JA02572
+  \endverb
+  \field{volume}{96}
+  \field{journaltitle}{Journal of Geophysical Research: Space Physics}
+  \field{year}{1991}
+\endentry
+
+\entry{Dere1994}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Dere}{D.}%
+     {K.P.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{DK1}
+  \strng{fullhash}{DK1}
+  \field{labelyear}{1994}
+  \field{sortinit}{D}
+  \field{abstract}{%
+  Signatures of explosive events are prominent in transition region spectra
+  where they display exceptionally large velocities (&gt;100 km s−1) in small
+  areas (1500 km). Their physical properties, deduced from previous analyses of
+  \{HRTS\} spectra and more recent work, are summarized here. It now appears
+  that the explosive events are associated with the process of magnetic
+  cancellation and \{HRTS\} data obtained during the most recent rocket flight
+  in 1990 provide direct evidence for this assertion. Flux cancellation, which
+  tends to proceed on time-scales of hours, most likely involves magnetic
+  reconnection in a very bursty manner which explains the small, short-lived
+  explosive events. These reconnection events are part of a larger pattern
+  where small flux elements emerge in the supergranule centers and are
+  transported to the boundaries to continually regenerate the network fields on
+  a timescale of about 8 hours. These timescales are also sufficiently short to
+  account for the energetics of the quiet sun.%
+  }
+  \verb{doi}
+  \verb http://dx.doi.org/10.1016/0273-1177(94)90154-6
+  \endverb
+  \field{issn}{0273-1177}
+  \field{number}{4}
+  \field{pages}{13 \bibrangedash  22}
+  \field{title}{Explosive events, magnetic reconnection, and coronal heating}
+  \verb{url}
+  \verb //www.sciencedirect.com/science/article/pii/0273117794901546
+  \endverb
+  \field{volume}{14}
+  \field{journaltitle}{Advances in Space Research}
+  \field{year}{1994}
+\endentry
+
+\entry{Descour:95}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Descour}{D.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dereniak}{D.}%
+     {Eustace}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {OSA}%
+  }
+  \strng{namehash}{DMDE1}
+  \strng{fullhash}{DMDE1}
+  \field{labelyear}{1995}
+  \field{sortinit}{D}
+  \verb{doi}
+  \verb 10.1364/AO.34.004817
+  \endverb
+  \field{number}{22}
+  \field{pages}{4817\bibrangedash 4826}
+  \field{title}{Computed-tomography imaging spectrometer: experimental
+  calibration and reconstruction results}
+  \verb{url}
+  \verb http://ao.osa.org/abstract.cfm?URI=ao-34-22-4817
+  \endverb
+  \field{volume}{34}
+  \field{journaltitle}{Appl. Opt.}
+  \field{year}{1995}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{De Pontieu2014}{article}{}
+  \name{author}{88}{}{%
+    {{}%
+     {De Pontieu}{D.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Title}{T.}%
+     {A.~M.}{A.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lemen}{L.}%
+     {J.~R.}{J.~R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kushner}{K.}%
+     {G.~D.}{G.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Akin}{A.}%
+     {D.~J.}{D.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Allard}{A.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Berger}{B.}%
+     {T.}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Boerner}{B.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cheung}{C.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chou}{C.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Drake}{D.}%
+     {J.~F.}{J.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Duncan}{D.}%
+     {D.~W.}{D.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Freeland}{F.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Heyman}{H.}%
+     {G.~F.}{G.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hoffman}{H.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hurlburt}{H.}%
+     {N.~E.}{N.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lindgren}{L.}%
+     {R.~W.}{R.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mathur}{M.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rehse}{R.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sabolish}{S.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Seguin}{S.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schrijver}{S.}%
+     {C.~J.}{C.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tarbell}{T.}%
+     {T.~D.}{T.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {W{\"u}lser}{W.}%
+     {J.-P.}{J.-P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wolfson}{W.}%
+     {C.~J.}{C.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yanari}{Y.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mudge}{M.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Nguyen-Phuc}{N.-P.}%
+     {N.}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Timmons}{T.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bezooijen}{B.}%
+     {R.}{R.}%
+     {van}{v.}%
+     {}{}}%
+    {{}%
+     {Weingrod}{W.}%
+     {I.}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brookner}{B.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Butcher}{B.}%
+     {G.}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dougherty}{D.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Eder}{E.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Knagenhjelm}{K.}%
+     {V.}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Larsen}{L.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mansir}{M.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Phan}{P.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Boyle}{B.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cheimets}{C.}%
+     {P.~N.}{P.~N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {DeLuca}{D.}%
+     {E.~E.}{E.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Golub}{G.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gates}{G.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hertz}{H.}%
+     {E.}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {McKillop}{M.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Park}{P.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Perry}{P.}%
+     {T.}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Podgorski}{P.}%
+     {W.~A.}{W.~A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Reeves}{R.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Saar}{S.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Testa}{T.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tian}{T.}%
+     {H.}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Weber}{W.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dunn}{D.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Eccles}{E.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jaeggli}{J.}%
+     {S.~A.}{S.~A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kankelborg}{K.}%
+     {C.~C.}{C.~C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mashburn}{M.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pust}{P.}%
+     {N.}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Springer}{S.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carvalho}{C.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kleint}{K.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Marmie}{M.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mazmanian}{M.}%
+     {E.}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pereira}{P.}%
+     {T.~M.~D.}{T.~M.~D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sawyer}{S.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Strong}{S.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Worden}{W.}%
+     {S.~P.}{S.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carlsson}{C.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hansteen}{H.}%
+     {V.~H.}{V.~H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Leenaarts}{L.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wiesmann}{W.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Aloise}{A.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chu}{C.}%
+     {K.-C.}{K.-C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bush}{B.}%
+     {R.~I.}{R.~I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Scherrer}{S.}%
+     {P.~H.}{P.~H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brekke}{B.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Martinez-Sykora}{M.-S.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lites}{L.}%
+     {B.~W.}{B.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {McIntosh}{M.}%
+     {S.~W.}{S.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Uitenbroek}{U.}%
+     {H.}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Okamoto}{O.}%
+     {T.~J.}{T.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gummin}{G.}%
+     {M.~A.}{M.~A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Auker}{A.}%
+     {G.}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jerram}{J.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pool}{P.}%
+     {P.}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Waltham}{W.}%
+     {N.}{N.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{DB+1}
+  \strng{fullhash}{DBTAMLJRKGDADJABBTBPCMCCDJFDDWFSHGFHCHNELRWMDRRSDSRSCJTTDWJPWCJYCMJNPNTRBRvWIBRBGDBEJKVLSMDPLBPCPNDEEGLGRHEMSPSPTPWARKSSTPTHWMDCESJSAKCCMKPNSLCRKLMJMEPTMDSSSJWSPCMHVHLJWMAJCKCBRISPHBPMSJLBWMSWUHOTJGMAAGJPPPWN1}
+  \field{labelyear}{2014}
+  \field{sortinit}{D}
+  \verb{doi}
+  \verb 10.1007/s11207-014-0485-y
+  \endverb
+  \field{issn}{1573-093X}
+  \field{number}{7}
+  \field{pages}{2733\bibrangedash 2779}
+  \field{title}{The Interface Region Imaging Spectrograph (IRIS)}
+  \verb{url}
+  \verb http://dx.doi.org/10.1007/s11207-014-0485-y
+  \endverb
+  \field{volume}{289}
+  \field{journaltitle}{Solar Physics}
+  \field{year}{2014}
+\endentry
+
+\entry{DAEC}{article}{}
+  \name{author}{6}{}{%
+    {{}%
+     {Du}{D.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Xiong}{X.}%
+     {W.}{W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wu}{W.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zhang}{Z.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zhang}{Z.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tao}{T.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Convolution;Convolutional codes;Data models;Noise
+  reduction;Robustness;Training;Visualization;Convolution;deep
+  learning;denoising auto-encoders;unsupervised learning}
+  \strng{namehash}{DB+2}
+  \strng{fullhash}{DBXWWJZLZLTD1}
+  \field{labelyear}{2016}
+  \field{sortinit}{D}
+  \verb{doi}
+  \verb 10.1109/TCYB.2016.2536638
+  \endverb
+  \field{issn}{2168-2267}
+  \field{number}{99}
+  \field{pages}{1\bibrangedash 11}
+  \field{title}{Stacked Convolutional Denoising Auto-Encoders for Feature
+  Representation}
+  \field{volume}{PP}
+  \field{journaltitle}{IEEE Transactions on Cybernetics}
+  \field{year}{2016}
+\endentry
+
+\entry{fox1}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {{Fox}}{F.}%
+     {J.~L.}{J.~L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Kankelborg}}{K.}%
+     {C.~C.}{C.~C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Thomas}}{T.}%
+     {R.~J.}{R.~J.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{instrumentation: spectrographs, space vehicles: instruments, Sun:
+  transition region, Sun: UV radiation, techniques: imaging spectroscopy}
+  \strng{namehash}{FJLKCCTRJ1}
+  \strng{fullhash}{FJLKCCTRJ1}
+  \field{labelyear}{2010}
+  \field{sortinit}{F}
+  \verb{doi}
+  \verb 10.1088/0004-637X/719/2/1132
+  \endverb
+  \field{pages}{1132\bibrangedash 1143}
+  \field{title}{{A Transition Region Explosive Event Observed in He II with the
+  MOSES Sounding Rocket}}
+  \verb{url}
+  \verb http://adsabs.harvard.edu/abs/2010ApJ...719.1132F
+  \endverb
+  \field{volume}{719}
+  \field{journaltitle}{ApJ}
+  \field{year}{2010}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{inversion}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Fox}{F.}%
+     {J.~Lewis}{J.~L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kankelborg}{K.}%
+     {Charles~C.}{C.~C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Metcalf}{M.}%
+     {Tomas~R.}{T.~R.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{FJLKCCMTR1}
+  \strng{fullhash}{FJLKCCMTR1}
+  \field{labelyear}{2003}
+  \field{sortinit}{F}
+  \verb{doi}
+  \verb 10.1117/12.512032
+  \endverb
+  \field{pages}{124\bibrangedash 132}
+  \field{title}{Data inversion for the Multi-Order Solar Extreme-Ultraviolet
+  Spectrograph}
+  \verb{url}
+  \verb http://dx.doi.org/10.1117/12.512032
+  \endverb
+  \field{volume}{5157}
+  \field{journaltitle}{Proc. SPIE}
+  \field{year}{2003}
+\endentry
+
+\entry{Gordon70}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Gordon}{G.}%
+     {Richard}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bender}{B.}%
+     {Robert}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Herman}{H.}%
+     {Gabor~T.}{G.~T.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{GRBRHGT1}
+  \strng{fullhash}{GRBRHGT1}
+  \field{labelyear}{1970}
+  \field{sortinit}{G}
+  \verb{doi}
+  \verb http://dx.doi.org/10.1016/0022-5193(70)90109-8
+  \endverb
+  \field{issn}{0022-5193}
+  \field{number}{3}
+  \field{pages}{471 \bibrangedash  481}
+  \field{title}{Algebraic Reconstruction Techniques (ART) for three-dimensional
+  electron microscopy and X-ray photography}
+  \verb{url}
+  \verb //www.sciencedirect.com/science/article/pii/0022519370901098
+  \endverb
+  \field{volume}{29}
+  \field{journaltitle}{Journal of Theoretical Biology}
+  \field{year}{1970}
+\endentry
+
+\entry{Hagan2013}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Hagen}{H.}%
+     {Nathan}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kudenov}{K.}%
+     {Michael~W.}{M.~W.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HNKMW1}
+  \strng{fullhash}{HNKMW1}
+  \field{labelyear}{2013}
+  \field{sortinit}{H}
+  \field{abstract}{%
+  Abstract.  Within the field of spectral imaging, the vast majority of
+  instruments used are scanning devices. Recently, several snapshot spectral
+  imaging systems have become commercially available, providing new
+  functionality for users and opening up the field to a wide array of new
+  applications. A comprehensive survey of the available snapshot technologies
+  is provided, and an attempt has been made to show how the new capabilities of
+  snapshot approaches can be fully utilized.%
+  }
+  \verb{doi}
+  \verb 10.1117/1.OE.52.9.090901
+  \endverb
+  \field{isbn}{0091-3286}
+  \field{number}{9}
+  \field{pages}{090901\bibrangedash 090901}
+  \field{title}{Review of snapshot spectral imaging technologies}
+  \verb{url}
+  \verb http://dx.doi.org/10.1117/1.OE.52.9.090901
+  \endverb
+  \field{volume}{52}
+  \field{journaltitle}{Optical Engineering}
+  \field{year}{2013}
+\endentry
+
+\entry{Huang2014}{article}{}
+  \name{author}{6}{}{%
+    {{}%
+     {Huang}{H.}%
+     {Zhenghua}{Z.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Madjarska}{M.}%
+     {Maria~S.}{M.~S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Xia}{X.}%
+     {Lidong}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Doyle}{D.}%
+     {J.~G.}{J.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Galsgaard}{G.}%
+     {Klaus}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fu}{F.}%
+     {Hui}{H.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HZ+1}
+  \strng{fullhash}{HZMMSXLDJGGKFH1}
+  \field{labelyear}{2014}
+  \field{sortinit}{H}
+  \field{abstract}{%
+  We present a study of a typical explosive event (EE) at subarcsecond scale
+  witnessed by strong non-Gaussian profiles with blue- and redshifted emission
+  of up to 150 km s –1 seen in the transition region Si IV 1402.8 Å, and
+  the chromospheric Mg II k 2796.4 Å and C II 1334.5 Å observed by the
+  Interface Region Imaging Spectrograph ( IRIS ) at unprecedented spatial and
+  spectral resolution. For the first time an EE is found to be associated with
+  very small-scale (~120 km wide) plasma ejection followed by retraction in
+  the chromosphere. These small-scale jets originate from a compact
+  bright-point-like structure of ~1.''5 size as seen in the IRIS 1330 Å
+  images. SDO /AIA and SDO /HMI co-observations show that the EE lies in the
+  footpoint of a complex loop-like brightening system. The EE is detected in
+  the higher temperature channels of AIA 171 Å, 193 Å, and 131 Å,
+  suggesting that it reaches a higher temperature oflog T = 5.36 ± 0.06 (K).
+  Brightenings observed in the AIA channels with durations 90-120 s are
+  probably caused by the plasma ejections seen in the chromosphere. The wings
+  of the C II line behave in a similar manner to the Si IV'S , indicating close
+  formation temperatures, while the Mg II k wings show additional
+  Doppler-shifted emission. Magnetic convergence or emergence followed by
+  cancellation at a rate of 5 × 10 14 Mx s –1 is associated with the EE
+  region. The combined changes of the locations and the flux of different
+  magnetic patches suggest that magnetic reconnection must have taken place.
+  Our results challenge several theories put forward in the past to explain
+  non-Gaussian line profiles, i.e., EEs. Our case study on its own, however,
+  cannot reject these theories; thus, further in-depth studies on the phenomena
+  producing EEs are required.%
+  }
+  \field{number}{2}
+  \field{pages}{88}
+  \field{title}{Explosive Events on a Subarcsecond Scale in IRIS Observations:
+  A Case Study}
+  \verb{url}
+  \verb http://stacks.iop.org/0004-637X/797/i=2/a=88
+  \endverb
+  \field{volume}{797}
+  \field{journaltitle}{The Astrophysical Journal}
+  \field{year}{2014}
+\endentry
+
+\entry{Innes1997}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {{Innes}}{I.}%
+     {D.~E.}{D.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Inhester}}{I.}%
+     {B.}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Axford}}{A.}%
+     {W.~I.}{W.~I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Wilhelm}}{W.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{IDE+2}
+  \strng{fullhash}{IDEIBAWIWK1}
+  \field{labelyear}{1997}
+  \field{sortinit}{I}
+  \verb{doi}
+  \verb 10.1038/386811a0
+  \endverb
+  \field{pages}{811\bibrangedash 813}
+  \field{title}{{Bi-directional plasma jets produced by magnetic reconnection
+  on the Sun}}
+  \field{volume}{386}
+  \field{journaltitle}{Nature}
+  \field{month}{04}
+  \field{year}{1997}
+\endentry
+
+\entry{Innes2015}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Innes}{I.}%
+     {D.~E.}{D.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Guo}{G.}%
+     {L.-J.}{L.-J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Huang}{H.}%
+     {Y.-M.}{Y.-M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bhattacharjee}{B.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{IDE+1}
+  \strng{fullhash}{IDEGLJHYMBA1}
+  \field{labelyear}{2015}
+  \field{sortinit}{I}
+  \field{abstract}{%
+  Our understanding of the process of fast reconnection has undergone a
+  dramatic change in the last 10 years driven, in part, by the availability of
+  high-resolution numerical simulations that have consistently demonstrated the
+  break-up of current sheets into magnetic islands, with reconnection rates
+  that become independent of Lundquist number, challenging the belief that fast
+  magnetic reconnection in flares proceeds via the Petschek mechanism which
+  invokes pairs of slow-mode shocks connected to a compact diffusion region.
+  The reconnection sites are too small to be resolved with images, but these
+  reconnection mechanisms, Petschek and the plasmoid instability, have
+  reconnection sites with very different density and velocity structures and so
+  can be distinguished by high-resolution line-profile observations. Using IRIS
+  spectroscopic observations we obtain a survey of typical line profiles
+  produced by small-scale events thought to be reconnection sites on the Sun.
+  Slit-jaw images are used to investigate the plasma heating and
+  re-configuration at the sites. A sample of 15 events from 2 active regions is
+  presented. The line profiles are complex with bright cores and broad wings
+  extending to over 300 km s −1 . The profiles can be reproduced with the
+  multiple magnetic islands and acceleration sites that characterize the
+  plasmoid instability but not by bi-directional jets that characterize the
+  Petschek mechanism. This result suggests that if these small-scale events are
+  reconnection sites, then fast reconnection proceeds via the plasmoid
+  instability, rather than the Petschek mechanism during small-scale
+  reconnection on the Sun.%
+  }
+  \field{number}{2}
+  \field{pages}{86}
+  \field{title}{IRIS Si IV Line Profiles: An Indication for the Plasmoid
+  Instability during Small-scale Magnetic Reconnection on the Sun}
+  \verb{url}
+  \verb http://stacks.iop.org/0004-637X/813/i=2/a=86
+  \endverb
+  \field{volume}{813}
+  \field{journaltitle}{The Astrophysical Journal}
+  \field{year}{2015}
+\endentry
+
+\entry{Jafarian2015}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Jafarian}{J.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Measoomy}{M.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Abbasbandy}{A.}%
+     {S.}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Volterra integral equations system}
+  \strng{namehash}{JAMSAS1}
+  \strng{fullhash}{JAMSAS1}
+  \field{labelyear}{2015}
+  \field{sortinit}{J}
+  \field{abstract}{%
+  Abstract Properly designing an artificial neural network is very important
+  for achieving the optimal performance. This study aims to utilize an
+  architecture of these networks together with the Taylor polynomials, to
+  achieve the approximate solution of second kind linear Volterra integral
+  equations system. For this purpose, first we substitute the Nth truncation of
+  the Taylor expansion for unknown functions in the origin system. Then we
+  apply the suggested neural net for adjusting the numerical coefficients of
+  given expansions in resulting system. Consequently, the reported architecture
+  using a learning algorithm that based on the gradient descent method, will
+  adjust the coefficients in given Taylor series. The proposed method was
+  illustrated by several examples with computer simulations. Subsequently,
+  performance comparisons with other developed methods was made. The
+  comparative experimental results showed that this approach is more effective
+  and robust.%
+  }
+  \verb{doi}
+  \verb http://dx.doi.org/10.1016/j.asoc.2014.10.036
+  \endverb
+  \field{issn}{1568-4946}
+  \field{pages}{391 \bibrangedash  398}
+  \field{title}{Artificial neural networks based modeling for solving Volterra
+  integral equations system}
+  \verb{url}
+  \verb //www.sciencedirect.com/science/article/pii/S1568494614005481
+  \endverb
+  \field{volume}{27}
+  \field{journaltitle}{Applied Soft Computing}
+  \field{year}{2015}
+\endentry
+
+\entry{jia2014caffe}{article}{}
+  \name{author}{8}{}{%
+    {{}%
+     {Jia}{J.}%
+     {Yangqing}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Shelhamer}{S.}%
+     {Evan}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Donahue}{D.}%
+     {Jeff}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Karayev}{K.}%
+     {Sergey}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Long}{L.}%
+     {Jonathan}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Girshick}{G.}%
+     {Ross}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Guadarrama}{G.}%
+     {Sergio}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Darrell}{D.}%
+     {Trevor}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{JY+1}
+  \strng{fullhash}{JYSEDJKSLJGRGSDT1}
+  \field{labelyear}{2014}
+  \field{sortinit}{J}
+  \field{title}{Caffe: Convolutional Architecture for Fast Feature Embedding}
+  \field{journaltitle}{arXiv preprint arXiv:1408.5093}
+  \field{year}{2014}
+\endentry
+
+\entry{kankel2}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Kankelborg}}{K.}%
+     {C.~C.}{C.~C.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Astrophysics}
+  \strng{namehash}{KCC1}
+  \strng{fullhash}{KCC1}
+  \field{labelyear}{2008}
+  \field{sortinit}{K}
+  \verb{eprint}
+  \verb 0806.4803
+  \endverb
+  \field{title}{{Coronal Tomography}}
+  \verb{url}
+  \verb http://adsabs.harvard.edu/abs/2008arXiv0806.4803K
+  \endverb
+  \field{journaltitle}{ArXiv e-prints}
+  \field{eprinttype}{arXiv}
+  \field{month}{06}
+  \field{year}{2008}
+\endentry
+
+\entry{kankel1}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Kankelborg}{K.}%
+     {Charles~C.}{C.~C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Thomas}{T.}%
+     {Roger~J.}{R.~J.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{KCCTRJ1}
+  \strng{fullhash}{KCCTRJ1}
+  \field{labelyear}{2001}
+  \field{sortinit}{K}
+  \verb{doi}
+  \verb 10.1117/12.450074
+  \endverb
+  \field{pages}{16\bibrangedash 26}
+  \field{title}{Simultaneous imaging and spectroscopy of the solar atmosphere:
+  advantages and challenges of a 3-order slitless spectrograph}
+  \verb{url}
+  \verb http://dx.doi.org/10.1117/12.450074
+  \endverb
+  \field{volume}{4498}
+  \field{journaltitle}{Proc. SPIE}
+  \field{year}{2001}
+\endentry
+
+\entry{Krucker2000}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Krucker}{K.}%
+     {S{\"a}m}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Benz}{B.}%
+     {Arnold~O.}{A.~O.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{KSBAO1}
+  \strng{fullhash}{KSBAO1}
+  \field{labelyear}{2000}
+  \field{sortinit}{K}
+  \field{abstract}{%
+  Temporary enhancements of the coronal emission measure in a quiet region have
+  been shown to constitute a significant energy input. Here some relatively
+  large events are studied for simultaneous brightenings in transition region
+  lines and in radio emission. Associated emissions are discussed and tested
+  for characteristics known from full-sized impulsive flares in active regions.
+  Heating events and flares are found to have many properties in common,
+  including (i) associated polarized radio emission, which usually precedes the
+  emission measure peak (Neupert effect) and sometimes has a non-thermal
+  spectrum, and (ii) associated and often preceding peaks in O{\thinspace}v and
+  He{\thinspace}i emission. On the other hand, heating events also differ from
+  impulsive flares: (i) In half of the cases, their radio emission at
+  centimeter waves shows a spectrum consistent with thermal radiation, (ii) the
+  ratio of the gyro-synchrotron emission to the estimated thermal soft X-ray
+  emission is smaller than in flares, and (iii) the associated emission in the
+  O{\thinspace}v transition region line shows red shifts and blue shifts,
+  indicating upflows in the rise phase and downflows in the decay phase,
+  respectively. Nevertheless, the differences seem to be mainly quantitative,
+  and the analyzed heating events with thermal energies around 1026 erg may in
+  principle be considered as microflares or large nanoflares, thus small
+  versions of regular flares.%
+  }
+  \verb{doi}
+  \verb 10.1023/A:1005255608792
+  \endverb
+  \field{issn}{1573-093X}
+  \field{number}{2}
+  \field{pages}{341\bibrangedash 358}
+  \field{title}{Are Heating Events in the Quiet Solar Corona Small Flares?
+  Multiwavelength Observations of Individual Events}
+  \verb{url}
+  \verb http://dx.doi.org/10.1023/A:1005255608792
+  \endverb
+  \field{volume}{191}
+  \field{journaltitle}{Solar Physics}
+  \field{year}{2000}
+\endentry
+
+\entry{Kruglov2013}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Kruglov}{K.}%
+     {I.~A.}{I.~A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mishulina}{M.}%
+     {O.~A.}{O.~A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{KIAMOA1}
+  \strng{fullhash}{KIAMOA1}
+  \field{labelyear}{2013}
+  \field{sortinit}{K}
+  \field{abstract}{%
+  A neural network solution of the ill-posed inverse approximation problem of a
+  multivariable vector function based on of a committee of multilayer
+  perceptrons is proposed. A nonlinear adaptive decision-making rule by the
+  committee is developed that improves the accuracy compared with other neural
+  network solutions of the inverse problem. Using a model example, the accuracy
+  characteristics of the method are shown. An applied engineering problem is
+  considered and the results of its solution by the proposed method are
+  presented.%
+  }
+  \verb{doi}
+  \verb 10.1134/S1064230713040126
+  \endverb
+  \field{issn}{1555-6530}
+  \field{number}{4}
+  \field{pages}{503\bibrangedash 518}
+  \field{title}{Neural network modeling of vector multivariable functions in
+  ill-posed approximation problems}
+  \verb{url}
+  \verb http://dx.doi.org/10.1134/S1064230713040126
+  \endverb
+  \field{volume}{52}
+  \field{journaltitle}{Journal of Computer and Systems Sciences International}
+  \field{year}{2013}
+\endentry
+
+\entry{Okamoto:91}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Okamoto}{O.}%
+     {Takayuki}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yamaguchi}{Y.}%
+     {Ichirou}{I.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {OSA}%
+  }
+  \strng{namehash}{OTYI1}
+  \strng{fullhash}{OTYI1}
+  \field{labelyear}{1991}
+  \field{sortinit}{O}
+  \verb{doi}
+  \verb 10.1364/OL.16.001277
+  \endverb
+  \field{number}{16}
+  \field{pages}{1277\bibrangedash 1279}
+  \field{title}{Simultaneous acquisition of spectral image information}
+  \verb{url}
+  \verb http://ol.osa.org/abstract.cfm?URI=ol-16-16-1277
+  \endverb
+  \field{volume}{16}
+  \field{journaltitle}{Opt. Lett.}
+  \field{year}{1991}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{RHB}{book}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Riley}{R.}%
+     {K.~F.}{K.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hobson}{H.}%
+     {M.~P.}{M.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bence}{B.}%
+     {S.J.}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Cambridge University Press}%
+  }
+  \strng{namehash}{RKFHMPBS1}
+  \strng{fullhash}{RKFHMPBS1}
+  \field{labelyear}{2006}
+  \field{sortinit}{R}
+  \field{edition}{3}
+  \field{isbn}{978-0-521-67971-8}
+  \field{title}{Mathematical Methods for Physics and Engineering}
+  \list{location}{1}{%
+    {New York, USA}%
+  }
+  \field{year}{2006}
+\endentry
+
+\entry{ai}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Russel}{R.}%
+     {Stuart}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Norvig}{N.}%
+     {Peter}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Pearson Education}%
+  }
+  \strng{namehash}{RSNP1}
+  \strng{fullhash}{RSNP1}
+  \field{labelyear}{2010}
+  \field{sortinit}{R}
+  \field{edition}{3rd}
+  \field{title}{Artificial Intelligence: A Modern Approach}
+  \list{location}{1}{%
+    {Upper Saddle River, New Jersey 07458}%
+  }
+  \field{year}{2010}
+\endentry
+
+\entry{rust1}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {{Rust}}{R.}%
+     {T.}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Kankelborg}}{K.}%
+     {C.~C.}{C.~C.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{RTKCC1}
+  \strng{fullhash}{RTKCC1}
+  \field{labelyear}{2016}
+  \field{sortinit}{R}
+  \field{booktitle}{AAS/Solar Physics Division Meeting}
+  \field{eid}{101.01}
+  \field{pages}{101.01}
+  \field{series}{AAS/Solar Physics Division Meeting}
+  \field{title}{{Transition Region Explosive Events in He II 304{\AA}:
+  Observation and Analysis}}
+  \verb{url}
+  \verb http://adsabs.harvard.edu/abs/2016SPD....4710101R
+  \endverb
+  \field{volume}{47}
+  \field{month}{05}
+  \field{year}{2016}
+\endentry
+
+\entry{smart1}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {{Smart}}{S.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Courrier}}{C.}%
+     {H.}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Kankelborg}}{K.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SRCHKC1}
+  \strng{fullhash}{SRCHKC1}
+  \field{labelyear}{2016}
+  \field{sortinit}{S}
+  \field{booktitle}{AAS/Solar Physics Division Meeting}
+  \field{eid}{309.01}
+  \field{pages}{309.01}
+  \field{series}{AAS/Solar Physics Division Meeting}
+  \field{title}{{Preliminary Results of the MOSES II 2015 Flight}}
+  \verb{url}
+  \verb http://adsabs.harvard.edu/abs/2016SPD....4730901S
+  \endverb
+  \field{volume}{47}
+  \field{month}{05}
+  \field{year}{2016}
+\endentry
+
+\entry{Tarbell1999}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Tarbell}{T.}%
+     {T.}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ryutova}{R.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Covington}{C.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fludra}{F.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{TT+1}
+  \strng{fullhash}{TTRMCJFA1}
+  \field{labelyear}{1999}
+  \field{sortinit}{T}
+  \field{abstract}{%
+  The solar transition region is the site of supersonic plasma jets and
+  sporadic radiative events, whose origin and physical nature have not been
+  understood. Here we show that ubiquitous small-scale magnetic flux "tubes,"
+  constantly emerging from subsurface layers, may cause the formation of plasma
+  jets and a sporadic excess of temperature near the solar surface. These flux
+  tubes collide and reconnect, creating a sling-shot effect that generates
+  complex three-dimensional shock waves with the curved surface. Self-focusing
+  of these shocks occurs as they propagate upward in the rarefied atmosphere.
+  Depending on the geometry of the shock collision, highly concentrated energy
+  may be converted entirely into either heat or strong jets, or distributed
+  between the two.%
+  }
+  \field{number}{1}
+  \field{pages}{L47}
+  \field{title}{Heating and Jet Formation by Hydrodynamic Cumulation in the
+  Solar Atmosphere}
+  \verb{url}
+  \verb http://stacks.iop.org/1538-4357/514/i=1/a=L47
+  \endverb
+  \field{volume}{514}
+  \field{journaltitle}{The Astrophysical Journal Letters}
+  \field{year}{1999}
+\endentry
+
+\entry{Teriaca2004}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {{Teriaca}}{T.}%
+     {L.}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Banerjee}}{B.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Falchi}}{F.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Doyle}}{D.}%
+     {J.~G.}{J.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Madjarska}}{M.}%
+     {M.~S.}{M.~S.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Sun: transition region, Sun: UV radiation, line: profiles}
+  \strng{namehash}{TL+1}
+  \strng{fullhash}{TLBDFADJGMMS1}
+  \field{labelyear}{2004}
+  \field{sortinit}{T}
+  \verb{doi}
+  \verb 10.1051/0004-6361:20040503
+  \endverb
+  \field{pages}{1065\bibrangedash 1074}
+  \field{title}{{Transition region small-scale dynamics as seen by SUMER on
+  SOHO}}
+  \field{volume}{427}
+  \field{journaltitle}{Astronomy \& Astrophysics}
+  \field{month}{12}
+  \field{year}{2004}
+\endentry
+
+\entry{Wilhelm2000}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Wilhelm}}{W.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{SUN: CHROMOSPHERE, SUN: CORONA, SUN: MAGNETIC FIELDS, SUN: TRANSITION
+  REGION, SUN: UV RADIATION}
+  \strng{namehash}{WK1}
+  \strng{fullhash}{WK1}
+  \field{labelyear}{2000}
+  \field{sortinit}{W}
+  \field{pages}{351\bibrangedash 362}
+  \field{title}{{Solar spicules and macrospicules observed by SUMER}}
+  \field{volume}{360}
+  \field{journaltitle}{Astronomy \& Astrophysics}
+  \field{month}{08}
+  \field{year}{2000}
+\endentry
+
+\entry{nn_psf}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Xu}{X.}%
+     {Li}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ren}{R.}%
+     {Jimmy~SJ.}{J.~S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Liu}{L.}%
+     {Ci}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jia}{J.}%
+     {Jiaya}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{XL+1}
+  \strng{fullhash}{XLRJSLCJJ1}
+  \field{labelyear}{2014}
+  \field{sortinit}{X}
+  \field{title}{{Deep Convolutional Neural Network for Image Deconvolution}}
+  \verb{url}
+  \verb http://papers.nips.cc/paper/5485-deep-convolutional-neural-network-for-
+  \verb image-deconvolution.pdf
+  \endverb
+  \field{year}{2014}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

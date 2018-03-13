@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: NESSF17_proposal_roysmart.aux
+The style file: biblatex.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: NESSF17_proposal_roysmart-blx.bib
+Database file #2: sources/sources.bib
+Warning--I'm ignoring Jafarian2015's extra "keywords" field
+--line 479 of file sources/sources.bib
+Warning--I'm ignoring Jafarian2015's extra "keywords" field
+--line 480 of file sources/sources.bib
+Warning--I'm ignoring Jafarian2015's extra "keywords" field
+--line 481 of file sources/sources.bib
+Biblatex version: 3.3
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+You've used 34 entries,
+            6047 wiz_defined-function locations,
+            1439 strings with 28254 characters,
+and the built_in function-call counts, 135436 in all, are:
+= -- 4560
+> -- 5240
+< -- 1050
++ -- 2205
+- -- 2535
+* -- 13460
+:= -- 8932
+add.period$ -- 0
+call.type$ -- 34
+change.case$ -- 512
+chr.to.int$ -- 110
+cite$ -- 66
+duplicate$ -- 15392
+empty$ -- 13545
+format.name$ -- 3742
+if$ -- 28938
+int.to.chr$ -- 0
+int.to.str$ -- 75
+missing$ -- 0
+newline$ -- 1686
+num.names$ -- 1527
+pop$ -- 11047
+preamble$ -- 1
+purify$ -- 730
+quote$ -- 0
+skip$ -- 7114
+stack$ -- 0
+substring$ -- 2401
+swap$ -- 5763
+text.length$ -- 1056
+text.prefix$ -- 33
+top$ -- 1
+type$ -- 1280
+warning$ -- 0
+while$ -- 750
+width$ -- 0
+write$ -- 1651
+(There were 3 warnings)

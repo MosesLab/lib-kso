@@ -1,0 +1,1145 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.4)  9 MAR 2018 16:02
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**NESSF17_proposal_roysmart.tex
+(./NESSF17_proposal_roysmart.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2016/03/03 v3.3 programmable bibliographies (PK/JW/AB)
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex_legacy.sty
+Package: biblatex_legacy 2016/03/03 v3.3 programmable bibliographies (bibtex) (
+PK/JW/AB)
+
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count90
+)
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count91
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count92
+\c@listtotal=\count93
+\c@listcount=\count94
+\c@liststart=\count95
+\c@liststop=\count96
+\c@citecount=\count97
+\c@citetotal=\count98
+\c@multicitecount=\count99
+\c@multicitetotal=\count100
+\c@instcount=\count101
+\c@maxnames=\count102
+\c@minnames=\count103
+\c@maxitems=\count104
+\c@minitems=\count105
+\c@citecounter=\count106
+\c@savedcitecounter=\count107
+\c@uniquelist=\count108
+\c@uniquename=\count109
+\c@refsection=\count110
+\c@refsegment=\count111
+\c@maxextrayear=\count112
+\c@maxextraalpha=\count113
+\c@abbrvpenalty=\count114
+\c@highnamepenalty=\count115
+\c@lownamepenalty=\count116
+\c@maxparens=\count117
+\c@parenlevel=\count118
+\blx@tempcnta=\count119
+\blx@tempcntb=\count120
+\blx@tempcntc=\count121
+\blx@maxsection=\count122
+\blx@maxsegment=\count123
+\blx@notetype=\count124
+\blx@parenlevel@text=\count125
+\blx@parenlevel@foot=\count126
+\labelnumberwidth=\skip43
+\labelalphawidth=\skip44
+\shorthandwidth=\skip45
+\biblabelsep=\skip46
+\bibitemsep=\skip47
+\bibnamesep=\skip48
+\bibinitsep=\skip49
+\bibparsep=\skip50
+\bibhang=\skip51
+\blx@auxin=\read1
+\blx@auxout=\write3
+\c@mincomprange=\count127
+\c@maxcomprange=\count128
+\c@mincompwidth=\count129
+\c@labelname=\count130
+\c@savedlabelname=\count131
+\c@author=\count132
+\c@savedauthor=\count133
+\c@shortauthor=\count134
+\c@savedshortauthor=\count135
+\c@editor=\count136
+\c@savededitor=\count137
+\c@editora=\count138
+\c@savededitora=\count139
+\c@editorb=\count140
+\c@savededitorb=\count141
+\c@editorc=\count142
+\c@savededitorc=\count143
+\c@shorteditor=\count144
+\c@savedshorteditor=\count145
+\c@bookauthor=\count146
+\c@savedbookauthor=\count147
+\c@translator=\count148
+\c@savedtranslator=\count149
+\c@annotator=\count150
+\c@savedannotator=\count151
+\c@commentator=\count152
+\c@savedcommentator=\count153
+\c@introduction=\count154
+\c@savedintroduction=\count155
+\c@foreword=\count156
+\c@savedforeword=\count157
+\c@afterword=\count158
+\c@savedafterword=\count159
+\c@holder=\count160
+\c@savedholder=\count161
+\c@namea=\count162
+\c@savednamea=\count163
+\c@nameb=\count164
+\c@savednameb=\count165
+\c@namec=\count166
+\c@savednamec=\count167
+\c@institution=\count168
+\c@savedinstitution=\count169
+\c@language=\count170
+\c@savedlanguage=\count171
+\c@location=\count172
+\c@savedlocation=\count173
+\c@organization=\count174
+\c@savedorganization=\count175
+\c@origlocation=\count176
+\c@savedoriglocation=\count177
+\c@origpublisher=\count178
+\c@savedorigpublisher=\count179
+\c@pageref=\count180
+\c@savedpageref=\count181
+\c@publisher=\count182
+\c@savedpublisher=\count183
+\c@lista=\count184
+\c@savedlista=\count185
+\c@listb=\count186
+\c@savedlistb=\count187
+\c@listc=\count188
+\c@savedlistc=\count189
+\c@listd=\count190
+\c@savedlistd=\count191
+\c@liste=\count192
+\c@savedliste=\count193
+\c@listf=\count194
+\c@savedlistf=\count195
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2016/03/03 v3.3 biblatex compatibility (PK/JW/AB)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex_legacy.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex_legacy.def
+File: biblatex_legacy.def 
+\c@textcitecount=\count196
+\c@textcitetotal=\count197
+\c@textcitemaxnames=\count198
+\c@biburlnumpenalty=\count199
+\c@biburlucpenalty=\count266
+\c@biburllcpenalty=\count267
+\c@smartand=\count268
+)
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+File: authoryear.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
+\c@bbx:relatedcount=\count269
+\c@bbx:relatedtotal=\count270
+))
+Package biblatex Info: Trying to load citation style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.cbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
+File: authoryear.cbx 2016/03/03 v3.3 biblatex citation style (PK/JW/AB)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifvtex' (already loaded).
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen111
+\Hy@linkcounter=\count271
+\Hy@pagecounter=\count272
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count273
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4688.
+\c@Hy@tempcnt=\count274
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen112
+\Fld@menulength=\count275
+\Field@Width=\dimen113
+\Fld@charsize=\dimen114
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count276
+\c@Item=\count277
+\c@Hfootnote=\count278
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count279
+\c@bookmark@seq@number=\count280
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip52
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count281
+\float@exts=\toks16
+\float@box=\box26
+\@float@everytoks=\toks17
+\@floatcapt=\box27
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 95.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count282
+))
+\Gin@req@height=\dimen115
+\Gin@req@width=\dimen116
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen117
+\captionmargin@=\dimen118
+\captionwidth=\dimen119
+\caption@tempdima=\dimen120
+\caption@indent=\dimen121
+\caption@parindent=\dimen122
+\caption@hangindent=\dimen123
+)
+\c@ContinuedFloat=\count283
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+\c@subfigure=\count284
+\c@subtable=\count285
+)
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen124
+\WF@size=\dimen125
+\c@WF@wrappedlines=\count286
+\WF@box=\box28
+\WF@everypar=\toks18
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2015/09/18 v0.5d Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count287
+\calc@Bcount=\count288
+\calc@Adimen=\dimen126
+\calc@Bdimen=\dimen127
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count289
+\calc@Cskip=\skip55
+)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+))
+\AM@pagewidth=\dimen128
+\AM@pageheight=\dimen129
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2015/09/18 v0.5d Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box29
+\AM@toc@title=\toks19
+\c@AM@survey=\count290
+\AM@templatesizebox=\box30
+)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2016/03/03 v3.3 biblatex localization (PK/JW/AB)
+)
+\@quotelevel=\count291
+\@quotereset=\count292
+
+
+LaTeX Warning: Unused global option(s):
+    [letter].
+
+(./NESSF17_proposal_roysmart.aux)
+\openout1 = `NESSF17_proposal_roysmart.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package biblatex Info: No input encoding detected.
+(biblatex)             Assuming 'ascii'.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'ascii'.
+\openout3 = `NESSF17_proposal_roysmart-blx.bib'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'NESSF17_proposal_roysmart.bbl' found.
+(./NESSF17_proposal_roysmart.bbl
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'Boublil2015':
+(biblatex)                - Invalid format of field 'month'.
+
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'Descour:95':
+(biblatex)                - Invalid format of field 'month'.
+
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'fox1':
+(biblatex)                - Invalid format of field 'month'.
+
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'Okamoto:91':
+(biblatex)                - Invalid format of field 'month'.
+
+)
+Package biblatex Info: Reference section=0 on input line 24.
+Package biblatex Info: Reference segment=0 on input line 24.
+\AtBeginShipoutBox=\box31
+Package hyperref Info: Link coloring OFF on input line 24.
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count293
+)
+LaTeX Info: Redefining \ref on input line 24.
+LaTeX Info: Redefining \pageref on input line 24.
+LaTeX Info: Redefining \nameref on input line 24.
+
+(./NESSF17_proposal_roysmart.out) (./NESSF17_proposal_roysmart.out)
+\@outlinefile=\write4
+\openout4 = `NESSF17_proposal_roysmart.out'.
+
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count294
+\scratchdimen=\dimen130
+\scratchbox=\box32
+\nofMPsegments=\count295
+\nofMParguments=\count296
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count297
+\MPscratchDim=\dimen131
+\MPnumerator=\count298
+\makeMPintoPDFobject=\count299
+\everyMPtoPDFconversion=\toks21
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: wrapfig package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 27.
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Missing character: There is no Â in font cmr10!
+Missing character: There is no   in font cmr10!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 60.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 60.
+Package epstopdf Info: Source file: <figures/tomography.eps>
+(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    size: 82185 bytes
+(epstopdf)             Output file: <figures/tomography-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    size: 72353 bytes
+(epstopdf)             Command: <repstopdf --outfile=figures/tomography-eps-con
+verted-to.pdf figures/tomography.eps>
+(epstopdf)             \includegraphics on input line 63.
+Package epstopdf Info: Output file is already uptodate.
+
+<figures/tomography-eps-converted-to.pdf, id=111, 437.635pt x 307.1475pt>
+File: figures/tomography-eps-converted-to.pdf Graphic file (type pdf)
+
+<use figures/tomography-eps-converted-to.pdf>
+Package pdftex.def Info: figures/tomography-eps-converted-to.pdf used on input 
+line 63.
+(pdftex.def)             Requested size: 187.89914pt x 131.87401pt.
+ [2]
+Package epstopdf Info: Source file: <figures/concave.eps>
+(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    size: 88748 bytes
+(epstopdf)             Output file: <figures/concave-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    size: 89657 bytes
+(epstopdf)             Command: <repstopdf --outfile=figures/concave-eps-conver
+ted-to.pdf figures/concave.eps>
+(epstopdf)             \includegraphics on input line 92.
+Package epstopdf Info: Output file is already uptodate.
+
+<figures/concave-eps-converted-to.pdf, id=151, 250.9375pt x 148.555pt>
+File: figures/concave-eps-converted-to.pdf Graphic file (type pdf)
+
+<use figures/concave-eps-converted-to.pdf>
+Package pdftex.def Info: figures/concave-eps-converted-to.pdf used on input lin
+e 92.
+(pdftex.def)             Requested size: 244.1672pt x 144.54pt.
+
+Overfull \hbox (13.98468pt too wide) in paragraph at lines 92--93
+ [][] 
+ []
+
+Package epstopdf Info: Source file: <figures/moses_cube.eps>
+(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    size: 87786 bytes
+(epstopdf)             Output file: <figures/moses_cube-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    size: 134431 bytes
+(epstopdf)             Command: <repstopdf --outfile=figures/moses_cube-eps-con
+verted-to.pdf figures/moses_cube.eps>
+(epstopdf)             \includegraphics on input line 99.
+Package epstopdf Info: Output file is already uptodate.
+<figures/moses_cube-eps-converted-to.pdf, id=152, 252.945pt x 176.66pt>
+File: figures/moses_cube-eps-converted-to.pdf Graphic file (type pdf)
+
+<use figures/moses_cube-eps-converted-to.pdf>
+Package pdftex.def Info: figures/moses_cube-eps-converted-to.pdf used on input 
+line 99.
+(pdftex.def)             Requested size: 206.95694pt x 144.54pt.
+ [3 <./figures/tomography-eps-converted-to.pdf> <./figures/concave-eps-converte
+d-to.pdf> <./figures/moses_cube-eps-converted-to.pdf>] <figures/plaid.png, id=1
+86, 907.39pt x 875.27pt>
+File: figures/plaid.png Graphic file (type png)
+
+<use figures/plaid.png>
+Package pdftex.def Info: figures/plaid.png used on input line 120.
+(pdftex.def)             Requested size: 93.94957pt x 90.61725pt.
+
+Underfull \hbox (badness 4242) in paragraph at lines 121--121
+[]\OT1/cmr/bx/n/7 Figure 3: |\OT1/cmr/m/n/7 An ex-am-
+ []
+
+[4 <./figures/plaid.png (PNG copy)>]
+Missing character: There is no Â in font cmr10!
+Missing character: There is no   in font cmr10!
+ [5]
+<figures/inv1.png, id=225, 358.33875pt x 716.6775pt>
+File: figures/inv1.png Graphic file (type png)
+ <use figures/inv1.png>
+Package pdftex.def Info: figures/inv1.png used on input line 174.
+(pdftex.def)             Requested size: 46.97836pt x 93.94777pt.
+
+<figures/inv2.png, id=226, 358.33875pt x 716.6775pt>
+File: figures/inv2.png Graphic file (type png)
+ <use figures/inv2.png>
+Package pdftex.def Info: figures/inv2.png used on input line 179.
+(pdftex.def)             Requested size: 46.97836pt x 93.94777pt.
+
+<figures/inv3.png, id=227, 358.33875pt x 716.6775pt>
+File: figures/inv3.png Graphic file (type png)
+ <use figures/inv3.png>
+Package pdftex.def Info: figures/inv3.png used on input line 184.
+(pdftex.def)             Requested size: 46.97836pt x 93.94777pt.
+
+<figures/inv4.png, id=228, 358.33875pt x 716.6775pt>
+File: figures/inv4.png Graphic file (type png)
+ <use figures/inv4.png>
+Package pdftex.def Info: figures/inv4.png used on input line 189.
+(pdftex.def)             Requested size: 46.97836pt x 93.94777pt.
+
+<figures/inv5.png, id=229, 358.33875pt x 716.6775pt>
+File: figures/inv5.png Graphic file (type png)
+ <use figures/inv5.png>
+Package pdftex.def Info: figures/inv5.png used on input line 194.
+(pdftex.def)             Requested size: 46.97836pt x 93.94777pt.
+
+<figures/schedule.png, id=230, 843.15pt x 294.09875pt>
+File: figures/schedule.png Graphic file (type png)
+
+<use figures/schedule.png>
+Package pdftex.def Info: figures/schedule.png used on input line 209.
+(pdftex.def)             Requested size: 375.80544pt x 131.08669pt.
+ [6 <./figures/inv1.png> <./figures/inv2.png> <./figures/inv3.png> <./figures/i
+nv4.png> <./figures/inv5.png>]
+Missing character: There is no Â in font cmr10!
+Missing character: There is no   in font cmr10!
+ [7 <./figures/schedule.png>]
+Missing character: There is no Â in font cmr10!
+Missing character: There is no   in font cmr10!
+ [8] <cv4ck_2p.pdf, id=311, 597.51233pt x 845.0471pt>
+File: cv4ck_2p.pdf Graphic file (type pdf)
+ <use cv4ck_2p.pdf>
+Package pdftex.def Info: cv4ck_2p.pdf used on input line 216.
+(pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
+File: cv4ck_2p.pdf Graphic file (type pdf)
+
+<use cv4ck_2p.pdf>
+Package pdftex.def Info: cv4ck_2p.pdf used on input line 216.
+(pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
+ <cv4ck_2p.pdf, id=314, page=1, 597.51233pt x 845.0471pt>
+File: cv4ck_2p.pdf Graphic file (type pdf)
+
+<use cv4ck_2p.pdf, page 1>
+Package pdftex.def Info: cv4ck_2p.pdf, page1 used on input line 216.
+(pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
+File: cv4ck_2p.pdf Graphic file (type pdf)
+ <use cv4ck_2p.pdf, page 1>
+Package pdftex.def Info: cv4ck_2p.pdf, page1 used on input line 216.
+(pdftex.def)             Requested size: 562.12665pt x 795.00201pt.
+ [9]
+File: cv4ck_2p.pdf Graphic file (type pdf)
+
+<use cv4ck_2p.pdf, page 1>
+Package pdftex.def Info: cv4ck_2p.pdf, page1 used on input line 216.
+(pdftex.def)             Requested size: 562.12665pt x 795.00201pt.
+File: cv4ck_2p.pdf Graphic file (type pdf)
+ <use cv4ck_2p.pdf, page 1>
+Package pdftex.def Info: cv4ck_2p.pdf, page1 used on input line 216.
+(pdftex.def)             Requested size: 562.12665pt x 795.00201pt.
+File: cv4ck_2p.pdf Graphic file (type pdf)
+
+<use cv4ck_2p.pdf, page 1>
+Package pdftex.def Info: cv4ck_2p.pdf, page1 used on input line 216.
+(pdftex.def)             Requested size: 562.12665pt x 795.00201pt.
+ [10 <./cv4ck_2p.pdf>]
+<cv4ck_2p.pdf, id=343, page=2, 597.51233pt x 845.0471pt>
+File: cv4ck_2p.pdf Graphic file (type pdf)
+
+<use cv4ck_2p.pdf, page 2>
+Package pdftex.def Info: cv4ck_2p.pdf, page2 used on input line 216.
+(pdftex.def)             Requested size: 562.12665pt x 795.00201pt.
+File: cv4ck_2p.pdf Graphic file (type pdf)
+ <use cv4ck_2p.pdf, page 2>
+Package pdftex.def Info: cv4ck_2p.pdf, page2 used on input line 216.
+(pdftex.def)             Requested size: 562.12665pt x 795.00201pt.
+File: cv4ck_2p.pdf Graphic file (type pdf)
+
+<use cv4ck_2p.pdf, page 2>
+Package pdftex.def Info: cv4ck_2p.pdf, page2 used on input line 216.
+(pdftex.def)             Requested size: 562.12665pt x 795.00201pt.
+ [11 <./cv4ck_2p.pdf>]
+<royCV.pdf, id=348, 614.295pt x 794.97pt>
+File: royCV.pdf Graphic file (type pdf)
+ <use royCV.pdf>
+Package pdftex.def Info: royCV.pdf used on input line 217.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: royCV.pdf Graphic file (type pdf)
+ <use royCV.pdf>
+Package pdftex.def Info: royCV.pdf used on input line 217.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+<royCV.pdf, id=351, page=1, 614.295pt x 794.97pt>
+File: royCV.pdf Graphic file (type pdf)
+ <use royCV.pdf, page 1>
+Package pdftex.def Info: royCV.pdf, page1 used on input line 217.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: royCV.pdf Graphic file (type pdf)
+
+<use royCV.pdf, page 1>
+Package pdftex.def Info: royCV.pdf, page1 used on input line 217.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: royCV.pdf Graphic file (type pdf)
+ <use royCV.pdf, page 1>
+Package pdftex.def Info: royCV.pdf, page1 used on input line 217.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: royCV.pdf Graphic file (type pdf)
+ <use royCV.pdf, page 1>
+Package pdftex.def Info: royCV.pdf, page1 used on input line 217.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: royCV.pdf Graphic file (type pdf)
+
+<use royCV.pdf, page 1>
+Package pdftex.def Info: royCV.pdf, page1 used on input line 217.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [12 <./royCV.pdf>]
+<nessf17smartLetter.pdf, id=380, 614.295pt x 794.97pt>
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use nessf17smartLetter.pdf>
+Package pdftex.def Info: nessf17smartLetter.pdf used on input line 218.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+ <use nessf17smartLetter.pdf>
+Package pdftex.def Info: nessf17smartLetter.pdf used on input line 218.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+<nessf17smartLetter.pdf, id=383, page=1, 614.295pt x 794.97pt>
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: nessf17smartLetter.pdf, page1 used on input line 218.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+ <use nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: nessf17smartLetter.pdf, page1 used on input line 218.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: nessf17smartLetter.pdf, page1 used on input line 218.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+ <use nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: nessf17smartLetter.pdf, page1 used on input line 218.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: nessf17smartLetter.pdf, page1 used on input line 218.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [13 <./nessf17smartLetter.pdf>]
+<nessf17smartLetter.pdf, id=399, page=2, 614.295pt x 794.97pt>
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use nessf17smartLetter.pdf, page 2>
+Package pdftex.def Info: nessf17smartLetter.pdf, page2 used on input line 218.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+ <use nessf17smartLetter.pdf, page 2>
+Package pdftex.def Info: nessf17smartLetter.pdf, page2 used on input line 218.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use nessf17smartLetter.pdf, page 2>
+Package pdftex.def Info: nessf17smartLetter.pdf, page2 used on input line 218.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [14 <./nessf17smartLetter.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./NESS17_smart_affirmation.pdf): PDF in
+clusion: found PDF version <1.7>, but at most version <1.5> allowed
+<NESS17_smart_affirmation.pdf, id=416, 614.295pt x 794.97pt>
+File: NESS17_smart_affirmation.pdf Graphic file (type pdf)
+
+<use NESS17_smart_affirmation.pdf>
+Package pdftex.def Info: NESS17_smart_affirmation.pdf used on input line 219.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: /usr/bin/pdflatex (file ./NESS17_smart_affirmation.pdf): PDF in
+clusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: NESS17_smart_affirmation.pdf Graphic file (type pdf)
+<use NESS17_smart_affirmation.pdf>
+Package pdftex.def Info: NESS17_smart_affirmation.pdf used on input line 219.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: /usr/bin/pdflatex (file ./NESS17_smart_affirmation.pdf): PDF in
+clusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: /usr/bin/pdflatex (file ./NESS17_smart_affirmation.pdf): PDF in
+clusion: found PDF version <1.7>, but at most version <1.5> allowed
+<NESS17_smart_affirmation.pdf, id=419, page=1, 614.295pt x 794.97pt>
+File: NESS17_smart_affirmation.pdf Graphic file (type pdf)
+
+<use NESS17_smart_affirmation.pdf, page 1>
+Package pdftex.def Info: NESS17_smart_affirmation.pdf, page1 used on input line
+ 219.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: NESS17_smart_affirmation.pdf Graphic file (type pdf)
+
+<use NESS17_smart_affirmation.pdf, page 1>
+Package pdftex.def Info: NESS17_smart_affirmation.pdf, page1 used on input line
+ 219.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: NESS17_smart_affirmation.pdf Graphic file (type pdf)
+
+<use NESS17_smart_affirmation.pdf, page 1>
+Package pdftex.def Info: NESS17_smart_affirmation.pdf, page1 used on input line
+ 219.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: NESS17_smart_affirmation.pdf Graphic file (type pdf)
+
+<use NESS17_smart_affirmation.pdf, page 1>
+Package pdftex.def Info: NESS17_smart_affirmation.pdf, page1 used on input line
+ 219.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: NESS17_smart_affirmation.pdf Graphic file (type pdf)
+
+<use NESS17_smart_affirmation.pdf, page 1>
+Package pdftex.def Info: NESS17_smart_affirmation.pdf, page1 used on input line
+ 219.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [15 <./NESS17_smart_affirmation.pdf>] <transcript.pdf, id=432, 614.295pt x 794
+.97pt>
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf>
+Package pdftex.def Info: transcript.pdf used on input line 220.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf>
+Package pdftex.def Info: transcript.pdf used on input line 220.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+ <transcript.pdf, id=435, page=1, 614.295pt x 794.97pt>
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 1>
+Package pdftex.def Info: transcript.pdf, page1 used on input line 220.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 1>
+Package pdftex.def Info: transcript.pdf, page1 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 1>
+Package pdftex.def Info: transcript.pdf, page1 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 1>
+Package pdftex.def Info: transcript.pdf, page1 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 1>
+Package pdftex.def Info: transcript.pdf, page1 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [16 <./transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./transcript.pdf): PDF inclusion: inval
+id other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>] <transcript.pdf, id=465, page=2, 614.295pt x 794.97pt>
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 2>
+Package pdftex.def Info: transcript.pdf, page2 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 2>
+Package pdftex.def Info: transcript.pdf, page2 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 2>
+Package pdftex.def Info: transcript.pdf, page2 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [17 <./transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./transcript.pdf): PDF inclusion: inval
+id other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>] <transcript.pdf, id=470, page=3, 614.295pt x 794.97pt>
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 3>
+Package pdftex.def Info: transcript.pdf, page3 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 3>
+Package pdftex.def Info: transcript.pdf, page3 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 3>
+Package pdftex.def Info: transcript.pdf, page3 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [18 <./transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./transcript.pdf): PDF inclusion: inval
+id other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>] <transcript.pdf, id=475, page=4, 614.295pt x 794.97pt>
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 4>
+Package pdftex.def Info: transcript.pdf, page4 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 4>
+Package pdftex.def Info: transcript.pdf, page4 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 4>
+Package pdftex.def Info: transcript.pdf, page4 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [19 <./transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./transcript.pdf): PDF inclusion: inval
+id other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>] <transcript.pdf, id=481, page=5, 614.295pt x 794.97pt>
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 5>
+Package pdftex.def Info: transcript.pdf, page5 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 5>
+Package pdftex.def Info: transcript.pdf, page5 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 5>
+Package pdftex.def Info: transcript.pdf, page5 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [20 <./transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./transcript.pdf): PDF inclusion: inval
+id other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>] <transcript.pdf, id=486, page=6, 614.295pt x 794.97pt>
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 6>
+Package pdftex.def Info: transcript.pdf, page6 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 6>
+Package pdftex.def Info: transcript.pdf, page6 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 6>
+Package pdftex.def Info: transcript.pdf, page6 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [21 <./transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./transcript.pdf): PDF inclusion: inval
+id other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>] <transcript.pdf, id=491, page=7, 614.295pt x 794.97pt>
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 7>
+Package pdftex.def Info: transcript.pdf, page7 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+ <use transcript.pdf, page 7>
+Package pdftex.def Info: transcript.pdf, page7 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: transcript.pdf Graphic file (type pdf)
+
+<use transcript.pdf, page 7>
+Package pdftex.def Info: transcript.pdf, page7 used on input line 220.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [22 <./transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./transcript.pdf): PDF inclusion: inval
+id other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 223.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 223.
+ (./NESSF17_proposal_roysmart.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 223.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 223.
+Package rerunfilecheck Info: File `NESSF17_proposal_roysmart.out' has not chang
+ed.
+(rerunfilecheck)             Checksum: BC1C2AF8C4F4D13F118C9BE869772651;1096.
+Package logreq Info: Writing requests to 'NESSF17_proposal_roysmart.run.xml'.
+\openout1 = `NESSF17_proposal_roysmart.run.xml'.
+
+ )
+(\end occurred when \iftrue on line 24 was incomplete) 
+Here is how much of TeX's memory you used:
+ 12944 strings out of 493029
+ 208279 string characters out of 6136235
+ 401937 words of memory out of 5000000
+ 16253 multiletter control sequences out of 15000+600000
+ 10097 words of font info for 36 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 46i,18n,75p,1182b,1062s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on NESSF17_proposal_roysmart.pdf (22 pages, 1167601 bytes).
+PDF statistics:
+ 572 PDF objects out of 1000 (max. 8388607)
+ 453 compressed objects within 5 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 319 words of extra memory for PDF output out of 10000 (max. 10000000)
+

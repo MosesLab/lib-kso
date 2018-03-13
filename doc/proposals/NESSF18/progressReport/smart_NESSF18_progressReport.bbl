@@ -1,0 +1,132 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Brueckner} and {Bartoe}(1983)]{Brueckner1983}
+G.~E. {Brueckner} and J.-D.~F. {Bartoe}.
+\newblock {Observations of high-energy jets in the corona above the quiet sun,
+  the heating of the corona, and the acceleration of the solar wind}.
+\newblock \emph{The Astrophysical Journal}, 272:\penalty0 329--348, September
+  1983.
+\newblock \doi{10.1086/161297}.
+
+\bibitem[De~Pontieu et~al.(2014)De~Pontieu, Title, Lemen, Kushner, Akin,
+  Allard, Berger, Boerner, Cheung, Chou, Drake, Duncan, Freeland, Heyman,
+  Hoffman, Hurlburt, Lindgren, Mathur, Rehse, Sabolish, Seguin, Schrijver,
+  Tarbell, W{\"u}lser, Wolfson, Yanari, Mudge, Nguyen-Phuc, Timmons, van
+  Bezooijen, Weingrod, Brookner, Butcher, Dougherty, Eder, Knagenhjelm, Larsen,
+  Mansir, Phan, Boyle, Cheimets, DeLuca, Golub, Gates, Hertz, McKillop, Park,
+  Perry, Podgorski, Reeves, Saar, Testa, Tian, Weber, Dunn, Eccles, Jaeggli,
+  Kankelborg, Mashburn, Pust, Springer, Carvalho, Kleint, Marmie, Mazmanian,
+  Pereira, Sawyer, Strong, Worden, Carlsson, Hansteen, Leenaarts, Wiesmann,
+  Aloise, Chu, Bush, Scherrer, Brekke, Martinez-Sykora, Lites, McIntosh,
+  Uitenbroek, Okamoto, Gummin, Auker, Jerram, Pool, and Waltham]{DePontieu2014}
+B.~De~Pontieu, A.~M. Title, J.~R. Lemen, G.~D. Kushner, D.~J. Akin, B.~Allard,
+  T.~Berger, P.~Boerner, M.~Cheung, C.~Chou, J.~F. Drake, D.~W. Duncan,
+  S.~Freeland, G.~F. Heyman, C.~Hoffman, N.~E. Hurlburt, R.~W. Lindgren,
+  D.~Mathur, R.~Rehse, D.~Sabolish, R.~Seguin, C.~J. Schrijver, T.~D. Tarbell,
+  J.-P. W{\"u}lser, C.~J. Wolfson, C.~Yanari, J.~Mudge, N.~Nguyen-Phuc,
+  R.~Timmons, R.~van Bezooijen, I.~Weingrod, R.~Brookner, G.~Butcher,
+  B.~Dougherty, J.~Eder, V.~Knagenhjelm, S.~Larsen, D.~Mansir, L.~Phan,
+  P.~Boyle, P.~N. Cheimets, E.~E. DeLuca, L.~Golub, R.~Gates, E.~Hertz,
+  S.~McKillop, S.~Park, T.~Perry, W.~A. Podgorski, K.~Reeves, S.~Saar,
+  P.~Testa, H.~Tian, M.~Weber, C.~Dunn, S.~Eccles, S.~A. Jaeggli, C.~C.
+  Kankelborg, K.~Mashburn, N.~Pust, L.~Springer, R.~Carvalho, L.~Kleint,
+  J.~Marmie, E.~Mazmanian, T.~M.~D. Pereira, S.~Sawyer, J.~Strong, S.~P.
+  Worden, M.~Carlsson, V.~H. Hansteen, J.~Leenaarts, M.~Wiesmann, J.~Aloise,
+  K.-C. Chu, R.~I. Bush, P.~H. Scherrer, P.~Brekke, J.~Martinez-Sykora, B.~W.
+  Lites, S.~W. McIntosh, H.~Uitenbroek, T.~J. Okamoto, M.~A. Gummin, G.~Auker,
+  P.~Jerram, P.~Pool, and N.~Waltham.
+\newblock The interface region imaging spectrograph (iris).
+\newblock \emph{Solar Physics}, 289\penalty0 (7):\penalty0 2733--2779, 2014.
+\newblock ISSN 1573-093X.
+\newblock \doi{10.1007/s11207-014-0485-y}.
+\newblock URL \url{http://dx.doi.org/10.1007/s11207-014-0485-y}.
+
+\bibitem[{Dere} et~al.(1989){Dere}, {Bartoe}, and {Brueckner}]{Dere1989}
+K.~P. {Dere}, J.-D.~F. {Bartoe}, and G.~E. {Brueckner}.
+\newblock {Explosive events in the solar transition zone}.
+\newblock \emph{Solar Physics}, 123:\penalty0 41--68, March 1989.
+\newblock \doi{10.1007/BF00150011}.
+\newblock URL \url{http://adsabs.harvard.edu/abs/1989SoPh..123...41D}.
+
+\bibitem[Dere(1994)]{Dere1994}
+K.P. Dere.
+\newblock Explosive events, magnetic reconnection, and coronal heating.
+\newblock \emph{Advances in Space Research}, 14\penalty0 (4):\penalty0 13 --
+  22, 1994.
+\newblock ISSN 0273-1177.
+\newblock \doi{http://dx.doi.org/10.1016/0273-1177(94)90154-6}.
+\newblock URL
+  \url{//www.sciencedirect.com/science/article/pii/0273117794901546}.
+
+\bibitem[{Fox} et~al.(2010){Fox}, {Kankelborg}, and {Thomas}]{fox1}
+J.~L. {Fox}, C.~C. {Kankelborg}, and R.~J. {Thomas}.
+\newblock {A Transition Region Explosive Event Observed in He II with the MOSES
+  Sounding Rocket}.
+\newblock \emph{ApJ}, 719:\penalty0 1132--1143, Aug 2010.
+\newblock \doi{10.1088/0004-637X/719/2/1132}.
+\newblock URL \url{http://adsabs.harvard.edu/abs/2010ApJ...719.1132F}.
+
+\bibitem[Fox(2011)]{Fox2011}
+James~Lewis Fox.
+\newblock \emph{Snapshot imaging spectroscopy of the solar transition region
+  the multi-order solar EUV spectrograph (MOSES) sounding rocket mission}.
+\newblock 2011.
+
+\bibitem[Haugan et~al.(2013)Haugan, Serafin, and Shinen]{itn15}
+Stein V.~H. Haugan, John Serafin, and Richard Shinen.
+\newblock Iris technical note 15 pipeline despiking procedure.
+\newblock Technical report, Lockheed Martin, Solar Astrophysics Laboratory,
+  June 2013.
+
+\bibitem[Kankelborg and Thomas(2001)]{kankel1}
+Charles~C. Kankelborg and Roger~J. Thomas.
+\newblock Simultaneous imaging and spectroscopy of the solar atmosphere:
+  advantages and challenges of a 3-order slitless spectrograph.
+\newblock \emph{Proc. SPIE}, 4498:\penalty0 16--26, 2001.
+\newblock \doi{10.1117/12.450074}.
+\newblock URL \url{http://dx.doi.org/10.1117/12.450074}.
+
+\bibitem[Okamoto and Yamaguchi(1991)]{Okamoto:91}
+Takayuki Okamoto and Ichirou Yamaguchi.
+\newblock Simultaneous acquisition of spectral image information.
+\newblock \emph{Opt. Lett.}, 16\penalty0 (16):\penalty0 1277--1279, Aug 1991.
+\newblock \doi{10.1364/OL.16.001277}.
+\newblock URL \url{http://ol.osa.org/abstract.cfm?URI=ol-16-16-1277}.
+
+\bibitem[{Parker} and {Kankelborg}(2016)]{Parker2016}
+J.~{Parker} and C.~{Kankelborg}.
+\newblock {Determining the Spectral Content of MOSES Images}.
+\newblock In \emph{AAS/Solar Physics Division Abstracts \#47}, volume~47 of
+  \emph{AAS/Solar Physics Division Meeting}, page 2.04, May 2016.
+
+\bibitem[{Pathak} et~al.(2016){Pathak}, {Krahenbuhl}, {Donahue}, {Darrell}, and
+  {Efros}]{Pathak2016}
+D.~{Pathak}, P.~{Krahenbuhl}, J.~{Donahue}, T.~{Darrell}, and A.~A. {Efros}.
+\newblock {Context Encoders: Feature Learning by Inpainting}.
+\newblock \emph{ArXiv e-prints}, April 2016.
+
+\bibitem[Russel and Norvig(2010)]{ai}
+Stuart Russel and Peter Norvig.
+\newblock \emph{Artificial Intelligence: A Modern Approach}.
+\newblock Pearson Education, Upper Saddle River, New Jersey 07458, 3rd edition,
+  2010.
+
+\bibitem[Rust(2017)]{Rust2017}
+Thomas Rust.
+\newblock Explosive events in the quiet sun: Extreme ultraviolet imaging
+  spectroscopy instrumentation and observations, January 2017.
+\newblock URL \url{http://search.proquest.com/docview/1952045621/}.
+
+\bibitem[{Smart} et~al.(2016){Smart}, {Courrier}, and {Kankelborg}]{smart1}
+R.~{Smart}, H.~{Courrier}, and C.~{Kankelborg}.
+\newblock {Preliminary Results of the MOSES II 2015 Flight}.
+\newblock In \emph{AAS/Solar Physics Division Meeting}, volume~47 of
+  \emph{AAS/Solar Physics Division Meeting}, page 309.01, May 2016.
+\newblock URL \url{http://adsabs.harvard.edu/abs/2016SPD....4730901S}.
+
+\end{thebibliography}

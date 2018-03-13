@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: smart_NESSF18_progressReport.aux
+The style file: plainnat.bst
+Database file #1: bib/sources.bib
+Warning--empty publisher in Fox2011
+You've used 14 entries,
+            2773 wiz_defined-function locations,
+            706 strings with 9129 characters,
+and the built_in function-call counts, 10723 in all, are:
+= -- 851
+> -- 1098
+< -- 12
++ -- 368
+- -- 354
+* -- 1045
+:= -- 1761
+add.period$ -- 58
+call.type$ -- 14
+change.case$ -- 160
+chr.to.int$ -- 14
+cite$ -- 29
+duplicate$ -- 305
+empty$ -- 528
+format.name$ -- 378
+if$ -- 2135
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 14
+newline$ -- 94
+num.names$ -- 56
+pop$ -- 304
+preamble$ -- 1
+purify$ -- 146
+quote$ -- 0
+skip$ -- 315
+stack$ -- 0
+substring$ -- 209
+swap$ -- 50
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 144
+warning$ -- 1
+while$ -- 53
+width$ -- 0
+write$ -- 220
+(There was 1 warning)
