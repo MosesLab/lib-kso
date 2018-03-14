@@ -98,6 +98,8 @@ for ax in range(0,nmet):
     plt.plot(y0, ghy(t1), 'w')
     plt.xlim(0,768)
     plt.ylim(-50,768)
+    plt.xlabel('local median intensity (DN)')
+    plt.ylabel('intensity (DN)')
     plt.savefig('hist_' + str(ax) + '.pdf', bbox_inches='tight', pad_inches=0, dpi=300)
     # if ax == 2: plt.colorbar(fraction=0.0497, pad=0.04)
 
