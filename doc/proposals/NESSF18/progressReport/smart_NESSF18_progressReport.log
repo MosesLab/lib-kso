@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.4)  14 MAR 2018 11:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.8)  14 MAR 2018 11:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -593,10 +593,10 @@ File: fig/doppler_1343.png Graphic file (type png)
 Package pdftex.def Info: fig/doppler_1343.png used on input line 169.
 (pdftex.def)             Requested size: 211.38832pt x 48.25194pt.
 Package epstopdf Info: Source file: <fig/smart_hist.eps>
-(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    date: 2018-03-01 23:36:13
 (epstopdf)                    size: 662951 bytes
 (epstopdf)             Output file: <fig/smart_hist-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-03-04 10:05:05
+(epstopdf)                    date: 2018-03-01 23:44:14
 (epstopdf)                    size: 128439 bytes
 (epstopdf)             Command: <repstopdf --outfile=fig/smart_hist-eps-convert
 ed-to.pdf fig/smart_hist.eps>
@@ -611,11 +611,11 @@ Package pdftex.def Info: fig/smart_hist-eps-converted-to.pdf used on input line
  184.
 (pdftex.def)             Requested size: 211.38832pt x 178.62694pt.
 
-<fig/linearity.pdf, id=106, 387.33946pt x 315.83257pt>
+<fig/linearity.pdf, id=106, 387.33946pt x 315.8325pt>
 File: fig/linearity.pdf Graphic file (type pdf)
  <use fig/linearity.pdf>
 Package pdftex.def Info: fig/linearity.pdf used on input line 191.
-(pdftex.def)             Requested size: 211.38832pt x 172.36388pt.
+(pdftex.def)             Requested size: 211.38832pt x 172.36385pt.
 Package acronym Info: Label `acro:SMART' newly defined as it shall be overridde
 n
 although it is yet undefined on input line 203.
@@ -771,41 +771,203 @@ line 346.
 18_progressReport.bbl [9
 
 ])
-[10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 376.
+[10] <../recommendation/nessf17smartLetter.pdf, id=490, 614.295pt x 794.97pt>
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf used on input
+ line 376.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf used on input
+ line 376.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+<../recommendation/nessf17smartLetter.pdf, id=493, page=1, 614.295pt x 794.97pt
+>
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+ <use ../recommendation/nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page1 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page1 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 376.
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page1 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page1 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf, page 1>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page1 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [12 <../recommendation/nessf17smartLetter.pdf>]
+<../recommendation/nessf17smartLetter.pdf, id=516, page=2, 614.295pt x 794.97pt
+>
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+ <use ../recommendation/nessf17smartLetter.pdf, page 2>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page2 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf, page 2>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page2 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
+
+<use ../recommendation/nessf17smartLetter.pdf, page 2>
+Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page2 used o
+n input line 376.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [13 <../recommendation/nessf17smartLetter.pdf>]
+<../transcript/transcript.pdf, id=525, 614.295pt x 794.97pt>
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf>
+Package pdftex.def Info: ../transcript/transcript.pdf used on input line 377.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+ <use ../transcript/transcript.pdf>
+Package pdftex.def Info: ../transcript/transcript.pdf used on input line 377.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+<../transcript/transcript.pdf, id=528, page=1, 614.295pt x 794.97pt>
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 1>
+Package pdftex.def Info: ../transcript/transcript.pdf, page1 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 1>
+Package pdftex.def Info: ../transcript/transcript.pdf, page1 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 1>
+Package pdftex.def Info: ../transcript/transcript.pdf, page1 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 1>
+Package pdftex.def Info: ../transcript/transcript.pdf, page1 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 1>
+Package pdftex.def Info: ../transcript/transcript.pdf, page1 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [14 <../transcript/transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ../transcript/transcript.pdf): PDF incl
+usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
+ignored.
+>] <../transcript/transcript.pdf, id=558, page=2, 614.295pt x 794.97pt>
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 2>
+Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 2>
+Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 2>
+Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [15 <../transcript/transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ../transcript/transcript.pdf): PDF incl
+usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
+ignored.
+>] <../transcript/transcript.pdf, id=563, page=3, 614.295pt x 794.97pt>
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 3>
+Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 3>
+Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 3>
+Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+ 377.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [16 <../transcript/transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ../transcript/transcript.pdf): PDF incl
+usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
+ignored.
+>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 379.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 379.
  (./smart_NESSF18_progressReport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 376.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 376.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 379.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 379.
 Package rerunfilecheck Info: File `smart_NESSF18_progressReport.out' has not ch
 anged.
 (rerunfilecheck)             Checksum: 6902BF9A9CB4452AFC4349B21F9A8690;564.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 376.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 379.
  ) 
 Here is how much of TeX's memory you used:
- 9989 strings out of 493029
- 146355 string characters out of 6136235
- 263237 words of memory out of 5000000
- 13297 multiletter control sequences out of 15000+600000
+ 10021 strings out of 493029
+ 147400 string characters out of 6136234
+ 263236 words of memory out of 5000000
+ 13320 multiletter control sequences out of 15000+600000
  13087 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,18n,43p,910b,526s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,18n,46p,910b,526s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmtt12.pfb>
-Output written on smart_NESSF18_progressReport.pdf (11 pages, 717735 bytes).
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.
+pfb>
+Output written on smart_NESSF18_progressReport.pdf (16 pages, 885394 bytes).
 PDF statistics:
- 545 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
- 51 named destinations out of 1000 (max. 500000)
- 173 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 619 PDF objects out of 1000 (max. 8388607)
+ 355 compressed objects within 4 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 228 words of extra memory for PDF output out of 10000 (max. 10000000)
 
