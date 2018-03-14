@@ -1,0 +1,11 @@
+Explosive events are a prominent feature in spectrographic observations of the solar transition region.
+A wide range of phenomena in the solar atmosphere have been found to be associated with explosive events, but are these really all examples of the same underlying mechanism, or are multiple mechanisms responsible for the spectral signature of explosive events? 
+We propose to confront this question by performing snapshot imaging spectroscopy of the transition region. 
+This measurement will provide cotemporal EUV emission line profiles over the full spatial extent of explosive events, permitting further characterization of these events through analysis of their spatial structure. 
+A more complete understanding of the mechanisms responsible for explosive events is directly applicable to the NASA Heliophysics Division's objective of "Exploring the physical processes in the space environment from the Sun to the Earth and throughout the solar system" because the dynamics of explosive events are applicable to other regions of the solar atmosphere and may provide insight into long-standing questions about energy transport within the Sun.
+		
+Snapshot imaging spectroscopy of the transition region will be achieved through computed tomography imaging spectroscopy of bright EUV emission lines. 
+This method of spectroscopy relies on the development of computed tomography algorithms to process data from such an instrument. 
+To help answer the questions proposed above, we developed a new computed tomography algorithm which is adapted to the environment of the transition region using neural networks.
+Results are presented that show this algorithm can reconstruct the Doppler shift of an EUV emission line to within +/-10 km/s over a wide, cotemporal 2D field-of-view.
+We propose to continue research into improving this method and also to apply this method to the problem of classifying and describing explosive events.

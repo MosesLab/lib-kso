@@ -100,6 +100,7 @@
 		For the remainder of my NESSF17 proposal (up to 09-01-18), I plan to introduce numerous improvements to our \IRIS\ data pipeline, including the improved despiking routine, and produce a publication describing the application of our \DIN\ to the \MOSES-06 dataset.
 		In my proposed schedule for NESSF18, I will develop and produce a publication on an improved \CINN\ with the capability to reconstruct the full spectral line profile of the \MOSES-06 observation (dubbed a \SPIN), and begin development of a \EE\ classification scheme.
 		
+		A more complete understanding of the mechanisms responsible for explosive events is directly applicable to the NASA Heliophysics Division's objective of ``Exploring the physical processes in the space environment from the Sun to the Earth and throughout the solar system'' because the dynamics of explosive events are applicable to other regions of the solar atmosphere and may provide insight into long-standing questions about energy transport within the Sun.
 		
 	
 	\section{NESSF17 Progress Report} 
@@ -124,7 +125,7 @@
 			This kernel size represents a window of $\pm$300\,km/s in MOSES pixels, providing a healthy margin around the typical 100\,km/s size of \EEs \citep{Dere1994}.
 			For this kernel size, we developed two networks: a \textit{Test} network with 1k free parameters, and a \textit{Final} network with 800k free parameters.
 			In Table \ref{nn_table} we have listed some important properties of these two networks, along with some qualitative measures of their performance.
-			This was done as a preliminary test of the quality of the reconstructed results as a function of network complexity.
+			This was done as a preliminary test of the quality of the reconstructed results, as a function of network complexity.
 			We can see that both networks were able to achieve an RMS velocity error better than the theoretical resolution of MOSES (29\,km/s).
 			Also we will point out that the training time was very short, only 15 minutes for the Final network.
 			This performance is possible thanks to \GPU\ implementations of our \NN\ libraries.
@@ -191,12 +192,12 @@
 					\caption{DIN}
 					\label{din_hist}
 				\end{subfigure}
-				\caption{Reconstructed vs. true Doppler velocity using both the standard SMART algorithm (applied to SUMER \OIII\ raster), and the CINN algorithm (applied to our \IRIS\ \SiIV\ validation dataset). Figure \ref{smart_hist} is a scatterplot of the reconstructed velocity vs. true velocity for every pixel in the SUMER raster. Figure \ref{din_hist} is a column-normalized histogram (where each column is an independent, normalized distribution) with the same axes as Figure \ref{smart_hist}. Plotted in red is the line of perfect reconstruction.}
+				\caption{Reconstructed vs. true Doppler velocity using both the standard SMART algorithm (applied to SUMER \OIII\ raster)\citep{Kankelborg2004}, and the CINN algorithm (applied to our \IRIS\ \SiIV\ validation dataset). Figure \ref{smart_hist} is a scatterplot of the reconstructed velocity vs. true velocity for every pixel in the SUMER raster. Figure \ref{din_hist} is a column-normalized histogram (where each column is an independent, normalized distribution) with the same axes as Figure \ref{smart_hist}. Plotted in red is the line of perfect reconstruction.}
 				\label{dopp_hist}
 			\end{figure*}
 
 			Currently, the \SMART\citep{fox1} serves as the de facto standard algorithm for MOSES spectral line profile inversions.
-			In Figure \ref{smart_hist} we can see an important test of this algorithm, the reconstructed Doppler velocity (mean) of the reconstructed spectral line profile, compared to the mean of the original (or true) line profile.
+			In Figure \ref{smart_hist} we can see an important test of this algorithm, the Doppler velocity (mean) of the reconstructed spectral line profile, compared to the mean of the original (or true) line profile.
 			This test can be represented as a scatterplot since it consisted of applying \SMART\ to a single SUMER raster.
 			
 			In Figure \ref{din_hist} we present an analogue of Figure \ref{smart_hist} for the \DIN\ calculated using our validation dataset.
@@ -208,7 +209,7 @@
 			\SMART\ has a systematic tendency to underestimate the reconstructed velocity, a well studied property of this algorithm \citep{Fox2011,Rust2017}.
 			We can see that the \DIN\ does a much better job, on average, of correctly estimating the velocity, however there is still significant underestimation of velocity.
 			We think that this underestimation is at least partially due to \CRSs\ in both the training and validation datasets, which we will discuss in Section \ref{sec_dspk}.
-			For now, we consider these results exciting verification of our method, since the \DIN\ method allows more accurate reconstructions of high-velocity events such as \EEs.		
+			For now, we consider these results exciting verification of our method, since the \DIN\ method allows for more accurate reconstructions of high-velocity events such as \EEs.		
 						
 		\subsection{Despiking Training Data}	\label{sec_dspk}	
 			
@@ -278,10 +279,10 @@
 			Considering this behavior, to use these procedures we found that we would have to manually tune them for each observation, which would become prohibitive for a training dataset composed of thousands of IRIS observations.
 			
 			Instead of estimating the mean and standard deviation, our method uses a median-percentile based approach, where pixels are marked as spikes if their value is larger than 99\% (for example) of all other pixels with the same median. 
-			This is accomplished by calculating a local median for every pixel in the observation, and then constructing a histogram of median vs. pixel value for each observation.
+			This is accomplished by calculating a local median for every pixel in the observation, and then constructing a histogram of local median vs. pixel value for each observation.
 			From this histogram, we can then determine the bad pixel threshold as a function of the local median.
 			Finally, this procedure was performed independently along each axis (wavelength, space, time) and we required that a pixel must be above the threshold for all three axes to be marked as a spike.
-			A visualization of this procedure is presented in Figure \ref{dspk_hist}, where we can see the threshold used to perform the despiking seen in Figure \ref{dspk_ex}.		
+			A visualization of this procedure is presented in Figure \ref{dspk_hist}, where we can see the thresholds of each axis overplotted on the histograms used to perform the despiking seen in Figure \ref{dspk_ex}.		
 			We have developed a GPU implementation of this despiking procedure, resulting in code that is at least 10x faster than current methods while being much more discriminatory at avoiding false positives and false negatives.
 
 		
@@ -327,7 +328,7 @@
 			These events are often spectrally classified into two groups: those with enhancements in both wings and those with enhancement in only one wing \citep{Dere1989}.
 			The wings are sometimes displaced from one another by a few thousand kilometers \citep{Dere1994}, indicating a dynamic spatial structure.
 			Recently, \cite{Innes2015} interpreted \EEs\ as evidence of  MHD reconnection through the plasmoid instability, however there have been many other explanations for \EEs\ such as: flows along loops \citep{Teriaca2004}, flows along spicules \citep{Wilhelm2000} and plasma ejection and retraction \citep{Huang2014}.
-			Therefore it is unclear if \EEs\ can be explained by one physical mechanism, or if multiple mechanisms are required to explain their characteristics.
+			Presently, it is unclear if \EEs\ can be explained by one physical mechanism, or if multiple mechanisms are required to explain their characteristics.
 			
 			In our NESSF17 proposal we asked: \textbf{If these events do arise from multiple mechanisms, can we distinguish different types of explosive events by considering their spatial structure?}
 			To answer this question, the spectrally-resolved images of the solar \TR\ taken using \MOSES\ and later \ESIS\ will be used to isolate \EEs\ and construct a database of events.
