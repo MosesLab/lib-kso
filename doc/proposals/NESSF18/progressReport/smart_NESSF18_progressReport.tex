@@ -1,6 +1,6 @@
 \documentclass[10pt,letterpaper, doublespace]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage[latin1]{inputenc}
+%\usepackage[latin1]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -209,7 +209,7 @@
 			
 			\SMART\ has a systematic tendency to underestimate the reconstructed velocity which is a well studied property of this algorithm \citep{Fox2011,Rust2017}.
 			We can see that the \DIN\ does a much better job, on average, of correctly estimating the velocity, however there is still significant underestimation of velocity.
-			We postulate that this underestimation is at least partially due to \CRSs\ in both the training and validation datasets, which we will discuss in Section \ref{sec_dspk}.
+			We speculate that this underestimation is at least partially due to \CRSs\ in both the training and validation datasets, which we will discuss in Section \ref{sec_dspk}.
 			For now, we consider these results exciting verification of our method since the \DIN\ method allows for more accurate reconstructions of high-velocity events such as \EEs.		
 						
 		\subsection{Despiking Training Data}	\label{sec_dspk}	
@@ -305,41 +305,41 @@
 		We are proposing to continue this research under the NESSF18 solicitation.
 		The results we have obtained so far show that our method is superior to current techniques in terms of reconstruction accuracy of Doppler shift.
 		We think this merits additional investigation into using \CNN\ techniques to interpret data from \CTIS\ instruments such as \MOSES\ and \ESIS.
-		Furthermore, we have made progress in terms of our \CTIS\ analysis tools, but we haven't yet developed any software to address our ultimate goal of classifying \EEs.
+		Furthermore, we have made progress in terms of our \CTIS\ analysis tools, but haven't yet developed any software to address our ultimate goal of classifying \EEs.
 		We plan to implement a more sophisticated \SPIN\ during the first half of the NESSF18 proposal period, and to begin work on an \EE\ classifier during the second half of the proposal period.
 	
 		\subsection{MOSES Inversion GAN} \label{sec_gan}
 		
-			An exciting advancement in using \CNNs\ for image reconstruction has been the development of \textit{adversial loss} as opposed to the Euclidean loss used by our current networks. 
+			An exciting advancement in using \CNNs\ for image reconstruction has been the development of \textit{adversial loss}, as opposed to the Euclidean loss currently used by our networks. 
 			This concept is expressed in a new type of \NN\ called a \GAN, developed by \cite{Goodfellow2014}. 
 			In this type of network, our current \DIN\ is known as the \textit{generator} network, and its output is an input to the \textit{adversary} network. 
 			The adversary network's task is to compare the output image of the generator network to the true image and determine which one was created by the generator network.
-			The loss is minimized when the adversary network can't distinguish between the generated image and the true image \cite{Isola2016}.
-			This method was recently used for \PSF\ deconvolution of astrophysical images by \cite{Schawinski2017}, the results indicate that this is a powerful technique that is well-suited to our inversion problem.
+			The loss is minimized when the adversary network can't distinguish between the generated image and the true image \citep{Isola2016}.
+			This method was recently used for \PSF\ deconvolution of astrophysical images by \cite{Schawinski2017}, the results of which indicate that this is a powerful technique that is well-suited to our inversion problem.
 			
-			Our plan is to pursue development of a \GAN\ for a \MOSES\ \SPIN\ after the submitting our publication describing the \DIN.
+			Our plan is to pursue development of a \GAN\ for a \MOSES\ \SPIN\ after submitting our publication describing the \DIN.
 			We expect the development time should be relatively short considering that we can use the training dataset from the \DIN.
-			If this \MOSES\ inversion \GAN\ is shows improvement over our current method, we will publish a short article describing the implementation and results of our approach.
+			If this \MOSES\ inversion \GAN\ shows improvement over our current method, we will publish a short article describing the implementation and results of our approach.
 			
 		
 		\subsection{Explosive Event Classification}
 		
 			The literature has conducted extensive analyses of \EEs\ using rastering imaging spectrographs, such as \IRIS.
-			They identify \EEs\ as an enhancement of the red and/or blue wings of emission lines forming between 20,000K and 250,000K \citep{Moses1994}.
+			They identify \EEs\ as an enhancement of the red and/or blue wings of emission lines forming between 20,000\,K and 250,000\,K \citep{Moses1994}.
 			These events are often spectrally classified into two groups: those with enhancements in both wings and those with enhancement in only one wing \citep{Dere1989}.
 			The wings are sometimes displaced from one another by a few thousand kilometers \citep{Dere1994}, indicating a dynamic spatial structure.
-			Recently, \cite{Innes2015} interpreted \EEs\ as evidence of  MHD reconnection through the plasmoid instability, however there have been many other explanations for \EEs\ such as: flows along loops \citep{Teriaca2004}, flows along spicules \citep{Wilhelm2000} and plasma ejection and retraction \citep{Huang2014}.
-			Presently, it is unclear if \EEs\ can be explained by one physical mechanism, or if multiple mechanisms are required to explain their characteristics.
+			Recently, \cite{Innes2015} interpreted \EEs\ as evidence of  MHD reconnection through the plasmoid instability, however there have been many other explanations for \EEs, including flows along loops \citep{Teriaca2004}, flows along spicules \citep{Wilhelm2000}, and plasma ejection and retraction \citep{Huang2014}.
+			Presently, it is unclear if \EEs\ may be explained by only one physical mechanism, or if multiple mechanisms are necessary to describe their characteristics.
 			
 			In our NESSF17 proposal we asked: \textbf{If these events do arise from multiple mechanisms, can we distinguish different types of explosive events by considering their spatial structure?}
-			To answer this question, the spectrally-resolved images of the solar \TR\ taken using \MOSES\ and later \ESIS\ will be used to isolate \EEs\ and construct a database of events.
-			We will then apply simple \textit{clustering} algorithms, such as $k$-means \citep{Macqueen1967}, to test if \EEs\ can naturally be classified into different groups.
-			This is an important first step to see if any obvious classes of \EEs\ can be identified.
+			To answer this question, the spectrally-resolved images of the solar \TR\ taken using \MOSES, and later \ESIS, will be used to isolate \EEs\ and construct a database of events.
+			Then, to test if \EEs\ may naturally be classified into different groups, we will apply simple \textit{clustering} algorithms, such as $k$-means \citep{Macqueen1967}.
+			This is an important first step to see if any obvious classes of \EEs\ may be identified.
 			We intend to present preliminary results of our investigation into this method in our NESSF19 progress report.
 			
-	\begin{landscape}
-		\includepdf[pages=-,landscape=true]{../schedule/NESSF18_schedule}
-	\end{landscape}
+%	\begin{landscape}
+%		\includepdf[pages=-,landscape=true]{../schedule/NESSF18_schedule}
+%	\end{landscape}
 
 	\bibliography{bib/sources}
 	
@@ -368,7 +368,7 @@
 		\acro{PSF}{point-spread function}
 	\end{acronym}
 	
-	\includepdf[pages=-]{../recommendation/nessf17smartLetter}
-	\includepdf[pages=-]{../transcript/transcript}
+%	\includepdf[pages=-]{../recommendation/nessf17smartLetter}
+%	\includepdf[pages=-]{../transcript/transcript}
 	
 \end{document}
