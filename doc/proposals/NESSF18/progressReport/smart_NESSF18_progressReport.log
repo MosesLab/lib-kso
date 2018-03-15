@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.4)  14 MAR 2018 14:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.4)  14 MAR 2018 14:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -569,28 +569,28 @@ although it is yet undefined on input line 101.
 Package acronym Info: Label `acro:SNR' newly defined as it shall be overridden
 although it is yet undefined on input line 121.
 
-<fig/doppler_1182.png, id=88, 398.9304pt x 91.0602pt>
+<fig/doppler_1182.png, id=87, 398.9304pt x 91.0602pt>
 File: fig/doppler_1182.png Graphic file (type png)
 
 <use fig/doppler_1182.png>
 Package pdftex.def Info: fig/doppler_1182.png used on input line 151.
 (pdftex.def)             Requested size: 211.38832pt x 48.25194pt.
 
-<fig/doppler_1225.png, id=90, 398.9304pt x 91.0602pt>
+<fig/doppler_1225.png, id=89, 398.9304pt x 91.0602pt>
 File: fig/doppler_1225.png Graphic file (type png)
 
 <use fig/doppler_1225.png>
 Package pdftex.def Info: fig/doppler_1225.png used on input line 156.
 (pdftex.def)             Requested size: 211.38832pt x 48.25194pt.
 
-<fig/doppler_1263.png, id=91, 398.9304pt x 91.0602pt>
+<fig/doppler_1263.png, id=90, 398.9304pt x 91.0602pt>
 File: fig/doppler_1263.png Graphic file (type png)
 
 <use fig/doppler_1263.png>
 Package pdftex.def Info: fig/doppler_1263.png used on input line 161.
 (pdftex.def)             Requested size: 211.38832pt x 48.25194pt.
 
-<fig/doppler_1343.png, id=92, 398.9304pt x 91.0602pt>
+<fig/doppler_1343.png, id=91, 398.9304pt x 91.0602pt>
 File: fig/doppler_1343.png Graphic file (type png)
 
 <use fig/doppler_1343.png>
@@ -608,7 +608,7 @@ ed-to.pdf fig/smart_hist.eps>
 (epstopdf)             \includegraphics on input line 181.
 Package epstopdf Info: Output file is already uptodate.
 
-<fig/smart_hist-eps-converted-to.pdf, id=105, 699.61375pt x 591.20876pt>
+<fig/smart_hist-eps-converted-to.pdf, id=104, 699.61375pt x 591.20876pt>
 File: fig/smart_hist-eps-converted-to.pdf Graphic file (type pdf)
 
 <use fig/smart_hist-eps-converted-to.pdf>
@@ -616,7 +616,7 @@ Package pdftex.def Info: fig/smart_hist-eps-converted-to.pdf used on input line
  181.
 (pdftex.def)             Requested size: 211.38832pt x 178.62694pt.
 
-<fig/linearity.pdf, id=106, 387.33946pt x 315.8325pt>
+<fig/linearity.pdf, id=105, 387.33946pt x 315.8325pt>
 File: fig/linearity.pdf Graphic file (type pdf)
  <use fig/linearity.pdf>
 Package pdftex.def Info: fig/linearity.pdf used on input line 188.
@@ -627,37 +627,37 @@ although it is yet undefined on input line 200.
 
 [3 <./fig/doppler_1182.png> <./fig/doppler_1225.png> <./fig/doppler_1263.png> <
 ./fig/doppler_1343.png> <./fig/smart_hist-eps-converted-to.pdf> <./fig/linearit
-y.pdf>] <fig/orig_1.pdf, id=177, 229.61784pt x 229.61784pt>
+y.pdf>] <fig/orig_1.pdf, id=176, 229.61784pt x 229.61784pt>
 File: fig/orig_1.pdf Graphic file (type pdf)
 
 <use fig/orig_1.pdf>
 Package pdftex.def Info: fig/orig_1.pdf used on input line 223.
 (pdftex.def)             Requested size: 117.43875pt x 117.43639pt.
- <fig/despike_1.pdf, id=178, 229.61784pt x 229.61784pt>
+ <fig/despike_1.pdf, id=177, 229.61784pt x 229.61784pt>
 File: fig/despike_1.pdf Graphic file (type pdf)
 
 <use fig/despike_1.pdf>
 Package pdftex.def Info: fig/despike_1.pdf used on input line 223.
 (pdftex.def)             Requested size: 117.43875pt x 117.43639pt.
- <fig/dspk_1.pdf, id=179, 229.61784pt x 229.61784pt>
+ <fig/dspk_1.pdf, id=178, 229.61784pt x 229.61784pt>
 File: fig/dspk_1.pdf Graphic file (type pdf)
 
 <use fig/dspk_1.pdf>
 Package pdftex.def Info: fig/dspk_1.pdf used on input line 223.
 (pdftex.def)             Requested size: 117.43875pt x 117.43639pt.
- <fig/orig_2.pdf, id=180, 229.61784pt x 229.61784pt>
+ <fig/orig_2.pdf, id=179, 229.61784pt x 229.61784pt>
 File: fig/orig_2.pdf Graphic file (type pdf)
 
 <use fig/orig_2.pdf>
 Package pdftex.def Info: fig/orig_2.pdf used on input line 224.
 (pdftex.def)             Requested size: 117.43875pt x 117.43639pt.
- <fig/despike_2.pdf, id=181, 229.61784pt x 229.61784pt>
+ <fig/despike_2.pdf, id=180, 229.61784pt x 229.61784pt>
 File: fig/despike_2.pdf Graphic file (type pdf)
 
 <use fig/despike_2.pdf>
 Package pdftex.def Info: fig/despike_2.pdf used on input line 224.
 (pdftex.def)             Requested size: 117.43875pt x 117.43639pt.
- <fig/dspk_2.pdf, id=182, 229.61784pt x 229.61784pt>
+ <fig/dspk_2.pdf, id=181, 229.61784pt x 229.61784pt>
 File: fig/dspk_2.pdf Graphic file (type pdf)
 
 <use fig/dspk_2.pdf>
@@ -665,25 +665,25 @@ Package pdftex.def Info: fig/dspk_2.pdf used on input line 224.
 (pdftex.def)             Requested size: 117.43875pt x 117.43639pt.
 Package acronym Info: Label `acro:SAA' newly defined as it shall be overridden
 although it is yet undefined on input line 231.
- <fig/hist_0.pdf, id=183, 252.39795pt x 256.56226pt>
+ <fig/hist_0.pdf, id=182, 252.39795pt x 256.56226pt>
 File: fig/hist_0.pdf Graphic file (type pdf)
 
 <use fig/hist_0.pdf>
 Package pdftex.def Info: fig/hist_0.pdf used on input line 241.
 (pdftex.def)             Requested size: 135.2868pt x 137.51978pt.
- <fig/hist_1.pdf, id=184, 252.39795pt x 256.56226pt>
+ <fig/hist_1.pdf, id=183, 252.39795pt x 256.56226pt>
 File: fig/hist_1.pdf Graphic file (type pdf)
 
 <use fig/hist_1.pdf>
 Package pdftex.def Info: fig/hist_1.pdf used on input line 247.
 (pdftex.def)             Requested size: 135.2868pt x 137.51978pt.
- <fig/hist_2.pdf, id=185, 252.39795pt x 256.56226pt>
+ <fig/hist_2.pdf, id=184, 252.39795pt x 256.56226pt>
 File: fig/hist_2.pdf Graphic file (type pdf)
 
 <use fig/hist_2.pdf>
 Package pdftex.def Info: fig/hist_2.pdf used on input line 253.
 (pdftex.def)             Requested size: 135.2868pt x 137.51978pt.
- <fig/cbar.pdf, id=186, 47.36696pt x 182.73865pt>
+ <fig/cbar.pdf, id=185, 47.36696pt x 182.73865pt>
 File: fig/cbar.pdf Graphic file (type pdf)
 
 <use fig/cbar.pdf>
@@ -727,7 +727,7 @@ e pdfs with page group included in a single page
 >]
 Package acronym Info: Label `acro:GAN' newly defined as it shall be overridden
 although it is yet undefined on input line 314.
- [6] <../schedule/NESSF18_schedule.pdf, id=388, 794.97pt x 614.295pt>
+ [6] [7] <../schedule/NESSF18_schedule.pdf, id=392, 794.97pt x 614.295pt>
 File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
 
 <use ../schedule/NESSF18_schedule.pdf>
@@ -740,7 +740,7 @@ Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf used on input line 34
 1.
 (pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
 
-<../schedule/NESSF18_schedule.pdf, id=391, page=1, 794.97pt x 614.295pt>
+<../schedule/NESSF18_schedule.pdf, id=395, page=1, 794.97pt x 614.295pt>
 File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
 
 <use ../schedule/NESSF18_schedule.pdf, page 1>
@@ -771,13 +771,13 @@ File: ../schedule/NESSF18_schedule.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../schedule/NESSF18_schedule.pdf, page1 used on input 
 line 341.
 (pdftex.def)             Requested size: 795.3441pt x 614.58406pt.
- [7
+ [8
 
  <../schedule/NESSF18_schedule.pdf, page is rotated 90 degrees>] (./smart_NESSF
-18_progressReport.bbl [8
+18_progressReport.bbl [9
 
 ])
-[9] <../recommendation/nessf17smartLetter.pdf, id=484, 614.295pt x 794.97pt>
+[10] <../recommendation/nessf17smartLetter.pdf, id=487, 614.295pt x 794.97pt>
 File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
 
 <use ../recommendation/nessf17smartLetter.pdf>
@@ -791,7 +791,7 @@ Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf used on input
  line 371.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 
-<../recommendation/nessf17smartLetter.pdf, id=487, page=1, 614.295pt x 794.97pt
+<../recommendation/nessf17smartLetter.pdf, id=490, page=1, 614.295pt x 794.97pt
 >
 File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
  <use ../recommendation/nessf17smartLetter.pdf, page 1>
@@ -804,7 +804,7 @@ File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page1 used o
 n input line 371.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [10]
+ [11]
 File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
 
 <use ../recommendation/nessf17smartLetter.pdf, page 1>
@@ -823,8 +823,8 @@ File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page1 used o
 n input line 371.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [11 <../recommendation/nessf17smartLetter.pdf>]
-<../recommendation/nessf17smartLetter.pdf, id=510, page=2, 614.295pt x 794.97pt
+ [12 <../recommendation/nessf17smartLetter.pdf>]
+<../recommendation/nessf17smartLetter.pdf, id=513, page=2, 614.295pt x 794.97pt
 >
 File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
  <use ../recommendation/nessf17smartLetter.pdf, page 2>
@@ -843,8 +843,8 @@ File: ../recommendation/nessf17smartLetter.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../recommendation/nessf17smartLetter.pdf, page2 used o
 n input line 371.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [12 <../recommendation/nessf17smartLetter.pdf>]
-<../transcript/transcript.pdf, id=518, 614.295pt x 794.97pt>
+ [13 <../recommendation/nessf17smartLetter.pdf>]
+<../transcript/transcript.pdf, id=522, 614.295pt x 794.97pt>
 File: ../transcript/transcript.pdf Graphic file (type pdf)
 
 <use ../transcript/transcript.pdf>
@@ -855,7 +855,7 @@ File: ../transcript/transcript.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../transcript/transcript.pdf used on input line 372.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 
-<../transcript/transcript.pdf, id=521, page=1, 614.295pt x 794.97pt>
+<../transcript/transcript.pdf, id=525, page=1, 614.295pt x 794.97pt>
 File: ../transcript/transcript.pdf Graphic file (type pdf)
 
 <use ../transcript/transcript.pdf, page 1>
@@ -886,55 +886,55 @@ File: ../transcript/transcript.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../transcript/transcript.pdf, page1 used on input line
  372.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [13 <../transcript/transcript.pdf
-
-pdfTeX warning: /usr/bin/pdflatex (file ../transcript/transcript.pdf): PDF incl
-usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
-ignored.
->] <../transcript/transcript.pdf, id=552, page=2, 614.295pt x 794.97pt>
-File: ../transcript/transcript.pdf Graphic file (type pdf)
-
-<use ../transcript/transcript.pdf, page 2>
-Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
- 372.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
-File: ../transcript/transcript.pdf Graphic file (type pdf)
-
-<use ../transcript/transcript.pdf, page 2>
-Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
- 372.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
-File: ../transcript/transcript.pdf Graphic file (type pdf)
-
-<use ../transcript/transcript.pdf, page 2>
-Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
- 372.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [14 <../transcript/transcript.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ../transcript/transcript.pdf): PDF incl
 usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
 ignored.
->] <../transcript/transcript.pdf, id=557, page=3, 614.295pt x 794.97pt>
+>] <../transcript/transcript.pdf, id=555, page=2, 614.295pt x 794.97pt>
 File: ../transcript/transcript.pdf Graphic file (type pdf)
 
-<use ../transcript/transcript.pdf, page 3>
-Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+<use ../transcript/transcript.pdf, page 2>
+Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
  372.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ../transcript/transcript.pdf Graphic file (type pdf)
 
-<use ../transcript/transcript.pdf, page 3>
-Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+<use ../transcript/transcript.pdf, page 2>
+Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
  372.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: ../transcript/transcript.pdf Graphic file (type pdf)
 
-<use ../transcript/transcript.pdf, page 3>
-Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+<use ../transcript/transcript.pdf, page 2>
+Package pdftex.def Info: ../transcript/transcript.pdf, page2 used on input line
  372.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [15 <../transcript/transcript.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ../transcript/transcript.pdf): PDF incl
+usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
+ignored.
+>] <../transcript/transcript.pdf, id=560, page=3, 614.295pt x 794.97pt>
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 3>
+Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+ 372.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 3>
+Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+ 372.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: ../transcript/transcript.pdf Graphic file (type pdf)
+
+<use ../transcript/transcript.pdf, page 3>
+Package pdftex.def Info: ../transcript/transcript.pdf, page3 used on input line
+ 372.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [16 <../transcript/transcript.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ../transcript/transcript.pdf): PDF incl
 usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
@@ -951,9 +951,9 @@ anged.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 374.
  ) 
 Here is how much of TeX's memory you used:
- 10025 strings out of 493029
- 147489 string characters out of 6136235
- 262258 words of memory out of 5000000
+ 10026 strings out of 493029
+ 147496 string characters out of 6136235
+ 262257 words of memory out of 5000000
  13325 multiletter control sequences out of 15000+600000
  13087 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -970,10 +970,10 @@ msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.
 pfb>
-Output written on smart_NESSF18_progressReport.pdf (15 pages, 885198 bytes).
+Output written on smart_NESSF18_progressReport.pdf (16 pages, 885369 bytes).
 PDF statistics:
- 613 PDF objects out of 1000 (max. 8388607)
- 351 compressed objects within 4 object streams
- 55 named destinations out of 1000 (max. 500000)
+ 616 PDF objects out of 1000 (max. 8388607)
+ 353 compressed objects within 4 object streams
+ 56 named destinations out of 1000 (max. 500000)
  228 words of extra memory for PDF output out of 10000 (max. 10000000)
 

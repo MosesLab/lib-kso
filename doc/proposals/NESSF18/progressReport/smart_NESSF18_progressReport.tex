@@ -77,7 +77,7 @@
 		\MOSES\ and \ESIS\ are further classified as a specific type of snapshot imaging spectograph known as a \CTIS \citep{Okamoto:91}, which takes a snapshot of a 2D \FOV\ by simply removing the slit used in imaging spectrographs.
 		However, without the slit space and spectrum become convoluted, which then requires images to be taken at several diffraction orders/angles in order to provide sufficient information about the scene.
 		Applying \CT\ inversion algorithms to these images yields a spectrally-resolved 2D scene, hence the name \CTIS.
-		As stated in NESSF17, \MOSES\ and \ESIS\ image in a limited number of diffraction orders/angles (only 3 to 6) \citep{kankel1}, making the process of spectrally-resolving their data is an ill-posed inversion problem.
+		As stated in the NESSF17 proposal, \MOSES\ and \ESIS\ image in a limited number of diffraction orders/angles (only 3 to 6) \citep{kankel1}, making the process of spectrally-resolving their data is an ill-posed inversion problem.
 		
 		A brute-force approach to addressing this ill-posed inversion problem would be to use a forward model of \MOSES/\ESIS\ and an a priori model of solar \TR\ spectra as a means to create a dictionary of spectral structures and their corresponding signatures on the \CTIS\ detectors.
 		This would allow \CTIS\ observations to be matched to entries in this dictionary in order to recover a spectrally-resolved scene.
@@ -259,7 +259,7 @@
 					\includegraphics[width=\textwidth]{fig/cbar}
 				\end{subfigure}
 				
-				\caption{Column-normalized histogram of local median intensity along each axis vs. intensity for the observation in Figure \ref{dspk_ex}.
+				\caption{Column-normalized histogram of local median intensity along each axis vs intensity for the observation in Figure \ref{dspk_ex}.
 					Each column has been divided by its total to understand the distribution of values about a particular median.
 					The 1\% and 99\% thresholds have been plotted in white.
 					}
@@ -284,7 +284,7 @@
 			From this histogram, we can then determine the bad pixel threshold as a function of the local median.
 			Finally, this procedure was performed independently along each axis (wavelength, space, time) and we required that a pixel must be above the threshold for all three axes to be marked as a spike.
 			A visualization of this procedure is presented in Figure \ref{dspk_hist}, where we can see the thresholds of each axis overplotted on the histograms used to perform the despiking seen in Figure \ref{dspk_ex}.		
-			We have developed a GPU implementation of this despiking procedure, resulting in code that is at least 10x faster than current methods while being much more discriminatory at avoiding false positives and false negatives.
+			We have developed a GPU implementation of this despiking procedure, resulting in code that is at least 10x faster than current implementations while being much more discriminatory at avoiding false positives and false negatives.
 
 		
 	\section{Remainder of NESSF17 Schedule}
