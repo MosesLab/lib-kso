@@ -43,7 +43,7 @@ dim3 read_fits_raster(string path, float * buf){
 		sprintf(key, "TDESC%d", i);
 		fits_read_keyword(fptr, key, keyval, NULL, &status);
 
-		printf("%s\n", keyval);
+//		printf("%s\n", keyval);
 
 		if(strcmp(keyval, window) == 0){
 			i = i + 1;		// add one since the first HDU has no data
@@ -54,28 +54,28 @@ dim3 read_fits_raster(string path, float * buf){
 
 
 
-	cout << "_______________________" << endl;
+//	cout << "_______________________" << endl;
 
 	fits_movabs_hdu(fptr, i, &type_h, &status);
 
 	fits_get_hdu_num(fptr, &i_h);
-	cout << "Current HDU index: " << i_h << endl;
+//	cout << "Current HDU index: " << i_h << endl;
 
 	//	fits_get_hdu_type(fptr, &type_h, &status);
-	cout << "Current HDU type: " << type_h << endl;
+//	cout << "Current HDU type: " << type_h << endl;
 
 	fits_get_hdrspace(fptr, &nkeys, NULL, &status);
-	cout << "Number of keys: " << nkeys << endl;
+//	cout << "Number of keys: " << nkeys << endl;
 
 
 	fits_get_img_type(fptr, &bitpix, &status);
-	cout << "Image type: " << bitpix << endl;
+//	cout << "Image type: " << bitpix << endl;
 
 	for (ii = 1; ii <= nkeys; ii++)  {
 		fits_read_record(fptr, ii, card, &status); /* read keyword */
-		printf("%s\n", card);
+//		printf("%s\n", card);
 	}
-	printf("END\n\n");  /* terminate listing with END */
+//	printf("END\n\n");  /* terminate listing with END */
 
 	dim3 sz;
 	long axis_sz[3];

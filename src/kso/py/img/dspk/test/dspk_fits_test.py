@@ -8,7 +8,7 @@ import os
 # # from dspk_idl import dspk_idl
 
 
-import kso.tf.img.dspk_tf as dspk_tf
+#import kso.tf.img.dspk_tf as dspk_tf
 # import kso.cpp.img.dspk.dspk as dspk_cpp
 import kso.cuda.img.dspk as dspk_cuda
 

@@ -115,7 +115,7 @@ for ax in range(0,nmet):
 
 
 fig, ax = plt.subplots(1, 1)
-tracker = IndexTracker(ax, kdt, 0, v_min=-5, v_max=256, cmap='gray')
+tracker = IndexTracker(ax, dt, 0, v_min=-5, v_max=256, cmap='gray')
 # tracker = IndexTracker(ax, q2_3[0,], 0)
 fig.canvas.mpl_connect('scroll_event', tracker.onscroll)
 
@@ -141,6 +141,7 @@ def region_2(dt, path):
     current_cmap = plt.cm.get_cmap()
     current_cmap.set_bad(color='red')
     plt.savefig(path, bbox_inches='tight', pad_inches=0, dpi=300)
+
 
 region_1(dt, 'dspk_1.pdf')
 region_1(odt, 'orig_1.pdf')
